@@ -49,7 +49,7 @@
     "aiAnalysis": "AI Analysis"
   },
   "auth": {
-    "brand": "Mango",
+    "brand": "Wastra",
     "subtitle": "SMART TOURISM PLATFORM",
     "tabs": {
       "login": "Sign In",
@@ -120,7 +120,7 @@
       },
       "ai": {
         "title": "AI-powered recommendations",
-        "desc": "Tailored suggestions that adapt to your style and the current island vibe. Mango guides you to the perfect spot at the perfect time."
+        "desc": "Tailored suggestions that adapt to your style and the current island vibe. Wastra guides you to the perfect spot at the perfect time."
       }
     },
     "destinations": {
@@ -136,10 +136,10 @@
       "openMap": "Open Full Map",
       "usersExploring": "users exploring live"
     },
-    "scrollText": "Mango is built by Bali, for Bali. Quiet mornings at Tegallalang, sunsets at Tanah Lot, and every peaceful corner in between.",
+    "scrollText": "Wastra is built by Bali, for Bali. Quiet mornings at Tegallalang, sunsets at Tanah Lot, and every peaceful corner in between.",
     "cta": {
       "title": "Ready for a quieter paradise?",
-      "subtitle": "Join over {{count}} travelers who use Mango to discover the island's hidden peace.",
+      "subtitle": "Join over {{count}} travelers who use Wastra to discover the island's hidden peace.",
       "rating": "Loved by 50,000+ travelers",
       "primary": "Get Started",
       "secondary": "Install PWA",
@@ -157,7 +157,7 @@
       "newsletterDesc": "Monthly digest of Bali's quietest spots, seasonal forecasts, and product updates.",
       "subscribe": "Subscribe",
       "madeIn": "Made in Bali · Indonesia",
-      "rights": "© 2025 Mango. Smart Tourism Platform Indonesia. All rights reserved.",
+      "rights": "© 2025 Wastra. Smart Tourism Platform Indonesia. All rights reserved.",
       "links": {
         "features": "Features",
         "destinations": "Destinations",
@@ -279,7 +279,7 @@
       "appearance": "Appearance",
       "privacy": "Privacy & Security",
       "help": "Help & Support",
-      "about": "About Mango",
+      "about": "About Wastra",
       "logout": "Sign Out"
     },
     "modals": {
@@ -287,7 +287,7 @@
       "appearance": "Appearance",
       "privacy": "Privacy & Security",
       "help": "Help & Support",
-      "about": "About Mango",
+      "about": "About Wastra",
       "edit": "Edit Profile"
     },
     "prefs": {

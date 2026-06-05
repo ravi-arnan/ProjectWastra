@@ -145,7 +145,7 @@ export default function AiAnalysis() {
           </motion.div>
           <div className="flex-1 min-w-0">
             <h2 className="text-sm font-extrabold text-on-surface font-headline">
-              <ShinyText text="Mango AI" color="#1f1b17" shineColor="#00647c" speed={3} />
+              <ShinyText text="Wastra AI" color="#1f1b17" shineColor="#00647c" speed={3} />
             </h2>
             <p className="text-[11px] text-on-surface-variant">{t('ai.subtitle')}</p>
           </div>
@@ -182,7 +182,7 @@ export default function AiAnalysis() {
                   colors={['#00647c', '#007f9d', '#6cd3f7', '#007f9d', '#00647c']}
                   animationSpeed={5}
                 >
-                  {lang === 'en' ? 'Hi! I am Mango AI' : 'Halo! Saya Mango AI'}
+                  {lang === 'en' ? 'Hi! I am Wastra AI' : 'Halo! Saya Wastra AI'}
                 </GradientText>
               </h3>
               <BlurText

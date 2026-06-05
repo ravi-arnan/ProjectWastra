@@ -18,7 +18,7 @@ export default function PageLoader() {
             <Icon name="sensors" className="text-white" size="24px" />
           </div>
           <h1 className="text-3xl font-extrabold font-headline tracking-tight">
-            <ShinyText text="Mango" color="#1f1b17" shineColor="#00647c" speed={2.5} />
+            <ShinyText text="Wastra" color="#1f1b17" shineColor="#00647c" speed={2.5} />
           </h1>
         </div>
 

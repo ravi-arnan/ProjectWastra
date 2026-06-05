@@ -57,8 +57,8 @@ export default defineConfig({
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
       },
       manifest: {
-        name: 'Mango - Smart Tourism Platform',
-        short_name: 'Mango',
+        name: 'Wastra - Smart Tourism Platform',
+        short_name: 'Wastra',
         description: 'Platform Pariwisata Cerdas Indonesia',
         theme_color: '#00647c',
         background_color: '#fff8f5',

@@ -83,7 +83,7 @@ export default function Landing() {
       {/* ==================== TOP NAV ==================== */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#fff8f5]/80 backdrop-blur-xl border-b border-stone-200/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 h-14 flex items-center justify-between">
-          <span className="text-xl font-extrabold text-cyan-900 font-headline tracking-tight">Mango</span>
+          <span className="text-xl font-extrabold text-cyan-900 font-headline tracking-tight">Wastra</span>
 
           <div className="hidden md:flex items-center gap-1 font-headline font-medium text-sm tracking-tight">
             {navLinks.map((link) => (
@@ -772,7 +772,7 @@ export default function Landing() {
                   { name: 'Instagram', icon: 'photo_camera', href: 'https://instagram.com' },
                   { name: 'Twitter', icon: 'alternate_email', href: 'https://twitter.com' },
                   { name: 'GitHub', icon: 'code', href: 'https://github.com' },
-                  { name: 'Email', icon: 'mail', href: 'mailto:support@mango.id' },
+                  { name: 'Email', icon: 'mail', href: 'mailto:support@wastra.id' },
                 ].map((s) => (
                   <a
                     key={s.name}
@@ -806,7 +806,7 @@ export default function Landing() {
                 <li><a href="#" className="hover:text-white transition-colors">{t('landing.footer.links.about')}</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">{t('landing.footer.links.partners')}</a></li>
                 <li><a href="#" className="hover:text-white transition-colors">{t('landing.footer.links.press')}</a></li>
-                <li><a href="mailto:careers@mango.id" className="hover:text-white transition-colors">{t('landing.footer.links.careers')}</a></li>
+                <li><a href="mailto:careers@wastra.id" className="hover:text-white transition-colors">{t('landing.footer.links.careers')}</a></li>
               </ul>
             </div>
 
@@ -851,7 +851,7 @@ export default function Landing() {
               <Link className="hover:text-white transition-colors" to="/privacy">{t('landing.footer.links.privacy')}</Link>
               <Link className="hover:text-white transition-colors" to="/terms">{t('landing.footer.links.terms')}</Link>
               <a className="hover:text-white transition-colors" href="#">{t('landing.footer.links.cookies')}</a>
-              <a className="hover:text-white transition-colors" href="mailto:support@mango.id">{t('landing.footer.links.support')}</a>
+              <a className="hover:text-white transition-colors" href="mailto:support@wastra.id">{t('landing.footer.links.support')}</a>
             </div>
           </div>
         </div>

@@ -23,12 +23,12 @@ export default function Legal({ page }: { page: 'privacy' | 'terms' }) {
 function PrivacyContent() {
   return (
     <div className="prose prose-sm max-w-none font-body text-on-surface-variant space-y-6">
-      <h2 className="text-xl font-bold text-on-surface font-headline">Kebijakan Privasi Mango</h2>
+      <h2 className="text-xl font-bold text-on-surface font-headline">Kebijakan Privasi Wastra</h2>
       <p className="text-sm">Terakhir diperbarui: April 2025</p>
 
       <section className="space-y-3">
         <h3 className="text-base font-bold text-on-surface">1. Data yang Kami Kumpulkan</h3>
-        <p>Mango mengumpulkan data berikut untuk memberikan layanan terbaik:</p>
+        <p>Wastra mengumpulkan data berikut untuk memberikan layanan terbaik:</p>
         <ul className="list-disc pl-5 space-y-1 text-sm">
           <li>Informasi akun (nama, email) saat Anda mendaftar</li>
           <li>Data lokasi untuk menampilkan destinasi terdekat (dengan izin Anda)</li>
@@ -55,7 +55,7 @@ function PrivacyContent() {
 
       <section className="space-y-3">
         <h3 className="text-base font-bold text-on-surface">4. Kontak</h3>
-        <p>Untuk pertanyaan tentang privasi, hubungi kami di <a href="mailto:support@mango.id" className="text-primary">support@mango.id</a></p>
+        <p>Untuk pertanyaan tentang privasi, hubungi kami di <a href="mailto:support@wastra.id" className="text-primary">support@wastra.id</a></p>
       </section>
     </div>
   )
@@ -64,17 +64,17 @@ function PrivacyContent() {
 function TermsContent() {
   return (
     <div className="prose prose-sm max-w-none font-body text-on-surface-variant space-y-6">
-      <h2 className="text-xl font-bold text-on-surface font-headline">Ketentuan Layanan Mango</h2>
+      <h2 className="text-xl font-bold text-on-surface font-headline">Ketentuan Layanan Wastra</h2>
       <p className="text-sm">Terakhir diperbarui: April 2025</p>
 
       <section className="space-y-3">
         <h3 className="text-base font-bold text-on-surface">1. Penerimaan Ketentuan</h3>
-        <p>Dengan menggunakan aplikasi Mango, Anda menyetujui ketentuan layanan ini. Jika Anda tidak setuju, silakan berhenti menggunakan aplikasi.</p>
+        <p>Dengan menggunakan aplikasi Wastra, Anda menyetujui ketentuan layanan ini. Jika Anda tidak setuju, silakan berhenti menggunakan aplikasi.</p>
       </section>
 
       <section className="space-y-3">
         <h3 className="text-base font-bold text-on-surface">2. Layanan</h3>
-        <p>Mango menyediakan:</p>
+        <p>Wastra menyediakan:</p>
         <ul className="list-disc pl-5 space-y-1 text-sm">
           <li>Informasi tingkat keramaian destinasi wisata secara real-time</li>
           <li>Prediksi keramaian berbasis AI</li>
@@ -85,17 +85,17 @@ function TermsContent() {
 
       <section className="space-y-3">
         <h3 className="text-base font-bold text-on-surface">3. Akurasi Data</h3>
-        <p>Data keramaian bersifat estimasi berdasarkan berbagai sumber. Mango tidak menjamin akurasi 100% dan tidak bertanggung jawab atas keputusan perjalanan berdasarkan data ini.</p>
+        <p>Data keramaian bersifat estimasi berdasarkan berbagai sumber. Wastra tidak menjamin akurasi 100% dan tidak bertanggung jawab atas keputusan perjalanan berdasarkan data ini.</p>
       </section>
 
       <section className="space-y-3">
         <h3 className="text-base font-bold text-on-surface">4. Pemesanan Tiket</h3>
-        <p>Pemesanan tiket melalui Mango tunduk pada ketentuan masing-masing destinasi. Pembatalan dan pengembalian dana mengikuti kebijakan pengelola destinasi.</p>
+        <p>Pemesanan tiket melalui Wastra tunduk pada ketentuan masing-masing destinasi. Pembatalan dan pengembalian dana mengikuti kebijakan pengelola destinasi.</p>
       </section>
 
       <section className="space-y-3">
         <h3 className="text-base font-bold text-on-surface">5. Kontak</h3>
-        <p>Untuk pertanyaan, hubungi kami di <a href="mailto:support@mango.id" className="text-primary">support@mango.id</a></p>
+        <p>Untuk pertanyaan, hubungi kami di <a href="mailto:support@wastra.id" className="text-primary">support@wastra.id</a></p>
       </section>
     </div>
   )

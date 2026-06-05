@@ -503,14 +503,14 @@ export default function AiAgent() {
             </div>
             <span className="text-xs text-on-surface-variant -mt-1">
               {lang === 'en'
-                ? 'The base prompt that defines Mango AI personality and rules. Pre-filled with the recommended default — edit to customize.'
-                : 'Prompt dasar yang mendefinisikan kepribadian dan aturan Mango AI. Sudah terisi dengan default rekomendasi — edit untuk kustomisasi.'}
+                ? 'The base prompt that defines Wastra AI personality and rules. Pre-filled with the recommended default — edit to customize.'
+                : 'Prompt dasar yang mendefinisikan kepribadian dan aturan Wastra AI. Sudah terisi dengan default rekomendasi — edit untuk kustomisasi.'}
             </span>
             <textarea
               value={settings.system_prompt}
               onChange={(e) => patch('system_prompt', e.target.value)}
               rows={12}
-              placeholder="Kamu adalah Mango AI..."
+              placeholder="Kamu adalah Wastra AI..."
               className="bg-surface-container-low rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-primary/30 font-mono resize-y"
             />
           </label>
@@ -545,7 +545,7 @@ export default function AiAgent() {
               value={settings.greeting_message}
               onChange={(e) => patch('greeting_message', e.target.value)}
               rows={3}
-              placeholder="Halo! Saya Mango AI..."
+              placeholder="Halo! Saya Wastra AI..."
               className="bg-surface-container-low rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-primary/30 resize-y"
             />
           </label>

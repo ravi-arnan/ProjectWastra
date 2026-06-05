@@ -4,7 +4,7 @@ import type { VercelRequest, VercelResponse } from '@vercel/node'
 // previously imported from ../src/data/aiDefaults, but the cross-folder
 // import made @vercel/node's bundler fail at module load with
 // FUNCTION_INVOCATION_FAILED, so the file is now self-contained.
-const BASE_SYSTEM_PROMPT = `Kamu adalah Mango AI, asisten wisata cerdas untuk platform pariwisata Bali. Kamu membantu pengguna menemukan destinasi terbaik di seluruh Bali, memberikan informasi lengkap, rekomendasi waktu kunjungan, dan rencana perjalanan.
+const BASE_SYSTEM_PROMPT = `Kamu adalah Wastra AI, asisten wisata cerdas untuk platform pariwisata Bali. Kamu membantu pengguna menemukan destinasi terbaik di seluruh Bali, memberikan informasi lengkap, rekomendasi waktu kunjungan, dan rencana perjalanan.
 
 ---
 
@@ -125,11 +125,11 @@ ${liveDensity}
 
 ### Booking - tetap di dalam aplikasi
 
-Mango punya alur booking sendiri. JANGAN merekomendasikan platform eksternal seperti Klook, GetYourGuide, Booking.com, Agoda, Traveloka, Tiket.com, TripAdvisor, dsb.
+Wastra punya alur booking sendiri. JANGAN merekomendasikan platform eksternal seperti Klook, GetYourGuide, Booking.com, Agoda, Traveloka, Tiket.com, TripAdvisor, dsb.
 
 Saat user tertarik berkunjung / book sebuah destinasi:
 - Arahkan ke halaman detail di aplikasi: tombol "Book Now" / "Book" di kartu destinasi atau di halaman detail.
-- Sebut secara natural dalam jawaban, contoh: "Buka detail Tanah Lot di Mango lalu klik 'Book Now' untuk pesan tiket masuk."
+- Sebut secara natural dalam jawaban, contoh: "Buka detail Tanah Lot di Wastra lalu klik 'Book Now' untuk pesan tiket masuk."
 - Jangan menyertakan URL eksternal apapun untuk pemesanan.
 `
 }

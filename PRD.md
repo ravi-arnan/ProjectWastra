@@ -1,4 +1,4 @@
-# Mango — Product Requirements Document
+# Wastra — Product Requirements Document
 
 > **Status:** Living document · written retroactively after MVP build · v0.1
 > **Last updated:** 2026-04-25
@@ -8,7 +8,7 @@
 
 ## 1. Overview
 
-**Mango** is a Progressive Web App that surfaces real-time crowd density and AI-driven forecasts for tourist destinations across Bali. It helps travelers find the quietest moments at iconic spots and gives local authorities a window into visitor distribution patterns to support sustainable tourism.
+**Wastra** is a Progressive Web App that surfaces real-time crowd density and AI-driven forecasts for tourist destinations across Bali. It helps travelers find the quietest moments at iconic spots and gives local authorities a window into visitor distribution patterns to support sustainable tourism.
 
 The product is opinionated: **sustainability over volume, calm over peak, distribution over concentration.** Every recommendation is biased toward steering visitors away from overcrowded hotspots and toward equally beautiful but less-visited alternatives.
 
@@ -28,9 +28,9 @@ Existing tools (Google Maps "popular times", booking platforms) report *generic*
 
 ## 3. Vision
 
-A traveler opens Mango in the morning, sees that Tegallalang is at 88% capacity, and accepts a one-tap recommendation for Jatiluwih (a quieter UNESCO-listed terrace 40 min away). They have a better trip, the icon site gets to breathe, and a smaller community gets visitor revenue.
+A traveler opens Wastra in the morning, sees that Tegallalang is at 88% capacity, and accepts a one-tap recommendation for Jatiluwih (a quieter UNESCO-listed terrace 40 min away). They have a better trip, the icon site gets to breathe, and a smaller community gets visitor revenue.
 
-Multiplied across 50,000 daily users, Mango becomes a **distributed crowd-management tool** that benefits tourists and the island in the same gesture.
+Multiplied across 50,000 daily users, Wastra becomes a **distributed crowd-management tool** that benefits tourists and the island in the same gesture.
 
 ---
 
@@ -52,8 +52,8 @@ Multiplied across 50,000 daily users, Mango becomes a **distributed crowd-manage
 ### Non-goals
 - A general-purpose Bali travel guide (no hotel reviews, no flight booking, no rideshare integration).
 - Coverage outside Bali (no Java, Lombok, or other Indonesian provinces — keep scope tight).
-- Social features (no profiles to follow, no public reviews on Mango itself; ratings come from existing sources).
-- Replacing official tourism authority systems — Mango is an additive layer, not a system of record.
+- Social features (no profiles to follow, no public reviews on Wastra itself; ratings come from existing sources).
+- Replacing official tourism authority systems — Wastra is an additive layer, not a system of record.
 
 ---
 
@@ -69,7 +69,7 @@ Multiplied across 50,000 daily users, Mango becomes a **distributed crowd-manage
 - 45, works at a Bali regency tourism office.
 - Needs aggregate visitor flow data for budgeting, staffing, and crowd-control planning.
 - Currently relies on after-the-fact ticket counts and informal reports from on-site staff.
-- Will use Mango on a desktop, weekly cadence, primarily the prediction and historical views.
+- Will use Wastra on a desktop, weekly cadence, primarily the prediction and historical views.
 
 ### Persona C — "Sari, the local guide"
 - 32, freelance guide who creates day trips for 2–6 travelers.
@@ -90,7 +90,7 @@ Multiplied across 50,000 daily users, Mango becomes a **distributed crowd-manage
 | US-6 | guest user | use the app without creating an account | I can evaluate it before committing |
 | US-7 | authority | view aggregate trends across regencies | I can make informed planning decisions |
 | US-8 | guide | compare two destinations on density and forecast | I can choose the better option for my client |
-| US-9 | traveler | install Mango to my home screen | it feels like a native app |
+| US-9 | traveler | install Wastra to my home screen | it feels like a native app |
 | US-10 | traveler | use the app offline for previously-viewed destinations | I can reference info without data |
 
 ---

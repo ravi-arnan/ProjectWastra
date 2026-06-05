@@ -292,8 +292,8 @@ export default function Profil() {
         <div className="flex flex-col items-center gap-3 py-4 px-6">
           <p className="text-[10px] text-on-surface-variant/60 text-center leading-relaxed">
             {lang === 'en'
-              ? 'Mango is developed as part of the Microsoft AI Impact Challenge to support sustainable tourism in Bali.'
-              : 'Mango dikembangkan sebagai bagian dari Microsoft AI Impact Challenge untuk membantu pariwisata berkelanjutan di Bali.'}
+              ? 'Wastra is developed as part of the Microsoft AI Impact Challenge to support sustainable tourism in Bali.'
+              : 'Wastra dikembangkan sebagai bagian dari Microsoft AI Impact Challenge untuk membantu pariwisata berkelanjutan di Bali.'}
           </p>
         </div>
       </div>
@@ -364,7 +364,7 @@ export default function Profil() {
                 <button
                   onClick={() => {
                     if (navigator.share) {
-                      navigator.share({ title: 'Profil Mango', url: window.location.href })
+                      navigator.share({ title: 'Profil Wastra', url: window.location.href })
                     } else {
                       navigator.clipboard.writeText(window.location.href)
                       showToast(lang === 'en' ? 'Profile link copied!' : 'Link profil disalin!')
@@ -525,7 +525,7 @@ export default function Profil() {
                   colors={['#a5f3fc', '#6cd3f7', '#ffffff', '#6cd3f7', '#a5f3fc']}
                   animationSpeed={5}
                 >
-                  {lang === 'en' ? 'Love Mango?' : 'Sukai Mango?'}
+                  {lang === 'en' ? 'Love Wastra?' : 'Sukai Wastra?'}
                 </GradientText>
               </h3>
               <p className="text-white/70 text-sm mt-1">
@@ -536,7 +536,7 @@ export default function Profil() {
             </div>
             <Magnet padding={40} magnetStrength={5}>
               <a
-                href="mailto:support@mango.id"
+                href="mailto:support@wastra.id"
                 className="bg-white text-on-surface font-bold text-sm px-6 py-3 rounded-full shrink-0 hover:bg-surface-container-lowest transition-colors shadow-xl"
               >
                 {lang === 'en' ? 'Contact Us' : 'Hubungi Kami'}
@@ -682,14 +682,14 @@ export default function Profil() {
             <Icon name="travel_explore" size="32px" className="text-primary" />
           </div>
           <div>
-            <h3 className="text-lg font-bold text-on-surface">Mango</h3>
+            <h3 className="text-lg font-bold text-on-surface">Wastra</h3>
             <p className="text-sm text-on-surface-variant">{t('auth.subtitle')}</p>
             <p className="text-xs text-on-surface-variant mt-1">v1.0.0</p>
           </div>
           <p className="text-xs text-on-surface-variant leading-relaxed">
             {lang === 'en'
-              ? 'Mango is an AI-powered smart tourism platform that helps travelers plan visits with real-time and predictive crowd density data.'
-              : 'Mango adalah platform pariwisata cerdas berbasis AI yang membantu wisatawan merencanakan kunjungan dengan menyajikan data keramaian destinasi secara real-time dan prediktif.'}
+              ? 'Wastra is an AI-powered smart tourism platform that helps travelers plan visits with real-time and predictive crowd density data.'
+              : 'Wastra adalah platform pariwisata cerdas berbasis AI yang membantu wisatawan merencanakan kunjungan dengan menyajikan data keramaian destinasi secara real-time dan prediktif.'}
           </p>
           <p className="text-[10px] text-on-surface-variant/60">
             {lang === 'en'
@@ -792,7 +792,7 @@ export default function Profil() {
             ))}
           </div>
           <a
-            href="mailto:support@mango.id"
+            href="mailto:support@wastra.id"
             className="w-full flex items-center justify-center gap-2 bg-primary text-on-primary rounded-xl py-3 font-bold text-sm hover:bg-primary-container transition-colors"
           >
             <Icon name="mail" size="18px" />

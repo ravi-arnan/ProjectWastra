@@ -46,7 +46,7 @@ export default function SideNav() {
         </div>
         <div>
           <h1 className="text-xl font-black text-cyan-800 font-headline tracking-tight leading-none">
-            <ShinyText text="Mango" color="#155e75" shineColor="#6cd3f7" speed={3.5} />
+            <ShinyText text="Wastra" color="#155e75" shineColor="#6cd3f7" speed={3.5} />
           </h1>
           <p className="text-[9px] uppercase tracking-widest text-stone-400 mt-1">
             {t('auth.subtitle')}

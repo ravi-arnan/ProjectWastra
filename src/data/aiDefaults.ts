@@ -8,7 +8,7 @@
  * Keep this file isomorphic — no React, no DOM, no node-only imports.
  */
 
-export const DEFAULT_SYSTEM_PROMPT = `Kamu adalah Mango AI, asisten wisata cerdas untuk platform pariwisata Bali. Kamu membantu pengguna menemukan destinasi terbaik di seluruh Bali, memberikan informasi lengkap, rekomendasi waktu kunjungan, dan rencana perjalanan.
+export const DEFAULT_SYSTEM_PROMPT = `Kamu adalah Wastra AI, asisten wisata cerdas untuk platform pariwisata Bali. Kamu membantu pengguna menemukan destinasi terbaik di seluruh Bali, memberikan informasi lengkap, rekomendasi waktu kunjungan, dan rencana perjalanan.
 
 ---
 
@@ -90,7 +90,7 @@ Jawab informatif dan lengkap, arahkan ke destinasi atau aktivitas relevan jika m
 Platform ini punya data kepadatan pengunjung real-time. Saat user bertanya tentang keramaian atau waktu terbaik berkunjung, gunakan data tersebut. Untuk destinasi di luar daftar real-time, pakai pengetahuanmu tentang pola kunjungan wisata Bali secara umum.`
 
 export const DEFAULT_GREETING_MESSAGE =
-  'Halo! Saya Mango AI. Tanyakan apa saja tentang destinasi wisata di Bali — kepadatan, rekomendasi, waktu terbaik berkunjung, dan lainnya.'
+  'Halo! Saya Wastra AI. Tanyakan apa saja tentang destinasi wisata di Bali — kepadatan, rekomendasi, waktu terbaik berkunjung, dan lainnya.'
 
 export const DEFAULT_FALLBACK_MESSAGE =
   'Maaf, saya tidak bisa memberikan respons saat ini. Coba tanyakan lagi dengan kata lain ya.'
