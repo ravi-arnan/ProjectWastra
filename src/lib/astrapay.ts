@@ -20,11 +20,18 @@ interface Envelope<T> {
   error?: string
 }
 
-export async function createCharge(orderId: string, amount: number): Promise<ChargeData> {
+export async function createCharge(
+  orderId: string,
+  amount: number,
+  options: { destinationId?: string; accessToken?: string } = {}
+): Promise<ChargeData> {
+  const headers: Record<string, string> = { 'Content-Type': 'application/json' }
+  if (options.accessToken) headers.Authorization = `Bearer ${options.accessToken}`
+
   const res = await fetch('/api/astrapay-charge', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ orderId, amount }),
+    headers,
+    body: JSON.stringify({ orderId, amount, destinationId: options.destinationId }),
   })
   const json = (await res.json()) as Envelope<ChargeData>
   if (!res.ok || !json.success || !json.data) {

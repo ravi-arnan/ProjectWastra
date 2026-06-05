@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Icon from './Icon'
 import { useBookings } from '../hooks/useBookings'
+import { useAuth } from '../context/AuthContext'
 import { parseTicketPrice, formatCurrency, formatDate } from '../lib/utils'
 import { createCharge, pollUntilSettled, type ChargeData, type PaymentStatus } from '../lib/astrapay'
 import type { Destination } from '../data/destinations'
@@ -20,6 +21,7 @@ export default function BookingModal({ destination, isOpen, onClose }: Props) {
   const [error, setError] = useState<string | null>(null)
   const [confirmedBooking, setConfirmedBooking] = useState<Booking | null>(null)
   const { createBooking } = useBookings()
+  const { session } = useAuth()
 
   if (!isOpen) return null
 
@@ -49,7 +51,10 @@ export default function BookingModal({ destination, isOpen, onClose }: Props) {
     setLoading(true)
     setError(null)
     try {
-      const data = await createCharge(`${destination.id}-${Date.now()}`, totalPrice)
+      const data = await createCharge(`${destination.id}-${Date.now()}`, totalPrice, {
+        destinationId: destination.id,
+        accessToken: session?.access_token,
+      })
       setCharge(data)
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Gagal membuat pembayaran')

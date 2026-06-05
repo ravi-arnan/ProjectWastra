@@ -11,7 +11,7 @@
  * When real credentials land, set the ASTRAPAY_* env vars and the same code
  * paths sign + call the live SNAP endpoints — the public contract is identical.
  */
-import { createHash, createHmac, createSign, randomUUID } from 'node:crypto'
+import { createHash, createHmac, createSign, randomUUID, timingSafeEqual } from 'node:crypto'
 
 export type PaymentStatus = 'PENDING' | 'PAID' | 'EXPIRED' | 'FAILED'
 
@@ -156,6 +156,59 @@ export async function queryStatus(intent: ChargeIntent): Promise<PaymentStatus> 
   return queryLiveStatus(intent.ref)
 }
 
+/**
+ * Resolve a still-PENDING DB-backed payment using its persisted timestamps.
+ * In mock mode this simulates the webhook firing after MOCK_PAY_DELAY_MS; it
+ * also honors expiry. Returns the new status (possibly still 'PENDING').
+ */
+export function evaluateMockPending(createdAtMs: number, expiresAtMs: number | null): PaymentStatus {
+  const now = Date.now()
+  if (expiresAtMs && now > expiresAtMs) return 'EXPIRED'
+  return now - createdAtMs >= MOCK_PAY_DELAY_MS ? 'PAID' : 'PENDING'
+}
+
+// --- Webhook (notification) signature verification ---------------------------
+
+/**
+ * SNAP-style symmetric signature for an inbound notification. The exact
+ * string-to-sign layout is provider-defined; AstraPay's QRIS notification uses
+ * the HMAC-SHA512 service signature without an access token. Adjust the
+ * stringToSign here to match the AstraPay spec once the sandbox docs are in hand.
+ */
+export function signNotification(
+  method: string,
+  path: string,
+  body: unknown,
+  timestamp: string,
+  secret: string
+): string {
+  const bodyHash = createHash('sha256').update(JSON.stringify(body)).digest('hex').toLowerCase()
+  const stringToSign = `${method}:${path}:${bodyHash}:${timestamp}`
+  return createHmac('sha512', secret).update(stringToSign).digest('base64')
+}
+
+/**
+ * Verify an inbound webhook signature in constant time. In mock mode (no secret
+ * configured) verification is skipped and accepted. A dedicated
+ * ASTRAPAY_WEBHOOK_SECRET overrides the client secret when set.
+ */
+export function verifyNotificationSignature(args: {
+  method: string
+  path: string
+  body: unknown
+  timestamp: string | undefined
+  signature: string | undefined
+}): boolean {
+  const secret = process.env.ASTRAPAY_WEBHOOK_SECRET || getConfig()?.clientSecret
+  if (!secret) return isMockMode() // mock: accept; misconfigured live: reject
+  if (!args.timestamp || !args.signature) return false
+  const expected = signNotification(args.method, args.path, args.body, args.timestamp, secret)
+  const a = Buffer.from(expected)
+  const b = Buffer.from(args.signature)
+  if (a.length !== b.length) return false
+  return timingSafeEqual(a, b)
+}
+
 // --- Live SNAP calls (exercised once credentials are configured) ------------
 
 async function getAccessToken(config: AstraPayConfig): Promise<string> {
@@ -251,7 +304,7 @@ async function queryLiveStatus(referenceNo: string): Promise<PaymentStatus> {
 }
 
 /** SNAP latestTransactionStatus → our PaymentStatus. */
-function mapSnapStatus(code: string | undefined): PaymentStatus {
+export function mapSnapStatus(code: string | undefined): PaymentStatus {
   switch (code) {
     case '00':
       return 'PAID'
