@@ -17,6 +17,29 @@ export default defineConfig({
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom', 'react-leaflet', 'leaflet', '@supabase/supabase-js'],
   },
+  build: {
+    rollupOptions: {
+      output: {
+        // Split rarely-changing vendors into stable chunks for better long-term
+        // caching. Heavy libs (ogl, leaflet, gsap, motion) are already isolated
+        // via dynamic import, so we only group the always-loaded core here.
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return
+          if (
+            id.includes('/react-dom/') ||
+            id.includes('/react/') ||
+            id.includes('/react-router') ||
+            id.includes('/scheduler/')
+          ) {
+            return 'react-vendor'
+          }
+          if (id.includes('i18next') || id.includes('react-i18next')) {
+            return 'i18n-vendor'
+          }
+        },
+      },
+    },
+  },
   plugins: [
     react(),
     tailwindcss(),

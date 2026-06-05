@@ -1,14 +1,31 @@
 import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
-import { NotificationProvider } from './hooks/useNotifications'
 import ProtectedRoute from './components/ProtectedRoute'
 import AdminRoute from './components/AdminRoute'
-import AppLayout from './components/AppLayout'
 import PageLoader from './components/PageLoader'
-import Auth from './pages/Auth'
-import Legal from './pages/Legal'
+import ErrorBoundary from './components/ErrorBoundary'
 
+// Shown if a lazy route chunk fails to load (e.g. a stale chunk after a deploy).
+const RouteLoadError = (
+  <div className="min-h-screen flex flex-col items-center justify-center gap-4 bg-surface text-on-surface px-6 text-center">
+    <p className="font-headline font-bold text-lg">Gagal memuat halaman</p>
+    <button
+      type="button"
+      onClick={() => window.location.reload()}
+      className="bg-primary text-on-primary px-5 py-2.5 rounded-lg font-headline font-bold text-sm"
+    >
+      Muat ulang
+    </button>
+  </div>
+)
+
+// All route components are lazy so the entry chunk holds only the router shell
+// and auth context. AppLayout is lazy too — it owns NotificationProvider, which
+// pulls in the destinations dataset that the public landing page never needs.
+const AppLayout = lazy(() => import('./components/AppLayout'))
+const Auth = lazy(() => import('./pages/Auth'))
+const Legal = lazy(() => import('./pages/Legal'))
 const Landing = lazy(() => import('./pages/Landing'))
 
 const Home = lazy(() => import('./pages/Home'))
@@ -28,7 +45,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <NotificationProvider>
+        <ErrorBoundary fallback={RouteLoadError}>
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<Landing />} />
@@ -52,7 +69,7 @@ export default function App() {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </Suspense>
-        </NotificationProvider>
+        </ErrorBoundary>
       </AuthProvider>
     </BrowserRouter>
   )
