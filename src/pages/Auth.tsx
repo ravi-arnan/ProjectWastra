@@ -203,11 +203,12 @@ export default function Auth() {
       {/* Video background */}
       <video
         src="/TanahLot.mp4"
+        poster="/TanahLot-poster.jpg"
         autoPlay
         loop
         muted
         playsInline
-        preload="metadata"
+        preload="none"
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover bg-on-surface"
       />

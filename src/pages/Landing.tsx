@@ -1,36 +1,44 @@
-import { useState } from 'react'
+import { lazy, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import Icon from '../components/Icon'
 import Magnet from '../components/reactbits/Magnet'
-import Aurora from '../components/reactbits/Aurora'
 import BlurText from '../components/reactbits/BlurText'
 import GradientText from '../components/reactbits/GradientText'
 import StarBorder from '../components/reactbits/StarBorder'
 import CountUp from '../components/reactbits/CountUp'
 import SpotlightCard from '../components/reactbits/SpotlightCard'
 import GlareHover from '../components/reactbits/GlareHover'
-import CircularGallery from '../components/reactbits/CircularGallery'
-import ScrollReveal from '../components/reactbits/ScrollReveal'
 import ScrollVelocity from '../components/reactbits/ScrollVelocity'
 import ShinyText from '../components/reactbits/ShinyText'
-import LiveMapPreview from '../components/LiveMapPreview'
+import LazyVisible from '../components/LazyVisible'
+import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion'
+
+// Heavy, dependency-laden components kept out of the synchronous Landing chunk:
+// Aurora + CircularGallery pull in `ogl` (WebGL), LiveMapPreview pulls in
+// `leaflet`, and ScrollReveal pulls in `gsap`. They mount lazily on scroll.
+const Aurora = lazy(() => import('../components/reactbits/Aurora'))
+const CircularGallery = lazy(() => import('../components/reactbits/CircularGallery'))
+const ScrollReveal = lazy(() => import('../components/reactbits/ScrollReveal'))
+const LiveMapPreview = lazy(() => import('../components/LiveMapPreview'))
 
 
+// WebP where a smaller variant exists (see scripts/optimize-media.mjs); the two
+// already-tiny photos (Mengening, Penglipuran) stay as JPG.
 const galleryItems = [
-  { image: '/highcompress_TanahLot.jpg', text: 'Tanah Lot' },
-  { image: '/highcompress_Uluwatu.jpg', text: 'Uluwatu' },
+  { image: '/highcompress_TanahLot.webp', text: 'Tanah Lot' },
+  { image: '/highcompress_Uluwatu.webp', text: 'Uluwatu' },
   { image: '/highcompress_Tegalalang.jpg', text: 'Tegallalang' },
   { image: '/highcompress_PantaiMengening.jpg', text: 'Mengening' },
   { image: '/highcompress_DesaPenglipuran.jpg', text: 'Penglipuran' },
-  { image: '/highcompress_Bedugul.jpg', text: 'Bedugul' },
-  { image: '/highcompress_Besakih.jpg', text: 'Besakih' },
-  { image: '/highcompress_Kintamani.jpg', text: 'Kintamani' },
-  { image: '/highcompress_KutaBeach.jpg', text: 'Kuta Beach' },
-  { image: '/highcompress_PandawaBeach.jpg', text: 'Pandawa' },
-  { image: '/highcompress_SanurBeach.jpg', text: 'Sanur' },
-  { image: '/highcompress_UbudMonkeyForest.jpg', text: 'Ubud Forest' },
+  { image: '/highcompress_Bedugul.webp', text: 'Bedugul' },
+  { image: '/highcompress_Besakih.webp', text: 'Besakih' },
+  { image: '/highcompress_Kintamani.webp', text: 'Kintamani' },
+  { image: '/highcompress_KutaBeach.webp', text: 'Kuta Beach' },
+  { image: '/highcompress_PandawaBeach.webp', text: 'Pandawa' },
+  { image: '/highcompress_SanurBeach.webp', text: 'Sanur' },
+  { image: '/highcompress_UbudMonkeyForest.webp', text: 'Ubud Forest' },
 ]
 
 const liveStatus = [
@@ -62,6 +70,7 @@ const liveStatus = [
 
 export default function Landing() {
   const { t } = useTranslation()
+  const reducedMotion = usePrefersReducedMotion()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const navLinks = [
     { label: t('landing.nav.features'), href: '#features' },
@@ -99,14 +108,21 @@ export default function Landing() {
                 {t('landing.nav.accessApp')}
               </Link>
             </Magnet>
-            <button className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            <button
+              type="button"
+              className="md:hidden"
+              aria-label={mobileMenuOpen ? 'Tutup menu' : 'Buka menu'}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-nav"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
               <Icon name={mobileMenuOpen ? 'close' : 'menu'} className="text-on-surface" />
             </button>
           </div>
         </div>
 
         {mobileMenuOpen && (
-          <div className="md:hidden bg-[#fff8f5]/95 backdrop-blur-xl border-t border-stone-200/50 px-6 py-4 flex flex-col gap-3">
+          <div id="mobile-nav" className="md:hidden bg-[#fff8f5]/95 backdrop-blur-xl border-t border-stone-200/50 px-6 py-4 flex flex-col gap-3">
             {navLinks.map((link) => (
               <a
                 key={link.label}
@@ -127,18 +143,21 @@ export default function Landing() {
           {/* Video background */}
           <video
             src="/DanauBratan.mp4"
+            poster="/DanauBratan-poster.jpg"
             autoPlay
             loop
             muted
             playsInline
-            preload="metadata"
-            aria-label="Pemandangan Danau Bratan, Bali"
+            preload="none"
+            aria-hidden="true"
             className="absolute inset-0 w-full h-full object-cover bg-on-surface"
           />
-          {/* Aurora overlay shader */}
-          <div className="absolute inset-0 opacity-50 mix-blend-screen pointer-events-none">
-            <Aurora colorStops={['#00647c', '#6cd3f7', '#a5f3fc']} amplitude={1.2} blend={0.6} speed={0.8} />
-          </div>
+          {/* Aurora overlay shader — decorative WebGL, deferred off the critical path */}
+          {!reducedMotion && (
+            <LazyVisible className="absolute inset-0 opacity-50 mix-blend-screen pointer-events-none">
+              <Aurora colorStops={['#00647c', '#6cd3f7', '#a5f3fc']} amplitude={1.2} blend={0.6} speed={0.8} />
+            </LazyVisible>
+          )}
           <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/35 to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
@@ -399,7 +418,14 @@ export default function Landing() {
               {t('landing.destinations.subtitle')}
             </p>
           </div>
-          <div className="h-[480px] lg:h-[600px] w-full">
+          <LazyVisible
+            className="h-[480px] lg:h-[600px] w-full"
+            placeholder={
+              <div className="h-full w-full flex items-center justify-center">
+                <span className="w-8 h-8 rounded-full border-2 border-white/20 border-t-white/70 animate-spin" />
+              </div>
+            }
+          >
             <CircularGallery
               items={galleryItems}
               bend={1.6}
@@ -407,7 +433,7 @@ export default function Landing() {
               borderRadius={0.06}
               font="bold 22px Plus Jakarta Sans"
             />
-          </div>
+          </LazyVisible>
         </section>
 
         {/* ==================== SCROLL VELOCITY MARQUEE ==================== */}
@@ -487,7 +513,12 @@ export default function Landing() {
                 className="relative isolate rounded-[1.5rem] lg:rounded-[2.5rem] overflow-hidden shadow-2xl border-4 lg:border-8 border-white"
                 style={{ minHeight: '500px', height: '500px' }}
               >
-                <LiveMapPreview />
+                <LazyVisible
+                  className="absolute inset-0"
+                  placeholder={<div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-surface-container to-tertiary/10" />}
+                >
+                  <LiveMapPreview />
+                </LazyVisible>
 
                 {/* Live badge */}
                 <div className="absolute top-4 lg:top-6 left-4 lg:left-6 z-[400] flex items-center gap-2 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full shadow-lg border border-slate-200">
@@ -542,15 +573,29 @@ export default function Landing() {
         {/* ==================== SCROLL REVEAL + CTA COMBO ==================== */}
         <section className="px-4 sm:px-6 lg:px-12 py-20 lg:py-28">
           <div className="max-w-5xl mx-auto mb-12 lg:mb-16">
-            <ScrollReveal
-              baseOpacity={0.05}
-              baseRotation={2}
-              blurStrength={5}
-              containerClassName="!my-0"
-              textClassName="text-on-surface font-headline !font-extrabold !text-center"
-            >
-              {t('landing.scrollText')}
-            </ScrollReveal>
+            {reducedMotion ? (
+              <p className="text-on-surface font-headline font-extrabold text-center text-[clamp(1.6rem,4vw,3rem)] leading-tight">
+                {t('landing.scrollText')}
+              </p>
+            ) : (
+              <LazyVisible
+                placeholder={
+                  <p className="text-on-surface/40 font-headline font-extrabold text-center text-[clamp(1.6rem,4vw,3rem)] leading-tight">
+                    {t('landing.scrollText')}
+                  </p>
+                }
+              >
+                <ScrollReveal
+                  baseOpacity={0.05}
+                  baseRotation={2}
+                  blurStrength={5}
+                  containerClassName="!my-0"
+                  textClassName="text-on-surface font-headline !font-extrabold !text-center"
+                >
+                  {t('landing.scrollText')}
+                </ScrollReveal>
+              </LazyVisible>
+            )}
           </div>
 
           {/* CTA card */}
@@ -558,15 +603,17 @@ export default function Landing() {
             spotlightColor="rgba(255, 255, 255, 0.3)"
             className="max-w-5xl mx-auto bg-primary py-12 lg:py-16 px-8 lg:px-14 rounded-[2rem] lg:rounded-[2.5rem] text-on-primary shadow-2xl"
           >
-            {/* Aurora background layer */}
-            <div className="absolute inset-0 opacity-50 pointer-events-none">
-              <Aurora
-                colorStops={['#007f9d', '#6cd3f7', '#a5f3fc']}
-                amplitude={1.4}
-                blend={0.7}
-                speed={0.6}
-              />
-            </div>
+            {/* Aurora background layer — decorative WebGL, deferred off the critical path */}
+            {!reducedMotion && (
+              <LazyVisible className="absolute inset-0 opacity-50 pointer-events-none">
+                <Aurora
+                  colorStops={['#007f9d', '#6cd3f7', '#a5f3fc']}
+                  amplitude={1.4}
+                  blend={0.7}
+                  speed={0.6}
+                />
+              </LazyVisible>
+            )}
             <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary-container/30 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl pointer-events-none" />
 
@@ -775,6 +822,7 @@ export default function Landing() {
               >
                 <input
                   type="email"
+                  aria-label={t('landing.footer.stayLoop')}
                   placeholder="you@email.com"
                   className="flex-1 bg-transparent text-sm text-white placeholder-white/40 px-3 py-2 outline-none"
                   required
