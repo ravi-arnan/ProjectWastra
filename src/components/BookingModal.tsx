@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Icon from './Icon'
 import { useBookings } from '../hooks/useBookings'
 import { parseTicketPrice, formatCurrency, formatDate } from '../lib/utils'
+import { createCharge, pollUntilSettled, type ChargeData, type PaymentStatus } from '../lib/astrapay'
 import type { Destination } from '../data/destinations'
 import type { Booking } from '../types/booking'
 
@@ -14,6 +15,9 @@ interface Props {
 export default function BookingModal({ destination, isOpen, onClose }: Props) {
   const [date, setDate] = useState('')
   const [visitors, setVisitors] = useState(1)
+  const [charge, setCharge] = useState<ChargeData | null>(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
   const [confirmedBooking, setConfirmedBooking] = useState<Booking | null>(null)
   const { createBooking } = useBookings()
 
@@ -23,8 +27,7 @@ export default function BookingModal({ destination, isOpen, onClose }: Props) {
   const totalPrice = unitPrice * visitors
   const today = new Date().toISOString().split('T')[0]
 
-  function handleConfirm() {
-    if (!date) return
+  function finalize() {
     const booking = createBooking({
       destinationId: destination.id,
       destinationName: destination.name,
@@ -32,11 +35,33 @@ export default function BookingModal({ destination, isOpen, onClose }: Props) {
       visitors,
       totalPrice,
     })
+    setCharge(null)
     setConfirmedBooking(booking)
+  }
+
+  async function handleConfirm() {
+    if (!date) return
+    // Free tickets skip payment entirely.
+    if (totalPrice === 0) {
+      finalize()
+      return
+    }
+    setLoading(true)
+    setError(null)
+    try {
+      const data = await createCharge(`${destination.id}-${Date.now()}`, totalPrice)
+      setCharge(data)
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Gagal membuat pembayaran')
+    } finally {
+      setLoading(false)
+    }
   }
 
   function handleClose() {
     setConfirmedBooking(null)
+    setCharge(null)
+    setError(null)
     setDate('')
     setVisitors(1)
     onClose()
@@ -48,6 +73,13 @@ export default function BookingModal({ destination, isOpen, onClose }: Props) {
       <div className="relative w-full max-w-[390px] lg:max-w-md bg-surface-container-lowest rounded-t-3xl lg:rounded-3xl p-6 max-h-[85vh] overflow-y-auto no-scrollbar">
         {confirmedBooking ? (
           <ConfirmationView booking={confirmedBooking} onClose={handleClose} />
+        ) : charge ? (
+          <PaymentView
+            charge={charge}
+            destinationName={destination.name}
+            onPaid={finalize}
+            onCancel={() => setCharge(null)}
+          />
         ) : (
           <>
             <div className="flex items-center justify-between mb-6">
@@ -108,16 +140,108 @@ export default function BookingModal({ destination, isOpen, onClose }: Props) {
               </div>
             </div>
 
+            {error && (
+              <p className="text-xs text-red-600 bg-red-50 rounded-lg px-3 py-2 mt-4">{error}</p>
+            )}
+
             <button
               onClick={handleConfirm}
-              disabled={!date}
+              disabled={!date || loading}
               className="w-full bg-primary text-on-primary rounded-xl py-3.5 font-bold text-sm mt-6 disabled:opacity-40 transition-opacity"
             >
-              Konfirmasi Pemesanan
+              {loading
+                ? 'Memproses…'
+                : totalPrice === 0
+                  ? 'Konfirmasi Pemesanan'
+                  : `Bayar dengan AstraPay`}
             </button>
           </>
         )}
       </div>
+    </div>
+  )
+}
+
+function PaymentView({
+  charge,
+  destinationName,
+  onPaid,
+  onCancel,
+}: {
+  charge: ChargeData
+  destinationName: string
+  onPaid: () => void
+  onCancel: () => void
+}) {
+  const [status, setStatus] = useState<PaymentStatus>('PENDING')
+  // Keep the latest onPaid without re-triggering the poll effect.
+  const onPaidRef = useRef(onPaid)
+  useEffect(() => {
+    onPaidRef.current = onPaid
+  }, [onPaid])
+
+  useEffect(() => {
+    const controller = new AbortController()
+    pollUntilSettled(charge.intent, { signal: controller.signal })
+      .then((settled) => {
+        if (controller.signal.aborted) return
+        setStatus(settled)
+        if (settled === 'PAID') onPaidRef.current()
+      })
+      .catch(() => {
+        if (!controller.signal.aborted) setStatus('FAILED')
+      })
+    return () => controller.abort()
+  }, [charge.intent])
+
+  const failed = status === 'EXPIRED' || status === 'FAILED'
+
+  return (
+    <div className="flex flex-col items-center text-center">
+      <div className="flex items-center justify-between w-full mb-4">
+        <h2 className="text-lg font-bold text-on-surface font-headline">Pembayaran AstraPay</h2>
+        <button onClick={onCancel} className="p-1.5 hover:bg-stone-100 rounded-full">
+          <Icon name="close" size="20px" />
+        </button>
+      </div>
+
+      {charge.mock && (
+        <p className="text-[11px] text-amber-700 bg-amber-50 rounded-full px-3 py-1 mb-4">
+          Mode simulasi — sandbox AstraPay belum aktif
+        </p>
+      )}
+
+      <p className="text-sm text-on-surface-variant mb-1">{destinationName}</p>
+      <p className="text-2xl font-bold text-primary mb-4">{formatCurrency(charge.amount)}</p>
+
+      <div className="bg-white rounded-2xl p-4 border border-stone-200 mb-4">
+        <img src={charge.qrImage} alt="QRIS AstraPay" width={208} height={208} className="w-52 h-52" />
+      </div>
+
+      {failed ? (
+        <>
+          <p className="text-sm font-semibold text-red-600 mb-1">
+            {status === 'EXPIRED' ? 'QR kedaluwarsa' : 'Pembayaran gagal'}
+          </p>
+          <p className="text-xs text-on-surface-variant mb-5">Silakan buat pembayaran baru.</p>
+          <button
+            onClick={onCancel}
+            className="w-full bg-primary text-on-primary rounded-xl py-3.5 font-bold text-sm"
+          >
+            Coba Lagi
+          </button>
+        </>
+      ) : (
+        <>
+          <div className="flex items-center gap-2 text-sm text-on-surface-variant mb-2">
+            <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+            Menunggu pembayaran…
+          </div>
+          <p className="text-xs text-on-surface-variant">
+            Scan QRIS dengan aplikasi AstraPay atau e-wallet apa pun.
+          </p>
+        </>
+      )}
     </div>
   )
 }
