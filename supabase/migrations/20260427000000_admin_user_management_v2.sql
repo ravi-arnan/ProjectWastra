@@ -1,5 +1,5 @@
 -- =====================================================
--- ProjectMango — Admin user management v2
+-- Wastra — Admin user management v2
 --
 -- Adds three RPCs:
 --   - admin_delete_user(target uuid)        — hard-delete a user (cascades)

@@ -1,5 +1,5 @@
 -- =====================================================
--- ProjectMango — AI Prompt + Safeguard settings
+-- Wastra — AI Prompt + Safeguard settings
 -- Menambah kolom baru ke ai_agent_settings. Idempotent.
 -- =====================================================
 

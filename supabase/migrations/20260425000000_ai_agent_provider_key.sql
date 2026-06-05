@@ -1,5 +1,5 @@
 -- =====================================================
--- ProjectMango — AI Agent provider + API key
+-- Wastra — AI Agent provider + API key
 -- Adds api_key + api_provider columns and locks down SELECT
 -- so only admins can read api_key. Non-admins use a SECURITY
 -- DEFINER function that returns only public-safe columns.

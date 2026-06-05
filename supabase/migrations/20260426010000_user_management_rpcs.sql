@@ -1,5 +1,5 @@
 -- =====================================================
--- ProjectMango — User management RPCs
+-- Wastra — User management RPCs
 -- Admin-only functions to list users and grant/revoke admin role.
 -- Each role mutation also writes to public.audit_logs.
 --

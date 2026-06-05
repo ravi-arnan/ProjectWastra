@@ -1,5 +1,5 @@
 -- =====================================================
--- ProjectMango — Periodic cleanup of stale anonymous users
+-- Wastra — Periodic cleanup of stale anonymous users
 --
 -- "Continue as Guest" creates an anonymous auth.users row per session;
 -- those accumulate forever. This sets up an hourly pg_cron job that

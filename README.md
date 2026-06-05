@@ -53,7 +53,7 @@ Wastra is a Progressive Web App (PWA) that helps travelers and local authorities
 ## Project Structure
 
 ```
-ProjectMango/
+ProjectWastra/
 ├── public/
 │   ├── favicon.svg
 │   └── icons/                  # PWA icons
@@ -96,8 +96,8 @@ ProjectMango/
 ### Installation
 
 ```bash
-git clone https://github.com/ravi-arnan/ProjectMango.git
-cd ProjectMango
+git clone https://github.com/ravi-arnan/ProjectWastra.git
+cd ProjectWastra
 npm install
 ```
 

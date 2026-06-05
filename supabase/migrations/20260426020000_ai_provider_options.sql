@@ -1,5 +1,5 @@
 -- =====================================================
--- ProjectMango — Expand allowed api_provider values
+-- Wastra — Expand allowed api_provider values
 --
 -- Original constraint only allowed 'github-models'. We now support several
 -- OpenAI-compatible providers; this migration drops the old check and adds

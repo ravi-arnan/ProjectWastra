@@ -1,5 +1,5 @@
 -- =====================================================
--- ProjectMango — admin role + AI settings (DDL only)
+-- Wastra — admin role + AI settings (DDL only)
 -- Jalankan pertama kali, idempotent.
 -- =====================================================
 

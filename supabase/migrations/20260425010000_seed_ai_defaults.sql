@@ -1,5 +1,5 @@
 -- =====================================================
--- ProjectMango — Seed AI agent defaults
+-- Wastra — Seed AI agent defaults
 --
 -- Populates the singleton ai_agent_settings row with meaningful default
 -- values for system_prompt, greeting/fallback/refusal messages, suggested
@@ -18,7 +18,7 @@ on conflict (id) do nothing;
 -- 2. Backfill defaults where currently NULL or empty.
 update public.ai_agent_settings set
   system_prompt = case
-    when system_prompt is null or btrim(system_prompt) = '' then $$Kamu adalah Mango AI, asisten wisata cerdas untuk platform pariwisata Bali. Kamu membantu pengguna menemukan destinasi terbaik di seluruh Bali, memberikan informasi lengkap, rekomendasi waktu kunjungan, dan rencana perjalanan.
+    when system_prompt is null or btrim(system_prompt) = '' then $$Kamu adalah Wastra AI, asisten wisata cerdas untuk platform pariwisata Bali. Kamu membantu pengguna menemukan destinasi terbaik di seluruh Bali, memberikan informasi lengkap, rekomendasi waktu kunjungan, dan rencana perjalanan.
 
 ---
 
@@ -86,7 +86,7 @@ Platform ini punya data kepadatan pengunjung real-time. Saat user bertanya tenta
     else system_prompt
   end,
   greeting_message = case
-    when greeting_message is null or btrim(greeting_message) = '' then 'Halo! Saya Mango AI. Tanyakan apa saja tentang destinasi wisata di Bali — kepadatan, rekomendasi, waktu terbaik berkunjung, dan lainnya.'
+    when greeting_message is null or btrim(greeting_message) = '' then 'Halo! Saya Wastra AI. Tanyakan apa saja tentang destinasi wisata di Bali — kepadatan, rekomendasi, waktu terbaik berkunjung, dan lainnya.'
     else greeting_message
   end,
   fallback_message = case

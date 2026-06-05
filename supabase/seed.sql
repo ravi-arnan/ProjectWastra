@@ -1,5 +1,5 @@
 -- =====================================================
--- ProjectMango — seed data
+-- Wastra — seed data
 -- Dijalankan setelah semua migration. Idempotent.
 -- =====================================================
 
@@ -14,7 +14,7 @@ update public.ai_agent_settings
 set
   greeting_message = coalesce(
     greeting_message,
-    'Halo! Saya Mango AI. Tanyakan apa saja soal wisata Bali — saya punya data kepadatan real-time dan bisa bantu rekomendasi waktu terbaik berkunjung.'
+    'Halo! Saya Wastra AI. Tanyakan apa saja soal wisata Bali — saya punya data kepadatan real-time dan bisa bantu rekomendasi waktu terbaik berkunjung.'
   ),
   fallback_message = coalesce(
     fallback_message,

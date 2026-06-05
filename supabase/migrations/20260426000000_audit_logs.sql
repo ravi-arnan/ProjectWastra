@@ -1,5 +1,5 @@
 -- =====================================================
--- ProjectMango — Audit logs
+-- Wastra — Audit logs
 -- Records every admin action: AI settings updates, role grants/revokes.
 -- Trigger-based for ai_agent_settings; security-definer RPCs insert
 -- their own rows for role changes (see 20260426010000_user_management_rpcs.sql).
