@@ -13,4 +13,5 @@ export interface NotificationPrefs {
   crowdAlerts: boolean
   bookingReminders: boolean
   recommendations: boolean
+  watchlistAlerts: boolean
 }

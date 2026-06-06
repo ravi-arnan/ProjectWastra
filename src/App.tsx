@@ -32,6 +32,7 @@ const Home = lazy(() => import('./pages/Home'))
 const Peta = lazy(() => import('./pages/Peta'))
 const DestinationDetail = lazy(() => import('./pages/DestinationDetail'))
 const Destinasi = lazy(() => import('./pages/Destinasi'))
+const Bandingkan = lazy(() => import('./pages/Bandingkan'))
 const Prediksi = lazy(() => import('./pages/Prediksi'))
 const Profil = lazy(() => import('./pages/Profil'))
 const Watchlist = lazy(() => import('./pages/Watchlist'))
@@ -57,6 +58,7 @@ export default function App() {
               <Route path="peta" element={<Peta />} />
               <Route path="destinasi" element={<Destinasi />} />
               <Route path="destinasi/:id" element={<DestinationDetail />} />
+              <Route path="bandingkan" element={<Bandingkan />} />
               <Route path="prediksi" element={<Prediksi />} />
               <Route path="ai-analysis" element={<AiAnalysis />} />
               <Route path="profil" element={<Profil />} />

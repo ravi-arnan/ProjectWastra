@@ -6,7 +6,8 @@ import Icon from '../components/Icon'
 import SpotlightCard from '../components/reactbits/SpotlightCard'
 import BlurText from '../components/reactbits/BlurText'
 import { useWatchlist } from '../hooks/useWatchlist'
-import { destinations } from '../data/destinations'
+import { useWatchlistThresholds } from '../hooks/useWatchlistThresholds'
+import { destinations, DENSITY_THRESHOLD_PRESETS } from '../data/destinations'
 
 type View = 'grid' | 'list'
 
@@ -16,11 +17,56 @@ function densityColor(d: number): string {
   return 'bg-primary'
 }
 
+/** Preset chips to pick the calm threshold that triggers an alert for a dest. */
+function ThresholdControl({
+  value,
+  density,
+  onChange,
+  lang,
+}: {
+  value: number
+  density: number
+  onChange: (value: number) => void
+  lang: string
+}) {
+  // A destination is "armed" when its density already sits at/below the chosen
+  // threshold (alerts off when threshold is 0).
+  const armed = value > 0 && density <= value
+  return (
+    <div className="flex items-center gap-1.5 flex-wrap">
+      <span className="text-[10px] font-semibold text-on-surface-variant inline-flex items-center gap-1">
+        <Icon name={armed ? 'notifications_active' : 'notifications'} size="13px" className={armed ? 'text-primary' : ''} />
+        {lang === 'en' ? 'Alert when' : 'Alarm saat'}
+      </span>
+      {DENSITY_THRESHOLD_PRESETS.map((p) => {
+        const active = value === p.value
+        return (
+          <button
+            key={p.value}
+            type="button"
+            onClick={() => onChange(p.value)}
+            aria-pressed={active}
+            className={`text-[10px] font-bold px-2 py-0.5 rounded-full transition-colors ${
+              active
+                ? 'bg-primary text-on-primary'
+                : 'bg-surface-container-high text-on-surface-variant hover:bg-surface-container-highest'
+            }`}
+            title={p.hint}
+          >
+            {lang === 'en' ? p.labelEn : p.labelId}
+          </button>
+        )
+      })}
+    </div>
+  )
+}
+
 export default function Watchlist() {
   const { i18n } = useTranslation()
   const lang = i18n.language
   const navigate = useNavigate()
   const { watchlist, removeFromWatchlist } = useWatchlist()
+  const { getThreshold, setThreshold } = useWatchlistThresholds()
   const [view, setView] = useState<View>('grid')
 
   const saved = useMemo(
@@ -143,10 +189,16 @@ export default function Watchlist() {
                     <p className="text-xs text-on-surface-variant truncate">{d.location} · {d.category}</p>
                   </div>
                 </button>
-                <div className="px-4 pb-4 -mt-2 flex items-center justify-end">
+                <div className="px-4 pb-4 -mt-1 flex flex-col gap-2.5">
+                  <ThresholdControl
+                    value={getThreshold(d.id)}
+                    density={d.density}
+                    onChange={(v) => setThreshold(d.id, v)}
+                    lang={lang}
+                  />
                   <button
                     onClick={() => removeFromWatchlist(d.id)}
-                    className="text-xs font-bold text-error hover:underline inline-flex items-center gap-1"
+                    className="self-end text-xs font-bold text-error hover:underline inline-flex items-center gap-1"
                     title={lang === 'en' ? 'Remove from watchlist' : 'Hapus dari watchlist'}
                   >
                     <Icon name="bookmark_remove" size="14px" />
@@ -167,33 +219,43 @@ export default function Watchlist() {
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: Math.min(i * 0.03, 0.25) }}
-                className="bg-surface-container-lowest rounded-2xl border border-stone-100 flex items-center gap-3 p-3 hover:shadow-sm transition-shadow"
+                className="bg-surface-container-lowest rounded-2xl border border-stone-100 flex flex-col gap-2.5 p-3 hover:shadow-sm transition-shadow"
               >
-                <button
-                  onClick={() => navigate(`/app/destinasi/${d.id}`)}
-                  className="flex items-center gap-3 flex-1 min-w-0 text-left"
-                >
-                  <img src={d.image} alt="" className="w-14 h-14 rounded-xl object-cover shrink-0" />
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-bold text-on-surface truncate">{d.name}</p>
-                    <p className="text-xs text-on-surface-variant truncate">
-                      {d.location} · {d.category}
-                    </p>
-                    <div className="flex items-center gap-2 mt-1">
-                      <span className={`w-1.5 h-1.5 rounded-full ${densityColor(d.density)}`} />
-                      <span className="text-[10px] font-semibold text-on-surface-variant">
-                        {d.densityLabel} · {pct}%
-                      </span>
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => navigate(`/app/destinasi/${d.id}`)}
+                    className="flex items-center gap-3 flex-1 min-w-0 text-left"
+                  >
+                    <img src={d.image} alt="" className="w-14 h-14 rounded-xl object-cover shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-bold text-on-surface truncate">{d.name}</p>
+                      <p className="text-xs text-on-surface-variant truncate">
+                        {d.location} · {d.category}
+                      </p>
+                      <div className="flex items-center gap-2 mt-1">
+                        <span className={`w-1.5 h-1.5 rounded-full ${densityColor(d.density)}`} />
+                        <span className="text-[10px] font-semibold text-on-surface-variant">
+                          {d.densityLabel} · {pct}%
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                </button>
-                <button
-                  onClick={() => removeFromWatchlist(d.id)}
-                  className="w-9 h-9 rounded-full bg-error/10 hover:bg-error/20 text-error flex items-center justify-center transition-colors shrink-0"
-                  title={lang === 'en' ? 'Remove from watchlist' : 'Hapus dari watchlist'}
-                >
-                  <Icon name="bookmark_remove" size="18px" />
-                </button>
+                  </button>
+                  <button
+                    onClick={() => removeFromWatchlist(d.id)}
+                    className="w-9 h-9 rounded-full bg-error/10 hover:bg-error/20 text-error flex items-center justify-center transition-colors shrink-0"
+                    title={lang === 'en' ? 'Remove from watchlist' : 'Hapus dari watchlist'}
+                  >
+                    <Icon name="bookmark_remove" size="18px" />
+                  </button>
+                </div>
+                <div className="pl-[68px]">
+                  <ThresholdControl
+                    value={getThreshold(d.id)}
+                    density={d.density}
+                    onChange={(v) => setThreshold(d.id, v)}
+                    lang={lang}
+                  />
+                </div>
               </motion.div>
             )
           })}

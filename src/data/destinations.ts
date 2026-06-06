@@ -275,6 +275,16 @@ export const destinations: Destination[] = [
   },
 ]
 
+/** Default "calm" cutoff (0..1). A destination at or below this counts as quiet. */
+export const DEFAULT_DENSITY_THRESHOLD = 0.3
+
+/** Preset calm thresholds offered for watchlist density alerts. */
+export const DENSITY_THRESHOLD_PRESETS = [
+  { value: 0.3, labelId: 'Sepi', labelEn: 'Calm', hint: '< 30%' },
+  { value: 0.6, labelId: 'Sedang', labelEn: 'Moderate', hint: '< 60%' },
+  { value: 0, labelId: 'Mati', labelEn: 'Off', hint: '—' },
+] as const
+
 export function getDensityColor(density: number): string {
   if (density > 0.8) return 'error'
   if (density > 0.6) return 'tertiary'

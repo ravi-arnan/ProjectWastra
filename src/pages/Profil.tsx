@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import Icon from '../components/Icon'
+import Logo from '../components/Logo'
 import SettingsModal from '../components/SettingsModal'
 import { useAuth, getUserInitials, getUserFullName } from '../context/AuthContext'
 import { useBookings } from '../hooks/useBookings'
@@ -586,6 +587,7 @@ export default function Profil() {
         <div className="space-y-4">
           {[
             { label: t('profil.prefs.crowdAlerts'), desc: t('profil.prefs.crowdAlertsDesc'), key: 'crowdAlerts' as const, value: prefs.crowdAlerts },
+            { label: t('profil.prefs.watchlistAlerts'), desc: t('profil.prefs.watchlistAlertsDesc'), key: 'watchlistAlerts' as const, value: prefs.watchlistAlerts },
             { label: t('profil.prefs.bookingReminders'), desc: t('profil.prefs.bookingRemindersDesc'), key: 'bookingReminders' as const, value: prefs.bookingReminders },
             { label: t('profil.prefs.recommendations'), desc: t('profil.prefs.recommendationsDesc'), key: 'recommendations' as const, value: prefs.recommendations },
           ].map((item) => (
@@ -678,9 +680,8 @@ export default function Profil() {
         onClose={() => setActiveModal(null)}
       >
         <div className="flex flex-col items-center text-center gap-4">
-          <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center">
-            <Icon name="travel_explore" size="32px" className="text-primary" />
-          </div>
+          <Logo size={64} />
+
           <div>
             <h3 className="text-lg font-bold text-on-surface">Wastra</h3>
             <p className="text-sm text-on-surface-variant">{t('auth.subtitle')}</p>
