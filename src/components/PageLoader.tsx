@@ -1,5 +1,4 @@
-import Icon from './Icon'
-import ShinyText from './reactbits/ShinyText'
+import Logo from './Logo'
 
 /**
  * Full-viewport branded loader shown while a lazy route loads.
@@ -13,12 +12,10 @@ export default function PageLoader() {
       <div className="absolute bottom-1/4 right-1/4 w-72 h-72 rounded-full bg-primary-container/10 blur-3xl pointer-events-none" />
 
       <div className="relative flex flex-col items-center gap-5">
-        <div className="flex items-center gap-2">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-primary-container flex items-center justify-center shadow-lg shadow-primary/25">
-            <Icon name="sensors" className="text-white" size="24px" />
-          </div>
-          <h1 className="text-3xl font-extrabold font-headline tracking-tight">
-            <ShinyText text="Wastra" color="#1f1b17" shineColor="#00647c" speed={2.5} />
+        <div className="flex items-center gap-3">
+          <Logo size={48} eager />
+          <h1 className="text-3xl font-extrabold font-headline tracking-tight bg-gradient-to-r from-[#1f1b17] via-[#00647c] to-[#1f1b17] bg-clip-text text-transparent">
+            Wastra
           </h1>
         </div>
 
