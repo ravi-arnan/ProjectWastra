@@ -11,6 +11,16 @@ export default function Admin() {
 
   const tools = [
     {
+      to: '/app/otoritas',
+      icon: 'insights',
+      title: lang === 'en' ? 'Authority Insights' : 'Wawasan Otoritas',
+      desc:
+        lang === 'en'
+          ? 'Visitor distribution across regencies and categories, capacity load, and forecasts.'
+          : 'Sebaran pengunjung per kabupaten dan kategori, beban kapasitas, dan prakiraan.',
+      cta: lang === 'en' ? 'Open dashboard' : 'Buka dashboard',
+    },
+    {
       to: '/app/ai-agent',
       icon: 'smart_toy',
       title: lang === 'en' ? 'AI Agent' : 'AI Agent',

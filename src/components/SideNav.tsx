@@ -23,6 +23,7 @@ export default function SideNav() {
   ]
   const adminLinks = [
     { to: '/app/admin', icon: 'admin_panel_settings', label: 'Admin' },
+    { to: '/app/otoritas', icon: 'insights', label: 'Insights' },
     { to: '/app/ai-agent', icon: 'smart_toy', label: 'AI Agent' },
     { to: '/app/user-management', icon: 'manage_accounts', label: 'User Management' },
     { to: '/app/audit-logs', icon: 'receipt_long', label: 'Audit Logs' },

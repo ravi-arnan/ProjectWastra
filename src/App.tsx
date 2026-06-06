@@ -38,6 +38,7 @@ const Profil = lazy(() => import('./pages/Profil'))
 const Watchlist = lazy(() => import('./pages/Watchlist'))
 const AiAnalysis = lazy(() => import('./pages/AiAnalysis'))
 const Admin = lazy(() => import('./pages/Admin'))
+const Otoritas = lazy(() => import('./pages/Otoritas'))
 const AiAgent = lazy(() => import('./pages/AiAgent'))
 const UserManagement = lazy(() => import('./pages/UserManagement'))
 const AuditLogs = lazy(() => import('./pages/AuditLogs'))
@@ -64,6 +65,7 @@ export default function App() {
               <Route path="profil" element={<Profil />} />
               <Route path="watchlist" element={<Watchlist />} />
               <Route path="admin" element={<AdminRoute><Admin /></AdminRoute>} />
+              <Route path="otoritas" element={<AdminRoute><Otoritas /></AdminRoute>} />
               <Route path="ai-agent" element={<AdminRoute><AiAgent /></AdminRoute>} />
               <Route path="user-management" element={<AdminRoute><UserManagement /></AdminRoute>} />
               <Route path="audit-logs" element={<AdminRoute><AuditLogs /></AdminRoute>} />
