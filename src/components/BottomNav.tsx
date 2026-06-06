@@ -14,6 +14,7 @@ export default function BottomNav() {
     { to: '/app/profil', icon: 'person', label: t('nav.profile') },
   ]
   const adminTabs = [
+    { to: '/app/otoritas', icon: 'insights', label: 'Insights' },
     { to: '/app/ai-agent', icon: 'smart_toy', label: 'AI Agent' },
     { to: '/app/user-management', icon: 'manage_accounts', label: 'Users' },
     { to: '/app/audit-logs', icon: 'receipt_long', label: 'Logs' },

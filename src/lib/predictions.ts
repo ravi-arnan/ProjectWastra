@@ -126,12 +126,12 @@ export function generateWeatherData(destination: Destination): WeatherData {
   const seed = destination.id.charCodeAt(0) + destination.id.charCodeAt(1)
   const r = seededRandom(seed + Date.now() / 86400000)
 
-  const isHighland = destination.region === 'Tabanan' || destination.region === 'Bangli'
+  const isHighland = destination.region.startsWith('Tabanan') || destination.region.startsWith('Bangli')
   const baseTemp = isHighland ? 24 : 30
 
   const conditions: WeatherData['condition'][] = ['cerah', 'berawan', 'hujan_ringan', 'hujan']
   const conditionIcons = { cerah: 'wb_sunny', berawan: 'cloud', hujan_ringan: 'grain', hujan: 'thunderstorm' }
-  const condition = conditions[Math.floor(r * 3)]
+  const condition = conditions[Math.floor(r * conditions.length)]
 
   return {
     temp: Math.round(baseTemp + (r * 6 - 3)),
