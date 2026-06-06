@@ -7,7 +7,7 @@ import { destinations, getDensityBgColor } from '../data/destinations'
 import CountUp from '../components/reactbits/CountUp'
 import SpotlightCard from '../components/reactbits/SpotlightCard'
 
-const categoryValues = ['Semua', 'Pantai', 'Pura', 'Alam', 'Desa Wisata'] as const
+const categoryValues = ['Semua', 'Pantai', 'Pura', 'Budaya', 'Alam', 'Desa Wisata'] as const
 
 export default function Destinasi() {
   const { t } = useTranslation()
@@ -19,8 +19,9 @@ export default function Destinasi() {
     Semua: t('common.categories.all'),
     Pantai: t('common.categories.beach'),
     Pura: t('common.categories.temple'),
+    Budaya: t('common.categories.culture'),
     Alam: t('common.categories.nature'),
-    'Desa Wisata': t('common.categories.culture'),
+    'Desa Wisata': t('common.categories.village'),
   }
 
   const filtered = destinations

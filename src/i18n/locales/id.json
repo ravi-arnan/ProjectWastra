@@ -28,7 +28,8 @@
       "beach": "Pantai",
       "temple": "Pura",
       "nature": "Alam",
-      "culture": "Budaya"
+      "culture": "Budaya",
+      "village": "Desa Wisata"
     },
     "density": {
       "veryBusy": "Sangat Ramai",

@@ -28,7 +28,8 @@
       "beach": "Beach",
       "temple": "Temple",
       "nature": "Nature",
-      "culture": "Culture"
+      "culture": "Culture",
+      "village": "Village"
     },
     "density": {
       "veryBusy": "Very Busy",
