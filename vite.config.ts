@@ -51,7 +51,7 @@ export default defineConfig({
     }),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.png', 'apple-touch-icon.png', 'icons/*.png'],
+      includeAssets: ['favicon.ico', 'favicon.png', 'apple-touch-icon.png', 'icons/*.png'],
       workbox: {
         globIgnores: ['**/*.mp4'],
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
