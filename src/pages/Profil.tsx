@@ -131,7 +131,7 @@ export default function Profil() {
               className="text-2xl font-extrabold text-on-surface !justify-center font-headline"
             />
             <p className="text-sm text-on-surface-variant mt-0.5">
-              {isGuest ? t('profil.guest') : (lang === 'en' ? 'Active traveler' : 'Traveler aktif')} &middot; Bali
+              {isGuest ? t('profil.guest') : (lang === 'en' ? 'Active traveler' : 'Traveler aktif')} &middot; Indonesia
             </p>
           </div>
         </motion.div>
@@ -293,8 +293,8 @@ export default function Profil() {
         <div className="flex flex-col items-center gap-3 py-4 px-6">
           <p className="text-[10px] text-on-surface-variant/60 text-center leading-relaxed">
             {lang === 'en'
-              ? 'Wastra is developed as part of the Microsoft AI Impact Challenge to support sustainable tourism in Bali.'
-              : 'Wastra dikembangkan sebagai bagian dari Microsoft AI Impact Challenge untuk membantu pariwisata berkelanjutan di Bali.'}
+              ? 'Wastra is developed as part of the Microsoft AI Impact Challenge to support sustainable tourism across Indonesia.'
+              : 'Wastra dikembangkan sebagai bagian dari Microsoft AI Impact Challenge untuk membantu pariwisata berkelanjutan di seluruh Indonesia.'}
           </p>
         </div>
       </div>
@@ -346,7 +346,7 @@ export default function Profil() {
                 </div>
                 <div className="flex items-center gap-1 mt-1">
                   <Icon name="location_on" size="16px" className="text-on-surface-variant" />
-                  <span className="text-sm text-on-surface-variant">Denpasar, Bali</span>
+                  <span className="text-sm text-on-surface-variant">Indonesia</span>
                 </div>
               </div>
               <div className="flex gap-3">

@@ -54,7 +54,7 @@ export default function Destinasi() {
           </h1>
           <p className="text-sm text-on-surface-variant mt-1">
             {t('destinasi.subtitle', {
-              defaultValue: 'Jelajahi {{count}} destinasi wisata di Bali',
+              defaultValue: 'Jelajahi {{count}} destinasi wisata di Indonesia',
               count: destinations.length,
             })}
           </p>

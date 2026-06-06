@@ -101,7 +101,7 @@
       "eyebrow": "Island Intelligence",
       "title1": "Travel Smarter,",
       "title2": "Avoid the Crowds",
-      "subtitle": "Experience Bali's serenity exactly how it was meant to be. Our AI-driven forecasts help you find the quietest moments at the island's most iconic destinations.",
+      "subtitle": "Experience Indonesia's serenity exactly how it was meant to be. Our AI-driven forecasts help you find the quietest moments at the country's most iconic destinations.",
       "ctaPrimary": "Add to Home Screen",
       "ctaSecondary": "View Live Map",
       "stats": {
@@ -112,10 +112,10 @@
     },
     "features": {
       "eyebrow": "What Makes Us Different",
-      "title": "Built for the way Bali moves",
+      "title": "Built for the way Indonesia moves",
       "density": {
         "title": "Real-time density tracking",
-        "desc": "Using anonymized satellite data and ground sensors, we provide live occupancy updates for over 200 locations across Bali."
+        "desc": "Using anonymized satellite data and ground sensors, we provide live occupancy updates for over 200 locations across Indonesia."
       },
       "forecast": {
         "title": "7-day crowd forecasts",
@@ -123,26 +123,26 @@
       },
       "ai": {
         "title": "AI-powered recommendations",
-        "desc": "Tailored suggestions that adapt to your style and the current island vibe. Wastra guides you to the perfect spot at the perfect time."
+        "desc": "Tailored suggestions that adapt to your style and the current vibe. Wastra guides you to the perfect spot at the perfect time."
       }
     },
     "destinations": {
-      "eyebrow": "Across Bali",
+      "eyebrow": "Across Indonesia",
       "title1": "200+ destinations,",
-      "title2": "one peaceful island.",
-      "subtitle": "Drag, scroll, or swipe to explore Bali's most iconic spots. Live data refreshes every five seconds."
+      "title2": "one peaceful archipelago.",
+      "subtitle": "Drag, scroll, or swipe to explore Indonesia's most iconic spots. Live data refreshes every five seconds."
     },
     "live": {
       "eyebrow": "Real-time",
       "title": "Live Now",
-      "desc": "The island is breathing. Watch live density pulses across Bali's hotspots. Green markers indicate optimal visiting times, while amber and red show growing crowds.",
+      "desc": "The archipelago is breathing. Watch live density pulses across Indonesia's hotspots. Green markers indicate optimal visiting times, while amber and red show growing crowds.",
       "openMap": "Open Full Map",
       "usersExploring": "users exploring live"
     },
-    "scrollText": "Wastra is built by Bali, for Bali. Quiet mornings at Tegallalang, sunsets at Tanah Lot, and every peaceful corner in between.",
+    "scrollText": "Wastra is built for the archipelago — quiet mornings in the highlands, sunsets on the coast, and every peaceful corner in between.",
     "cta": {
       "title": "Ready for a quieter paradise?",
-      "subtitle": "Join over {{count}} travelers who use Wastra to discover the island's hidden peace.",
+      "subtitle": "Join over {{count}} travelers who use Wastra to discover the country's hidden peace.",
       "rating": "Loved by 50,000+ travelers",
       "primary": "Get Started",
       "secondary": "Install PWA",
@@ -153,13 +153,13 @@
       }
     },
     "footer": {
-      "tagline": "Smart tourism platform helping travelers discover Bali's quietest moments and authorities manage sustainable visitation.",
+      "tagline": "Smart tourism platform helping travelers discover Indonesia's quietest moments and authorities manage sustainable visitation.",
       "product": "Product",
       "company": "Company",
       "stayLoop": "Stay in the loop",
-      "newsletterDesc": "Monthly digest of Bali's quietest spots, seasonal forecasts, and product updates.",
+      "newsletterDesc": "Monthly digest of Indonesia's quietest spots, seasonal forecasts, and product updates.",
       "subscribe": "Subscribe",
-      "madeIn": "Made in Bali · Indonesia",
+      "madeIn": "Made in Indonesia",
       "rights": "© 2025 Wastra. Smart Tourism Platform Indonesia. All rights reserved.",
       "links": {
         "features": "Features",
@@ -190,7 +190,7 @@
     "discoveryMode": "Discovery Mode",
     "ctaMap": "View Density Map",
     "ctaPrefs": "Set Preferences",
-    "searchPlaceholder": "Search calm spots in Bali...",
+    "searchPlaceholder": "Search calm spots in Indonesia...",
     "popular": "Popular Destinations",
     "recommendations": {
       "title": "Recommended for You",
@@ -209,7 +209,7 @@
   },
   "peta": {
     "title": "Density Map",
-    "subtitle": "Monitor Bali destination crowds in real-time",
+    "subtitle": "Monitor Indonesia destination crowds in real-time",
     "search": "Search destinations...",
     "filter": "Category Filter",
     "legend": {
@@ -311,8 +311,8 @@
   },
   "ai": {
     "title": "AI Travel Analysis",
-    "subtitle": "Smart assistant for your Bali journey",
-    "placeholder": "Ask anything about Bali...",
+    "subtitle": "Smart assistant for your Indonesia journey",
+    "placeholder": "Ask anything about Indonesia...",
     "send": "Send",
     "thinking": "AI is thinking...",
     "examples": {
