@@ -101,7 +101,12 @@ export default function Auth() {
           supabase.from('local_managers').select('destination_id').eq('user_id', data.user.id).maybeSingle()
         ]);
         
-        if (adminData || managerData) {
+        if (adminData) {
+          navigate('/app/admin');
+          return;
+        }
+        
+        if (managerData) {
           navigate('/dashboard');
           return;
         }
