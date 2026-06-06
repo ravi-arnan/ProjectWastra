@@ -268,16 +268,14 @@ export default function Auth() {
           load. Suspense fallback (also PageLoader) takes over after Auth
           unmounts, so the visual stays seamless. */}
       {navigatingBack && <PageLoader />}
-      {/* Video background */}
-      <video
-        src="/TanahLot.mp4"
-        poster="/TanahLot-poster.jpg"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="none"
+      {/* Static image background — swapped from a 1.6MB looping video to a
+          127KB still for faster load and lower data/CPU on the auth screen. */}
+      <img
+        src="/TanahLot-poster.jpg"
+        alt=""
         aria-hidden="true"
+        loading="eager"
+        fetchPriority="high"
         className="absolute inset-0 w-full h-full object-cover bg-on-surface"
       />
       {/* Gradient + tint overlays */}
