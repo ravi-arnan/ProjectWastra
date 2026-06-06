@@ -40,9 +40,9 @@ export default function DashboardOverview() {
       case 'visitors': list.sort((a, b) => b.visitors - a.visitors); break
     }
     return list
-  }, [sortKey, filterCategory])
+  }, [sortKey, filterCategory, filteredDestinations])
 
-  const categories = ['Semua', ...Array.from(new Set(destinations.map((d) => d.category)))]
+  const categories = ['Semua', ...Array.from(new Set(filteredDestinations.map((d) => d.category)))]
 
   return (
     <div className="flex flex-col gap-5 max-w-6xl">
@@ -63,7 +63,7 @@ export default function DashboardOverview() {
         >
           {isLocalManager 
               ? `Selamat datang, Pengelola ${destinations.find(d => d.id === localManagerDestId)?.name || 'Destinasi'}. Berikut adalah ringkasan performa wisata hari ini.`
-              : 'Ringkasan performa dan pergerakan wisatawan di seluruh destinasi Bali hari ini.'}
+              : 'Ringkasan performa dan pergerakan wisatawan di seluruh destinasi Indonesia hari ini.'}
         </motion.p>
       </div>
 

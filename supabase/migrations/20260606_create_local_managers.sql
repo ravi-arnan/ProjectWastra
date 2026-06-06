@@ -12,16 +12,20 @@ CREATE TABLE IF NOT EXISTS public.local_managers (
 -- Row Level Security (RLS)
 ALTER TABLE public.local_managers ENABLE ROW LEVEL SECURITY;
 
--- Siapa saja bisa melihat data manager (untuk frontend validation)
-CREATE POLICY "Local managers are viewable by everyone."
+-- Manager hanya bisa melihat baris miliknya sendiri; Super Admin bisa melihat semua.
+-- (Sebelumnya USING(true) membocorkan seluruh pemetaan user_id -> destinasi ke publik.)
+CREATE POLICY "Managers can view their own row; admins view all"
   ON public.local_managers FOR SELECT
-  USING ( true );
+  TO authenticated
+  USING ( user_id = auth.uid() OR public.is_admin(auth.uid()) );
 
 -- Hanya Super Admin yang bisa menambah/menghapus local manager
 CREATE POLICY "Admins can insert local managers"
   ON public.local_managers FOR INSERT
-  WITH CHECK ( exists (select 1 from public.admins where user_id = auth.uid()) );
+  TO authenticated
+  WITH CHECK ( public.is_admin(auth.uid()) );
 
 CREATE POLICY "Admins can delete local managers"
   ON public.local_managers FOR DELETE
-  USING ( exists (select 1 from public.admins where user_id = auth.uid()) );
+  TO authenticated
+  USING ( public.is_admin(auth.uid()) );

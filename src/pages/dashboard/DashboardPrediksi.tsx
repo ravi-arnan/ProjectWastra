@@ -65,7 +65,7 @@ export default function DashboardPrediksi() {
         }
       })
 
-      const avgDensity = totalDensity / weeklyData.length
+      const avgDensity = totalDensity / (weeklyData.length || 1)
 
       return {
         ...dayInfo,
@@ -90,6 +90,20 @@ export default function DashboardPrediksi() {
     if (!selectedDest) return null
     return generateHourlyPrediction(selectedDest, 0) // Default to today
   }, [selectedDest])
+
+  // Empty state: e.g. local manager whose destination ID no longer matches any data
+  if (weeklyData.length === 0) {
+    return (
+      <div className="max-w-[1400px] mx-auto">
+        <div className="flex flex-col items-center justify-center gap-3 py-20 text-center">
+          <Icon name="calendar_month" size="40px" className="text-on-surface-variant/40" />
+          <p className="text-sm text-on-surface-variant">
+            Belum ada data prediksi untuk destinasi Anda.
+          </p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="max-w-[1400px] mx-auto space-y-6">
