@@ -87,12 +87,26 @@ export default function Auth() {
     if (!ensureCaptcha()) return;
     setLoading(true);
     try {
-      const { error: authError } = await supabase.auth.signInWithPassword({
+      const { data, error: authError } = await supabase.auth.signInWithPassword({
         email,
         password,
         options: captchaToken ? { captchaToken } : undefined,
       });
       if (authError) throw authError;
+
+      // Check roles before navigating
+      if (data.user) {
+        const [{ data: adminData }, { data: managerData }] = await Promise.all([
+          supabase.from('admins').select('user_id').eq('user_id', data.user.id).maybeSingle(),
+          supabase.from('local_managers').select('destination_id').eq('user_id', data.user.id).maybeSingle()
+        ]);
+        
+        if (adminData || managerData) {
+          navigate('/dashboard');
+          return;
+        }
+      }
+      
       navigate('/app');
     } catch (err: any) {
       const code: string | undefined = err?.code;

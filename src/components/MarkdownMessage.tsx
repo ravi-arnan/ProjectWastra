@@ -1,5 +1,6 @@
 import ReactMarkdown from 'react-markdown'
 import type { Components } from 'react-markdown'
+import { Link } from 'react-router-dom'
 import Icon from './Icon'
 
 // ── Emoji → Material Symbol mapping ──────────────────────────────────────────
@@ -89,17 +90,35 @@ const markdownComponents: Components = {
     if (typeof children !== 'string') return <>{children}</>
     return <>{renderTextWithIcons(children)}</>
   },
-  // Links stay as-is but open in new tab
-  a: ({ href, children }) => (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-primary underline underline-offset-2 hover:opacity-75 transition-opacity"
-    >
-      {children}
-    </a>
-  ),
+  // Links stay as-is but open in new tab, EXCEPT internal /app/destinasi/ links which become nice buttons
+  a: ({ href, children }) => {
+    if (href?.startsWith('/app/destinasi/') || href?.startsWith('/destinasi/')) {
+      // normalize to /app/destinasi/...
+      const destUrl = href.startsWith('/app/') ? href : `/app${href}`
+      
+      return (
+        <span className="block mt-3 mb-1">
+          <Link
+            to={destUrl}
+            className="inline-flex items-center gap-1.5 px-4 py-2 bg-primary text-on-primary text-xs font-semibold rounded-full hover:bg-primary-container hover:text-on-primary-container hover:shadow-md transition-all border border-transparent hover:border-primary/20"
+          >
+            <Icon name="local_activity" size="16px" />
+            {children}
+          </Link>
+        </span>
+      )
+    }
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-primary underline underline-offset-2 hover:opacity-75 transition-opacity"
+      >
+        {children}
+      </a>
+    )
+  },
   p:          ({ children }) => <p className="mb-2 last:mb-0 leading-relaxed">{children}</p>,
   ul:         ({ children }) => <ul className="list-disc pl-5 mb-2 space-y-0.5">{children}</ul>,
   ol:         ({ children }) => <ol className="list-decimal pl-5 mb-2 space-y-0.5">{children}</ol>,

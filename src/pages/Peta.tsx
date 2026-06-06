@@ -133,53 +133,6 @@ export default function Peta() {
     <div className="relative w-full h-full -mx-4 -mb-24 lg:-mx-10 lg:-my-8 w-[calc(100%+2rem)] lg:w-[calc(100%+5rem)]">
       {/* ===== MOBILE VIEW ===== */}
       <div className="lg:hidden relative w-full h-[calc(100vh-56px-80px)]">
-        {/* Floating Search */}
-        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 w-[calc(100%-2rem)]">
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-white/90 backdrop-blur-md rounded-full flex items-center gap-2 px-4 py-2.5 shadow-lg border border-white/60"
-          >
-            <Icon name="search" className="text-on-surface-variant" size="20px" />
-            <input
-              type="text"
-              placeholder={t('peta.search')}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="bg-transparent outline-none flex-1 text-sm text-on-surface placeholder:text-outline"
-            />
-            {searchQuery && (
-              <button onClick={() => setSearchQuery('')} className="cursor-pointer">
-                <Icon name="close" className="text-on-surface-variant" size="18px" />
-              </button>
-            )}
-          </motion.div>
-          {filteredDestinations && filteredDestinations.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: -4 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mt-2 bg-white rounded-2xl shadow-lg overflow-hidden max-h-60 overflow-y-auto"
-            >
-              {filteredDestinations.map((dest) => (
-                <button
-                  key={dest.id}
-                  onClick={() => {
-                    setSelectedDestination(dest)
-                    setSearchQuery('')
-                  }}
-                  className="w-full px-4 py-3 text-left hover:bg-surface-container-high flex items-center gap-3 cursor-pointer"
-                >
-                  <div className="w-3 h-3 rounded-full shrink-0" style={{ background: getDensityHex(dest.density) }} />
-                  <div>
-                    <p className="text-sm font-medium text-on-surface">{dest.name}</p>
-                    <p className="text-xs text-on-surface-variant">{dest.location}</p>
-                  </div>
-                </button>
-              ))}
-            </motion.div>
-          )}
-        </div>
-
         {/* Map */}
         <MapContainer
           center={[-8.4095, 115.1889]}
@@ -197,7 +150,7 @@ export default function Peta() {
         </MapContainer>
 
         {/* Category Filter - Mobile */}
-        <div className="absolute top-[68px] left-1/2 -translate-x-1/2 z-20 flex gap-2">
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
           {categoryValues.map((cat, i) => (
             <motion.button
               key={cat}

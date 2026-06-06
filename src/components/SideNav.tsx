@@ -8,7 +8,7 @@ import Magnet from './reactbits/Magnet'
 
 export default function SideNav() {
   const { t } = useTranslation()
-  const { isAdmin, user } = useAuth()
+  const { isAdmin, isLocalManager, user } = useAuth()
   const initials = getUserInitials(user)
   const displayName = getUserFullName(user, t('profil.guest'))
 
@@ -26,7 +26,11 @@ export default function SideNav() {
     { to: '/app/audit-logs', icon: 'receipt_long', label: 'Audit Logs' },
     { to: '/app/profil', icon: 'person', label: t('nav.profile') },
   ]
-  const links = isAdmin ? adminLinks : userLinks
+  const baseLinks = isAdmin ? adminLinks : userLinks
+  const links = [...baseLinks]
+  if (isLocalManager && !isAdmin) {
+    links.splice(1, 0, { to: '/dashboard', icon: 'query_stats', label: 'Dashboard Pengelola' })
+  }
 
   return (
     <aside className="hidden lg:flex fixed left-0 top-0 w-64 h-screen bg-gradient-to-b from-white via-white to-surface-container-low/30 border-r border-stone-100 p-6 flex-col z-30">

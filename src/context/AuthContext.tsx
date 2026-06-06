@@ -6,7 +6,10 @@ interface AuthContextType {
   user: User | null
   session: Session | null
   loading: boolean
+  isCheckingRoles: boolean
   isAdmin: boolean
+  isLocalManager: boolean
+  localManagerDestId: string | null
   signOut: () => Promise<void>
 }
 
@@ -14,7 +17,10 @@ const AuthContext = createContext<AuthContextType>({
   user: null,
   session: null,
   loading: true,
+  isCheckingRoles: true,
   isAdmin: false,
+  isLocalManager: false,
+  localManagerDestId: null,
   signOut: async () => {},
 })
 
@@ -51,7 +57,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [session, setSession] = useState<Session | null>(null)
   const [loading, setLoading] = useState(true)
+  const [isCheckingRoles, setIsCheckingRoles] = useState(true)
   const [isAdmin, setIsAdmin] = useState(false)
+  const [localManagerDestId, setLocalManagerDestId] = useState<string | null>(null)
 
   useEffect(() => {
     let subscription: { unsubscribe: () => void } | null = null
@@ -79,33 +87,48 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [])
 
   useEffect(() => {
-    if (!user || user.is_anonymous) {
+    // Prevent premature abortion of role checks while initial session is still loading
+    if (loading) return
+
+    if (!user?.id || user.is_anonymous) {
       setIsAdmin(false)
+      setLocalManagerDestId(null)
+      setIsCheckingRoles(false)
       return
     }
+    
     let cancelled = false
-    supabase
-      .from('admins')
-      .select('user_id')
-      .eq('user_id', user.id)
-      .maybeSingle()
-      .then(({ data }) => {
-        if (!cancelled) setIsAdmin(!!data)
-      })
+    setIsCheckingRoles(true)
+    
+    // Check Super Admin & Local Manager concurrently
+    Promise.all([
+      supabase.from('admins').select('user_id').eq('user_id', user.id).maybeSingle(),
+      supabase.from('local_managers').select('destination_id').eq('user_id', user.id).maybeSingle()
+    ]).then(([adminRes, managerRes]) => {
+      if (!cancelled) {
+        setIsAdmin(!!adminRes.data)
+        setLocalManagerDestId(managerRes.data?.destination_id || null)
+        setIsCheckingRoles(false)
+      }
+    })
+
     return () => {
       cancelled = true
     }
-  }, [user])
+  }, [user?.id, user?.is_anonymous, loading])
 
   const signOut = async () => {
     await supabase.auth.signOut()
     setUser(null)
     setSession(null)
     setIsAdmin(false)
+    setLocalManagerDestId(null)
   }
 
+  const isLocalManager = !!localManagerDestId
+
   return (
-    <AuthContext.Provider value={{ user, session, loading, isAdmin, signOut }}>
+    <AuthContext.Provider value={{ user, session, loading, isCheckingRoles, isAdmin, isLocalManager, localManagerDestId, signOut }}>
       {children}
     </AuthContext.Provider>
   )
