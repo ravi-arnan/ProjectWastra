@@ -9,7 +9,7 @@ export default function MobileHeader() {
       {/* Location chip */}
       <div className="flex items-center gap-1 text-stone-600">
         <Icon name="location_on" size="18px" className="text-primary" />
-        <span className="text-sm font-medium">Denpasar, Bali</span>
+        <span className="text-sm font-medium">Indonesia</span>
       </div>
 
       <div className="flex items-center gap-2">

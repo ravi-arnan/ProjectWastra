@@ -28,7 +28,8 @@
       "beach": "Pantai",
       "temple": "Pura",
       "nature": "Alam",
-      "culture": "Budaya"
+      "culture": "Budaya",
+      "village": "Desa Wisata"
     },
     "density": {
       "veryBusy": "Sangat Ramai",
@@ -44,6 +45,7 @@
     "home": "Beranda",
     "map": "Peta",
     "predictions": "Prediksi",
+    "compare": "Bandingkan",
     "watchlist": "Watchlist",
     "profile": "Profil",
     "aiAnalysis": "AI Analysis"
@@ -65,6 +67,7 @@
       "login": "Masuk",
       "signup": "Daftar",
       "guest": "Masuk sebagai Tamu",
+      "google": "Lanjutkan dengan Google",
       "forgotPassword": "Lupa kata sandi?",
       "resetSent": "Email reset terkirim!",
       "resendConfirmation": "Kirim ulang email konfirmasi",
@@ -75,6 +78,7 @@
       "loginFailed": "Gagal masuk. Silakan coba lagi.",
       "signupFailed": "Gagal mendaftar. Silakan coba lagi.",
       "guestFailed": "Gagal masuk sebagai tamu. Silakan coba lagi.",
+      "googleFailed": "Gagal masuk dengan Google. Silakan coba lagi.",
       "passwordMismatch": "Kata sandi tidak cocok.",
       "emailFirst": "Masukkan email terlebih dahulu untuk reset kata sandi.",
       "resetFailed": "Gagal mengirim email reset.",
@@ -98,7 +102,7 @@
       "eyebrow": "Island Intelligence",
       "title1": "Travel Smarter,",
       "title2": "Avoid the Crowds",
-      "subtitle": "Rasakan ketenangan Bali sebagaimana mestinya. Prediksi berbasis AI membantu Anda menemukan momen paling tenang di destinasi paling ikonik.",
+      "subtitle": "Rasakan ketenangan Indonesia sebagaimana mestinya. Prediksi berbasis AI membantu Anda menemukan momen paling tenang di destinasi paling ikonik.",
       "ctaPrimary": "Tambahkan ke Layar Utama",
       "ctaSecondary": "Lihat Peta Langsung",
       "stats": {
@@ -109,10 +113,10 @@
     },
     "features": {
       "eyebrow": "Apa Yang Membuat Kami Berbeda",
-      "title": "Dibangun untuk irama Bali",
+      "title": "Dibangun untuk irama Indonesia",
       "density": {
         "title": "Pelacakan kepadatan real-time",
-        "desc": "Dengan data satelit anonim dan sensor di lapangan, kami menyediakan update okupansi langsung untuk lebih dari 200 lokasi di Bali."
+        "desc": "Dengan data satelit anonim dan sensor di lapangan, kami menyediakan update okupansi langsung untuk lebih dari 200 lokasi di Indonesia."
       },
       "forecast": {
         "title": "Prediksi keramaian 7 hari",
@@ -120,26 +124,26 @@
       },
       "ai": {
         "title": "Rekomendasi bertenaga AI",
-        "desc": "Saran yang menyesuaikan gaya Anda dan vibe pulau saat ini. Wastra memandu Anda ke spot yang tepat di waktu yang tepat."
+        "desc": "Saran yang menyesuaikan gaya Anda dan vibe Nusantara saat ini. Wastra memandu Anda ke spot yang tepat di waktu yang tepat."
       }
     },
     "destinations": {
-      "eyebrow": "Across Bali",
+      "eyebrow": "Across Indonesia",
       "title1": "200+ destinasi,",
-      "title2": "satu pulau yang tenang.",
-      "subtitle": "Drag, scroll, atau swipe untuk menjelajahi spot ikonik Bali. Data live diperbarui setiap lima detik."
+      "title2": "satu Nusantara yang tenang.",
+      "subtitle": "Drag, scroll, atau swipe untuk menjelajahi spot ikonik Indonesia. Data live diperbarui setiap lima detik."
     },
     "live": {
       "eyebrow": "Real-time",
       "title": "Live Now",
-      "desc": "Pulau ini berdetak. Lihat denyut kepadatan langsung di hotspot Bali. Penanda hijau menunjukkan waktu kunjungan optimal, kuning dan merah menunjukkan kerumunan tumbuh.",
+      "desc": "Nusantara berdetak. Lihat denyut kepadatan langsung di hotspot seluruh Indonesia. Penanda hijau menunjukkan waktu kunjungan optimal, kuning dan merah menunjukkan kerumunan tumbuh.",
       "openMap": "Open Full Map",
       "usersExploring": "pengguna menjelajah live"
     },
-    "scrollText": "Wastra dibangun oleh Bali, untuk Bali. Pagi tenang di Tegallalang, sunset di Tanah Lot, dan setiap sudut tenang di antaranya.",
+    "scrollText": "Wastra dibangun untuk Nusantara — dari pagi tenang di pegunungan hingga sunset di pesisir, dan setiap sudut tenang di antaranya.",
     "cta": {
       "title": "Siap untuk surga yang lebih tenang?",
-      "subtitle": "Bergabung dengan {{count}} traveler yang menggunakan Wastra untuk menemukan ketenangan tersembunyi pulau ini.",
+      "subtitle": "Bergabung dengan {{count}} traveler yang menggunakan Wastra untuk menemukan ketenangan tersembunyi negeri ini.",
       "rating": "Disukai oleh 50.000+ traveler",
       "primary": "Mulai Sekarang",
       "secondary": "Install PWA",
@@ -150,13 +154,13 @@
       }
     },
     "footer": {
-      "tagline": "Platform pariwisata cerdas yang membantu traveler menemukan momen tenang Bali dan otoritas mengelola kunjungan berkelanjutan.",
+      "tagline": "Platform pariwisata cerdas yang membantu traveler menemukan momen tenang Indonesia dan otoritas mengelola kunjungan berkelanjutan.",
       "product": "Produk",
       "company": "Perusahaan",
       "stayLoop": "Tetap Terhubung",
-      "newsletterDesc": "Ringkasan bulanan tentang spot tenang Bali, prediksi musiman, dan update produk.",
+      "newsletterDesc": "Ringkasan bulanan tentang spot tenang Indonesia, prediksi musiman, dan update produk.",
       "subscribe": "Berlangganan",
-      "madeIn": "Dibuat di Bali · Indonesia",
+      "madeIn": "Dibuat di Indonesia",
       "rights": "© 2025 Wastra. Smart Tourism Platform Indonesia. Hak cipta dilindungi.",
       "links": {
         "features": "Features",
@@ -187,7 +191,7 @@
     "discoveryMode": "Discovery Mode",
     "ctaMap": "Lihat Peta Kepadatan",
     "ctaPrefs": "Atur Preferensi",
-    "searchPlaceholder": "Cari destinasi tenang di Bali...",
+    "searchPlaceholder": "Cari destinasi tenang di Indonesia...",
     "popular": "Destinasi Populer",
     "recommendations": {
       "title": "Rekomendasi untuk Kamu",
@@ -206,7 +210,7 @@
   },
   "peta": {
     "title": "Peta Kepadatan",
-    "subtitle": "Pantau keramaian destinasi Bali secara real-time",
+    "subtitle": "Pantau keramaian destinasi Indonesia secara real-time",
     "search": "Cari destinasi...",
     "filter": "Filter Kategori",
     "legend": {
@@ -293,6 +297,8 @@
     "prefs": {
       "crowdAlerts": "Notifikasi keramaian",
       "crowdAlertsDesc": "Terima pemberitahuan saat destinasi favorit mulai sepi",
+      "watchlistAlerts": "Alarm watchlist",
+      "watchlistAlertsDesc": "Beri tahu saat destinasi tersimpan turun di bawah ambang tenang saya",
       "bookingReminders": "Pengingat booking",
       "bookingRemindersDesc": "Ingatkan sehari sebelum jadwal kunjungan",
       "recommendations": "Rekomendasi",
@@ -306,8 +312,8 @@
   },
   "ai": {
     "title": "AI Travel Analysis",
-    "subtitle": "Asisten cerdas untuk perjalananmu di Bali",
-    "placeholder": "Tanyakan apapun tentang Bali...",
+    "subtitle": "Asisten cerdas untuk perjalananmu di Indonesia",
+    "placeholder": "Tanyakan apapun tentang Indonesia...",
     "send": "Kirim",
     "thinking": "AI sedang berpikir...",
     "examples": {

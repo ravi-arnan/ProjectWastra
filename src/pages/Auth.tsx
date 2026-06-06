@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../context/AuthContext';
 import Icon from '../components/Icon';
+import Logo from '../components/Logo';
 import PageLoader from '../components/PageLoader';
 import BlurText from '../components/reactbits/BlurText';
 import GradientText from '../components/reactbits/GradientText';
@@ -16,6 +17,18 @@ import StarBorder from '../components/reactbits/StarBorder';
 type Tab = 'login' | 'signup';
 
 const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined;
+
+/** Official multicolor Google "G" mark (Material Symbols has no brand glyph). */
+function GoogleIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
+      <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z" />
+      <path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z" />
+      <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z" />
+      <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z" />
+    </svg>
+  );
+}
 
 export default function Auth() {
   const navigate = useNavigate();
@@ -204,6 +217,28 @@ export default function Auth() {
     }
   };
 
+  const handleGoogleLogin = async () => {
+    setError('');
+    setLoading(true);
+    try {
+      // OAuth performs a full-page redirect to Google, then back to /app where
+      // the Supabase client exchanges the code for a session (PKCE,
+      // detectSessionInUrl). No captcha — Turnstile only gates password/guest.
+      const { error: authError } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/app`,
+        },
+      });
+      if (authError) throw authError;
+      // On success the browser navigates away; keep the spinner until unload.
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : undefined;
+      setError(msg || t('auth.errors.googleFailed'));
+      setLoading(false);
+    }
+  };
+
   const inputGroupClass =
     'bg-white/70 border border-white/60 rounded-xl px-4 py-3 flex items-center gap-3 focus-within:border-primary/60 focus-within:bg-white transition-colors';
   const inputClass =
@@ -211,6 +246,20 @@ export default function Auth() {
   const guestButtonClass = `w-full bg-white/60 hover:bg-white/85 border border-white/70 text-on-surface rounded-xl py-3 font-headline text-sm tracking-wide flex items-center justify-center gap-2 transition-colors ${
     loading ? 'opacity-70 pointer-events-none' : ''
   }`;
+
+  const googleButton = (
+    <button
+      type="button"
+      onClick={handleGoogleLogin}
+      disabled={loading}
+      className={`w-full bg-white hover:bg-white/90 border border-white/70 text-on-surface rounded-xl py-3 font-headline text-sm tracking-wide flex items-center justify-center gap-2.5 shadow-sm transition-colors ${
+        loading ? 'opacity-70 pointer-events-none' : ''
+      }`}
+    >
+      <GoogleIcon />
+      {t('auth.actions.google', { defaultValue: 'Lanjutkan dengan Google' })}
+    </button>
+  );
 
   return (
     <div className="relative min-h-dvh overflow-hidden flex items-center justify-center p-4 md:p-6">
@@ -274,7 +323,7 @@ export default function Auth() {
         {/* Branding */}
         <div className="flex flex-col items-center gap-2 pt-2">
           <div className="flex items-center gap-2">
-            <Icon name="travel_explore" filled className="text-primary" size="32px" />
+            <Logo size={38} eager />
             <BlurText
               text={t('auth.brand')}
               as="span"
@@ -484,6 +533,8 @@ export default function Auth() {
                 <div className="flex-1 h-px bg-outline-variant/40" />
               </div>
 
+              {googleButton}
+
               <button type="button" onClick={handleGuestLogin} className={guestButtonClass}>
                 <Icon name="person_outline" size="20px" />
                 {t('auth.actions.guest')}
@@ -591,6 +642,8 @@ export default function Auth() {
                 <span className="text-xs text-on-surface-variant/60 font-body">{t('common.or')}</span>
                 <div className="flex-1 h-px bg-outline-variant/40" />
               </div>
+
+              {googleButton}
 
               <button type="button" onClick={handleGuestLogin} className={guestButtonClass}>
                 <Icon name="person_outline" size="20px" />

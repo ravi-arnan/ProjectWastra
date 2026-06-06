@@ -1,9 +1,11 @@
 export const STORAGE_KEYS = {
   WATCHLIST: 'mango_watchlist',
+  WATCHLIST_THRESHOLDS: 'mango_watchlist_thresholds',
   BOOKINGS: 'mango_bookings', // legacy global key — kept only for cleanup, do not write
   NOTIFICATIONS: 'mango_notifications',
   NOTIFICATION_PREFS: 'mango_notification_prefs',
   FIRED_REMINDERS: 'mango_fired_reminders',
+  FIRED_WATCHLIST_ALERTS: 'mango_fired_watchlist_alerts',
   LAST_MOOD: 'mango_last_mood',
   REVIEWS: 'mango_reviews',
   SETTINGS: 'mango_settings',

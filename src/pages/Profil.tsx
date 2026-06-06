@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import Icon from '../components/Icon'
+import Logo from '../components/Logo'
 import SettingsModal from '../components/SettingsModal'
 import { useAuth, getUserInitials, getUserFullName } from '../context/AuthContext'
 import { useBookings } from '../hooks/useBookings'
@@ -130,7 +131,7 @@ export default function Profil() {
               className="text-2xl font-extrabold text-on-surface !justify-center font-headline"
             />
             <p className="text-sm text-on-surface-variant mt-0.5">
-              {isGuest ? t('profil.guest') : (lang === 'en' ? 'Active traveler' : 'Traveler aktif')} &middot; Bali
+              {isGuest ? t('profil.guest') : (lang === 'en' ? 'Active traveler' : 'Traveler aktif')} &middot; Indonesia
             </p>
           </div>
         </motion.div>
@@ -292,8 +293,8 @@ export default function Profil() {
         <div className="flex flex-col items-center gap-3 py-4 px-6">
           <p className="text-[10px] text-on-surface-variant/60 text-center leading-relaxed">
             {lang === 'en'
-              ? 'Wastra is developed as part of the Microsoft AI Impact Challenge to support sustainable tourism in Bali.'
-              : 'Wastra dikembangkan sebagai bagian dari Microsoft AI Impact Challenge untuk membantu pariwisata berkelanjutan di Bali.'}
+              ? 'Wastra is developed as part of the Microsoft AI Impact Challenge to support sustainable tourism across Indonesia.'
+              : 'Wastra dikembangkan sebagai bagian dari Microsoft AI Impact Challenge untuk membantu pariwisata berkelanjutan di seluruh Indonesia.'}
           </p>
         </div>
       </div>
@@ -345,7 +346,7 @@ export default function Profil() {
                 </div>
                 <div className="flex items-center gap-1 mt-1">
                   <Icon name="location_on" size="16px" className="text-on-surface-variant" />
-                  <span className="text-sm text-on-surface-variant">Denpasar, Bali</span>
+                  <span className="text-sm text-on-surface-variant">Indonesia</span>
                 </div>
               </div>
               <div className="flex gap-3">
@@ -586,6 +587,7 @@ export default function Profil() {
         <div className="space-y-4">
           {[
             { label: t('profil.prefs.crowdAlerts'), desc: t('profil.prefs.crowdAlertsDesc'), key: 'crowdAlerts' as const, value: prefs.crowdAlerts },
+            { label: t('profil.prefs.watchlistAlerts'), desc: t('profil.prefs.watchlistAlertsDesc'), key: 'watchlistAlerts' as const, value: prefs.watchlistAlerts },
             { label: t('profil.prefs.bookingReminders'), desc: t('profil.prefs.bookingRemindersDesc'), key: 'bookingReminders' as const, value: prefs.bookingReminders },
             { label: t('profil.prefs.recommendations'), desc: t('profil.prefs.recommendationsDesc'), key: 'recommendations' as const, value: prefs.recommendations },
           ].map((item) => (
@@ -678,9 +680,8 @@ export default function Profil() {
         onClose={() => setActiveModal(null)}
       >
         <div className="flex flex-col items-center text-center gap-4">
-          <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center">
-            <Icon name="travel_explore" size="32px" className="text-primary" />
-          </div>
+          <Logo size={64} />
+
           <div>
             <h3 className="text-lg font-bold text-on-surface">Wastra</h3>
             <p className="text-sm text-on-surface-variant">{t('auth.subtitle')}</p>

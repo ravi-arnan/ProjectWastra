@@ -1,7 +1,8 @@
 import { createContext, useContext, useState, useCallback, useEffect, useRef, type ReactNode } from 'react'
 import { bookingsKey, getStorageItem, setStorageItem, STORAGE_KEYS } from '../lib/storage'
 import { generateId } from '../lib/utils'
-import { destinations } from '../data/destinations'
+import { destinations, DEFAULT_DENSITY_THRESHOLD } from '../data/destinations'
+import i18n from '../i18n'
 import type { AppNotification, NotificationPrefs } from '../types/notification'
 import type { Booking } from '../types/booking'
 import { useAuth } from '../context/AuthContext'
@@ -30,6 +31,22 @@ const DEFAULT_PREFS: NotificationPrefs = {
   crowdAlerts: true,
   bookingReminders: true,
   recommendations: true,
+  watchlistAlerts: true,
+}
+
+/** Bilingual copy for a watchlist destination that has gone calm. */
+function densityAlertCopy(name: string, density: number) {
+  const pct = Math.round(density * 100)
+  if (i18n.language === 'en') {
+    return {
+      title: `${name} is calm now`,
+      message: `Crowd dropped to ${pct}% capacity — a great window to visit.`,
+    }
+  }
+  return {
+    title: `${name} sedang sepi`,
+    message: `Kepadatan turun ke ${pct}% kapasitas — waktu yang tepat untuk berkunjung.`,
+  }
 }
 
 function generateInitialNotifications(): AppNotification[] {
@@ -221,6 +238,59 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
     const interval = setInterval(runBookingReminderScheduler, 5 * 60 * 1000)
     return () => clearInterval(interval)
   }, [prefs.bookingReminders, addNotification, userId])
+
+  // Watchlist density alert scheduler: notify once per day per watchlisted
+  // destination whose crowd density has dropped at/below the user's calm
+  // threshold. Reads the watchlist directly from storage (useWatchlist is not
+  // a context) and reuses the shared FIRED_REMINDERS dedup set.
+  useEffect(() => {
+    if (!prefs.watchlistAlerts) return
+
+    const runWatchlistAlertScheduler = () => {
+      const watchlist = getStorageItem<string[]>(STORAGE_KEYS.WATCHLIST, [])
+      if (watchlist.length === 0) return
+
+      const thresholds = getStorageItem<Record<string, number>>(STORAGE_KEYS.WATCHLIST_THRESHOLDS, {})
+      // Dedicated dedup set (not the shared booking FIRED_REMINDERS) so the two
+      // schedulers can't clobber each other's keys on a concurrent mount tick.
+      const firedSet = new Set(getStorageItem<string[]>(STORAGE_KEYS.FIRED_WATCHLIST_ALERTS, []))
+      const today = new Date().toISOString().split('T')[0]
+      let changed = false
+
+      for (const id of watchlist) {
+        if (typeof id !== 'string') continue
+        const dest = destinations.find((d) => d.id === id)
+        if (!dest) continue
+        const rawThreshold = thresholds[id]
+        const threshold = typeof rawThreshold === 'number' && Number.isFinite(rawThreshold)
+          ? rawThreshold
+          : DEFAULT_DENSITY_THRESHOLD
+        if (threshold <= 0) continue // alerts muted for this destination
+        if (dest.density > threshold) continue
+
+        const key = `${id}:calm_alert:${today}` // at most once per day per dest
+        if (firedSet.has(key)) continue
+
+        const copy = densityAlertCopy(dest.name, dest.density)
+        addNotification({
+          type: 'crowd_alert',
+          title: copy.title,
+          message: copy.message,
+          destinationId: id,
+        })
+        firedSet.add(key)
+        changed = true
+      }
+
+      if (changed) {
+        setStorageItem(STORAGE_KEYS.FIRED_WATCHLIST_ALERTS, Array.from(firedSet))
+      }
+    }
+
+    runWatchlistAlertScheduler()
+    const interval = setInterval(runWatchlistAlertScheduler, 5 * 60 * 1000)
+    return () => clearInterval(interval)
+  }, [prefs.watchlistAlerts, addNotification])
 
   const value: NotificationContextValue = {
     notifications,

@@ -7,7 +7,7 @@ import { destinations, getDensityBgColor } from '../data/destinations'
 import CountUp from '../components/reactbits/CountUp'
 import SpotlightCard from '../components/reactbits/SpotlightCard'
 
-const categoryValues = ['Semua', 'Pantai', 'Pura', 'Alam', 'Desa Wisata'] as const
+const categoryValues = ['Semua', 'Pantai', 'Pura', 'Budaya', 'Alam', 'Desa Wisata'] as const
 
 export default function Destinasi() {
   const { t } = useTranslation()
@@ -19,8 +19,9 @@ export default function Destinasi() {
     Semua: t('common.categories.all'),
     Pantai: t('common.categories.beach'),
     Pura: t('common.categories.temple'),
+    Budaya: t('common.categories.culture'),
     Alam: t('common.categories.nature'),
-    'Desa Wisata': t('common.categories.culture'),
+    'Desa Wisata': t('common.categories.village'),
   }
 
   const filtered = destinations
@@ -46,16 +47,26 @@ export default function Destinasi() {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
+        className="flex items-start justify-between gap-3"
       >
-        <h1 className="text-2xl lg:text-3xl font-extrabold text-on-surface font-headline">
-          {t('destinasi.title', { defaultValue: 'Semua Destinasi' })}
-        </h1>
-        <p className="text-sm text-on-surface-variant mt-1">
-          {t('destinasi.subtitle', {
-            defaultValue: 'Jelajahi {{count}} destinasi wisata di Bali',
-            count: destinations.length,
-          })}
-        </p>
+        <div>
+          <h1 className="text-2xl lg:text-3xl font-extrabold text-on-surface font-headline">
+            {t('destinasi.title', { defaultValue: 'Semua Destinasi' })}
+          </h1>
+          <p className="text-sm text-on-surface-variant mt-1">
+            {t('destinasi.subtitle', {
+              defaultValue: 'Jelajahi {{count}} destinasi wisata di Indonesia',
+              count: destinations.length,
+            })}
+          </p>
+        </div>
+        <Link
+          to="/app/bandingkan"
+          className="shrink-0 flex items-center gap-1.5 bg-primary text-on-primary text-sm font-bold rounded-full px-4 py-2.5 shadow-md shadow-primary/20 hover:shadow-primary/30 transition-shadow"
+        >
+          <Icon name="compare_arrows" size="18px" />
+          <span className="hidden sm:inline">{t('nav.compare', { defaultValue: 'Bandingkan' })}</span>
+        </Link>
       </motion.div>
 
       {/* Search & Sort Bar */}

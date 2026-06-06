@@ -2,6 +2,7 @@ import { NavLink, Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { motion } from 'motion/react'
 import Icon from './Icon'
+import Logo from './Logo'
 import { useAuth, getUserInitials, getUserFullName } from '../context/AuthContext'
 import ShinyText from './reactbits/ShinyText'
 import Magnet from './reactbits/Magnet'
@@ -16,11 +17,13 @@ export default function SideNav() {
     { to: '/app', icon: 'home', label: t('nav.home') },
     { to: '/app/peta', icon: 'map', label: t('nav.map') },
     { to: '/app/prediksi', icon: 'online_prediction', label: t('nav.predictions') },
+    { to: '/app/bandingkan', icon: 'compare_arrows', label: t('nav.compare') },
     { to: '/app/watchlist', icon: 'bookmark', label: t('nav.watchlist') },
     { to: '/app/profil', icon: 'person', label: t('nav.profile') },
   ]
   const adminLinks = [
     { to: '/app/admin', icon: 'admin_panel_settings', label: 'Admin' },
+    { to: '/app/otoritas', icon: 'insights', label: 'Insights' },
     { to: '/app/ai-agent', icon: 'smart_toy', label: 'AI Agent' },
     { to: '/app/user-management', icon: 'manage_accounts', label: 'User Management' },
     { to: '/app/audit-logs', icon: 'receipt_long', label: 'Audit Logs' },
@@ -45,9 +48,7 @@ export default function SideNav() {
         transition={{ duration: 0.5 }}
         className="relative flex items-center gap-3 mb-8"
       >
-        <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-primary to-primary-container flex items-center justify-center shadow-lg shadow-primary/25">
-          <Icon name="sensors" className="text-white" size="22px" />
-        </div>
+        <Logo size={34} eager />
         <div>
           <h1 className="text-xl font-black text-cyan-800 font-headline tracking-tight leading-none">
             <ShinyText text="Wastra" color="#155e75" shineColor="#6cd3f7" speed={3.5} />

@@ -38,8 +38,8 @@ export default function AiAnalysis() {
 
   const defaultGreeting =
     lang === 'en'
-      ? 'Ask me anything about Bali destinations — crowd levels, recommendations, best visit times, and more.'
-      : 'Tanyakan apa saja tentang destinasi wisata di Bali — kepadatan, rekomendasi, waktu terbaik berkunjung, dan lainnya.'
+      ? 'Ask me anything about destinations across Indonesia — crowd levels, recommendations, best visit times, and more.'
+      : 'Tanyakan apa saja tentang destinasi wisata di Indonesia — kepadatan, rekomendasi, waktu terbaik berkunjung, dan lainnya.'
 
   useEffect(() => {
     setSuggestedPrompts(defaultPrompts)

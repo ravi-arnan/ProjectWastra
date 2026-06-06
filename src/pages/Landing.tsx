@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import Icon from '../components/Icon'
+import Logo from '../components/Logo'
 import Magnet from '../components/reactbits/Magnet'
 import BlurText from '../components/reactbits/BlurText'
 import GradientText from '../components/reactbits/GradientText'
@@ -83,7 +84,10 @@ export default function Landing() {
       {/* ==================== TOP NAV ==================== */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#fff8f5]/80 backdrop-blur-xl border-b border-stone-200/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 h-14 flex items-center justify-between">
-          <span className="text-xl font-extrabold text-cyan-900 font-headline tracking-tight">Wastra</span>
+          <a href="#top" className="flex items-center gap-2">
+            <Logo size={30} eager />
+            <span className="text-xl font-extrabold text-cyan-900 font-headline tracking-tight">Wastra</span>
+          </a>
 
           <div className="hidden md:flex items-center gap-1 font-headline font-medium text-sm tracking-tight">
             {navLinks.map((link) => (

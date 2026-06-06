@@ -42,7 +42,7 @@ const MOOD_MAP: Record<Mood, MoodConfig> = {
     icon: 'menu_book',
     label: 'Edukatif',
     description: 'Budaya & desa wisata',
-    filter: (d) => d.category === 'Pura' || d.category === 'Desa Wisata',
+    filter: (d) => d.category === 'Pura' || d.category === 'Desa Wisata' || d.category === 'Budaya',
     sort: (a, b) => b.rating - a.rating,
   },
   seru: {
