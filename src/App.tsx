@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import ProtectedRoute from './components/ProtectedRoute'
 import AdminRoute from './components/AdminRoute'
+import DashboardRoute from './components/DashboardRoute'
 import PageLoader from './components/PageLoader'
 import ErrorBoundary from './components/ErrorBoundary'
 
@@ -43,6 +44,14 @@ const AiAgent = lazy(() => import('./pages/AiAgent'))
 const UserManagement = lazy(() => import('./pages/UserManagement'))
 const AuditLogs = lazy(() => import('./pages/AuditLogs'))
 
+// Dashboard pages (admin-only, own layout)
+const DashboardLayout = lazy(() => import('./pages/dashboard/DashboardLayout'))
+const DashboardOverview = lazy(() => import('./pages/dashboard/DashboardOverview'))
+const DashboardMap = lazy(() => import('./pages/dashboard/DashboardMap'))
+const DashboardPrediksi = lazy(() => import('./pages/dashboard/DashboardPrediksi'))
+const DashboardLaporan = lazy(() => import('./pages/dashboard/DashboardLaporan'))
+const DashboardDestinasi = lazy(() => import('./pages/dashboard/DashboardDestinasi'))
+
 export default function App() {
   return (
     <BrowserRouter>
@@ -69,6 +78,14 @@ export default function App() {
               <Route path="ai-agent" element={<AdminRoute><AiAgent /></AdminRoute>} />
               <Route path="user-management" element={<AdminRoute><UserManagement /></AdminRoute>} />
               <Route path="audit-logs" element={<AdminRoute><AuditLogs /></AdminRoute>} />
+            </Route>
+            {/* Dashboard Pengelola Wisata — separate section with its own layout */}
+            <Route path="/dashboard" element={<ProtectedRoute><DashboardRoute><DashboardLayout /></DashboardRoute></ProtectedRoute>}>
+              <Route index element={<DashboardOverview />} />
+              <Route path="peta" element={<DashboardMap />} />
+              <Route path="prediksi" element={<DashboardPrediksi />} />
+              <Route path="laporan" element={<DashboardLaporan />} />
+              <Route path="destinasi" element={<DashboardDestinasi />} />
             </Route>
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

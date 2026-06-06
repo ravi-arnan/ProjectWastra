@@ -11,6 +11,16 @@ export default function Admin() {
 
   const tools = [
     {
+      to: '/dashboard',
+      icon: 'query_stats',
+      title: lang === 'en' ? 'Tourism Dashboard' : 'Dashboard Pengelola',
+      desc:
+        lang === 'en'
+          ? 'Real-time density overview, heatmap, forecasts, and export reports.'
+          : 'Pantauan kepadatan real-time, heatmap, prediksi, dan export laporan.',
+      cta: lang === 'en' ? 'Open Dashboard' : 'Buka Dashboard',
+    },
+    {
       to: '/app/otoritas',
       icon: 'insights',
       title: lang === 'en' ? 'Authority Insights' : 'Wawasan Otoritas',
