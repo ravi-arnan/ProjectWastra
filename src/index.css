@@ -54,9 +54,10 @@
   --font-label: 'Manrope', sans-serif;
 }
 
-/* Self-hosted Material Symbols subset (~23KB, only the icons this app uses)
-   generated via scripts/optimize-media.mjs notes — replaces the 1.1MB Google
-   variable font. Keeps the FILL axis so the .filled modifier still works. */
+/* Self-hosted Material Symbols subset (~25KB, only the icons this app uses)
+   generated via `node scripts/generate-icon-subset.mjs` — replaces the 1.1MB
+   Google variable font. Re-run that script after adding a new icon, or it will
+   render as literal text. Keeps the FILL axis so the .filled modifier works. */
 @font-face {
   font-family: 'Material Symbols Outlined';
   font-style: normal;
