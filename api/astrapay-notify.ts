@@ -7,8 +7,8 @@
  * invalid or missing signature.
  */
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { verifyNotificationSignature, mapSnapStatus, isMockMode } from '../server/astrapay'
-import { hasAdmin, updatePaymentStatus } from '../server/supabaseAdmin'
+import { verifyNotificationSignature, mapSnapStatus, isMockMode } from '../server/astrapay.js'
+import { hasAdmin, updatePaymentStatus } from '../server/supabaseAdmin.js'
 
 const PATH = '/api/astrapay-notify'
 
