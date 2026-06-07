@@ -34,5 +34,7 @@ export function apiUrl(path: string): string {
  */
 export function appOrigin(): string {
   if (!isNative) return window.location.origin
-  return import.meta.env.VITE_APP_URL || DEPLOYED_ORIGIN
+  // Strip any trailing slash so call sites like `${appOrigin()}/auth` never
+  // produce `...//auth`, which breaks strict OAuth redirect matching.
+  return (import.meta.env.VITE_APP_URL || DEPLOYED_ORIGIN).replace(/\/$/, '')
 }

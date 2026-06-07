@@ -15,7 +15,8 @@ export async function initNative(): Promise<void> {
     import('@capacitor/app'),
   ])
 
-  // Match the app's warm background and use dark icons on the light status bar.
+  // Capacitor's Style.Light = content for a LIGHT background, i.e. dark
+  // status-bar icons — correct for the warm #fff8f5 surface.
   try {
     await StatusBar.setStyle({ style: Style.Light })
     await StatusBar.setBackgroundColor({ color: '#fff8f5' })

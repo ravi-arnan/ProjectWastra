@@ -11,9 +11,9 @@ into it.
 
 | Tool | Version | Notes |
 |------|---------|-------|
-| Node | ≥ 20 | build the web bundle |
-| JDK | **21 (full JDK, not JRE)** | Capacitor 7's Android libs target Java 21 |
-| Android SDK | platform 35 + build-tools | `ANDROID_HOME` or `android/local.properties` |
+| Node | **≥ 22** | `@capacitor/cli` 8.x declares a Node ≥ 22 engine |
+| JDK | **21 (full JDK, not JRE)** | Capacitor 8's Android libs target Java 21 |
+| Android SDK | platform 36 + build-tools | `ANDROID_HOME` or `android/local.properties` |
 
 `android/local.properties` (git-ignored) must point Gradle at the SDK:
 
