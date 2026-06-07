@@ -766,7 +766,7 @@ export default function Landing() {
             {/* Brand */}
             <div className="col-span-2 md:col-span-4">
               <span className="inline-block text-2xl font-extrabold font-headline tracking-tight">
-                <span className="text-primary-fixed-dim">M</span>ango
+                <span className="text-primary-fixed-dim">W</span>astra
               </span>
               <p className="text-sm text-white/60 mt-3 leading-relaxed max-w-xs">
                 {t('landing.footer.tagline')}
