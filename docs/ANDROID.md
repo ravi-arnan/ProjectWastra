@@ -67,7 +67,17 @@ source of stale-asset bugs after an app update). Web builds keep the PWA.
    open the flow with `@capacitor/browser`, and catch the callback via
    `App.addListener('appUrlOpen', ...)`. Until then, **email/password sign-in
    works fully** inside the APK.
-2. **App icon / splash** still use Capacitor defaults. Generate branded assets
-   from `src/assets/wastra_logo.png` with `@capacitor/assets` once online.
-3. **Release build / signing.** This is an unsigned *debug* APK. For a
+2. **Release build / signing.** This is an unsigned *debug* APK. For a
    distributable build, configure a keystore and run `assembleRelease`.
+
+## App icon & splash
+
+Branded launcher icons (incl. adaptive) and light/dark splash screens are
+generated from `src/assets/wastra_logo.png` on the `#fff8f5` brand surface:
+
+```bash
+node scripts/generate-app-icons.mjs   # logo → assets/ source set (uses sharp)
+npx @capacitor/assets generate --android   # assets/ → every Android density
+```
+
+Re-run both whenever the logo changes, then rebuild the APK.
