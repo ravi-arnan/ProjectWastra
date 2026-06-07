@@ -56,6 +56,10 @@ Other scripts:
 `CapacitorHttp` is enabled in `capacitor.config.ts` so native `fetch` goes
 through native HTTP and avoids CORS preflight against the API.
 
+The `cap:*` scripts set `CAP_BUILD=true`, which makes `vite.config.ts` drop the
+`vite-plugin-pwa` service worker from native builds (redundant in the APK and a
+source of stale-asset bugs after an app update). Web builds keep the PWA.
+
 ## Known follow-ups
 
 1. **Google sign-in returns to the website, not the app.** Native OAuth needs a
@@ -65,8 +69,5 @@ through native HTTP and avoids CORS preflight against the API.
    works fully** inside the APK.
 2. **App icon / splash** still use Capacitor defaults. Generate branded assets
    from `src/assets/wastra_logo.png` with `@capacitor/assets` once online.
-3. **Service worker / PWA.** The Workbox SW from `vite-plugin-pwa` is still in
-   the bundle. Inside the APK it's redundant and can serve stale assets after an
-   app update — consider disabling PWA for native builds.
-4. **Release build / signing.** This is an unsigned *debug* APK. For a
+3. **Release build / signing.** This is an unsigned *debug* APK. For a
    distributable build, configure a keystore and run `assembleRelease`.

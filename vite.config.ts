@@ -4,6 +4,11 @@ import tailwindcss from '@tailwindcss/vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
 
+// Native (Capacitor) builds set CAP_BUILD=true. Inside the APK the Workbox
+// service worker is redundant and can serve stale assets after an app update,
+// so the PWA plugin is included for web builds only.
+const isNativeBuild = process.env.CAP_BUILD === 'true'
+
 export default defineConfig({
   server: {
     allowedHosts: true,
@@ -49,28 +54,33 @@ export default defineConfig({
       png: { quality: 80 },
       webp: { quality: 75 },
     }),
-    VitePWA({
-      registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'favicon.png', 'apple-touch-icon.png', 'icons/*.png'],
-      workbox: {
-        globIgnores: ['**/*.mp4'],
-        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
-      },
-      manifest: {
-        name: 'Wastra - Smart Tourism Platform',
-        short_name: 'Wastra',
-        description: 'Platform Pariwisata Cerdas Indonesia',
-        theme_color: '#00647c',
-        background_color: '#fff8f5',
-        display: 'standalone',
-        orientation: 'portrait',
-        start_url: '/',
-        icons: [
-          { src: '/icons/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
-          { src: '/icons/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
-          { src: '/icons/icon-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
-        ],
-      },
-    }),
+    // Web only — skipped for native (Capacitor) builds.
+    ...(isNativeBuild
+      ? []
+      : [
+          VitePWA({
+            registerType: 'autoUpdate',
+            includeAssets: ['favicon.ico', 'favicon.png', 'apple-touch-icon.png', 'icons/*.png'],
+            workbox: {
+              globIgnores: ['**/*.mp4'],
+              maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
+            },
+            manifest: {
+              name: 'Wastra - Smart Tourism Platform',
+              short_name: 'Wastra',
+              description: 'Platform Pariwisata Cerdas Indonesia',
+              theme_color: '#00647c',
+              background_color: '#fff8f5',
+              display: 'standalone',
+              orientation: 'portrait',
+              start_url: '/',
+              icons: [
+                { src: '/icons/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+                { src: '/icons/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+                { src: '/icons/icon-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+              ],
+            },
+          }),
+        ]),
   ],
 })
