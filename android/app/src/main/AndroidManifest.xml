@@ -22,6 +22,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
+            <!-- OAuth callback deep link: Supabase redirects to
+                 com.wastra.app://auth-callback after Google sign-in, which
+                 re-opens this (singleTask) activity and fires appUrlOpen. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="com.wastra.app" android:host="auth-callback" />
+            </intent-filter>
+
         </activity>
 
         <provider
