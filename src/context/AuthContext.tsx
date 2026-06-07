@@ -1,6 +1,5 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
-import { supabase } from '../lib/supabase'
-import type { User, Session } from '@supabase/supabase-js'
+import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from 'react'
+import type { User, Session, SupabaseClient } from '@supabase/supabase-js'
 
 interface AuthContextType {
   user: User | null
@@ -60,46 +59,60 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isCheckingRoles, setIsCheckingRoles] = useState(true)
   const [isAdmin, setIsAdmin] = useState(false)
   const [localManagerDestId, setLocalManagerDestId] = useState<string | null>(null)
+  // The Supabase client is imported dynamically so its ~48KB stays off the
+  // landing critical path; it's only needed once we resolve auth state.
+  const clientRef = useRef<SupabaseClient | null>(null)
 
   useEffect(() => {
+    let active = true
     let subscription: { unsubscribe: () => void } | null = null
 
-    try {
-      supabase.auth.getSession().then(({ data: { session } }) => {
-        setSession(session)
-        setUser(session?.user ?? null)
-        setLoading(false)
-      }).catch(() => {
-        setLoading(false)
-      })
+    import('../lib/supabase')
+      .then(({ supabase }) => {
+        if (!active) return
+        clientRef.current = supabase
 
-      const { data } = supabase.auth.onAuthStateChange((_event, session) => {
-        setSession(session)
-        setUser(session?.user ?? null)
-        setLoading(false)
+        supabase.auth
+          .getSession()
+          .then(({ data: { session } }) => {
+            setSession(session)
+            setUser(session?.user ?? null)
+            setLoading(false)
+          })
+          .catch(() => setLoading(false))
+
+        const { data } = supabase.auth.onAuthStateChange((_event, session) => {
+          setSession(session)
+          setUser(session?.user ?? null)
+          setLoading(false)
+        })
+        subscription = data.subscription
       })
-      subscription = data.subscription
-    } catch {
-      setLoading(false)
+      .catch(() => setLoading(false))
+
+    return () => {
+      active = false
+      subscription?.unsubscribe()
     }
-
-    return () => subscription?.unsubscribe()
   }, [])
 
   useEffect(() => {
     // Prevent premature abortion of role checks while initial session is still loading
     if (loading) return
 
-    if (!user?.id || user.is_anonymous) {
+    // clientRef is always set by the time loading flips to false (see the
+    // effect above), but guard anyway for safety.
+    const supabase = clientRef.current
+    if (!supabase || !user?.id || user.is_anonymous) {
       setIsAdmin(false)
       setLocalManagerDestId(null)
       setIsCheckingRoles(false)
       return
     }
-    
+
     let cancelled = false
     setIsCheckingRoles(true)
-    
+
     // Check Super Admin & Local Manager concurrently
     Promise.all([
       supabase.from('admins').select('user_id').eq('user_id', user.id).maybeSingle(),
@@ -118,7 +131,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [user?.id, user?.is_anonymous, loading])
 
   const signOut = async () => {
-    await supabase.auth.signOut()
+    await clientRef.current?.auth.signOut()
     setUser(null)
     setSession(null)
     setIsAdmin(false)
