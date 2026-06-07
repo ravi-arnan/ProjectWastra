@@ -16,6 +16,12 @@ dist-ssr
 *.apk
 *.aab
 
+# Android release signing — NEVER commit keystores or their passwords
+*.jks
+*.keystore
+keystore.properties
+android/keystore.properties
+
 # Env files with secrets
 .env
 .env.*

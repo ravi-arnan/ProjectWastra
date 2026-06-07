@@ -83,11 +83,6 @@ Flow (`src/lib/nativeAuth.ts`, wired into `Auth.tsx`):
 
 Email/password and guest sign-in work without any of this.
 
-## Known follow-ups
-
-1. **Release build / signing.** This is an unsigned *debug* APK. For a
-   distributable build, configure a keystore and run `assembleRelease`.
-
 ## App icon & splash
 
 Branded launcher icons (incl. adaptive) and light/dark splash screens are
@@ -99,3 +94,37 @@ npx @capacitor/assets generate --android   # assets/ → every Android density
 ```
 
 Re-run both whenever the logo changes, then rebuild the APK.
+
+## Release build & signing
+
+Debug APKs (`cap:apk`) are signed with the shared Android debug key — fine for
+testing, not for distribution. A release build is signed with **your** keystore,
+configured via `android/keystore.properties` (git-ignored, never committed).
+
+1. Create a keystore once (back up the `.jks` **and** the passwords — losing them
+   means you can never ship an update):
+
+   ```bash
+   keytool -genkeypair -v -keystore android/wastra-release.jks \
+     -alias wastra -keyalg RSA -keysize 2048 -validity 10000
+   ```
+
+2. Copy the template and fill it in:
+
+   ```bash
+   cp android/keystore.properties.example android/keystore.properties
+   # edit storeFile / storePassword / keyAlias / keyPassword
+   ```
+
+3. Build the signed artifact:
+
+   ```bash
+   npm run cap:apk:release   # → android/app/build/outputs/apk/release/app-release.apk
+   npm run cap:aab:release   # → android/app/build/outputs/bundle/release/app-release.aab (Play Store)
+   ```
+
+`android/app/build.gradle` reads the keystore from `keystore.properties`; if that
+file is absent the release build falls back to debug signing, so contributors and
+CI without the keystore can still assemble (non-distributable) release builds.
+
+Bump `versionCode` / `versionName` in `android/app/build.gradle` for each release.
