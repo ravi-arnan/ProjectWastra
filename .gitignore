@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Built Android packages (regenerate with npm run cap:apk)
+*.apk
+*.aab
+
 # Env files with secrets
 .env
 .env.*

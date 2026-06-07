@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background is a full-bleed solid brand surface (no inset, no transparent
+         border). The foreground PNG already centers the logo inside the ~66%
+         safe zone, so it needs no extra inset either. -->
+    <background android:drawable="@mipmap/ic_launcher_background" />
+    <foreground android:drawable="@mipmap/ic_launcher_foreground" />
+</adaptive-icon>

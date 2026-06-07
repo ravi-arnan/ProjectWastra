@@ -12,6 +12,13 @@ try {
   // ignore — Safari private mode etc.
 }
 
+// Native (Capacitor) shell setup. Guarded by isNative so the web build never
+// fetches the native chunk; only the APK runtime loads and runs it.
+import { isNative } from './lib/platform'
+if (isNative) {
+  import('./lib/native').then(({ initNative }) => initNative()).catch(() => {})
+}
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />

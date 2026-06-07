@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
 import { motion, AnimatePresence } from 'motion/react';
 import { supabase } from '../lib/supabase';
+import { appOrigin } from '../lib/platform';
 import { useAuth } from '../context/AuthContext';
 import Icon from '../components/Icon';
 import Logo from '../components/Logo';
@@ -155,7 +156,7 @@ export default function Auth() {
         type: 'signup',
         email,
         options: {
-          emailRedirectTo: `${window.location.origin}/auth`,
+          emailRedirectTo: `${appOrigin()}/auth`,
           ...(captchaToken ? { captchaToken } : {}),
         },
       });
@@ -184,7 +185,7 @@ export default function Auth() {
         password,
         options: {
           data: { full_name: name },
-          emailRedirectTo: `${window.location.origin}/auth`,
+          emailRedirectTo: `${appOrigin()}/auth`,
           ...(captchaToken ? { captchaToken } : {}),
         },
       });
@@ -227,7 +228,7 @@ export default function Auth() {
       const { error: authError } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/app`,
+          redirectTo: `${appOrigin()}/app`,
         },
       });
       if (authError) throw authError;
@@ -493,7 +494,7 @@ export default function Auth() {
                   setLoading(true);
                   try {
                     const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
-                      redirectTo: `${window.location.origin}/auth`,
+                      redirectTo: `${appOrigin()}/auth`,
                     });
                     if (resetError) throw resetError;
                     setResetSent(true);
