@@ -60,13 +60,29 @@ The `cap:*` scripts set `CAP_BUILD=true`, which makes `vite.config.ts` drop the
 `vite-plugin-pwa` service worker from native builds (redundant in the APK and a
 source of stale-asset bugs after an app update). Web builds keep the PWA.
 
-## Known follow-ups
+## Google sign-in (native deep link)
 
-1. **Google sign-in returns to the website, not the app.** Native OAuth needs a
-   deep link: register a custom scheme / App Link, set Supabase's redirect to it,
-   open the flow with `@capacitor/browser`, and catch the callback via
-   `App.addListener('appUrlOpen', ...)`. Until then, **email/password sign-in
-   works fully** inside the APK.
+Google blocks OAuth inside embedded WebViews, so native sign-in opens Google in
+a system Custom Tab and returns to the app via a custom-scheme deep link:
+
+```
+com.wastra.app://auth-callback
+```
+
+Flow (`src/lib/nativeAuth.ts`, wired into `Auth.tsx`):
+1. `signInWithOAuth({ provider: 'google', skipBrowserRedirect: true, redirectTo: <deep link> })`
+2. open the returned URL with `@capacitor/browser`
+3. catch the redirect via `App.addListener('appUrlOpen', ...)` (intent-filter in
+   `AndroidManifest.xml`)
+4. `exchangeCodeForSession` (PKCE) or `setSession` (implicit), then route to `/app`
+
+> ⚠️ **One dashboard step required:** add `com.wastra.app://auth-callback` to
+> **Supabase → Authentication → URL Configuration → Redirect URLs**. No Google
+> Cloud Console change is needed — Google still redirects to the Supabase
+> callback; only Supabase's post-exchange redirect must allow the deep link.
+
+Email/password and guest sign-in work without any of this.
+
 ## App icon & splash
 
 Branded launcher icons (incl. adaptive) and light/dark splash screens are
