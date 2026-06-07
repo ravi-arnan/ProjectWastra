@@ -12,6 +12,13 @@ import { Capacitor } from '@capacitor/core'
 /** Deployed origin that serves the API routes and is registered for OAuth. */
 const DEPLOYED_ORIGIN = 'https://project-wastra.vercel.app'
 
+/**
+ * Custom-scheme deep link Supabase redirects to after native Google sign-in.
+ * Must be added to Supabase → Authentication → URL Configuration → Redirect URLs.
+ * Mirrored by the intent-filter in android/app/src/main/AndroidManifest.xml.
+ */
+export const NATIVE_AUTH_REDIRECT = 'com.wastra.app://auth-callback'
+
 /** True when running inside the native Capacitor shell (Android/iOS). */
 export const isNative = Capacitor.isNativePlatform()
 

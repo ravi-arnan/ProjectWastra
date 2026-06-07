@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile';
 import { motion, AnimatePresence } from 'motion/react';
 import { supabase } from '../lib/supabase';
-import { appOrigin } from '../lib/platform';
+import { appOrigin, isNative } from '../lib/platform';
 import { useAuth } from '../context/AuthContext';
 import Icon from '../components/Icon';
 import Logo from '../components/Logo';
@@ -222,8 +222,16 @@ export default function Auth() {
     setError('');
     setLoading(true);
     try {
-      // OAuth performs a full-page redirect to Google, then back to /app where
-      // the Supabase client exchanges the code for a session (PKCE,
+      if (isNative) {
+        // Native: open Google in a system Custom Tab and exchange the deep-link
+        // callback for a session, then route into the app ourselves.
+        const { signInWithGoogleNative } = await import('../lib/nativeAuth');
+        await signInWithGoogleNative();
+        navigate('/app');
+        return;
+      }
+      // Web: OAuth performs a full-page redirect to Google, then back to /app
+      // where the Supabase client exchanges the code for a session (PKCE,
       // detectSessionInUrl). No captcha — Turnstile only gates password/guest.
       const { error: authError } = await supabase.auth.signInWithOAuth({
         provider: 'google',
