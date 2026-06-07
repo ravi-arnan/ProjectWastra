@@ -668,25 +668,12 @@ export default function Landing() {
                     {t('landing.cta.primary')}
                   </StarBorder>
                 </Magnet>
-                <button
-                  onClick={() => {
-                    const deferredPrompt = (window as unknown as { __pwaInstallPrompt?: { prompt: () => void } }).__pwaInstallPrompt
-                    if (deferredPrompt) {
-                      deferredPrompt.prompt()
-                    } else {
-                      window.scrollTo({ top: 0, behavior: 'smooth' })
-                    }
-                  }}
-                  className="bg-primary-container border border-white/20 text-white px-8 py-4 rounded-xl font-headline font-bold text-base hover:bg-primary-container/80 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:scale-95"
-                >
-                  {t('landing.cta.secondary')}
-                </button>
               </div>
 
               {/* Trust signals */}
               <div className="mt-8 pt-6 border-t border-white/15 grid grid-cols-3 gap-4 text-center lg:text-left max-w-md mx-auto lg:mx-0">
                 {[
-                  { icon: 'wifi_off', label: t('landing.cta.trust.offline') },
+                  { icon: 'bolt', label: t('landing.cta.trust.realtime') },
                   { icon: 'lock', label: t('landing.cta.trust.noLogin') },
                   { icon: 'favorite', label: t('landing.cta.trust.free') },
                 ].map((item) => (

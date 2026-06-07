@@ -103,7 +103,7 @@
       "title1": "Travel Smarter,",
       "title2": "Avoid the Crowds",
       "subtitle": "Rasakan ketenangan Indonesia sebagaimana mestinya. Prediksi berbasis AI membantu Anda menemukan momen paling tenang di destinasi paling ikonik.",
-      "ctaPrimary": "Tambahkan ke Layar Utama",
+      "ctaPrimary": "Mulai Sekarang",
       "ctaSecondary": "Lihat Peta Langsung",
       "stats": {
         "users": "Pengguna",
@@ -146,9 +146,8 @@
       "subtitle": "Bergabung dengan {{count}} traveler yang menggunakan Wastra untuk menemukan ketenangan tersembunyi negeri ini.",
       "rating": "Disukai oleh 50.000+ traveler",
       "primary": "Mulai Sekarang",
-      "secondary": "Install PWA",
       "trust": {
-        "offline": "Bekerja Offline",
+        "realtime": "Data Real-Time",
         "noLogin": "Tanpa Login",
         "free": "100% Gratis"
       }
@@ -179,9 +178,6 @@
     }
   },
   "home": {
-    "installBanner": "Gunakan aplikasi untuk akses lebih cepat",
-    "install": "Pasang",
-    "installHint": "Buka menu browser dan pilih \"Tambahkan ke Layar Utama\"",
     "ai": {
       "title": "AI Analysis",
       "desc": "Tanyakan rekomendasi wisata cerdas"
