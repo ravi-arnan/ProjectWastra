@@ -9,9 +9,14 @@
  */
 import sharp from 'sharp'
 import { mkdir } from 'node:fs/promises'
+import { fileURLToPath } from 'node:url'
+import { dirname, resolve } from 'node:path'
 
-const LOGO = 'src/assets/wastra_logo.png'
-const OUT = 'assets'
+// Resolve paths relative to the repo root (this file lives in scripts/), so the
+// script works regardless of the current working directory.
+const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
+const LOGO = resolve(ROOT, 'src/assets/wastra_logo.png')
+const OUT = resolve(ROOT, 'assets')
 
 // Brand surfaces (match capacitor.config.ts / PWA manifest).
 const LIGHT = '#fff8f5'
@@ -35,8 +40,9 @@ await mkdir(OUT, { recursive: true })
 
 const transparent = { r: 0, g: 0, b: 0, alpha: 0 }
 
-// Adaptive icon: foreground keeps the logo inside the ~66% safe zone so the
-// launcher mask never clips it; background is a flat brand surface.
+// Adaptive icon foreground: logo at 620/1024 (~61%) sits inside Android's 66%
+// safe zone, so the anydpi adaptive-icon XML references it full-bleed (no extra
+// inset). Background is a flat brand surface, also full-bleed.
 await sharp(await compose(1024, 620, transparent)).toFile(`${OUT}/icon-foreground.png`)
 await sharp({ create: { width: 1024, height: 1024, channels: 4, background: r(LIGHT) } }).png().toFile(`${OUT}/icon-background.png`)
 
