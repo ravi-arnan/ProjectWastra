@@ -6,8 +6,8 @@
  */
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import QRCode from 'qrcode'
-import { createCharge, isMockMode } from '../server/astrapay'
-import { hasAdmin, insertPayment, getUserIdFromToken } from '../server/supabaseAdmin'
+import { createCharge, isMockMode } from '../server/astrapay.js'
+import { hasAdmin, insertPayment, getUserIdFromToken } from '../server/supabaseAdmin.js'
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
