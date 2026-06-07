@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next'
 import Icon from '../components/Icon'
 import { destinations, getDensityBgColor } from '../data/destinations'
 import { useAuth, getUserDisplayName } from '../context/AuthContext'
-import { showToast } from '../components/Toast'
 import { filterByMood, getMoodMeta, MOODS, type Mood } from '../lib/moodMapping'
 import { getStorageItem, setStorageItem, STORAGE_KEYS } from '../lib/storage'
 import BlurText from '../components/reactbits/BlurText'
@@ -23,7 +22,6 @@ export default function Home() {
   const { t } = useTranslation()
   const [searchQuery, setSearchQuery] = useState('')
   const [activeCategory, setActiveCategory] = useState('Semua')
-  const [showInstallBanner, setShowInstallBanner] = useState(true)
   const [selectedMood, setSelectedMood] = useState<Mood | null>(() =>
     getStorageItem<Mood | null>(STORAGE_KEYS.LAST_MOOD, null)
   )
@@ -75,34 +73,6 @@ export default function Home() {
     <div>
       {/* ===================== MOBILE VIEW ===================== */}
       <div className="lg:hidden flex flex-col gap-4 pb-6">
-        {/* PWA Install Banner */}
-        {showInstallBanner && (
-          <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-primary-container text-on-primary-container rounded-2xl p-4 flex items-center gap-3"
-          >
-            <Icon name="install_mobile" size="24px" />
-            <p className="flex-1 text-sm">{t('home.installBanner')}</p>
-            <button
-              onClick={() => {
-                const deferredPrompt = (window as any).__pwaInstallPrompt
-                if (deferredPrompt) {
-                  deferredPrompt.prompt()
-                } else {
-                  showToast(t('home.installHint'), 'info')
-                }
-              }}
-              className="bg-primary text-on-primary text-xs font-bold px-4 py-2 rounded-full"
-            >
-              {t('home.install')}
-            </button>
-            <button onClick={() => setShowInstallBanner(false)}>
-              <Icon name="close" size="20px" />
-            </button>
-          </motion.div>
-        )}
-
         {/* AI Analysis Banner */}
         <Link
           to="/app/ai-analysis"

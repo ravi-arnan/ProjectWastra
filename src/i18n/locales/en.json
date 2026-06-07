@@ -103,7 +103,7 @@
       "title1": "Travel Smarter,",
       "title2": "Avoid the Crowds",
       "subtitle": "Experience Indonesia's serenity exactly how it was meant to be. Our AI-driven forecasts help you find the quietest moments at the country's most iconic destinations.",
-      "ctaPrimary": "Add to Home Screen",
+      "ctaPrimary": "Get Started",
       "ctaSecondary": "View Live Map",
       "stats": {
         "users": "Users",
@@ -146,9 +146,8 @@
       "subtitle": "Join over {{count}} travelers who use Wastra to discover the country's hidden peace.",
       "rating": "Loved by 50,000+ travelers",
       "primary": "Get Started",
-      "secondary": "Install PWA",
       "trust": {
-        "offline": "Works Offline",
+        "realtime": "Real-Time Data",
         "noLogin": "No Login Required",
         "free": "100% Free"
       }
@@ -179,9 +178,6 @@
     }
   },
   "home": {
-    "installBanner": "Use the app for faster access",
-    "install": "Install",
-    "installHint": "Open browser menu and select \"Add to Home Screen\"",
     "ai": {
       "title": "AI Analysis",
       "desc": "Ask for smart travel recommendations"
