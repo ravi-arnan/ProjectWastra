@@ -14,8 +14,8 @@ import {
   evaluateMockPending,
   isMockMode,
   type PaymentStatus,
-} from './_lib/astrapay'
-import { hasAdmin, getPayment, updatePaymentStatus } from './_lib/supabaseAdmin'
+} from '../server/astrapay'
+import { hasAdmin, getPayment, updatePaymentStatus } from '../server/supabaseAdmin'
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   const raw = req.query?.intent ?? (req.body as { intent?: unknown } | undefined)?.intent

@@ -1,8 +1,10 @@
 /**
  * AstraPay SNAP integration helpers (shared by api/astrapay-*.ts).
  *
- * Files under api/_lib are ignored by Vercel's filesystem routing and by the
- * dev-api proxy, so this is library code — not an HTTP endpoint.
+ * Lives in server/ (outside api/) on purpose: Vercel strips underscore-prefixed
+ * dirs like api/_lib from the deployed lambda, which made the astrapay functions
+ * crash at init (FUNCTION_INVOCATION_FAILED). Imported relatively, this file is
+ * traced into each function's bundle. It is server-only — never import it client-side.
  *
  * AstraPay follows SNAP (Standar Nasional Open API Pembayaran, Bank Indonesia).
  * Until the team receives sandbox credentials from the hackathon organizer,
