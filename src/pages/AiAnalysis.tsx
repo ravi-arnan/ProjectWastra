@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import Icon from '../components/Icon'
 import { destinations } from '../data/destinations'
 import { supabase } from '../lib/supabase'
+import { apiUrl } from '../lib/platform'
 import MarkdownMessage from '../components/MarkdownMessage'
 import BlurText from '../components/reactbits/BlurText'
 import ShinyText from '../components/reactbits/ShinyText'
@@ -82,7 +83,7 @@ export default function AiAnalysis() {
       const {
         data: { session },
       } = await supabase.auth.getSession()
-      const res = await fetch('/api/ai-analysis', {
+      const res = await fetch(apiUrl('/api/ai-analysis'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Wastra</string>
+    <string name="title_activity_main">Wastra</string>
+    <string name="package_name">com.wastra.app</string>
+    <string name="custom_url_scheme">com.wastra.app</string>
+</resources>

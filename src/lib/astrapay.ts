@@ -2,6 +2,8 @@
  * Client wrapper for the AstraPay payment endpoints.
  * The server signs/calls AstraPay; the client only ever sees the QR + status.
  */
+import { apiUrl } from './platform'
+
 export type PaymentStatus = 'PENDING' | 'PAID' | 'EXPIRED' | 'FAILED'
 
 export interface ChargeData {
@@ -28,7 +30,7 @@ export async function createCharge(
   const headers: Record<string, string> = { 'Content-Type': 'application/json' }
   if (options.accessToken) headers.Authorization = `Bearer ${options.accessToken}`
 
-  const res = await fetch('/api/astrapay-charge', {
+  const res = await fetch(apiUrl('/api/astrapay-charge'), {
     method: 'POST',
     headers,
     body: JSON.stringify({ orderId, amount, destinationId: options.destinationId }),
@@ -41,7 +43,7 @@ export async function createCharge(
 }
 
 export async function fetchStatus(intent: string): Promise<PaymentStatus> {
-  const res = await fetch(`/api/astrapay-status?intent=${encodeURIComponent(intent)}`)
+  const res = await fetch(apiUrl(`/api/astrapay-status?intent=${encodeURIComponent(intent)}`))
   const json = (await res.json()) as Envelope<{ referenceNo: string; status: PaymentStatus }>
   if (!res.ok || !json.success || !json.data) {
     throw new Error(json.error || 'Gagal memeriksa status pembayaran')

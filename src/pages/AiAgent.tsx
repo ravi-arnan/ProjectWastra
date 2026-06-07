@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import Icon from '../components/Icon'
 import TagInput from '../components/admin/TagInput'
 import { supabase } from '../lib/supabase'
+import { apiUrl } from '../lib/platform'
 import { showToast } from '../components/Toast'
 import { AI_PROVIDERS, DEFAULT_PROVIDER_ID, getProvider, getDefaultModel } from '../data/aiProviders'
 import {
@@ -180,7 +181,7 @@ export default function AiAgent() {
       const {
         data: { session },
       } = await supabase.auth.getSession()
-      const res = await fetch('/api/ai-test', {
+      const res = await fetch(apiUrl('/api/ai-test'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -12,6 +12,9 @@ try {
   // ignore — Safari private mode etc.
 }
 
+// Native (Capacitor) shell setup — no-op on the web, code-split out of the bundle.
+import('./lib/native').then(({ initNative }) => initNative()).catch(() => {})
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <App />
