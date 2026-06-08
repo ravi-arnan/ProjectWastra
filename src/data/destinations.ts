@@ -579,6 +579,6 @@ export function getDensityBgColor(density: number): string {
 export function getDensityTextColor(density: number): string {
   if (density > 0.8) return 'text-error'
   if (density > 0.6) return 'text-tertiary'
-  if (density > 0.3) return 'text-amber-600'
+  if (density > 0.3) return 'text-amber-700'
   return 'text-primary'
 }

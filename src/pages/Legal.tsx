@@ -55,7 +55,7 @@ function PrivacyContent() {
 
       <section className="space-y-3">
         <h3 className="text-base font-bold text-on-surface">4. Kontak</h3>
-        <p>Untuk pertanyaan tentang privasi, hubungi kami di <a href="mailto:support@wastra.id" className="text-primary">support@wastra.id</a></p>
+        <p>Untuk pertanyaan tentang privasi, hubungi kami di <a href="mailto:support@wastra.id" className="text-primary underline">support@wastra.id</a></p>
       </section>
     </div>
   )
@@ -95,7 +95,7 @@ function TermsContent() {
 
       <section className="space-y-3">
         <h3 className="text-base font-bold text-on-surface">5. Kontak</h3>
-        <p>Untuk pertanyaan, hubungi kami di <a href="mailto:support@wastra.id" className="text-primary">support@wastra.id</a></p>
+        <p>Untuk pertanyaan, hubungi kami di <a href="mailto:support@wastra.id" className="text-primary underline">support@wastra.id</a></p>
       </section>
     </div>
   )

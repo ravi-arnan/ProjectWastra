@@ -192,7 +192,7 @@ export default function AiAnalysis() {
                 delay={40}
                 className="text-sm text-on-surface-variant mb-6 max-w-md !justify-center !text-center"
               />
-              <p className="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant/70 mb-3">
+              <p className="text-[11px] font-bold uppercase tracking-widest text-on-surface-variant mb-3">
                 {t('ai.examples.title')}
               </p>
               <div className="flex flex-wrap gap-2 justify-center max-w-lg">
@@ -276,7 +276,7 @@ export default function AiAnalysis() {
               </button>
             </Magnet>
           </div>
-          <p className="text-[10px] text-on-surface-variant/60 text-center mt-2">{t('ai.disclaimer')}</p>
+          <p className="text-[10px] text-on-surface-variant text-center mt-2">{t('ai.disclaimer')}</p>
         </form>
       </SpotlightCard>
 
@@ -309,8 +309,8 @@ export default function AiAnalysis() {
                   : dest.density > 0.6
                   ? 'text-tertiary'
                   : dest.density > 0.3
-                  ? 'text-amber-600'
-                  : 'text-emerald-600'
+                  ? 'text-amber-700'
+                  : 'text-emerald-700'
 
               return (
                 <motion.div

@@ -281,7 +281,7 @@ export default function Home() {
                         <Icon name="diamond" size="10px" />Hidden Gem
                       </span>
                     )}
-                    <p className="text-[11px] text-emerald-600 font-medium mt-1">
+                    <p className="text-[11px] text-emerald-700 font-medium mt-1">
                       {t('home.recommendations.calmNow', { percent: Math.round(dest.density * 100) })}
                     </p>
                     <div className="flex items-center gap-2 mt-1">
@@ -560,7 +560,7 @@ export default function Home() {
                   </div>
                   <div className="p-4 flex flex-col flex-1">
                     <h3 className="text-base font-bold text-on-surface">{dest.name}</h3>
-                    <p className="text-xs text-emerald-600 font-medium mt-1">
+                    <p className="text-xs text-emerald-700 font-medium mt-1">
                       {t('home.recommendations.calmNow', { percent: Math.round(dest.density * 100) })}
                     </p>
                     <div className="flex items-center gap-1 mt-2">

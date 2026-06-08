@@ -234,3 +234,22 @@ h1, h2, h3, h4 {
 .hero-zoom {
   animation: slow-zoom 20s ease-out forwards;
 }
+
+/* ───────────────────────────────────────────────────────────
+   Reduced motion (WCAG 2.3.3 / 2.2.2)
+   Honors the OS "reduce motion" setting for all CSS-driven motion.
+   motion/react components are handled separately via <MotionConfig
+   reducedMotion="user"> in App.tsx.
+   Uses 0.01ms (not `none`) so animations still snap to their final
+   keyframe — reveal-from-opacity animations end up visible, not stuck.
+   ─────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

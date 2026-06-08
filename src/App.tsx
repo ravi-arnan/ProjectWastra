@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { MotionConfig } from 'motion/react'
 import { AuthProvider } from './context/AuthContext'
 import ProtectedRoute from './components/ProtectedRoute'
 import AdminRoute from './components/AdminRoute'
@@ -55,6 +56,10 @@ const DashboardDestinasi = lazy(() => import('./pages/dashboard/DashboardDestina
 export default function App() {
   return (
     <BrowserRouter>
+      {/* reducedMotion="user" makes every motion component honor the OS
+          "reduce motion" setting automatically — transforms/opacity tweens
+          are dropped while layout stays intact. */}
+      <MotionConfig reducedMotion="user">
       <AuthProvider>
         <ErrorBoundary fallback={RouteLoadError}>
         <Suspense fallback={<PageLoader />}>
@@ -92,6 +97,7 @@ export default function App() {
         </Suspense>
         </ErrorBoundary>
       </AuthProvider>
+      </MotionConfig>
     </BrowserRouter>
   )
 }

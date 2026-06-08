@@ -422,18 +422,27 @@ export default function Prediksi() {
                 const trend = dest.density > 0.6 ? '+5%' : '-3%'
                 const trendUp = dest.density > 0.6
                 return (
-                  <motion.button
+                  <motion.div
                     key={dest.id}
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.06 }}
                     whileHover={{ y: -2 }}
-                    onClick={() => setSelectedDestination(dest)}
-                    className={`bg-surface-container-low rounded-2xl p-5 text-left transition-all ${
+                    className={`relative bg-surface-container-low rounded-2xl p-5 text-left transition-all ${
                       isSelected ? 'border-2 border-primary ring-4 ring-primary/15' : 'border-2 border-transparent hover:shadow-md'
                     }`}
                   >
-                    <div className="flex items-center justify-between mb-3">
+                    {/* Full-card selection target — keyboard accessible, sits
+                        behind the content so the bookmark button stays clickable
+                        without being nested inside another interactive element. */}
+                    <button
+                      type="button"
+                      aria-label={`Lihat prediksi ${dest.name}`}
+                      aria-pressed={isSelected}
+                      onClick={() => setSelectedDestination(dest)}
+                      className="absolute inset-0 z-0 rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+                    />
+                    <div className="relative z-10 pointer-events-none flex items-center justify-between mb-3">
                       <div className={`w-10 h-10 rounded-xl ${getDensityBgColor(dest.density)}/15 flex items-center justify-center`}>
                         <Icon
                           name={
@@ -455,22 +464,25 @@ export default function Prediksi() {
                           e.stopPropagation()
                           toggleWatchlist(dest.id)
                         }}
+                        className="pointer-events-auto relative z-10"
                       >
                         <Icon name="bookmark" size="18px" className="text-primary" filled={isWatchlisted(dest.id)} />
                       </button>
                     </div>
-                    <p className="text-sm font-bold text-on-surface">{dest.name}</p>
-                    <p className="text-xs text-on-surface-variant mt-0.5">{dest.location}</p>
-                    <div className="flex items-center justify-between mt-3">
-                      <span className={`text-2xl font-extrabold font-headline ${getDensityTextColor(dest.density)}`}>
-                        <CountUp to={crowdIndex} duration={1.4} />%
-                      </span>
-                      <span className={`text-xs font-bold flex items-center gap-0.5 ${trendUp ? 'text-error' : 'text-primary'}`}>
-                        <Icon name={trendUp ? 'trending_up' : 'trending_down'} size="14px" />
-                        {trend}
-                      </span>
+                    <div className="relative z-10 pointer-events-none">
+                      <p className="text-sm font-bold text-on-surface">{dest.name}</p>
+                      <p className="text-xs text-on-surface-variant mt-0.5">{dest.location}</p>
+                      <div className="flex items-center justify-between mt-3">
+                        <span className={`text-2xl font-extrabold font-headline ${getDensityTextColor(dest.density)}`}>
+                          <CountUp to={crowdIndex} duration={1.4} />%
+                        </span>
+                        <span className={`text-xs font-bold flex items-center gap-0.5 ${trendUp ? 'text-error' : 'text-primary'}`}>
+                          <Icon name={trendUp ? 'trending_up' : 'trending_down'} size="14px" />
+                          {trend}
+                        </span>
+                      </div>
                     </div>
-                  </motion.button>
+                  </motion.div>
                 )
               }
             )}
@@ -726,7 +738,7 @@ export default function Prediksi() {
             </Magnet>
             <button
               onClick={() => showToast(lang === 'en' ? 'Live cam coming soon' : 'Fitur live cam akan segera hadir', 'info')}
-              className="bg-white/20 backdrop-blur-sm text-white font-bold text-sm px-6 py-3 rounded-full flex items-center gap-2 hover:bg-white/30 transition-colors"
+              className="bg-black/25 backdrop-blur-sm text-white font-bold text-sm px-6 py-3 rounded-full flex items-center gap-2 border border-white/30 hover:bg-black/35 transition-colors"
             >
               <Icon name="videocam" size="18px" />
               Live Cam

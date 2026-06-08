@@ -318,11 +318,11 @@ export default function Landing() {
                 <h3 className="text-xl lg:text-2xl font-headline font-bold mb-3">
                   {t('landing.features.forecast.title')}
                 </h3>
-                <p className="text-white/85 text-sm leading-relaxed">
+                <p className="text-white text-sm leading-relaxed">
                   {t('landing.features.forecast.desc')}
                 </p>
               </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 mt-6 border border-white/10">
+              <div className="bg-black/10 backdrop-blur-sm rounded-xl p-5 mt-6 border border-white/10">
                 <div className="flex items-end gap-2 h-24">
                   {[38, 55, 42, 80, 62, 48, 30].map((h, i) => (
                     <motion.div
@@ -335,7 +335,7 @@ export default function Landing() {
                     />
                   ))}
                 </div>
-                <div className="flex justify-between mt-3 text-[10px] font-bold opacity-60 uppercase">
+                <div className="flex justify-between mt-3 text-[10px] font-bold uppercase">
                   {['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].map((d) => (
                     <span key={d}>{d}</span>
                   ))}
@@ -441,7 +441,9 @@ export default function Landing() {
         </section>
 
         {/* ==================== SCROLL VELOCITY MARQUEE ==================== */}
-        <section className="bg-surface py-10 lg:py-14 border-y border-stone-200/60">
+        {/* Decorative typographic texture (repeating place names) — hidden from
+            assistive tech; its faded color is intentional and not content. */}
+        <section aria-hidden="true" data-decorative className="bg-surface py-10 lg:py-14 border-y border-stone-200/60">
           <ScrollVelocity
             texts={['Tanah Lot · Uluwatu · Tegallalang · Ubud · Mengening · Penglipuran ·']}
             velocity={60}
@@ -584,7 +586,7 @@ export default function Landing() {
             ) : (
               <LazyVisible
                 placeholder={
-                  <p className="text-on-surface/40 font-headline font-extrabold text-center text-[clamp(1.6rem,4vw,3rem)] leading-tight">
+                  <p className="text-on-surface/70 font-headline font-extrabold text-center text-[clamp(1.6rem,4vw,3rem)] leading-tight">
                     {t('landing.scrollText')}
                   </p>
                 }

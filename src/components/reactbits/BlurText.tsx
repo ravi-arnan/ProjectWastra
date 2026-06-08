@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import type { Transition, Easing } from 'motion/react';
 import { useEffect, useRef, useState, useMemo } from 'react';
+import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 
 type BlurTextProps = {
   text?: string;
@@ -46,10 +47,16 @@ const BlurText: React.FC<BlurTextProps> = ({
   as = 'p'
 }) => {
   const elements = animateBy === 'words' ? text.split(' ') : text.split('');
+  const prefersReducedMotion = usePrefersReducedMotion();
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    // Reduced motion: render the text immediately, no reveal animation.
+    if (prefersReducedMotion) {
+      setInView(true);
+      return;
+    }
     if (!ref.current) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -62,7 +69,7 @@ const BlurText: React.FC<BlurTextProps> = ({
     );
     observer.observe(ref.current);
     return () => observer.disconnect();
-  }, [threshold, rootMargin]);
+  }, [threshold, rootMargin, prefersReducedMotion]);
 
   const defaultFrom = useMemo(
     () =>
@@ -93,17 +100,22 @@ const BlurText: React.FC<BlurTextProps> = ({
     <Tag ref={ref as React.RefObject<HTMLElement>} className={`blur-text ${className} flex flex-wrap`}>
       {elements.map((segment, index) => {
         const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
-        const spanTransition: Transition = {
-          duration: totalDuration,
-          times,
-          delay: (index * delay) / 1000,
-          ease: easing
-        };
+        // Final, fully-visible snapshot (last "to" step) — used as the instant
+        // target when the user prefers reduced motion.
+        const finalSnapshot = toSnapshots[toSnapshots.length - 1];
+        const spanTransition: Transition = prefersReducedMotion
+          ? { duration: 0 }
+          : {
+              duration: totalDuration,
+              times,
+              delay: (index * delay) / 1000,
+              ease: easing
+            };
         return (
           <motion.span
             key={index}
-            initial={fromSnapshot}
-            animate={inView ? animateKeyframes : fromSnapshot}
+            initial={prefersReducedMotion ? false : fromSnapshot}
+            animate={prefersReducedMotion ? finalSnapshot : inView ? animateKeyframes : fromSnapshot}
             transition={spanTransition}
             onAnimationComplete={index === elements.length - 1 ? onAnimationComplete : undefined}
             style={{
