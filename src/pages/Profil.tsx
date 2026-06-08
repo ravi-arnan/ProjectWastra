@@ -260,8 +260,20 @@ export default function Profil() {
           {settingsItems.map((item) => (
             <div
               key={item.label}
-              className="flex items-center gap-3 py-3 cursor-pointer hover:bg-stone-50/50 rounded-lg px-2 -mx-2 transition-colors"
+              role={item.type === 'toggle' ? undefined : 'button'}
+              tabIndex={item.type === 'toggle' ? undefined : 0}
+              className="flex items-center gap-3 py-3 cursor-pointer hover:bg-stone-50/50 rounded-lg px-2 -mx-2 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
               onClick={item.action}
+              onKeyDown={
+                item.type === 'toggle'
+                  ? undefined
+                  : (e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault()
+                        item.action?.()
+                      }
+                    }
+              }
             >
               <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                 <Icon name={item.icon} size="20px" className="text-primary" />
@@ -342,8 +354,17 @@ export default function Profil() {
             className={`${canShowStats ? 'col-span-7' : 'col-span-12'} bg-surface-container-low rounded-[2.5rem] p-8 flex items-center gap-8`}
           >
             <div
-              className={`w-[160px] h-[160px] rounded-full ${avatarColors[selectedAvatar]} flex items-center justify-center shrink-0 cursor-pointer shadow-2xl hover:scale-105 transition-transform`}
+              role="button"
+              tabIndex={0}
+              aria-label="Ganti avatar"
+              className={`w-[160px] h-[160px] rounded-full ${avatarColors[selectedAvatar]} flex items-center justify-center shrink-0 cursor-pointer shadow-2xl hover:scale-105 transition-transform focus:outline-none focus:ring-4 focus:ring-primary/30`}
               onClick={() => handleAvatarChange((selectedAvatar + 1) % avatarColors.length)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault()
+                  handleAvatarChange((selectedAvatar + 1) % avatarColors.length)
+                }
+              }}
             >
               <span className="text-white text-5xl font-extrabold">{initials}</span>
             </div>
