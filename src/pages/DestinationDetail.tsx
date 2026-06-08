@@ -98,10 +98,10 @@ export default function DestinationDetail() {
       <img src={destination.image} alt={destination.name} className="w-full h-full object-cover" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
       <div className="absolute top-4 left-4 right-4 flex justify-between items-center">
-        <Link to="/app" className="w-10 h-10 rounded-full bg-black/30 backdrop-blur flex items-center justify-center text-white">
+        <Link to="/app" aria-label="Kembali" className="w-10 h-10 rounded-full bg-black/30 backdrop-blur flex items-center justify-center text-white">
           <Icon name="arrow_back_ios_new" size="20px" />
         </Link>
-        <button onClick={handleShare} className="w-10 h-10 rounded-full bg-black/30 backdrop-blur flex items-center justify-center text-white">
+        <button type="button" onClick={handleShare} aria-label="Bagikan" className="w-10 h-10 rounded-full bg-black/30 backdrop-blur flex items-center justify-center text-white">
           <Icon name="share" size="20px" />
         </button>
       </div>
@@ -259,7 +259,8 @@ export default function DestinationDetail() {
         <Link to="/app/peta" className="flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-outline text-sm font-semibold text-on-surface">
           <Icon name="sensors" size="18px" className="text-error" />Live
         </Link>
-        <button onClick={() => toggleWatchlist(destination.id)}
+        <button type="button" onClick={() => toggleWatchlist(destination.id)}
+          aria-pressed={watched}
           className="flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-outline text-sm font-semibold text-on-surface">
           <Icon name="bookmark" filled={watched} size="18px" />
           {watched ? 'Tersimpan' : 'Watchlist'}
@@ -334,7 +335,9 @@ export default function DestinationDetail() {
           className="flex-1 py-3 bg-primary text-on-primary rounded-full font-semibold text-sm shadow-md">
           Pesan Tiket
         </button>
-        <button onClick={() => toggleWatchlist(destination.id)}
+        <button type="button" onClick={() => toggleWatchlist(destination.id)}
+          aria-label={watched ? 'Hapus dari watchlist' : 'Simpan ke watchlist'}
+          aria-pressed={watched}
           className={`w-12 h-12 rounded-full border flex items-center justify-center ${watched ? 'bg-primary/10 border-primary text-primary' : 'border-outline text-on-surface'}`}>
           <Icon name="bookmark" filled={watched} size="20px" />
         </button>

@@ -157,15 +157,15 @@ export default function DashboardDestinasi() {
             <thead>
               <tr>
                 <th className="bg-white p-4 text-xs font-bold text-on-surface uppercase tracking-wider border-b border-stone-100 w-16 text-center">Foto</th>
-                <th className="bg-white p-4 text-xs font-bold text-on-surface uppercase tracking-wider border-b border-stone-100 cursor-pointer hover:bg-stone-50" onClick={() => handleSort('name')}>
-                  <div className="flex items-center gap-1">Nama {sortConfig.key === 'name' && <span className="text-[14px]">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}</div>
+                <th aria-sort={sortConfig.key === 'name' ? (sortConfig.direction === 'asc' ? 'ascending' : 'descending') : 'none'} className="bg-white p-4 text-xs font-bold text-on-surface uppercase tracking-wider border-b border-stone-100 cursor-pointer hover:bg-stone-50" onClick={() => handleSort('name')}>
+                  <button type="button" onClick={(e) => { e.stopPropagation(); handleSort('name') }} className="flex items-center gap-1 uppercase">Nama {sortConfig.key === 'name' && <span className="text-[14px]">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}</button>
                 </th>
-                <th className="bg-white p-4 text-xs font-bold text-on-surface uppercase tracking-wider border-b border-stone-100 cursor-pointer hover:bg-stone-50 hidden md:table-cell" onClick={() => handleSort('region')}>
-                  <div className="flex items-center gap-1">Region {sortConfig.key === 'region' && <span className="text-[14px]">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}</div>
+                <th aria-sort={sortConfig.key === 'region' ? (sortConfig.direction === 'asc' ? 'ascending' : 'descending') : 'none'} className="bg-white p-4 text-xs font-bold text-on-surface uppercase tracking-wider border-b border-stone-100 cursor-pointer hover:bg-stone-50 hidden md:table-cell" onClick={() => handleSort('region')}>
+                  <button type="button" onClick={(e) => { e.stopPropagation(); handleSort('region') }} className="flex items-center gap-1 uppercase">Region {sortConfig.key === 'region' && <span className="text-[14px]">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}</button>
                 </th>
                 <th className="bg-white p-4 text-xs font-bold text-on-surface uppercase tracking-wider border-b border-stone-100 hidden sm:table-cell">Kategori</th>
-                <th className="bg-white p-4 text-xs font-bold text-on-surface uppercase tracking-wider border-b border-stone-100 cursor-pointer hover:bg-stone-50 text-right" onClick={() => handleSort('density')}>
-                  <div className="flex items-center justify-end gap-1">Kepadatan {sortConfig.key === 'density' && <span className="text-[14px]">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}</div>
+                <th aria-sort={sortConfig.key === 'density' ? (sortConfig.direction === 'asc' ? 'ascending' : 'descending') : 'none'} className="bg-white p-4 text-xs font-bold text-on-surface uppercase tracking-wider border-b border-stone-100 cursor-pointer hover:bg-stone-50 text-right" onClick={() => handleSort('density')}>
+                  <button type="button" onClick={(e) => { e.stopPropagation(); handleSort('density') }} className="flex items-center justify-end gap-1 uppercase w-full">Kepadatan {sortConfig.key === 'density' && <span className="text-[14px]">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}</button>
                 </th>
                 <th className="bg-white p-4 text-xs font-bold text-on-surface uppercase tracking-wider border-b border-stone-100 text-center w-28">Aksi</th>
               </tr>

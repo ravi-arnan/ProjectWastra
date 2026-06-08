@@ -5,10 +5,12 @@ interface Props {
   value: string[]
   onChange: (next: string[]) => void
   placeholder?: string
+  /** Accessible label for the entry field (falls back to placeholder). */
+  label?: string
   maxTagLength?: number
 }
 
-export default function TagInput({ value, onChange, placeholder, maxTagLength = 64 }: Props) {
+export default function TagInput({ value, onChange, placeholder, label, maxTagLength = 64 }: Props) {
   const [draft, setDraft] = useState('')
 
   const addTag = () => {
@@ -59,6 +61,7 @@ export default function TagInput({ value, onChange, placeholder, maxTagLength = 
         onChange={(e) => setDraft(e.target.value)}
         onKeyDown={handleKeyDown}
         onBlur={addTag}
+        aria-label={label ?? placeholder ?? 'Tambah tag'}
         placeholder={placeholder}
         className="flex-1 min-w-[140px] bg-transparent text-sm outline-none py-1 placeholder:text-on-surface-variant/50"
       />

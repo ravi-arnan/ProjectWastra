@@ -70,6 +70,7 @@ export default defineConfig({
         'src/hooks/useWatchlist.ts',
         'src/hooks/useWatchlistThresholds.ts',
         'src/hooks/useBookings.ts',
+        'src/hooks/useModalA11y.ts',
       ],
     },
   },

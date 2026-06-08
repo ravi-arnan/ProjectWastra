@@ -113,6 +113,8 @@ export default function Profil() {
               <span className="text-white text-2xl font-extrabold">{initials}</span>
             </div>
             <button
+              type="button"
+              aria-label="Ganti avatar"
               onClick={() => {
                 const next = (selectedAvatar + 1) % avatarColors.length
                 handleAvatarChange(next)
@@ -229,8 +231,17 @@ export default function Profil() {
                     initial={{ opacity: 0, x: 12 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.05 }}
-                    className="shrink-0 w-32 bg-surface-container-low rounded-xl overflow-hidden cursor-pointer"
+                    role="button"
+                    tabIndex={0}
+                    aria-label={dest.name}
+                    className="shrink-0 w-32 bg-surface-container-low rounded-xl overflow-hidden cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/40"
                     onClick={() => navigate(`/app/destinasi/${dest.id}`)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault()
+                        navigate(`/app/destinasi/${dest.id}`)
+                      }
+                    }}
                   >
                     <img src={dest.image} alt={dest.name} className="w-full h-20 object-cover" />
                     <div className="p-2">
@@ -258,6 +269,10 @@ export default function Profil() {
               <span className="flex-1 text-sm font-semibold text-on-surface">{item.label}</span>
               {item.type === 'toggle' && (
                 <button
+                  type="button"
+                  role="switch"
+                  aria-checked={prefs.crowdAlerts}
+                  aria-label={item.label}
                   onClick={(e) => {
                     e.stopPropagation()
                     updatePrefs({ crowdAlerts: !prefs.crowdAlerts })
@@ -597,6 +612,10 @@ export default function Profil() {
                 <p className="text-xs text-on-surface-variant mt-0.5">{item.desc}</p>
               </div>
               <button
+                type="button"
+                role="switch"
+                aria-checked={item.value}
+                aria-label={item.label}
                 onClick={() => updatePrefs({ [item.key]: !item.value })}
                 className={`w-11 h-6 rounded-full relative transition-colors shrink-0 ${
                   item.value ? 'bg-primary' : 'bg-on-surface/20'

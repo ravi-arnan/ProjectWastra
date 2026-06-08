@@ -133,7 +133,7 @@ export default function Prediksi() {
             <h1 className="text-xl font-extrabold text-on-surface font-headline mt-1">{t('prediksi.title')}</h1>
             <p className="text-xs text-on-surface-variant mt-0.5">{t('prediksi.subtitle')}</p>
           </div>
-          <button className="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container">
+          <button type="button" aria-label="Informasi" className="w-10 h-10 flex items-center justify-center rounded-full bg-surface-container">
             <Icon name="info" size="20px" className="text-on-surface-variant" />
           </button>
         </motion.div>

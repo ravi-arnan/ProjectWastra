@@ -53,6 +53,8 @@
 ## Tech Stack
 
 > 📚 Lihat **[docs/TECH_STACK.md](docs/TECH_STACK.md)** untuk rincian lengkap (frontend, mobile/Capacitor, backend, AI/ML, infra) dan diagram arsitektur.
+>
+> 📄 Dokumen lain: **[docs/PERFORMANCE.md](docs/PERFORMANCE.md)** (postur bundle & performa) · **[docs/ACCESSIBILITY.md](docs/ACCESSIBILITY.md)** (WCAG 2.2 & konvensi a11y) · **[docs/ANDROID.md](docs/ANDROID.md)** (build APK).
 
 | Layer | Technology |
 |-------|-----------|

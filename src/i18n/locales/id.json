@@ -322,5 +322,13 @@
     "newChat": "Chat Baru",
     "history": "Riwayat",
     "disclaimer": "AI dapat membuat kesalahan. Verifikasi info penting."
+  },
+  "a11y": {
+    "notifications": "Notifikasi",
+    "settings": "Pengaturan",
+    "search": "Cari destinasi",
+    "sortBy": "Urutkan berdasarkan",
+    "sendMessage": "Kirim pesan",
+    "chatInput": "Ketik pertanyaanmu"
   }
 }

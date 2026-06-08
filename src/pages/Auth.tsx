@@ -393,6 +393,7 @@ export default function Auth() {
           {success && (
             <motion.div
               key="success"
+              role="status"
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
@@ -405,6 +406,7 @@ export default function Auth() {
           {error && (
             <motion.div
               key="error"
+              role="alert"
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
@@ -466,6 +468,7 @@ export default function Auth() {
                 <Icon name="mail" className="text-on-surface-variant" size="20px" />
                 <input
                   type="email"
+                  aria-label={t('auth.fields.email')}
                   placeholder={t('auth.fields.email')}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -483,6 +486,7 @@ export default function Auth() {
                 <Icon name="lock" className="text-on-surface-variant" size="20px" />
                 <input
                   type={showPassword ? 'text' : 'password'}
+                  aria-label={t('auth.fields.password')}
                   placeholder={t('auth.fields.password')}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -492,6 +496,7 @@ export default function Auth() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}
                   className="text-on-surface-variant hover:text-primary transition-colors"
                 >
                   <Icon name={showPassword ? 'visibility_off' : 'visibility'} size="20px" />
@@ -577,6 +582,7 @@ export default function Auth() {
                   <Icon name={field.icon} className="text-on-surface-variant" size="20px" />
                   <input
                     type={field.type}
+                    aria-label={field.placeholder}
                     placeholder={field.placeholder}
                     value={field.value}
                     onChange={(e) => field.setter(e.target.value)}
@@ -595,6 +601,7 @@ export default function Auth() {
                 <Icon name="lock" className="text-on-surface-variant" size="20px" />
                 <input
                   type={showPassword ? 'text' : 'password'}
+                  aria-label={t('auth.fields.password')}
                   placeholder={t('auth.fields.password')}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -604,6 +611,7 @@ export default function Auth() {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
+                  aria-label={showPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}
                   className="text-on-surface-variant hover:text-primary transition-colors"
                 >
                   <Icon name={showPassword ? 'visibility_off' : 'visibility'} size="20px" />
@@ -619,6 +627,7 @@ export default function Auth() {
                 <Icon name="lock" className="text-on-surface-variant" size="20px" />
                 <input
                   type={showConfirmPassword ? 'text' : 'password'}
+                  aria-label={t('auth.fields.confirmPassword')}
                   placeholder={t('auth.fields.confirmPassword')}
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
@@ -628,6 +637,7 @@ export default function Auth() {
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  aria-label={showConfirmPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}
                   className="text-on-surface-variant hover:text-primary transition-colors"
                 >
                   <Icon name={showConfirmPassword ? 'visibility_off' : 'visibility'} size="20px" />

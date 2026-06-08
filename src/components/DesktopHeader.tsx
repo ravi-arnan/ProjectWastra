@@ -24,6 +24,7 @@ export default function DesktopHeader() {
             </span>
             <input
               type="text"
+              aria-label={t('a11y.search')}
               placeholder={t('home.searchPlaceholder')}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
@@ -36,7 +37,7 @@ export default function DesktopHeader() {
 
       <div className="flex items-center gap-3 ml-8">
         <div className="relative">
-          <button onClick={() => setNotifOpen(!notifOpen)} className="p-2.5 hover:bg-stone-100 rounded-full transition-colors text-stone-500 relative">
+          <button onClick={() => setNotifOpen(!notifOpen)} aria-label={t('a11y.notifications')} aria-expanded={notifOpen} className="p-2.5 hover:bg-stone-100 rounded-full transition-colors text-stone-500 relative">
             <Icon name="notifications" />
             {unreadCount > 0 && (
               <span className="absolute top-1.5 right-1.5 w-4 h-4 bg-error text-white text-[9px] font-bold rounded-full flex items-center justify-center">
@@ -46,7 +47,7 @@ export default function DesktopHeader() {
           </button>
           <NotificationPanel isOpen={notifOpen} onClose={() => setNotifOpen(false)} />
         </div>
-        <button onClick={() => navigate('/app/profil')} className="p-2.5 hover:bg-stone-100 rounded-full transition-colors text-stone-500">
+        <button onClick={() => navigate('/app/profil')} aria-label={t('a11y.settings')} className="p-2.5 hover:bg-stone-100 rounded-full transition-colors text-stone-500">
           <Icon name="settings" />
         </button>
         <div className="w-10 h-10 rounded-full bg-primary-container overflow-hidden border-2 border-white shadow-sm flex items-center justify-center">

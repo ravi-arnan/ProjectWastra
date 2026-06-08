@@ -126,6 +126,7 @@ export default function Home() {
           <Icon name="search" className="text-on-surface-variant" size="20px" />
           <input
             type="text"
+            aria-label={t('a11y.search')}
             placeholder={t('home.searchPlaceholder')}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}

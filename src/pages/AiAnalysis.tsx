@@ -260,6 +260,7 @@ export default function AiAnalysis() {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
+              aria-label={t('a11y.chatInput')}
               placeholder={t('ai.placeholder')}
               className="flex-1 bg-transparent text-sm text-on-surface placeholder:text-on-surface-variant/50 outline-none"
               disabled={isLoading}
@@ -267,6 +268,7 @@ export default function AiAnalysis() {
             <Magnet padding={20} magnetStrength={6} disabled={!input.trim() || isLoading}>
               <button
                 type="submit"
+                aria-label={t('a11y.sendMessage')}
                 disabled={!input.trim() || isLoading}
                 className="w-10 h-10 bg-primary text-on-primary rounded-xl flex items-center justify-center shrink-0 disabled:opacity-40 hover:bg-primary-container transition-colors shadow-md shadow-primary/20"
               >

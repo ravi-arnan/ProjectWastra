@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import Icon from './Icon'
+import { useModalA11y } from '../hooks/useModalA11y'
 import { useBookings } from '../hooks/useBookings'
 import { useAuth } from '../context/AuthContext'
 import { parseTicketPrice, formatCurrency, formatDate } from '../lib/utils'
@@ -22,6 +23,7 @@ export default function BookingModal({ destination, isOpen, onClose }: Props) {
   const [confirmedBooking, setConfirmedBooking] = useState<Booking | null>(null)
   const { createBooking } = useBookings()
   const { session } = useAuth()
+  const dialogRef = useModalA11y<HTMLDivElement>(isOpen, handleClose)
 
   if (!isOpen) return null
 
@@ -74,8 +76,15 @@ export default function BookingModal({ destination, isOpen, onClose }: Props) {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-end lg:items-center justify-center">
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={handleClose} />
-      <div className="relative w-full max-w-[390px] lg:max-w-md bg-surface-container-lowest rounded-t-3xl lg:rounded-3xl p-6 max-h-[85vh] overflow-y-auto no-scrollbar">
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={handleClose} aria-hidden="true" />
+      <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Pesan tiket"
+        tabIndex={-1}
+        className="relative w-full max-w-[390px] lg:max-w-md bg-surface-container-lowest rounded-t-3xl lg:rounded-3xl p-6 max-h-[85vh] overflow-y-auto no-scrollbar"
+      >
         {confirmedBooking ? (
           <ConfirmationView booking={confirmedBooking} onClose={handleClose} />
         ) : charge ? (
@@ -89,7 +98,7 @@ export default function BookingModal({ destination, isOpen, onClose }: Props) {
           <>
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-lg font-bold text-on-surface font-headline">Pesan Tiket</h2>
-              <button onClick={handleClose} className="p-1.5 hover:bg-stone-100 rounded-full">
+              <button type="button" onClick={handleClose} aria-label="Tutup" className="p-1.5 hover:bg-stone-100 rounded-full">
                 <Icon name="close" size="20px" />
               </button>
             </div>
@@ -118,14 +127,18 @@ export default function BookingModal({ destination, isOpen, onClose }: Props) {
                 <label className="text-sm font-semibold text-on-surface mb-1.5 block">Jumlah Pengunjung</label>
                 <div className="flex items-center gap-4 bg-surface-container-low rounded-xl px-4 py-2.5">
                   <button
+                    type="button"
                     onClick={() => setVisitors(Math.max(1, visitors - 1))}
+                    aria-label="Kurangi pengunjung"
                     className="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center"
                   >
                     <Icon name="remove" size="18px" />
                   </button>
                   <span className="text-lg font-bold text-on-surface flex-1 text-center">{visitors}</span>
                   <button
+                    type="button"
                     onClick={() => setVisitors(Math.min(20, visitors + 1))}
+                    aria-label="Tambah pengunjung"
                     className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary"
                   >
                     <Icon name="add" size="18px" />
@@ -150,6 +163,7 @@ export default function BookingModal({ destination, isOpen, onClose }: Props) {
             )}
 
             <button
+              type="button"
               onClick={handleConfirm}
               disabled={!date || loading}
               className="w-full bg-primary text-on-primary rounded-xl py-3.5 font-bold text-sm mt-6 disabled:opacity-40 transition-opacity"
@@ -205,7 +219,7 @@ function PaymentView({
     <div className="flex flex-col items-center text-center">
       <div className="flex items-center justify-between w-full mb-4">
         <h2 className="text-lg font-bold text-on-surface font-headline">Pembayaran AstraPay</h2>
-        <button onClick={onCancel} className="p-1.5 hover:bg-stone-100 rounded-full">
+        <button type="button" onClick={onCancel} aria-label="Tutup" className="p-1.5 hover:bg-stone-100 rounded-full">
           <Icon name="close" size="20px" />
         </button>
       </div>

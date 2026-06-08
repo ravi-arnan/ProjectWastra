@@ -322,5 +322,13 @@
     "newChat": "New Chat",
     "history": "History",
     "disclaimer": "AI can make mistakes. Verify important info."
+  },
+  "a11y": {
+    "notifications": "Notifications",
+    "settings": "Settings",
+    "search": "Search destinations",
+    "sortBy": "Sort by",
+    "sendMessage": "Send message",
+    "chatInput": "Type your question"
   }
 }

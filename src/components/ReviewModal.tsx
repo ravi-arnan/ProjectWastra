@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Icon from './Icon'
+import { useModalA11y } from '../hooks/useModalA11y'
 import { getStorageItem, setStorageItem, STORAGE_KEYS } from '../lib/storage'
 import { generateId } from '../lib/utils'
 
@@ -23,6 +24,7 @@ export default function ReviewModal({ destinationId, destinationName, isOpen, on
   const [hoverRating, setHoverRating] = useState(0)
   const [comment, setComment] = useState('')
   const [submitted, setSubmitted] = useState(false)
+  const dialogRef = useModalA11y<HTMLDivElement>(isOpen, handleClose)
 
   if (!isOpen) return null
 
@@ -49,8 +51,15 @@ export default function ReviewModal({ destinationId, destinationName, isOpen, on
 
   return (
     <div className="fixed inset-0 z-[100] flex items-end lg:items-center justify-center">
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={handleClose} />
-      <div className="relative w-full max-w-[390px] lg:max-w-md bg-surface-container-lowest rounded-t-3xl lg:rounded-3xl p-6">
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={handleClose} aria-hidden="true" />
+      <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Tulis ulasan"
+        tabIndex={-1}
+        className="relative w-full max-w-[390px] lg:max-w-md bg-surface-container-lowest rounded-t-3xl lg:rounded-3xl p-6"
+      >
         {submitted ? (
           <div className="flex flex-col items-center text-center py-4">
             <div className="w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center mb-3">
@@ -58,7 +67,7 @@ export default function ReviewModal({ destinationId, destinationName, isOpen, on
             </div>
             <h3 className="text-lg font-bold text-on-surface mb-1">Terima kasih!</h3>
             <p className="text-sm text-on-surface-variant mb-4">Ulasan Anda untuk {destinationName} telah disimpan.</p>
-            <button onClick={handleClose} className="bg-primary text-on-primary rounded-xl px-6 py-2.5 font-bold text-sm">
+            <button type="button" onClick={handleClose} className="bg-primary text-on-primary rounded-xl px-6 py-2.5 font-bold text-sm">
               Selesai
             </button>
           </div>
@@ -66,7 +75,7 @@ export default function ReviewModal({ destinationId, destinationName, isOpen, on
           <>
             <div className="flex items-center justify-between mb-5">
               <h2 className="text-lg font-bold text-on-surface font-headline">Tulis Ulasan</h2>
-              <button onClick={handleClose} className="p-1.5 hover:bg-stone-100 rounded-full">
+              <button type="button" onClick={handleClose} aria-label="Tutup" className="p-1.5 hover:bg-stone-100 rounded-full">
                 <Icon name="close" size="20px" />
               </button>
             </div>
@@ -77,6 +86,9 @@ export default function ReviewModal({ destinationId, destinationName, isOpen, on
               {[1, 2, 3, 4, 5].map((star) => (
                 <button
                   key={star}
+                  type="button"
+                  aria-label={`Beri ${star} bintang`}
+                  aria-pressed={star <= rating}
                   onMouseEnter={() => setHoverRating(star)}
                   onMouseLeave={() => setHoverRating(0)}
                   onClick={() => setRating(star)}
@@ -95,11 +107,13 @@ export default function ReviewModal({ destinationId, destinationName, isOpen, on
             <textarea
               value={comment}
               onChange={(e) => setComment(e.target.value)}
+              aria-label="Komentar ulasan"
               placeholder="Bagikan pengalaman Anda... (opsional)"
               className="w-full bg-surface-container-low rounded-xl px-4 py-3 text-sm text-on-surface placeholder:text-on-surface-variant/50 outline-none focus:ring-1 focus:ring-primary/30 resize-none h-24"
             />
 
             <button
+              type="button"
               onClick={handleSubmit}
               disabled={rating === 0}
               className="w-full bg-primary text-on-primary rounded-xl py-3.5 font-bold text-sm mt-4 disabled:opacity-40"

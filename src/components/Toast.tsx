@@ -45,9 +45,13 @@ export default function ToastContainer() {
   }
 
   return (
-    <div className={`fixed bottom-24 lg:bottom-8 left-1/2 -translate-x-1/2 z-[200] transition-all duration-300 ${
-      visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-    }`}>
+    <div
+      role={toast.type === 'error' ? 'alert' : 'status'}
+      aria-live={toast.type === 'error' ? 'assertive' : 'polite'}
+      className={`fixed bottom-24 lg:bottom-8 left-1/2 -translate-x-1/2 z-[200] transition-all duration-300 ${
+        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+      }`}
+    >
       <div className={`${colors[toast.type || 'success']} text-white px-5 py-3 rounded-xl shadow-2xl flex items-center gap-2.5 text-sm font-medium`}>
         <Icon name={icons[toast.type || 'success']} size="18px" />
         {toast.message}

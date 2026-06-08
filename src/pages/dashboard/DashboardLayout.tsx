@@ -118,7 +118,7 @@ export default function DashboardLayout() {
           </div>
           <span className="text-sm font-black text-cyan-800 font-headline">Dashboard</span>
         </div>
-        <Link to="/app" className="p-2 text-stone-400 hover:text-on-surface">
+        <Link to="/app" aria-label="Tutup dashboard" className="p-2 text-stone-400 hover:text-on-surface">
           <Icon name="close" size="20px" />
         </Link>
       </div>

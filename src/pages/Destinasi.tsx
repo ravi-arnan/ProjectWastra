@@ -80,19 +80,21 @@ export default function Destinasi() {
           <Icon name="search" className="text-on-surface-variant" size="20px" />
           <input
             type="text"
+            aria-label={t('a11y.search')}
             placeholder={t('destinasi.searchPlaceholder', { defaultValue: 'Cari destinasi...' })}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="flex-1 bg-transparent text-sm text-on-surface placeholder:text-on-surface-variant outline-none"
           />
           {searchQuery && (
-            <button onClick={() => setSearchQuery('')} className="cursor-pointer">
+            <button type="button" onClick={() => setSearchQuery('')} aria-label="Hapus pencarian" className="cursor-pointer">
               <Icon name="close" className="text-on-surface-variant" size="18px" />
             </button>
           )}
         </div>
         <select
           value={sortBy}
+          aria-label={t('a11y.sortBy')}
           onChange={(e) => setSortBy(e.target.value as typeof sortBy)}
           className="bg-surface-container-low text-on-surface text-sm font-medium rounded-xl px-4 py-3 outline-none cursor-pointer border-none focus:ring-2 focus:ring-primary/30"
         >

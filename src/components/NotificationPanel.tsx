@@ -21,7 +21,7 @@ export default function NotificationPanel({ isOpen, onClose }: Props) {
 
   return (
     <>
-      <div className="fixed inset-0 z-[90]" onClick={onClose} />
+      <div className="fixed inset-0 z-[90]" onClick={onClose} aria-hidden="true" />
       <div className="absolute right-0 top-full mt-2 w-[360px] bg-surface-container-lowest rounded-2xl shadow-2xl border border-stone-100 z-[91] overflow-hidden">
         <div className="flex items-center justify-between px-5 py-4 border-b border-stone-100">
           <div className="flex items-center gap-2">
@@ -39,7 +39,7 @@ export default function NotificationPanel({ isOpen, onClose }: Props) {
               </button>
             )}
             {notifications.length > 0 && (
-              <button onClick={clearAll} className="p-1 hover:bg-stone-100 rounded-full">
+              <button onClick={clearAll} aria-label="Hapus semua notifikasi" className="p-1 hover:bg-stone-100 rounded-full">
                 <Icon name="delete_sweep" size="18px" className="text-on-surface-variant" />
               </button>
             )}
@@ -80,6 +80,7 @@ export default function NotificationPanel({ isOpen, onClose }: Props) {
                         }}
                         className="p-0.5 hover:bg-stone-200 rounded-full transition-colors opacity-0 group-hover:opacity-100"
                         title="Hapus"
+                        aria-label="Hapus notifikasi"
                       >
                         <Icon name="close" size="14px" className="text-on-surface-variant" />
                       </button>

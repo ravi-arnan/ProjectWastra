@@ -1,7 +1,9 @@
+import { useId } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import Icon from './Icon'
+import { useModalA11y } from '../hooks/useModalA11y'
 
 interface Props {
   isOpen: boolean
@@ -13,6 +15,8 @@ interface Props {
 export default function GuestGateModal({ isOpen, onClose, action }: Props) {
   const { i18n } = useTranslation()
   const lang = i18n.language
+  const dialogRef = useModalA11y<HTMLDivElement>(isOpen, onClose)
+  const titleId = useId()
 
   const verb =
     action ??
@@ -25,6 +29,7 @@ export default function GuestGateModal({ isOpen, onClose, action }: Props) {
           className="fixed inset-0 z-[200] flex items-end sm:items-center justify-center"
           role="dialog"
           aria-modal="true"
+          aria-labelledby={titleId}
         >
           {/* Backdrop */}
           <motion.div
@@ -34,10 +39,13 @@ export default function GuestGateModal({ isOpen, onClose, action }: Props) {
             transition={{ duration: 0.2 }}
             className="absolute inset-0 bg-black/55 backdrop-blur-sm"
             onClick={onClose}
+            aria-hidden="true"
           />
 
           {/* Card */}
           <motion.div
+            ref={dialogRef}
+            tabIndex={-1}
             initial={{ opacity: 0, y: 30, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.97 }}
@@ -51,6 +59,7 @@ export default function GuestGateModal({ isOpen, onClose, action }: Props) {
             <div className="relative">
               {/* Close button */}
               <button
+                type="button"
                 onClick={onClose}
                 className="absolute -top-1 -right-1 w-9 h-9 rounded-full hover:bg-stone-100 flex items-center justify-center text-on-surface-variant transition-colors"
                 aria-label={lang === 'en' ? 'Close' : 'Tutup'}
@@ -64,7 +73,7 @@ export default function GuestGateModal({ isOpen, onClose, action }: Props) {
               </div>
 
               {/* Heading */}
-              <h2 className="text-xl sm:text-2xl font-extrabold text-on-surface font-headline mb-2 leading-tight">
+              <h2 id={titleId} className="text-xl sm:text-2xl font-extrabold text-on-surface font-headline mb-2 leading-tight">
                 {lang === 'en' ? 'Sign in required' : 'Login dulu yuk'}
               </h2>
 
@@ -116,6 +125,7 @@ export default function GuestGateModal({ isOpen, onClose, action }: Props) {
                   {lang === 'en' ? 'Create account' : 'Daftar akun baru'}
                 </Link>
                 <button
+                  type="button"
                   onClick={onClose}
                   className="text-on-surface-variant hover:text-on-surface text-xs font-semibold py-2 transition-colors"
                 >
