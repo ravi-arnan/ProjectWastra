@@ -18,7 +18,7 @@ import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion'
 
 // Heavy, dependency-laden components kept out of the synchronous Landing chunk:
 // Aurora + CircularGallery pull in `ogl` (WebGL), LiveMapPreview pulls in
-// `leaflet`, and ScrollReveal pulls in `gsap`. They mount lazily on scroll.
+// `leaflet`. They mount lazily on scroll.
 const Aurora = lazy(() => import('../components/reactbits/Aurora'))
 const CircularGallery = lazy(() => import('../components/reactbits/CircularGallery'))
 const ScrollReveal = lazy(() => import('../components/reactbits/ScrollReveal'))
