@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import { VitePWA } from 'vite-plugin-pwa'
@@ -43,6 +43,34 @@ export default defineConfig({
           }
         },
       },
+    },
+  },
+  test: {
+    globals: true,
+    environment: 'happy-dom',
+    setupFiles: ['./src/test/setup.ts'],
+    css: false,
+    // Unit tests target pure logic + hooks. The Playwright e2e suite lives in
+    // ./e2e and is run separately, so it is excluded here.
+    include: ['src/**/*.{test,spec}.{ts,tsx}'],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'html'],
+      // Scope coverage to the pure logic + hooks layer. Side-effect modules
+      // (Supabase client, Capacitor native bootstrap, OAuth deep-link flow,
+      // scroll-reveal DOM effect) are exercised by the Playwright e2e suite,
+      // not unit tests, so they are intentionally out of this metric.
+      include: [
+        'src/lib/utils.ts',
+        'src/lib/storage.ts',
+        'src/lib/predictions.ts',
+        'src/lib/platform.ts',
+        'src/lib/moodMapping.ts',
+        'src/data/destinations.ts',
+        'src/hooks/useWatchlist.ts',
+        'src/hooks/useWatchlistThresholds.ts',
+        'src/hooks/useBookings.ts',
+      ],
     },
   },
   plugins: [
