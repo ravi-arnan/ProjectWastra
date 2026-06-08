@@ -22,7 +22,7 @@ native packaging details.
 | Auth/data client | **`@supabase/supabase-js` 2** | browser SDK |
 | i18n | **i18next + react-i18next** | ID/EN, default Indonesian; browser language detector |
 | Maps | **Leaflet + react-leaflet** | crowd / destination map tiles |
-| Animation | **GSAP 3** (`@gsap/react`), **Motion 12** (`motion`, `@motionone/react`), **OGL** | scroll + WebGL effects |
+| Animation | **Motion 12** (`motion/react`) + **OGL** (WebGL) | one animation library; scroll reveal, transitions, and WebGL effects |
 | Misc | `react-markdown`, `qrcode`, `@marsidev/react-turnstile` | AI chat rendering, QRIS rendering, anti-bot |
 
 ---
