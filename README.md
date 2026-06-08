@@ -7,6 +7,10 @@
 <p align="center"><em>Smart Tourism Platform — pantau keramaian wisata Indonesia secara real-time.</em></p>
 
 <p align="center">
+  <a href="https://github.com/ravi-arnan/ProjectWastra/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/ravi-arnan/ProjectWastra/actions/workflows/ci.yml/badge.svg"></a>
+</p>
+
+<p align="center">
   <img alt="React" src="https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white">
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript&logoColor=white">
   <img alt="Vite" src="https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white">
