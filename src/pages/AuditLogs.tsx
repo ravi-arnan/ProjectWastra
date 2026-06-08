@@ -98,6 +98,10 @@ export default function AuditLogs() {
   }
 
   useEffect(() => {
+    // Data fetch on filter/limit change. `load` flips a loading flag before
+    // awaiting Supabase — a deliberate, non-cascading state update, so the
+    // set-state-in-effect heuristic is a false positive here.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     load(filter, limit)
   }, [filter, limit])
 

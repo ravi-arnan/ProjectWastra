@@ -28,10 +28,9 @@ const Magnet: React.FC<MagnetProps> = ({
   const magnetRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (disabled) {
-      setPosition({ x: 0, y: 0 });
-      return;
-    }
+    // When disabled, attach no listener; the rendered position is derived as
+    // the rest state below, so no state update is needed here.
+    if (disabled) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       if (!magnetRef.current) return;
@@ -55,7 +54,10 @@ const Magnet: React.FC<MagnetProps> = ({
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [padding, disabled, magnetStrength]);
 
-  const transitionStyle = isActive ? activeTransition : inactiveTransition;
+  // Derive the rendered state so a disabled magnet always rests at the origin
+  // without needing an effect to reset it.
+  const renderPosition = disabled ? { x: 0, y: 0 } : position;
+  const transitionStyle = !disabled && isActive ? activeTransition : inactiveTransition;
 
   return (
     <div
@@ -67,7 +69,7 @@ const Magnet: React.FC<MagnetProps> = ({
       <div
         className={innerClassName}
         style={{
-          transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
+          transform: `translate3d(${renderPosition.x}px, ${renderPosition.y}px, 0)`,
           transition: transitionStyle,
           willChange: 'transform'
         }}

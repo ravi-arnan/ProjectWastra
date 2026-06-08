@@ -36,12 +36,17 @@ export default function DashboardPrediksi() {
     })
   }, [allowedDestinations])
 
-  // Days from the first destination's predictions (since dates are same for all)
-  const days = weeklyData[0]?.preds.map(p => ({
-    day: p.day,
-    dayShort: p.dayShort,
-    date: p.date,
-  })) || []
+  // Days from the first destination's predictions (since dates are same for all).
+  // Memoized so its identity is stable for the dailyAggregates dependency below.
+  const days = useMemo(
+    () =>
+      weeklyData[0]?.preds.map(p => ({
+        day: p.day,
+        dayShort: p.dayShort,
+        date: p.date,
+      })) || [],
+    [weeklyData],
+  )
 
   // Calculate daily aggregates
   const dailyAggregates = useMemo(() => {

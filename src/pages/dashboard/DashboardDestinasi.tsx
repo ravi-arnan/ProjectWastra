@@ -21,22 +21,21 @@ export default function DashboardDestinasi() {
   const [deleteId, setDeleteId] = useState<string | null>(null)
 
   const filteredAndSortedDests = useMemo(() => {
-    let result = [...dests]
-    
-    // Filter untuk Local Manager
-    if (isLocalManager && localManagerDestId) {
-      result = result.filter(d => d.id === localManagerDestId)
-    }
-    
-    if (search) {
-      const q = search.toLowerCase()
-      result = result.filter(d => d.name.toLowerCase().includes(q) || d.region.toLowerCase().includes(q))
-    }
+    // Local managers only see their assigned destination.
+    const scoped = isLocalManager && localManagerDestId
+      ? dests.filter(d => d.id === localManagerDestId)
+      : dests
 
-    result.sort((a, b) => {
+    const q = search.toLowerCase()
+    const searched = search
+      ? scoped.filter(d => d.name.toLowerCase().includes(q) || d.region.toLowerCase().includes(q))
+      : scoped
+
+    // Copy before sorting so the source array is never mutated.
+    return [...searched].sort((a, b) => {
       const aVal = a[sortConfig.key]
       const bVal = b[sortConfig.key]
-      
+
       if (typeof aVal === 'string' && typeof bVal === 'string') {
         return sortConfig.direction === 'asc' ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal)
       }
@@ -45,9 +44,7 @@ export default function DashboardDestinasi() {
       }
       return 0
     })
-
-    return result
-  }, [dests, search, sortConfig])
+  }, [dests, search, sortConfig, isLocalManager, localManagerDestId])
 
   const handleSort = (key: keyof Destination) => {
     setSortConfig(prev => ({

@@ -1,22 +1,28 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback } from 'react'
 import { bookingsKey, getStorageItem, setStorageItem } from '../lib/storage'
 import { generateId, generateTicketCode } from '../lib/utils'
 import type { Booking } from '../types/booking'
 import { useAuth } from '../context/AuthContext'
+
+function loadBookings(key: string | null): Booking[] {
+  return key ? getStorageItem<Booking[]>(key, []) : []
+}
 
 export function useBookings() {
   const { user } = useAuth()
   const userId = user && !user.is_anonymous ? user.id : null
   const storageKey = bookingsKey(userId)
 
-  const [bookings, setBookings] = useState<Booking[]>(() =>
-    storageKey ? getStorageItem<Booking[]>(storageKey, []) : []
-  )
+  const [bookings, setBookings] = useState<Booking[]>(() => loadBookings(storageKey))
 
-  // Reload list whenever the active user changes (login, logout, switch).
-  useEffect(() => {
-    setBookings(storageKey ? getStorageItem<Booking[]>(storageKey, []) : [])
-  }, [storageKey])
+  // Reload the list when the active user changes (login, logout, switch).
+  // Adjusting state during render — React's supported pattern for resetting
+  // state from a changed input — avoids a cascading effect re-render.
+  const [loadedKey, setLoadedKey] = useState(storageKey)
+  if (storageKey !== loadedKey) {
+    setLoadedKey(storageKey)
+    setBookings(loadBookings(storageKey))
+  }
 
   const persist = useCallback(
     (updated: Booking[]) => {

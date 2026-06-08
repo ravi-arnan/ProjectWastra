@@ -6,7 +6,8 @@ import tseslint from 'typescript-eslint'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  // `dist` is the web build; `android` and `coverage` are generated artifacts.
+  globalIgnores(['dist', 'android', 'coverage']),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
@@ -18,6 +19,11 @@ export default defineConfig([
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
+    },
+    rules: {
+      // Fast Refresh is a dev-only HMR concern with no runtime impact, so a
+      // mixed component/helper export is a warning, not a build-blocking error.
+      'react-refresh/only-export-components': 'warn',
     },
   },
 ])
