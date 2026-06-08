@@ -52,6 +52,8 @@
 
 ## Tech Stack
 
+> 📚 Lihat **[docs/TECH_STACK.md](docs/TECH_STACK.md)** untuk rincian lengkap (frontend, mobile/Capacitor, backend, AI/ML, infra) dan diagram arsitektur.
+
 | Layer | Technology |
 |-------|-----------|
 | **Framework** | [React 19](https://react.dev) + [TypeScript 6](https://www.typescriptlang.org/) |
