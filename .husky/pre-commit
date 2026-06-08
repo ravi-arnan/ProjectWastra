@@ -1,0 +1,12 @@
+# 1. Lint + auto-fix only the staged JS/TS files (config in package.json "lint-staged").
+npx lint-staged
+
+# 2. Secret scan on staged changes. Blocks the commit if a secret is detected.
+#    gitleaks is an external binary; if it is not installed the scan is skipped with a
+#    warning so commits are not blocked before you install it (sudo apt install gitleaks).
+if command -v gitleaks >/dev/null 2>&1; then
+  gitleaks protect --staged --redact --verbose
+else
+  echo "[pre-commit] gitleaks not installed - skipping secret scan."
+  echo "[pre-commit] install it once to enable: sudo apt install gitleaks"
+fi

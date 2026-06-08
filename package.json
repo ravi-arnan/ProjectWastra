@@ -18,7 +18,11 @@
     "cap:aab:release": "CAP_BUILD=true npm run build && cap sync android && cd android && ./gradlew bundleRelease",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,mjs,cjs}": "eslint --fix"
   },
   "dependencies": {
     "@capacitor/app": "^8.1.0",
@@ -44,6 +48,7 @@
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.3",
     "@capacitor/android": "^8.4.0",
     "@capacitor/assets": "^3.0.5",
     "@capacitor/cli": "^8.4.0",
@@ -70,7 +75,9 @@
     "express": "^5.2.1",
     "globals": "^17.4.0",
     "happy-dom": "^20.10.2",
+    "husky": "^9.1.7",
     "jsdom": "^29.1.1",
+    "lint-staged": "^17.0.7",
     "sharp": "^0.34.5",
     "svgo": "^4.0.1",
     "tsx": "^4.21.0",
