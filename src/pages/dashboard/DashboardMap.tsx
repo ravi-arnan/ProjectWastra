@@ -18,12 +18,16 @@ function ZoomControls() {
   return (
     <div className="absolute bottom-8 right-8 z-[400] hidden lg:flex flex-col gap-2">
       <button
+        type="button"
+        aria-label="Perbesar peta"
         onClick={() => map.zoomIn()}
         className="w-10 h-10 rounded-xl bg-white/95 backdrop-blur shadow-lg flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-all cursor-pointer"
       >
         <Icon name="add" />
       </button>
       <button
+        type="button"
+        aria-label="Perkecil peta"
         onClick={() => map.zoomOut()}
         className="w-10 h-10 rounded-xl bg-white/95 backdrop-blur shadow-lg flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-all cursor-pointer"
       >

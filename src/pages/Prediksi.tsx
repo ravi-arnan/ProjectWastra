@@ -448,6 +448,9 @@ export default function Prediksi() {
                         />
                       </div>
                       <button
+                        type="button"
+                        aria-label={isWatchlisted(dest.id) ? 'Hapus dari watchlist' : 'Simpan ke watchlist'}
+                        aria-pressed={isWatchlisted(dest.id)}
                         onClick={(e) => {
                           e.stopPropagation()
                           toggleWatchlist(dest.id)

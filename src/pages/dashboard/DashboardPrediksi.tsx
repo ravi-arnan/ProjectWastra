@@ -280,7 +280,9 @@ export default function DashboardPrediksi() {
                 <h3 className="text-sm font-bold text-on-surface uppercase tracking-wider mb-1">Detail Hari Ini</h3>
                 <h4 className="text-lg font-black text-primary font-headline leading-tight">{selectedDest.name}</h4>
               </div>
-              <button 
+              <button
+                type="button"
+                aria-label="Tutup"
                 onClick={() => setSelectedDestId(null)}
                 className="w-8 h-8 rounded-full hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant cursor-pointer transition-colors"
               >

@@ -110,6 +110,8 @@ export default function Watchlist() {
         {saved.length > 0 && (
           <div className="flex items-center gap-1 bg-surface-container-low rounded-full p-1">
             <button
+              type="button"
+              aria-label={lang === 'en' ? 'Grid view' : 'Tampilan grid'}
               onClick={() => setView('grid')}
               aria-pressed={view === 'grid'}
               className={`w-9 h-9 rounded-full flex items-center justify-center transition-colors ${
@@ -120,6 +122,8 @@ export default function Watchlist() {
               <Icon name="grid_view" size="18px" />
             </button>
             <button
+              type="button"
+              aria-label={lang === 'en' ? 'List view' : 'Tampilan list'}
               onClick={() => setView('list')}
               aria-pressed={view === 'list'}
               className={`w-9 h-9 rounded-full flex items-center justify-center transition-colors ${
@@ -241,6 +245,8 @@ export default function Watchlist() {
                     </div>
                   </button>
                   <button
+                    type="button"
+                    aria-label={lang === 'en' ? 'Remove from watchlist' : 'Hapus dari watchlist'}
                     onClick={() => removeFromWatchlist(d.id)}
                     className="w-9 h-9 rounded-full bg-error/10 hover:bg-error/20 text-error flex items-center justify-center transition-colors shrink-0"
                     title={lang === 'en' ? 'Remove from watchlist' : 'Hapus dari watchlist'}

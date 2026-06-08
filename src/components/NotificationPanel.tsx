@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import Icon from './Icon'
 import { useNotifications } from '../hooks/useNotifications'
 import { timeAgo } from '../lib/utils'
@@ -16,6 +17,15 @@ interface Props {
 
 export default function NotificationPanel({ isOpen, onClose }: Props) {
   const { notifications, markAsRead, markAllAsRead, clearAll, deleteNotification, unreadCount } = useNotifications()
+
+  useEffect(() => {
+    if (!isOpen) return
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Escape') onClose()
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [isOpen, onClose])
 
   if (!isOpen) return null
 

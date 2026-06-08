@@ -1,7 +1,8 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useId } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { destinations as initialDestinations, type Destination } from '../../data/destinations'
 import Icon from '../../components/Icon'
+import { useModalA11y } from '../../hooks/useModalA11y'
 import { useAuth } from '../../context/AuthContext'
 
 export default function DashboardDestinasi() {
@@ -19,6 +20,11 @@ export default function DashboardDestinasi() {
   
   // Delete Dialog State
   const [deleteId, setDeleteId] = useState<string | null>(null)
+
+  const editDialogRef = useModalA11y<HTMLDivElement>(isModalOpen, () => setIsModalOpen(false))
+  const deleteDialogRef = useModalA11y<HTMLDivElement>(deleteId !== null, () => setDeleteId(null))
+  const editTitleId = useId()
+  const deleteTitleId = useId()
 
   const filteredAndSortedDests = useMemo(() => {
     // Local managers only see their assigned destination.
@@ -210,7 +216,9 @@ export default function DashboardDestinasi() {
                     </td>
                     <td className="p-3 border-b border-stone-100 text-center">
                       <div className="flex items-center justify-center gap-1 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button 
+                        <button
+                          type="button"
+                          aria-label={`Edit ${dest.name}`}
                           onClick={() => {
                             setEditingDest(dest)
                             setIsModalOpen(true)
@@ -220,7 +228,9 @@ export default function DashboardDestinasi() {
                           <Icon name="edit" size="16px" />
                         </button>
                         {!isLocalManager && (
-                          <button 
+                          <button
+                            type="button"
+                            aria-label={`Hapus ${dest.name}`}
                             onClick={() => setDeleteId(dest.id)}
                             className="w-8 h-8 rounded-full hover:bg-error/10 text-error flex items-center justify-center transition-colors"
                           >
@@ -247,16 +257,21 @@ export default function DashboardDestinasi() {
       {/* ── Modal Form Tambah/Edit ── */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-          <motion.div 
+          <motion.div
+            ref={editDialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={editTitleId}
+            tabIndex={-1}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden"
           >
             <div className="p-5 border-b border-stone-100 flex items-center justify-between bg-surface-container-lowest">
-              <h2 className="text-lg font-bold font-headline text-on-surface">
+              <h2 id={editTitleId} className="text-lg font-bold font-headline text-on-surface">
                 {editingDest ? 'Edit Destinasi' : 'Tambah Destinasi Baru'}
               </h2>
-              <button onClick={() => setIsModalOpen(false)} className="p-1 rounded-full hover:bg-surface-container-high text-stone-500">
+              <button type="button" onClick={() => setIsModalOpen(false)} aria-label="Tutup" className="p-1 rounded-full hover:bg-surface-container-high text-stone-500">
                 <Icon name="close" size="20px" />
               </button>
             </div>
@@ -354,7 +369,12 @@ export default function DashboardDestinasi() {
       {/* ── Dialog Konfirmasi Hapus ── */}
       {deleteId && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-          <motion.div 
+          <motion.div
+            ref={deleteDialogRef}
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby={deleteTitleId}
+            tabIndex={-1}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             className="bg-white rounded-3xl shadow-2xl p-6 max-w-sm w-full text-center"
@@ -362,15 +382,15 @@ export default function DashboardDestinasi() {
             <div className="w-14 h-14 rounded-full bg-error/10 text-error flex items-center justify-center mx-auto mb-4">
               <Icon name="delete" size="28px" />
             </div>
-            <h3 className="text-lg font-bold text-on-surface mb-2 font-headline">Hapus Destinasi?</h3>
+            <h3 id={deleteTitleId} className="text-lg font-bold text-on-surface mb-2 font-headline">Hapus Destinasi?</h3>
             <p className="text-sm text-on-surface-variant mb-6">
               Apakah Anda yakin ingin menghapus destinasi ini? Tindakan ini tidak dapat dibatalkan.
             </p>
             <div className="flex gap-3">
-              <button onClick={() => setDeleteId(null)} className="flex-1 py-2.5 rounded-xl font-bold text-stone-600 bg-stone-100 hover:bg-stone-200 transition-colors cursor-pointer">
+              <button type="button" onClick={() => setDeleteId(null)} className="flex-1 py-2.5 rounded-xl font-bold text-stone-600 bg-stone-100 hover:bg-stone-200 transition-colors cursor-pointer">
                 Batal
               </button>
-              <button onClick={handleDelete} className="flex-1 py-2.5 rounded-xl font-bold text-white bg-error hover:bg-error/90 shadow-md transition-colors cursor-pointer">
+              <button type="button" onClick={handleDelete} className="flex-1 py-2.5 rounded-xl font-bold text-white bg-error hover:bg-error/90 shadow-md transition-colors cursor-pointer">
                 Ya, Hapus
               </button>
             </div>

@@ -35,8 +35,16 @@ Attach its ref to the dialog container and pair it with `role="dialog"`,
 - **Escape** to close;
 - focus **restored** to the triggering element on close.
 
-Wired into: `BookingModal`, `ReviewModal`, `SettingsModal`, `GuestGateModal`.
-Behaviour is covered by `src/hooks/useModalA11y.test.tsx`.
+Wired into: `BookingModal`, `ReviewModal`, `SettingsModal`, `GuestGateModal`,
+and the admin CRUD dialogs (`DashboardDestinasi` add/edit + delete-confirm,
+`UserManagement` edit). The delete-confirm uses `role="alertdialog"`.
+`NotificationPanel` is a popover (not a modal): it closes on Escape and on
+outside-click, without a focus trap. Behaviour is covered by
+`src/hooks/useModalA11y.test.tsx`.
+
+> **Coverage note:** every interactive `<button>/<Link>/<a>/<NavLink>` whose only
+> child is an `<Icon>` was swept programmatically (brace-aware, so inline
+> `=>` handlers don't hide the match) and given an accessible name — **0 remain**.
 
 ## Fixed in this pass
 

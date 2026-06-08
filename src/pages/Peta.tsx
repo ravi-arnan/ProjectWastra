@@ -55,12 +55,16 @@ function ZoomControls() {
   return (
     <div className="absolute bottom-8 left-8 z-20 hidden lg:flex flex-col gap-2">
       <button
+        type="button"
+        aria-label="Perbesar peta"
         onClick={() => map.zoomIn()}
         className="w-10 h-10 rounded-xl bg-white/95 backdrop-blur shadow-lg flex items-center justify-center text-on-surface hover:bg-white hover:scale-105 transition-all cursor-pointer"
       >
         <Icon name="add" />
       </button>
       <button
+        type="button"
+        aria-label="Perkecil peta"
         onClick={() => map.zoomOut()}
         className="w-10 h-10 rounded-xl bg-white/95 backdrop-blur shadow-lg flex items-center justify-center text-on-surface hover:bg-white hover:scale-105 transition-all cursor-pointer"
       >
@@ -212,6 +216,8 @@ export default function Peta() {
                   </p>
                 </div>
                 <button
+                  type="button"
+                  aria-label="Tutup"
                   onClick={() => setSelectedDestination(null)}
                   className="p-1 rounded-full hover:bg-surface-container-high cursor-pointer"
                 >
@@ -270,6 +276,9 @@ export default function Peta() {
                   {t('common.details')}
                 </button>
                 <button
+                  type="button"
+                  aria-label={isWatchlisted(selectedDestination.id) ? 'Hapus dari watchlist' : 'Simpan ke watchlist'}
+                  aria-pressed={isWatchlisted(selectedDestination.id)}
                   onClick={() => toggleWatchlist(selectedDestination.id)}
                   className="w-11 h-11 rounded-full border border-outline flex items-center justify-center cursor-pointer bg-transparent shrink-0 hover:bg-surface-container-low transition-colors"
                 >
@@ -352,7 +361,7 @@ export default function Peta() {
               className="bg-transparent outline-none flex-1 text-on-surface placeholder:text-outline"
             />
             {searchQuery && (
-              <button onClick={() => setSearchQuery('')} className="cursor-pointer">
+              <button type="button" aria-label="Hapus pencarian" onClick={() => setSearchQuery('')} className="cursor-pointer">
                 <Icon name="close" className="text-on-surface-variant" size="20px" />
               </button>
             )}
@@ -439,6 +448,8 @@ export default function Peta() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 <button
+                  type="button"
+                  aria-label="Tutup"
                   onClick={() => setSelectedDestination(null)}
                   className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/40 backdrop-blur flex items-center justify-center cursor-pointer hover:bg-black/60 transition-colors"
                 >
@@ -511,6 +522,9 @@ export default function Peta() {
                     </Link>
                   </Magnet>
                   <button
+                    type="button"
+                    aria-label={isWatchlisted(selectedDestination.id) ? 'Hapus dari watchlist' : 'Simpan ke watchlist'}
+                    aria-pressed={isWatchlisted(selectedDestination.id)}
                     onClick={() => toggleWatchlist(selectedDestination.id)}
                     className={`w-11 h-11 rounded-full border flex items-center justify-center cursor-pointer shrink-0 transition-colors ${
                       isWatchlisted(selectedDestination.id)

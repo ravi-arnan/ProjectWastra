@@ -1,8 +1,9 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useId, useMemo, useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import Icon from '../components/Icon'
+import { useModalA11y } from '../hooks/useModalA11y'
 import SpotlightCard from '../components/reactbits/SpotlightCard'
 import BlurText from '../components/reactbits/BlurText'
 import { supabase } from '../lib/supabase'
@@ -53,6 +54,10 @@ export default function UserManagement() {
   const [editing, setEditing] = useState<AdminUser | null>(null)
   const [editName, setEditName] = useState('')
   const [editSaving, setEditSaving] = useState(false)
+  const editDialogRef = useModalA11y<HTMLDivElement>(editing !== null, () => {
+    if (!editSaving) setEditing(null)
+  })
+  const editTitleId = useId()
 
   async function load() {
     setLoading(true)
@@ -406,6 +411,8 @@ export default function UserManagement() {
 
                   {/* Edit */}
                   <button
+                    type="button"
+                    aria-label={lang === 'en' ? 'Edit user' : 'Edit user'}
                     onClick={() => openEdit(u)}
                     disabled={isBusy || u.is_anonymous}
                     className="w-9 h-9 rounded-full flex items-center justify-center bg-surface-container-low hover:bg-surface-container-high text-on-surface-variant disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
@@ -416,6 +423,8 @@ export default function UserManagement() {
 
                   {/* Delete */}
                   <button
+                    type="button"
+                    aria-label={lang === 'en' ? 'Delete user' : 'Hapus user'}
                     onClick={() => handleDelete(u)}
                     disabled={isSelf || isBusy}
                     className="w-9 h-9 rounded-full flex items-center justify-center bg-error/10 hover:bg-error/20 text-error disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
@@ -443,6 +452,11 @@ export default function UserManagement() {
           >
             <motion.div
               key="edit-card"
+              ref={editDialogRef}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby={editTitleId}
+              tabIndex={-1}
               initial={{ opacity: 0, scale: 0.96, y: 8 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 8 }}
@@ -451,11 +465,13 @@ export default function UserManagement() {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-extrabold text-on-surface font-headline">
+                <h2 id={editTitleId} className="text-lg font-extrabold text-on-surface font-headline">
                   {lang === 'en' ? 'Edit user' : 'Edit user'}
                 </h2>
                 <button
+                  type="button"
                   onClick={() => !editSaving && setEditing(null)}
+                  aria-label={lang === 'en' ? 'Close' : 'Tutup'}
                   className="w-8 h-8 rounded-full hover:bg-surface-container-low flex items-center justify-center"
                 >
                   <Icon name="close" size="20px" />
