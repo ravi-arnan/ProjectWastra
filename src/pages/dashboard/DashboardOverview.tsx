@@ -29,7 +29,7 @@ export default function DashboardOverview() {
 
   // ── Filtered & sorted list ──
   const filteredSorted = useMemo(() => {
-    let list = filterCategory === 'Semua'
+    const list = filterCategory === 'Semua'
       ? [...filteredDestinations]
       : filteredDestinations.filter((d) => d.category === filterCategory)
 

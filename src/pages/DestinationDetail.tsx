@@ -90,7 +90,10 @@ export default function DestinationDetail() {
     }
   }
 
-  const HeroImage = ({ height, rounded }: { height: string; rounded?: string }) => (
+  // These are single-use render helpers (not components) so they stay as plain
+  // function calls — defining them as components inside render would give each
+  // a fresh identity every render and remount the whole subtree.
+  const heroImage = (height: string, rounded?: string) => (
     <div className={`relative w-full ${height} overflow-hidden ${rounded || ''}`}>
       <img src={destination.image} alt={destination.name} className="w-full h-full object-cover" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
@@ -113,7 +116,7 @@ export default function DestinationDetail() {
     </div>
   )
 
-  const DensityGauge = () => (
+  const densityGauge = () => (
     <svg width="96" height="96" viewBox="0 0 96 96" className="shrink-0">
       <circle cx="48" cy="48" r="40" fill="none" className="stroke-surface-container-high" strokeWidth="8" />
       <circle cx="48" cy="48" r="40" fill="none" className={strokeColorClass} strokeWidth="8" strokeLinecap="round"
@@ -123,10 +126,10 @@ export default function DestinationDetail() {
     </svg>
   )
 
-  const StatusCard = () => (
+  const statusCard = () => (
     <div className="mx-4 -mt-5 relative z-10 bg-surface-container-lowest rounded-2xl shadow-lg p-4">
       <div className="flex items-center gap-4">
-        <DensityGauge />
+        {densityGauge()}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1">
             <span className={`${densityColor} text-2xl font-headline font-bold`}>{densityPercent}%</span>
@@ -142,7 +145,7 @@ export default function DestinationDetail() {
     </div>
   )
 
-  const WeatherStrip = () => (
+  const weatherStrip = () => (
     <div className="mx-4 mt-3 bg-surface-container-low rounded-2xl p-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -170,7 +173,7 @@ export default function DestinationDetail() {
     </div>
   )
 
-  const CrowdVisualization = () => (
+  const crowdVisualization = () => (
     <div className="mx-4 mt-3 bg-surface-container-high rounded-3xl p-5">
       <div className="flex items-center justify-between mb-4">
         <h3 className="font-headline font-bold text-on-surface">Visualisasi Keramaian Real-Time</h3>
@@ -195,7 +198,7 @@ export default function DestinationDetail() {
     </div>
   )
 
-  const InfoGrid = () => (
+  const infoGrid = () => (
     <div className="grid grid-cols-2 gap-3">
       {[
         { icon: 'schedule', label: 'Jam Buka', value: destination.openHours },
@@ -212,7 +215,7 @@ export default function DestinationDetail() {
     </div>
   )
 
-  const RatingCard = () => (
+  const ratingCard = () => (
     <div className="bg-surface-container-lowest rounded-2xl p-5 flex flex-col items-center text-center">
       <div className="flex items-center gap-1 mb-1">
         {Array.from({ length: 5 }).map((_, i) => (
@@ -228,7 +231,7 @@ export default function DestinationDetail() {
     </div>
   )
 
-  const AlternativeDestinations = () => (
+  const alternativeDestinations = () => (
     <div>
       <h3 className="font-headline font-bold text-on-surface mb-3">Alternatif Lebih Sepi</h3>
       <div className="flex gap-3 overflow-x-auto no-scrollbar lg:flex-col lg:overflow-x-visible">
@@ -250,7 +253,7 @@ export default function DestinationDetail() {
     </div>
   )
 
-  const BottomActionBar = () => (
+  const bottomActionBar = () => (
     <div className="fixed bottom-20 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-t border-outline-variant px-4 py-3 flex items-center justify-between lg:hidden">
       <div className="flex gap-2">
         <Link to="/app/peta" className="flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-outline text-sm font-semibold text-on-surface">
@@ -268,7 +271,7 @@ export default function DestinationDetail() {
     </div>
   )
 
-  const HourlyChart = () => (
+  const hourlyChart = () => (
     <div>
       <h4 className="font-headline font-semibold text-on-surface mb-3">Distribusi Keramaian Per Jam</h4>
       <div className="flex items-end gap-1.5 h-32">
@@ -288,7 +291,7 @@ export default function DestinationDetail() {
     </div>
   )
 
-  const WeeklyOutlook = () => (
+  const weeklyOutlook = () => (
     <div>
       <h4 className="font-headline font-semibold text-on-surface mb-3">Perkiraan 7 Hari</h4>
       <div className="space-y-2">
@@ -309,7 +312,7 @@ export default function DestinationDetail() {
     </div>
   )
 
-  const VisitPlanningCard = () => (
+  const visitPlanningCard = () => (
     <div className="bg-surface-container-lowest rounded-2xl p-5 shadow-sm">
       <h3 className="font-headline font-bold text-on-surface mb-4">Visit Planning</h3>
       <div className="space-y-3 text-sm">
@@ -343,23 +346,23 @@ export default function DestinationDetail() {
     <>
       {/* MOBILE VIEW */}
       <div className="lg:hidden pb-32">
-        <HeroImage height="h-[280px]" />
-        <StatusCard />
-        <WeatherStrip />
-        <CrowdVisualization />
-        <div className="px-4 mt-3"><InfoGrid /></div>
-        <div className="px-4 mt-3"><RatingCard /></div>
-        <div className="px-4 mt-5"><AlternativeDestinations /></div>
-        <BottomActionBar />
+        {heroImage('h-[280px]')}
+        {statusCard()}
+        {weatherStrip()}
+        {crowdVisualization()}
+        <div className="px-4 mt-3">{infoGrid()}</div>
+        <div className="px-4 mt-3">{ratingCard()}</div>
+        <div className="px-4 mt-5">{alternativeDestinations()}</div>
+        {bottomActionBar()}
       </div>
 
       {/* DESKTOP VIEW */}
       <div className="hidden lg:flex gap-6 max-w-7xl mx-auto p-6">
         <div className="flex-1 min-w-0 space-y-5">
-          <HeroImage height="h-[480px]" rounded="rounded-[32px]" />
+          {heroImage('h-[480px]', 'rounded-[32px]')}
           <div className="bg-surface-container-lowest rounded-2xl shadow-sm p-5">
             <div className="flex items-center gap-5">
-              <DensityGauge />
+              {densityGauge()}
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-1">
                   <span className={`${densityColor} text-3xl font-headline font-bold`}>{densityPercent}%</span>
@@ -413,15 +416,15 @@ export default function DestinationDetail() {
                 <p className="text-xs text-on-surface-variant">vs Kemarin</p>
               </div>
             </div>
-            <HourlyChart />
-            <WeeklyOutlook />
+            {hourlyChart()}
+            {weeklyOutlook()}
           </div>
-          <RatingCard />
+          {ratingCard()}
         </div>
         <div className="w-[400px] shrink-0 space-y-5">
-          <VisitPlanningCard />
-          <InfoGrid />
-          <AlternativeDestinations />
+          {visitPlanningCard()}
+          {infoGrid()}
+          {alternativeDestinations()}
         </div>
       </div>
 

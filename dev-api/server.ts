@@ -6,7 +6,6 @@
 import 'dotenv/config'
 import express from 'express'
 import type { Request, Response } from 'express'
-import { createRequire } from 'module'
 import { pathToFileURL } from 'url'
 import path from 'path'
 

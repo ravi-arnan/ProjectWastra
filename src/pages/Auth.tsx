@@ -17,6 +17,11 @@ import StarBorder from '../components/reactbits/StarBorder';
 
 type Tab = 'login' | 'signup';
 
+/** Narrow an unknown thrown value to the shape Supabase auth errors expose. */
+function authError(err: unknown): { code?: string; message?: string } {
+  return (err ?? {}) as { code?: string; message?: string };
+}
+
 const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined;
 
 /** Official multicolor Google "G" mark (Material Symbols has no brand glyph). */
@@ -127,9 +132,10 @@ export default function Auth() {
       }
       
       navigate('/app');
-    } catch (err: any) {
-      const code: string | undefined = err?.code;
-      const msg: string = err?.message || '';
+    } catch (err: unknown) {
+      const e = authError(err);
+      const code: string | undefined = e.code;
+      const msg: string = e.message || '';
       const isUnconfirmed =
         code === 'email_not_confirmed' || /email not confirmed/i.test(msg);
       if (isUnconfirmed) {
@@ -163,8 +169,8 @@ export default function Auth() {
       if (resendError) throw resendError;
       setSuccess(t('auth.messages.confirmationResent'));
       setNeedsResend(false);
-    } catch (err: any) {
-      setError(err?.message || t('auth.errors.resendFailed'));
+    } catch (err: unknown) {
+      setError(authError(err).message || t('auth.errors.resendFailed'));
     } finally {
       setResending(false);
     }
@@ -192,8 +198,8 @@ export default function Auth() {
       if (authError) throw authError;
       setSuccess(t('auth.messages.signupSuccess'));
       handleTabSwitch('login');
-    } catch (err: any) {
-      setError(err.message || t('auth.errors.signupFailed'));
+    } catch (err: unknown) {
+      setError(authError(err).message || t('auth.errors.signupFailed'));
       resetCaptcha();
     } finally {
       setLoading(false);
@@ -210,8 +216,8 @@ export default function Auth() {
       });
       if (authError) throw authError;
       navigate('/app');
-    } catch (err: any) {
-      setError(err.message || t('auth.errors.guestFailed'));
+    } catch (err: unknown) {
+      setError(authError(err).message || t('auth.errors.guestFailed'));
       resetCaptcha();
     } finally {
       setLoading(false);
@@ -507,8 +513,8 @@ export default function Auth() {
                     if (resetError) throw resetError;
                     setResetSent(true);
                     setError('');
-                  } catch (err: any) {
-                    setError(err.message || t('auth.errors.resetFailed'));
+                  } catch (err: unknown) {
+                    setError(authError(err).message || t('auth.errors.resetFailed'));
                   } finally {
                     setLoading(false);
                   }

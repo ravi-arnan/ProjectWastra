@@ -125,8 +125,12 @@ export function NotificationProvider({ children }: { children: ReactNode }) {
   const [prefs, setPrefs] = useState<NotificationPrefs>(() =>
     getStorageItem<NotificationPrefs>(STORAGE_KEYS.NOTIFICATION_PREFS, DEFAULT_PREFS)
   )
+  // Mirror the latest notifications into a ref for use inside timers/callbacks.
+  // Updated post-commit (not during render) to satisfy React's purity rules.
   const notifsRef = useRef(notifications)
-  notifsRef.current = notifications
+  useEffect(() => {
+    notifsRef.current = notifications
+  }, [notifications])
 
   const persistNotifications = useCallback((updated: AppNotification[]) => {
     setNotifications(updated)
