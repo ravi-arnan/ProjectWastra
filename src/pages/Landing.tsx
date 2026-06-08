@@ -796,9 +796,9 @@ export default function Landing() {
             <div className="md:col-span-2">
               <h4 className="text-[11px] font-bold uppercase tracking-widest text-primary-fixed-dim mb-4">{t('landing.footer.company')}</h4>
               <ul className="space-y-2.5 text-sm text-white/70">
-                <li><a href="#" className="hover:text-white transition-colors">{t('landing.footer.links.about')}</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">{t('landing.footer.links.partners')}</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">{t('landing.footer.links.press')}</a></li>
+                <li><a href="#features" className="hover:text-white transition-colors">{t('landing.footer.links.about')}</a></li>
+                <li><a href="mailto:support@wastra.id?subject=Partnership" className="hover:text-white transition-colors">{t('landing.footer.links.partners')}</a></li>
+                <li><a href="mailto:support@wastra.id?subject=Press" className="hover:text-white transition-colors">{t('landing.footer.links.press')}</a></li>
                 <li><a href="mailto:careers@wastra.id" className="hover:text-white transition-colors">{t('landing.footer.links.careers')}</a></li>
               </ul>
             </div>
@@ -843,7 +843,7 @@ export default function Landing() {
             <div className="flex gap-6">
               <Link className="hover:text-white transition-colors" to="/privacy">{t('landing.footer.links.privacy')}</Link>
               <Link className="hover:text-white transition-colors" to="/terms">{t('landing.footer.links.terms')}</Link>
-              <a className="hover:text-white transition-colors" href="#">{t('landing.footer.links.cookies')}</a>
+              <Link className="hover:text-white transition-colors" to="/privacy">{t('landing.footer.links.cookies')}</Link>
               <a className="hover:text-white transition-colors" href="mailto:support@wastra.id">{t('landing.footer.links.support')}</a>
             </div>
           </div>

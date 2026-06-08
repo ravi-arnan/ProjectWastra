@@ -258,6 +258,7 @@ export default function Auth() {
     'bg-white/70 border border-white/60 rounded-xl px-4 py-3 flex items-center gap-3 focus-within:border-primary/60 focus-within:bg-white transition-colors';
   const inputClass =
     'bg-transparent flex-1 text-sm outline-none placeholder:text-on-surface-variant/60 text-on-surface font-body';
+  const labelClass = 'text-xs font-semibold text-on-surface/80 mb-1.5 block';
   const guestButtonClass = `w-full bg-white/60 hover:bg-white/85 border border-white/70 text-on-surface rounded-xl py-3 font-headline text-sm tracking-wide flex items-center justify-center gap-2 transition-colors ${
     loading ? 'opacity-70 pointer-events-none' : ''
   }`;
@@ -463,44 +464,48 @@ export default function Auth() {
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.05 }}
-                className={inputGroupClass}
               >
-                <Icon name="mail" className="text-on-surface-variant" size="20px" />
-                <input
-                  type="email"
-                  aria-label={t('auth.fields.email')}
-                  placeholder={t('auth.fields.email')}
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className={inputClass}
-                />
+                <label htmlFor="login-email" className={labelClass}>{t('auth.fields.email')}</label>
+                <div className={inputGroupClass}>
+                  <Icon name="mail" className="text-on-surface-variant" size="20px" />
+                  <input
+                    id="login-email"
+                    type="email"
+                    placeholder={t('auth.fields.email')}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className={inputClass}
+                  />
+                </div>
               </motion.div>
 
               <motion.div
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.12 }}
-                className={inputGroupClass}
               >
-                <Icon name="lock" className="text-on-surface-variant" size="20px" />
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  aria-label={t('auth.fields.password')}
-                  placeholder={t('auth.fields.password')}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  className={inputClass}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  aria-label={showPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}
-                  className="text-on-surface-variant hover:text-primary transition-colors"
-                >
-                  <Icon name={showPassword ? 'visibility_off' : 'visibility'} size="20px" />
-                </button>
+                <label htmlFor="login-password" className={labelClass}>{t('auth.fields.password')}</label>
+                <div className={inputGroupClass}>
+                  <Icon name="lock" className="text-on-surface-variant" size="20px" />
+                  <input
+                    id="login-password"
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder={t('auth.fields.password')}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    className={inputClass}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    aria-label={showPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}
+                    className="text-on-surface-variant hover:text-primary transition-colors"
+                  >
+                    <Icon name={showPassword ? 'visibility_off' : 'visibility'} size="20px" />
+                  </button>
+                </div>
               </motion.div>
 
               <button
@@ -569,26 +574,28 @@ export default function Auth() {
               className="flex flex-col gap-4"
             >
               {[
-                { icon: 'person', type: 'text', placeholder: t('auth.fields.fullName'), value: name, setter: setName },
-                { icon: 'mail', type: 'email', placeholder: t('auth.fields.email'), value: email, setter: setEmail },
+                { id: 'signup-name', icon: 'person', type: 'text', placeholder: t('auth.fields.fullName'), value: name, setter: setName },
+                { id: 'signup-email', icon: 'mail', type: 'email', placeholder: t('auth.fields.email'), value: email, setter: setEmail },
               ].map((field, i) => (
                 <motion.div
                   key={field.placeholder}
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.05 + i * 0.07 }}
-                  className={inputGroupClass}
                 >
-                  <Icon name={field.icon} className="text-on-surface-variant" size="20px" />
-                  <input
-                    type={field.type}
-                    aria-label={field.placeholder}
-                    placeholder={field.placeholder}
-                    value={field.value}
-                    onChange={(e) => field.setter(e.target.value)}
-                    required
-                    className={inputClass}
-                  />
+                  <label htmlFor={field.id} className={labelClass}>{field.placeholder}</label>
+                  <div className={inputGroupClass}>
+                    <Icon name={field.icon} className="text-on-surface-variant" size="20px" />
+                    <input
+                      id={field.id}
+                      type={field.type}
+                      placeholder={field.placeholder}
+                      value={field.value}
+                      onChange={(e) => field.setter(e.target.value)}
+                      required
+                      className={inputClass}
+                    />
+                  </div>
                 </motion.div>
               ))}
 
@@ -596,52 +603,56 @@ export default function Auth() {
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.19 }}
-                className={inputGroupClass}
               >
-                <Icon name="lock" className="text-on-surface-variant" size="20px" />
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  aria-label={t('auth.fields.password')}
-                  placeholder={t('auth.fields.password')}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  className={inputClass}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  aria-label={showPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}
-                  className="text-on-surface-variant hover:text-primary transition-colors"
-                >
-                  <Icon name={showPassword ? 'visibility_off' : 'visibility'} size="20px" />
-                </button>
+                <label htmlFor="signup-password" className={labelClass}>{t('auth.fields.password')}</label>
+                <div className={inputGroupClass}>
+                  <Icon name="lock" className="text-on-surface-variant" size="20px" />
+                  <input
+                    id="signup-password"
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder={t('auth.fields.password')}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    className={inputClass}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    aria-label={showPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}
+                    className="text-on-surface-variant hover:text-primary transition-colors"
+                  >
+                    <Icon name={showPassword ? 'visibility_off' : 'visibility'} size="20px" />
+                  </button>
+                </div>
               </motion.div>
 
               <motion.div
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.26 }}
-                className={inputGroupClass}
               >
-                <Icon name="lock" className="text-on-surface-variant" size="20px" />
-                <input
-                  type={showConfirmPassword ? 'text' : 'password'}
-                  aria-label={t('auth.fields.confirmPassword')}
-                  placeholder={t('auth.fields.confirmPassword')}
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  required
-                  className={inputClass}
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  aria-label={showConfirmPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}
-                  className="text-on-surface-variant hover:text-primary transition-colors"
-                >
-                  <Icon name={showConfirmPassword ? 'visibility_off' : 'visibility'} size="20px" />
-                </button>
+                <label htmlFor="signup-confirm" className={labelClass}>{t('auth.fields.confirmPassword')}</label>
+                <div className={inputGroupClass}>
+                  <Icon name="lock" className="text-on-surface-variant" size="20px" />
+                  <input
+                    id="signup-confirm"
+                    type={showConfirmPassword ? 'text' : 'password'}
+                    placeholder={t('auth.fields.confirmPassword')}
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                    className={inputClass}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    aria-label={showConfirmPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'}
+                    className="text-on-surface-variant hover:text-primary transition-colors"
+                  >
+                    <Icon name={showConfirmPassword ? 'visibility_off' : 'visibility'} size="20px" />
+                  </button>
+                </div>
               </motion.div>
 
               <Magnet padding={50} magnetStrength={5} wrapperClassName="!block w-full">

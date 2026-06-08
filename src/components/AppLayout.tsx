@@ -12,9 +12,17 @@ export default function AppLayout() {
   return (
     <NotificationProvider>
       <div className="min-h-screen bg-surface">
+        {/* Skip link — visually hidden until focused; lets keyboard/AT users
+            jump past the nav straight to the page content. */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[300] focus:bg-primary focus:text-on-primary focus:px-4 focus:py-2.5 focus:rounded-xl focus:font-semibold focus:text-sm focus:shadow-lg"
+        >
+          Lewati ke konten
+        </a>
         <SideNav />
         <MobileHeader />
-        <main className="lg:ml-64">
+        <main id="main-content" tabIndex={-1} className="lg:ml-64 focus:outline-none">
           <DesktopHeader />
           <div className="max-w-[390px] mx-auto lg:max-w-none pt-14 pb-24 lg:pt-0 lg:pb-0 px-4 lg:px-10 lg:py-8">
             <Outlet />

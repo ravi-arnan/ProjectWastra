@@ -107,10 +107,20 @@ Prediksi "Live Cam" glass button, and the Legal contact links (added
 cards were also restructured so the bookmark button is no longer nested inside
 the card's selection button (`nested-interactive`).
 
+## Navigation & forms
+
+- **Skip link** — `AppLayout` renders a `sr-only focus:not-sr-only` "Lewati ke
+  konten" link as its first child, targeting `<main id="main-content"
+  tabIndex={-1}>`, so keyboard/AT users can jump past the nav.
+- **Auth form** uses visible, persistent `<label htmlFor>` elements (the
+  `BookingModal` pattern) instead of placeholder-only labelling, so the field
+  purpose stays visible after typing. Search / sort / chat inputs keep
+  `aria-label` (the conventional pattern for icon-prefixed search boxes).
+- No dead `href="#"` links: the Landing footer's placeholder links now point to
+  real destinations (`#features`, `mailto:`, `/privacy`).
+
 ## Backlog
 
-- Wire `npm run test:a11y` into CI.
-- Footer "coming soon" links in `Landing.tsx` are `href="#"` placeholders —
-  convert to real routes or buttons when those pages exist.
-- Consider a visible skip-to-content link on the app shell.
-- Form inputs use `aria-label`; consider visible persistent `<label>`s.
+- All previously-listed items are addressed. Remaining ideas: per-field inline
+  validation messages wired with `aria-describedby`; periodic re-audit as new
+  surfaces are added.
