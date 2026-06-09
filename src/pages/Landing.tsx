@@ -14,6 +14,7 @@ import GlareHover from '../components/reactbits/GlareHover'
 import ScrollVelocity from '../components/reactbits/ScrollVelocity'
 import ShinyText from '../components/reactbits/ShinyText'
 import LazyVisible from '../components/LazyVisible'
+import NewsletterForm from '../components/NewsletterForm'
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion'
 
 // Heavy, dependency-laden components kept out of the synchronous Landing chunk:
@@ -809,24 +810,7 @@ export default function Landing() {
               <p className="text-sm text-white/60 mb-4 leading-relaxed">
                 {t('landing.footer.newsletterDesc')}
               </p>
-              <form
-                onSubmit={(e) => e.preventDefault()}
-                className="flex gap-2 bg-white/5 border border-white/10 rounded-xl p-1.5 focus-within:border-primary/60 transition-colors"
-              >
-                <input
-                  type="email"
-                  aria-label={t('landing.footer.stayLoop')}
-                  placeholder="you@email.com"
-                  className="flex-1 bg-transparent text-sm text-white placeholder-white/40 px-3 py-2 outline-none"
-                  required
-                />
-                <button
-                  type="submit"
-                  className="bg-primary hover:bg-primary-container text-on-primary font-bold text-xs uppercase tracking-wider px-4 py-2 rounded-lg transition-colors"
-                >
-                  {t('landing.footer.subscribe')}
-                </button>
-              </form>
+              <NewsletterForm />
               <div className="mt-5 inline-flex items-center gap-2 text-[11px] text-white/50">
                 <Icon name="public" size="14px" />
                 <span>{t('landing.footer.madeIn')}</span>
