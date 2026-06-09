@@ -572,7 +572,9 @@ export function getDensityColor(density: number): string {
 export function getDensityBgColor(density: number): string {
   if (density > 0.8) return 'bg-error'
   if (density > 0.6) return 'bg-tertiary'
-  if (density > 0.3) return 'bg-amber-500'
+  // amber-700 (not -500): used as a solid badge background under white text,
+  // where the lighter amber fails WCAG contrast.
+  if (density > 0.3) return 'bg-amber-700'
   return 'bg-primary'
 }
 

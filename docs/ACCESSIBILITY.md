@@ -83,12 +83,23 @@ labels inline, matching their visible copy.
 - Components that gate visibility behind a scroll/in-view reveal (e.g.
   `BlurText`) short-circuit to the fully-visible state under reduced motion via
   `usePrefersReducedMotion`, so text is never stuck hidden.
+- WebGL/RAF backgrounds outside `motion/react`'s reach are handled directly:
+  the full-screen `Aurora` shader renders a single static frame (no continuous
+  loop) under reduced motion. (`CircularGallery` only moves on user input, so it
+  needs no change.)
+
+## Language
+
+`<html lang>` is kept in sync with the active i18n language (`src/i18n/index.ts`
+listens for `languageChanged` and updates `document.documentElement.lang`), so
+the page language always matches the rendered content (WCAG 3.1.1).
 
 ## Automated audit (axe-core)
 
-`e2e/accessibility.spec.ts` runs **axe-core** (WCAG 2.0/2.1 A + AA) against 9
-routes — 3 public + 6 authenticated (a synthetic Supabase session is seeded the
-same way as `booking-payment.spec.ts`). Run it with:
+`e2e/accessibility.spec.ts` runs **axe-core** (WCAG 2.0/2.1 A + AA) against 13
+routes — 4 public + 9 member-facing (a synthetic Supabase session is seeded the
+same way as `booking-payment.spec.ts`). Admin/dashboard routes need an elevated
+role and are out of scope until that fixture exists. Run it with:
 
 ```bash
 npm run test:a11y      # just the audit (needs system Chrome; boots the dev server)

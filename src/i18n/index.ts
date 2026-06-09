@@ -27,6 +27,16 @@ i18n
     },
   })
 
+// Keep <html lang> in sync with the active language (WCAG 3.1.1) — the static
+// attribute in index.html would otherwise go stale when the user switches.
+const syncHtmlLang = (lng: string) => {
+  if (typeof document !== 'undefined') {
+    document.documentElement.lang = lng.split('-')[0]
+  }
+}
+syncHtmlLang(i18n.resolvedLanguage ?? 'id')
+i18n.on('languageChanged', syncHtmlLang)
+
 export const setAppLanguage = (lang: AppLang) => {
   i18n.changeLanguage(lang)
   try {

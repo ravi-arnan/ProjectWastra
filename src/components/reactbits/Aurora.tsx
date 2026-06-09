@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion';
 import { Renderer, Program, Mesh, Color, Triangle } from 'ogl';
 
 const VERT = `#version 300 es
@@ -96,6 +97,7 @@ export default function Aurora(props: AuroraProps) {
   const { colorStops = ['#5227FF', '#7cff67', '#5227FF'], amplitude = 1.0, blend = 0.5 } = props;
   const propsRef = useRef<AuroraProps>(props);
   propsRef.current = props;
+  const prefersReducedMotion = usePrefersReducedMotion();
 
   const ctnDom = useRef<HTMLDivElement>(null);
 
@@ -152,7 +154,8 @@ export default function Aurora(props: AuroraProps) {
 
     let animateId = 0;
     const update = (t: number) => {
-      animateId = requestAnimationFrame(update);
+      // Reduced motion: render a single static frame, don't loop.
+      if (!prefersReducedMotion) animateId = requestAnimationFrame(update);
       const { time = t * 0.01, speed = 1.0 } = propsRef.current;
       if (program) {
         program.uniforms.uTime.value = time * speed * 0.1;
@@ -179,7 +182,7 @@ export default function Aurora(props: AuroraProps) {
       gl.getExtension('WEBGL_lose_context')?.loseContext();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [amplitude]);
+  }, [amplitude, prefersReducedMotion]);
 
   return <div ref={ctnDom} className="w-full h-full" />;
 }

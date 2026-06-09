@@ -72,6 +72,7 @@ const publicRoutes = [
   { path: '/', name: 'Landing' },
   { path: '/auth', name: 'Auth' },
   { path: '/privacy', name: 'Legal (privacy)' },
+  { path: '/terms', name: 'Legal (terms)' },
 ]
 
 for (const route of publicRoutes) {
@@ -94,9 +95,15 @@ for (const route of publicRoutes) {
   })
 }
 
+// Member-facing routes reachable with the seeded (non-admin) session.
+// Admin/dashboard routes need an elevated role and are audited separately
+// when that fixture exists.
 const appRoutes = [
   { path: '/app', name: 'Home' },
   { path: '/app/peta', name: 'Peta' },
+  { path: '/app/destinasi', name: 'Destinasi' },
+  { path: '/app/destinasi/uluwatu', name: 'Destination detail' },
+  { path: '/app/bandingkan', name: 'Bandingkan' },
   { path: '/app/prediksi', name: 'Prediksi' },
   { path: '/app/watchlist', name: 'Watchlist' },
   { path: '/app/profil', name: 'Profil' },

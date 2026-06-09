@@ -281,7 +281,7 @@ export default function DestinationDetail() {
           return (
             <div key={h.hour} className="flex-1 flex flex-col items-center gap-1">
               <div className="w-full relative flex-1 flex items-end">
-                <div className={`w-full rounded-t ${pct > 80 ? 'bg-error' : pct > 60 ? 'bg-tertiary' : pct > 30 ? 'bg-amber-500' : 'bg-primary'}`}
+                <div className={`w-full rounded-t ${pct > 80 ? 'bg-error' : pct > 60 ? 'bg-tertiary' : pct > 30 ? 'bg-amber-700' : 'bg-primary'}`}
                   style={{ height: `${pct}%` }} />
               </div>
               <span className="text-[10px] text-on-surface-variant">{h.hour.split(':')[0]}</span>
@@ -302,7 +302,7 @@ export default function DestinationDetail() {
             <div key={d.date} className="flex items-center gap-3">
               <span className="text-xs text-on-surface-variant w-8">{d.dayShort}</span>
               <div className="flex-1 h-3 bg-surface-container-high rounded-full overflow-hidden">
-                <div className={`h-full rounded-full ${pct > 80 ? 'bg-error' : pct > 60 ? 'bg-tertiary' : pct > 30 ? 'bg-amber-500' : 'bg-primary'}`}
+                <div className={`h-full rounded-full ${pct > 80 ? 'bg-error' : pct > 60 ? 'bg-tertiary' : pct > 30 ? 'bg-amber-700' : 'bg-primary'}`}
                   style={{ width: `${pct}%` }} />
               </div>
               <span className="text-xs font-semibold text-on-surface w-8 text-right">{pct}%</span>
