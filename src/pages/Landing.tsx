@@ -83,11 +83,11 @@ export default function Landing() {
   return (
     <div className="min-h-screen bg-surface text-on-surface font-body overflow-x-hidden">
       {/* ==================== TOP NAV ==================== */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#fff8f5]/80 backdrop-blur-xl border-b border-stone-200/50">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-outline-variant/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 h-14 flex items-center justify-between">
           <a href="#top" className="flex items-center gap-2">
             <Logo size={30} eager />
-            <span className="text-xl font-extrabold text-cyan-900 font-headline tracking-tight">Wastra</span>
+            <span className="text-xl font-extrabold text-primary font-headline tracking-tight">Wastra</span>
           </a>
 
           <div className="hidden md:flex items-center gap-1 font-headline font-medium text-sm tracking-tight">
@@ -127,7 +127,7 @@ export default function Landing() {
         </div>
 
         {mobileMenuOpen && (
-          <div id="mobile-nav" className="md:hidden bg-[#fff8f5]/95 backdrop-blur-xl border-t border-stone-200/50 px-6 py-4 flex flex-col gap-3">
+          <div id="mobile-nav" className="md:hidden bg-background/95 backdrop-blur-xl border-t border-outline-variant/50 px-6 py-4 flex flex-col gap-3">
             {navLinks.map((link) => (
               <a
                 key={link.label}
@@ -172,7 +172,7 @@ export default function Landing() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-sm text-white/90 text-[10px] font-bold px-3 py-1 rounded-full w-fit mb-5 uppercase tracking-widest"
+              className="inline-flex items-center gap-1.5 bg-surface-container-lowest/15 backdrop-blur-sm text-white/90 text-[10px] font-bold px-3 py-1 rounded-full w-fit mb-5 uppercase tracking-widest"
             >
               {t('landing.hero.eyebrow')}
             </motion.span>
@@ -221,7 +221,7 @@ export default function Landing() {
               </StarBorder>
               <a
                 href="#map"
-                className="bg-white/15 backdrop-blur-sm text-white font-bold text-sm px-6 py-3 rounded-xl hover:bg-white/25 transition-all border border-white/20 active:scale-95 inline-flex items-center"
+                className="bg-surface-container-lowest/15 backdrop-blur-sm text-white font-bold text-sm px-6 py-3 rounded-xl hover:bg-surface-container-lowest/25 transition-all border border-white/20 active:scale-95 inline-flex items-center"
               >
                 {t('landing.hero.ctaSecondary')}
               </a>
@@ -240,7 +240,7 @@ export default function Landing() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.9 + i * 0.15 }}
-                className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-6 py-3.5 text-white text-center"
+                className="bg-surface-container-lowest/10 backdrop-blur-md border border-white/20 rounded-2xl px-6 py-3.5 text-white text-center"
               >
                 <Icon name={stat.icon} size="20px" className="mb-1 opacity-80" />
                 <p className="text-2xl font-extrabold leading-none flex items-baseline justify-center">
@@ -272,7 +272,7 @@ export default function Landing() {
             {/* Real-time density tracking */}
             <SpotlightCard
               spotlightColor="rgba(0, 100, 124, 0.2)"
-              className="col-span-12 lg:col-span-7 bg-surface-container-low rounded-[1.5rem] lg:rounded-[2rem] p-7 lg:p-10 flex flex-col justify-between min-h-[340px] border border-stone-200/60"
+              className="col-span-12 lg:col-span-7 bg-surface-container-low rounded-[1.5rem] lg:rounded-[2rem] p-7 lg:p-10 flex flex-col justify-between min-h-[340px] border border-outline-variant/60"
             >
               <div>
                 <div className="w-12 h-12 bg-primary rounded-xl flex items-center justify-center text-white mb-5 shadow-lg shadow-primary/20">
@@ -286,7 +286,7 @@ export default function Landing() {
                 </p>
               </div>
               <div className="flex gap-3 mt-6 overflow-x-auto no-scrollbar">
-                <div className="bg-surface-container-lowest p-3.5 rounded-xl min-w-[170px] shadow-sm border border-stone-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                <div className="bg-surface-container-lowest p-3.5 rounded-xl min-w-[170px] shadow-sm border border-outline-variant hover:shadow-md hover:-translate-y-1 transition-all duration-300">
                   <div className="flex justify-between items-center mb-3">
                     <span className="text-[11px] font-bold text-on-surface-variant tracking-wide">ULI KITCHEN</span>
                     <span className="bg-error/10 text-error px-2.5 py-0.5 rounded-full text-[10px] font-extrabold">BUSY</span>
@@ -295,7 +295,7 @@ export default function Landing() {
                     <div className="bg-error h-full rounded-full" style={{ width: '85%' }} />
                   </div>
                 </div>
-                <div className="bg-surface-container-lowest p-3.5 rounded-xl min-w-[170px] shadow-sm border border-stone-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                <div className="bg-surface-container-lowest p-3.5 rounded-xl min-w-[170px] shadow-sm border border-outline-variant hover:shadow-md hover:-translate-y-1 transition-all duration-300">
                   <div className="flex justify-between items-center mb-3">
                     <span className="text-[11px] font-bold text-on-surface-variant tracking-wide">MELASTI BEACH</span>
                     <span className="bg-primary/10 text-primary px-2.5 py-0.5 rounded-full text-[10px] font-extrabold">CALM</span>
@@ -313,7 +313,7 @@ export default function Landing() {
               className="col-span-12 lg:col-span-5 bg-tertiary-container rounded-[1.5rem] lg:rounded-[2rem] p-7 lg:p-10 text-white flex flex-col justify-between min-h-[340px]"
             >
               <div>
-                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-5 backdrop-blur">
+                <div className="w-12 h-12 bg-surface-container-lowest/20 rounded-xl flex items-center justify-center mb-5 backdrop-blur">
                   <Icon name="analytics" />
                 </div>
                 <h3 className="text-xl lg:text-2xl font-headline font-bold mb-3">
@@ -332,7 +332,7 @@ export default function Landing() {
                       whileInView={{ height: `${h}%` }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.7, delay: i * 0.07 }}
-                      className={`flex-1 rounded-t-md ${i === 3 ? 'bg-white' : 'bg-white/40 hover:bg-white/70 transition-colors'}`}
+                      className={`flex-1 rounded-t-md ${i === 3 ? 'bg-surface-container-lowest' : 'bg-surface-container-lowest/40 hover:bg-surface-container-lowest/70 transition-colors'}`}
                     />
                   ))}
                 </div>
@@ -347,7 +347,7 @@ export default function Landing() {
             {/* AI-powered recommendations */}
             <SpotlightCard
               spotlightColor="rgba(0, 100, 124, 0.2)"
-              className="col-span-12 bg-surface-container-highest rounded-[1.5rem] lg:rounded-[2rem] p-7 lg:p-10 border border-stone-200/60"
+              className="col-span-12 bg-surface-container-highest rounded-[1.5rem] lg:rounded-[2rem] p-7 lg:p-10 border border-outline-variant/60"
             >
               <div className="flex flex-col md:flex-row md:items-start gap-6 lg:gap-10">
                 <div className="flex-1">
@@ -407,7 +407,7 @@ export default function Landing() {
         </section>
 
         {/* ==================== DESTINATIONS GALLERY ==================== */}
-        <section id="destinations" className="bg-on-surface text-white py-20 lg:py-28 overflow-hidden">
+        <section id="destinations" className="bg-stone-900 text-white py-20 lg:py-28 overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mb-10 lg:mb-14">
             <span className="text-xs font-bold text-primary-fixed uppercase tracking-widest">{t('landing.destinations.eyebrow')}</span>
             <h2 className="text-3xl lg:text-5xl font-headline font-extrabold mt-3 max-w-3xl">
@@ -444,7 +444,7 @@ export default function Landing() {
         {/* ==================== SCROLL VELOCITY MARQUEE ==================== */}
         {/* Decorative typographic texture (repeating place names) — hidden from
             assistive tech; its faded color is intentional and not content. */}
-        <section aria-hidden="true" data-decorative className="bg-surface py-10 lg:py-14 border-y border-stone-200/60">
+        <section aria-hidden="true" data-decorative className="bg-surface py-10 lg:py-14 border-y border-outline-variant/60">
           <ScrollVelocity
             texts={['Tanah Lot · Uluwatu · Tegallalang · Ubud · Mengening · Penglipuran ·']}
             velocity={60}
@@ -528,7 +528,7 @@ export default function Landing() {
                 </LazyVisible>
 
                 {/* Live badge */}
-                <div className="absolute top-4 lg:top-6 left-4 lg:left-6 z-[400] flex items-center gap-2 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-full shadow-lg border border-slate-200">
+                <div className="absolute top-4 lg:top-6 left-4 lg:left-6 z-[400] flex items-center gap-2 bg-surface-container-lowest/95 backdrop-blur-md px-3 py-1.5 rounded-full shadow-lg border border-slate-200">
                   <span className="flex h-2 w-2 relative">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500" />
@@ -548,7 +548,7 @@ export default function Landing() {
                 </Link>
 
                 {/* Legend */}
-                <div className="absolute bottom-4 lg:bottom-6 left-4 lg:left-6 z-[400] bg-white/90 backdrop-blur-md px-4 py-3 rounded-2xl flex flex-col gap-2 border border-white/40 shadow-xl">
+                <div className="absolute bottom-4 lg:bottom-6 left-4 lg:left-6 z-[400] bg-surface-container-lowest/90 backdrop-blur-md px-4 py-3 rounded-2xl flex flex-col gap-2 border border-white/40 shadow-xl">
                   {[
                     { color: 'bg-primary', label: 'CALM' },
                     { color: 'bg-tertiary', label: 'MODERATE' },
@@ -562,11 +562,11 @@ export default function Landing() {
                 </div>
 
                 {/* Active users */}
-                <div className="absolute bottom-4 lg:bottom-6 right-4 lg:right-6 z-[400] bg-white/90 backdrop-blur-md px-4 py-3 rounded-2xl flex items-center gap-3 border border-white/40 shadow-xl">
+                <div className="absolute bottom-4 lg:bottom-6 right-4 lg:right-6 z-[400] bg-surface-container-lowest/90 backdrop-blur-md px-4 py-3 rounded-2xl flex items-center gap-3 border border-white/40 shadow-xl">
                   <div className="flex -space-x-2.5">
                     <div className="w-8 h-8 rounded-full border-2 border-white bg-slate-200 flex items-center justify-center text-[9px] font-bold text-slate-600 shadow-sm">JD</div>
                     <div className="w-8 h-8 rounded-full border-2 border-white bg-slate-300 flex items-center justify-center text-[9px] font-bold text-slate-700 shadow-sm">AS</div>
-                    <div className="w-8 h-8 rounded-full border-2 border-white bg-primary text-white flex items-center justify-center text-[9px] font-bold shadow-sm">+12</div>
+                    <div className="w-8 h-8 rounded-full border-2 border-white bg-primary text-on-primary flex items-center justify-center text-[9px] font-bold shadow-sm">+12</div>
                   </div>
                   <span className="text-[11px] font-bold text-on-surface">
                     <CountUp to={1204} separator="," duration={2.5} /> {t('landing.live.usersExploring')}
@@ -621,7 +621,7 @@ export default function Landing() {
                 />
               </LazyVisible>
             )}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl pointer-events-none" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-surface-container-lowest/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary-container/30 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl pointer-events-none" />
 
             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-10 lg:gap-14 items-center">
@@ -637,13 +637,13 @@ export default function Landing() {
                     ))}
                   </div>
                   <div className="text-left">
-                    <div className="flex items-center gap-1 text-white">
+                    <div className="flex items-center gap-1 text-on-primary">
                       {[0, 1, 2, 3, 4].map((i) => (
                         <Icon key={i} name="star" filled size="14px" className="text-tertiary-fixed-dim" />
                       ))}
                       <span className="ml-1 text-xs font-bold opacity-90">4.9</span>
                     </div>
-                    <p className="text-[11px] opacity-75 leading-tight">{t('landing.cta.rating')}</p>
+                    <p className="text-[11px] opacity-90 leading-tight">{t('landing.cta.rating')}</p>
                   </div>
                 </div>
 
@@ -666,7 +666,7 @@ export default function Landing() {
                       to="/auth"
                       color="#a5f3fc"
                       speed="3.5s"
-                      innerClassName="bg-white text-primary px-8 py-4 font-headline font-bold text-base hover:bg-surface-container-lowest transition-colors"
+                      innerClassName="bg-surface-container-lowest text-primary px-8 py-4 font-headline font-bold text-base hover:bg-surface-container-lowest transition-colors"
                     >
                     {t('landing.cta.primary')}
                   </StarBorder>
@@ -680,7 +680,7 @@ export default function Landing() {
                   { icon: 'lock', label: t('landing.cta.trust.noLogin') },
                   { icon: 'favorite', label: t('landing.cta.trust.free') },
                 ].map((item) => (
-                  <div key={item.label} className="flex flex-col lg:flex-row items-center gap-2 text-white/80">
+                  <div key={item.label} className="flex flex-col lg:flex-row items-center gap-2 text-on-primary/80">
                     <Icon name={item.icon} size="18px" className="opacity-90" />
                     <span className="text-[11px] font-bold uppercase tracking-wider">{item.label}</span>
                   </div>
@@ -745,7 +745,7 @@ export default function Landing() {
       </main>
 
       {/* ==================== FOOTER ==================== */}
-      <footer className="relative w-full bg-on-surface text-white overflow-hidden">
+      <footer className="relative w-full bg-stone-900 text-white overflow-hidden">
         {/* Subtle gradient accents */}
         <div className="absolute top-0 left-0 w-[420px] h-[420px] bg-primary/15 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 right-0 w-[420px] h-[420px] bg-primary-container/10 rounded-full translate-x-1/2 translate-y-1/2 blur-3xl pointer-events-none" />
@@ -774,7 +774,7 @@ export default function Landing() {
                     target={s.href.startsWith('http') ? '_blank' : undefined}
                     rel={s.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                     aria-label={s.name}
-                    className="w-9 h-9 rounded-full bg-white/5 hover:bg-primary hover:scale-105 border border-white/10 flex items-center justify-center text-white/80 hover:text-white transition-all"
+                    className="w-9 h-9 rounded-full bg-surface-container-lowest/5 hover:bg-primary hover:scale-105 border border-white/10 flex items-center justify-center text-white/80 hover:text-white transition-all"
                   >
                     <Icon name={s.icon} size="16px" />
                   </a>

@@ -124,9 +124,9 @@ Data ini digenerate secara otomatis oleh sistem monitoring Wastra berdasarkan da
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-surface-container-lowest border border-stone-200 rounded-3xl p-6 shadow-sm"
+            className="bg-surface-container-lowest border border-outline-variant rounded-3xl p-6 shadow-sm"
           >
-            <div className="flex items-center justify-between mb-4 border-b border-stone-100 pb-4">
+            <div className="flex items-center justify-between mb-4 border-b border-outline-variant pb-4">
               <div className="flex items-center gap-2">
                 <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
                   <Icon name="receipt_long" size="20px" />
@@ -150,7 +150,7 @@ Data ini digenerate secara otomatis oleh sistem monitoring Wastra berdasarkan da
               role="region"
               aria-label="Pratinjau laporan"
               tabIndex={0}
-              className="bg-surface-container-low rounded-2xl p-5 font-mono text-xs text-stone-700 leading-relaxed whitespace-pre-wrap h-[280px] overflow-y-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+              className="bg-surface-container-low rounded-2xl p-5 font-mono text-xs text-on-surface leading-relaxed whitespace-pre-wrap h-[280px] overflow-y-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
             >
               {reportSummary}
             </div>
@@ -163,7 +163,7 @@ Data ini digenerate secara otomatis oleh sistem monitoring Wastra berdasarkan da
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="bg-surface-container-lowest border border-stone-200 rounded-3xl p-6 shadow-sm"
+            className="bg-surface-container-lowest border border-outline-variant rounded-3xl p-6 shadow-sm"
           >
             <h2 className="text-base font-bold text-on-surface font-headline flex items-center gap-2 mb-4">
               <Icon name="query_stats" size="20px" className="text-primary" />
@@ -172,14 +172,14 @@ Data ini digenerate secara otomatis oleh sistem monitoring Wastra berdasarkan da
 
             <div className="space-y-4">
               {/* Export 1: Kepadatan Saat Ini */}
-              <div className="p-4 bg-surface-container-low rounded-2xl border border-stone-100">
+              <div className="p-4 bg-surface-container-low rounded-2xl border border-outline-variant">
                 <h3 className="text-sm font-bold text-on-surface mb-1">Status Kepadatan Live</h3>
                 <p className="text-[11px] text-on-surface-variant mb-3">
                   {isLocalManager ? 'Data real-time pengunjung destinasi Anda.' : 'Data real-time pengunjung dan persentase kapasitas seluruh destinasi.'}
                 </p>
                 <button
                   onClick={handleExportCsvDestinasi}
-                  className="w-full flex justify-center items-center gap-2 py-2.5 px-4 bg-white border border-outline text-on-surface text-sm font-bold rounded-xl hover:bg-surface-container-high transition-colors"
+                  className="w-full flex justify-center items-center gap-2 py-2.5 px-4 bg-surface-container-lowest border border-outline text-on-surface text-sm font-bold rounded-xl hover:bg-surface-container-high transition-colors"
                 >
                   <Icon name="download" size="18px" />
                   Download CSV
@@ -187,7 +187,7 @@ Data ini digenerate secara otomatis oleh sistem monitoring Wastra berdasarkan da
               </div>
 
               {/* Export 2: Data Prediksi */}
-              <div className="p-4 bg-surface-container-low rounded-2xl border border-stone-100">
+              <div className="p-4 bg-surface-container-low rounded-2xl border border-outline-variant">
                 <h3 className="text-sm font-bold text-on-surface mb-1">Data Prediksi</h3>
                 <p className="text-[11px] text-on-surface-variant mb-3">
                   {isLocalManager ? 'Unduh rincian prediksi per-jam untuk destinasi Anda.' : 'Pilih destinasi untuk mengunduh prediksi per-jam, atau "Semua" untuk prediksi 7 hari.'}
@@ -198,7 +198,7 @@ Data ini digenerate secara otomatis oleh sistem monitoring Wastra berdasarkan da
                   aria-label="Pilih destinasi untuk laporan"
                   onChange={(e) => setSelectedDestId(e.target.value)}
                   disabled={isLocalManager}
-                  className="w-full bg-white border border-outline-variant rounded-xl text-sm font-semibold text-on-surface px-3 py-2 outline-none focus:ring-2 focus:ring-primary/30 mb-3 disabled:opacity-70 disabled:bg-stone-50"
+                  className="w-full bg-surface-container-lowest border border-outline-variant rounded-xl text-sm font-semibold text-on-surface px-3 py-2 outline-none focus:ring-2 focus:ring-primary/30 mb-3 disabled:opacity-70 disabled:bg-surface-container-low"
                 >
                   {!isLocalManager && <option value="semua">Semua Destinasi (7 Hari)</option>}
                   {destinations
@@ -212,7 +212,7 @@ Data ini digenerate secara otomatis oleh sistem monitoring Wastra berdasarkan da
 
                 <button
                   onClick={handleExportCsvPrediksi}
-                  className="w-full flex justify-center items-center gap-2 py-2.5 px-4 bg-white border border-outline text-on-surface text-sm font-bold rounded-xl hover:bg-surface-container-high transition-colors"
+                  className="w-full flex justify-center items-center gap-2 py-2.5 px-4 bg-surface-container-lowest border border-outline text-on-surface text-sm font-bold rounded-xl hover:bg-surface-container-high transition-colors"
                 >
                   <Icon name="download" size="18px" />
                   Download CSV

@@ -578,9 +578,21 @@ export function getDensityBgColor(density: number): string {
   return 'bg-primary'
 }
 
+/**
+ * Text color that pairs with getDensityBgColor on a solid badge. Uses the M3
+ * `on-*` tokens so contrast holds in dark mode (where primary/tertiary/error
+ * flip to light tones); amber-700 stays dark, so white works there.
+ */
+export function getDensityOnColor(density: number): string {
+  if (density > 0.8) return 'text-on-error'
+  if (density > 0.6) return 'text-on-tertiary'
+  if (density > 0.3) return 'text-white'
+  return 'text-on-primary'
+}
+
 export function getDensityTextColor(density: number): string {
   if (density > 0.8) return 'text-error'
   if (density > 0.6) return 'text-tertiary'
-  if (density > 0.3) return 'text-amber-700'
+  if (density > 0.3) return 'text-amber-700 dark:text-amber-400'
   return 'text-primary'
 }

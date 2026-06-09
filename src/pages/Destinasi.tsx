@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import Icon from '../components/Icon'
-import { destinations, getDensityBgColor } from '../data/destinations'
+import { destinations, getDensityBgColor, getDensityOnColor } from '../data/destinations'
 import CountUp from '../components/reactbits/CountUp'
 import SpotlightCard from '../components/reactbits/SpotlightCard'
 
@@ -162,7 +162,7 @@ export default function Destinasi() {
             >
               <SpotlightCard
                 spotlightColor="rgba(0, 100, 124, 0.12)"
-                className="bg-surface-container-lowest rounded-2xl overflow-hidden border border-stone-200/50 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 h-full flex flex-col"
+                className="bg-surface-container-lowest rounded-2xl overflow-hidden border border-outline-variant/50 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 h-full flex flex-col"
               >
                 <Link to={`/app/destinasi/${dest.id}`} className="flex flex-col h-full">
                   {/* Image */}
@@ -174,7 +174,7 @@ export default function Destinasi() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                     <span
-                      className={`absolute top-3 right-3 ${getDensityBgColor(dest.density)} text-white text-[10px] font-bold px-2.5 py-1 rounded-full`}
+                      className={`absolute top-3 right-3 ${getDensityBgColor(dest.density)} ${getDensityOnColor(dest.density)} text-[10px] font-bold px-2.5 py-1 rounded-full`}
                     >
                       {dest.densityLabel}
                     </span>
@@ -222,7 +222,7 @@ export default function Destinasi() {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-3 mt-3 pt-3 border-t border-stone-200/60 text-[10px] text-on-surface-variant">
+                    <div className="flex items-center gap-3 mt-3 pt-3 border-t border-outline-variant/60 text-[10px] text-on-surface-variant">
                       <span className="flex items-center gap-1">
                         <Icon name="schedule" size="12px" />
                         {dest.openHours}

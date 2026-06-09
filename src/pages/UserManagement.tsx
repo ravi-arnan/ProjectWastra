@@ -225,7 +225,7 @@ export default function UserManagement() {
       {/* Header */}
       <SpotlightCard
         spotlightColor="rgba(0, 100, 124, 0.15)"
-        className="bg-linear-to-br from-surface-container-low via-white to-primary-fixed/30 rounded-4xl p-8 border border-stone-200/60"
+        className="bg-linear-to-br from-surface-container-low via-white to-primary-fixed/30 rounded-4xl p-8 border border-outline-variant/60"
       >
         <Link
           to="/app/admin"
@@ -305,7 +305,7 @@ export default function UserManagement() {
       {loading ? (
         <SpotlightCard
           spotlightColor="rgba(0, 100, 124, 0.08)"
-          className="bg-surface-container-lowest rounded-3xl p-10 border border-stone-100 flex items-center justify-center gap-3"
+          className="bg-surface-container-lowest rounded-3xl p-10 border border-outline-variant flex items-center justify-center gap-3"
         >
           <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin" />
           <span className="text-sm text-on-surface-variant">
@@ -336,7 +336,7 @@ export default function UserManagement() {
       ) : filtered.length === 0 ? (
         <SpotlightCard
           spotlightColor="rgba(0, 100, 124, 0.08)"
-          className="bg-surface-container-lowest rounded-3xl p-10 border border-stone-100 text-center"
+          className="bg-surface-container-lowest rounded-3xl p-10 border border-outline-variant text-center"
         >
           <Icon name="group_off" size="32px" className="text-on-surface-variant/50 mb-2" />
           <p className="text-sm font-semibold text-on-surface-variant">
@@ -354,7 +354,7 @@ export default function UserManagement() {
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: Math.min(i * 0.02, 0.3) }}
-                className="bg-surface-container-lowest rounded-2xl p-4 border border-stone-100 flex items-center gap-3 hover:shadow-sm transition-shadow"
+                className="bg-surface-container-lowest rounded-2xl p-4 border border-outline-variant flex items-center gap-3 hover:shadow-sm transition-shadow"
               >
                 <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0 font-bold text-sm">
                   {initialsOf(u)}
@@ -370,7 +370,7 @@ export default function UserManagement() {
                       </span>
                     )}
                     {u.is_anonymous && (
-                      <span className="bg-stone-100 text-stone-600 text-[10px] font-bold px-2 py-0.5 rounded-full">
+                      <span className="bg-surface-container text-on-surface-variant text-[10px] font-bold px-2 py-0.5 rounded-full">
                         GUEST
                       </span>
                     )}
@@ -461,7 +461,7 @@ export default function UserManagement() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 8 }}
               transition={{ duration: 0.15 }}
-              className="w-full max-w-md bg-white rounded-3xl shadow-2xl p-6"
+              className="w-full max-w-md bg-surface-container-lowest rounded-3xl shadow-2xl p-6"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between mb-4">

@@ -255,11 +255,11 @@ export default function Auth() {
   };
 
   const inputGroupClass =
-    'bg-white/70 border border-white/60 rounded-xl px-4 py-3 flex items-center gap-3 focus-within:border-primary/60 focus-within:bg-white transition-colors';
+    'bg-surface-container-lowest/70 border border-white/60 rounded-xl px-4 py-3 flex items-center gap-3 focus-within:border-primary/60 focus-within:bg-surface-container-lowest transition-colors';
   const inputClass =
     'bg-transparent flex-1 text-sm outline-none placeholder:text-on-surface-variant/60 text-on-surface font-body';
   const labelClass = 'text-xs font-semibold text-on-surface/80 mb-1.5 block';
-  const guestButtonClass = `w-full bg-white/60 hover:bg-white/85 border border-white/70 text-on-surface rounded-xl py-3 font-headline text-sm tracking-wide flex items-center justify-center gap-2 transition-colors ${
+  const guestButtonClass = `w-full bg-surface-container-lowest/60 hover:bg-surface-container-lowest/85 border border-white/70 text-on-surface rounded-xl py-3 font-headline text-sm tracking-wide flex items-center justify-center gap-2 transition-colors ${
     loading ? 'opacity-70 pointer-events-none' : ''
   }`;
 
@@ -268,7 +268,7 @@ export default function Auth() {
       type="button"
       onClick={handleGoogleLogin}
       disabled={loading}
-      className={`w-full bg-white hover:bg-white/90 border border-white/70 text-on-surface rounded-xl py-3 font-headline text-sm tracking-wide flex items-center justify-center gap-2.5 shadow-sm transition-colors ${
+      className={`w-full bg-surface-container-lowest hover:bg-surface-container-lowest/90 border border-white/70 text-on-surface rounded-xl py-3 font-headline text-sm tracking-wide flex items-center justify-center gap-2.5 shadow-sm transition-colors ${
         loading ? 'opacity-70 pointer-events-none' : ''
       }`}
     >
@@ -315,7 +315,7 @@ export default function Auth() {
             requestAnimationFrame(() => navigate('/', { replace: true }))
           }}
           disabled={navigatingBack}
-          className="group inline-flex items-center gap-2 bg-white/15 hover:bg-white/25 backdrop-blur-md border border-white/30 text-white text-sm font-semibold px-4 py-2.5 rounded-full transition-colors shadow-lg cursor-pointer"
+          className="group inline-flex items-center gap-2 bg-surface-container-lowest/15 hover:bg-surface-container-lowest/25 backdrop-blur-md border border-white/30 text-white text-sm font-semibold px-4 py-2.5 rounded-full transition-colors shadow-lg cursor-pointer"
         >
           <Icon
             name="arrow_back"
@@ -332,7 +332,7 @@ export default function Auth() {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         whileHover={{ scale: 1.005 }}
-        className="group relative w-full max-w-[440px] bg-white/70 hover:bg-white/95 backdrop-blur-2xl border border-white/50 shadow-2xl rounded-[2rem] p-6 md:p-8 flex flex-col gap-6 transition-colors duration-500"
+        className="group relative w-full max-w-[440px] bg-surface-container-lowest/70 hover:bg-surface-container-lowest/95 backdrop-blur-2xl border border-white/50 shadow-2xl rounded-[2rem] p-6 md:p-8 flex flex-col gap-6 transition-colors duration-500"
       >
         {/* Branding */}
         <div className="flex flex-col items-center gap-2 pt-2">

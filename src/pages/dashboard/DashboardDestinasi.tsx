@@ -139,17 +139,17 @@ export default function DashboardDestinasi() {
         )}
       </div>
 
-      <div className="bg-surface-container-lowest rounded-3xl border border-stone-100 shadow-sm overflow-hidden flex flex-col">
+      <div className="bg-surface-container-lowest rounded-3xl border border-outline-variant shadow-sm overflow-hidden flex flex-col">
         {/* Toolbar */}
-        <div className="p-4 border-b border-stone-100 flex flex-col sm:flex-row gap-4 items-center justify-between bg-surface-container-low">
+        <div className="p-4 border-b border-outline-variant flex flex-col sm:flex-row gap-4 items-center justify-between bg-surface-container-low">
           <div className="relative w-full sm:w-80">
-            <Icon name="search" size="18px" className="absolute left-3 top-1/2 -translate-y-1/2 text-stone-400" />
+            <Icon name="search" size="18px" className="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" />
             <input 
               type="text" 
               placeholder="Cari destinasi atau region..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 rounded-xl border border-outline-variant bg-white text-sm focus:ring-2 focus:ring-primary/30 outline-none transition-shadow"
+              className="w-full pl-10 pr-4 py-2 rounded-xl border border-outline-variant bg-surface-container-lowest text-sm focus:ring-2 focus:ring-primary/30 outline-none transition-shadow"
             />
           </div>
           <div className="text-xs font-bold text-on-surface-variant uppercase">
@@ -162,18 +162,18 @@ export default function DashboardDestinasi() {
           <table className="w-full text-left border-collapse">
             <thead>
               <tr>
-                <th className="bg-white p-4 text-xs font-bold text-on-surface uppercase tracking-wider border-b border-stone-100 w-16 text-center">Foto</th>
-                <th aria-sort={sortConfig.key === 'name' ? (sortConfig.direction === 'asc' ? 'ascending' : 'descending') : 'none'} className="bg-white p-4 text-xs font-bold text-on-surface uppercase tracking-wider border-b border-stone-100 cursor-pointer hover:bg-stone-50" onClick={() => handleSort('name')}>
+                <th className="bg-surface-container-lowest p-4 text-xs font-bold text-on-surface uppercase tracking-wider border-b border-outline-variant w-16 text-center">Foto</th>
+                <th aria-sort={sortConfig.key === 'name' ? (sortConfig.direction === 'asc' ? 'ascending' : 'descending') : 'none'} className="bg-surface-container-lowest p-4 text-xs font-bold text-on-surface uppercase tracking-wider border-b border-outline-variant cursor-pointer hover:bg-surface-container-low" onClick={() => handleSort('name')}>
                   <button type="button" onClick={(e) => { e.stopPropagation(); handleSort('name') }} className="flex items-center gap-1 uppercase">Nama {sortConfig.key === 'name' && <span className="text-[14px]">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}</button>
                 </th>
-                <th aria-sort={sortConfig.key === 'region' ? (sortConfig.direction === 'asc' ? 'ascending' : 'descending') : 'none'} className="bg-white p-4 text-xs font-bold text-on-surface uppercase tracking-wider border-b border-stone-100 cursor-pointer hover:bg-stone-50 hidden md:table-cell" onClick={() => handleSort('region')}>
+                <th aria-sort={sortConfig.key === 'region' ? (sortConfig.direction === 'asc' ? 'ascending' : 'descending') : 'none'} className="bg-surface-container-lowest p-4 text-xs font-bold text-on-surface uppercase tracking-wider border-b border-outline-variant cursor-pointer hover:bg-surface-container-low hidden md:table-cell" onClick={() => handleSort('region')}>
                   <button type="button" onClick={(e) => { e.stopPropagation(); handleSort('region') }} className="flex items-center gap-1 uppercase">Region {sortConfig.key === 'region' && <span className="text-[14px]">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}</button>
                 </th>
-                <th className="bg-white p-4 text-xs font-bold text-on-surface uppercase tracking-wider border-b border-stone-100 hidden sm:table-cell">Kategori</th>
-                <th aria-sort={sortConfig.key === 'density' ? (sortConfig.direction === 'asc' ? 'ascending' : 'descending') : 'none'} className="bg-white p-4 text-xs font-bold text-on-surface uppercase tracking-wider border-b border-stone-100 cursor-pointer hover:bg-stone-50 text-right" onClick={() => handleSort('density')}>
+                <th className="bg-surface-container-lowest p-4 text-xs font-bold text-on-surface uppercase tracking-wider border-b border-outline-variant hidden sm:table-cell">Kategori</th>
+                <th aria-sort={sortConfig.key === 'density' ? (sortConfig.direction === 'asc' ? 'ascending' : 'descending') : 'none'} className="bg-surface-container-lowest p-4 text-xs font-bold text-on-surface uppercase tracking-wider border-b border-outline-variant cursor-pointer hover:bg-surface-container-low text-right" onClick={() => handleSort('density')}>
                   <button type="button" onClick={(e) => { e.stopPropagation(); handleSort('density') }} className="flex items-center justify-end gap-1 uppercase w-full">Kepadatan {sortConfig.key === 'density' && <span className="text-[14px]">{sortConfig.direction === 'asc' ? '↑' : '↓'}</span>}</button>
                 </th>
-                <th className="bg-white p-4 text-xs font-bold text-on-surface uppercase tracking-wider border-b border-stone-100 text-center w-28">Aksi</th>
+                <th className="bg-surface-container-lowest p-4 text-xs font-bold text-on-surface uppercase tracking-wider border-b border-outline-variant text-center w-28">Aksi</th>
               </tr>
             </thead>
             <tbody>
@@ -187,34 +187,34 @@ export default function DashboardDestinasi() {
                     exit={{ opacity: 0 }}
                     className="hover:bg-surface-container-low transition-colors group"
                   >
-                    <td className="p-3 border-b border-stone-100 text-center">
-                      <div className="w-10 h-10 rounded-lg overflow-hidden mx-auto bg-stone-200">
+                    <td className="p-3 border-b border-outline-variant text-center">
+                      <div className="w-10 h-10 rounded-lg overflow-hidden mx-auto bg-surface-container-high">
                         <img src={dest.image} alt={dest.name} className="w-full h-full object-cover" />
                       </div>
                     </td>
-                    <td className="p-3 border-b border-stone-100">
+                    <td className="p-3 border-b border-outline-variant">
                       <p className="text-sm font-bold text-on-surface">{dest.name}</p>
                       <p className="text-[10px] text-on-surface-variant truncate w-32 sm:hidden">{dest.region}</p>
                     </td>
-                    <td className="p-3 border-b border-stone-100 hidden md:table-cell">
+                    <td className="p-3 border-b border-outline-variant hidden md:table-cell">
                       <span className="text-xs text-on-surface-variant">{dest.region}</span>
                     </td>
-                    <td className="p-3 border-b border-stone-100 hidden sm:table-cell">
+                    <td className="p-3 border-b border-outline-variant hidden sm:table-cell">
                       <span className="px-2.5 py-1 rounded-full bg-surface-container text-[10px] font-bold text-on-surface-variant">
                         {dest.category}
                       </span>
                     </td>
-                    <td className="p-3 border-b border-stone-100 text-right">
+                    <td className="p-3 border-b border-outline-variant text-right">
                       <div className="flex flex-col items-end gap-1">
-                        <span className={`text-sm font-bold ${dest.density > 0.6 ? 'text-error' : dest.density > 0.3 ? 'text-amber-700' : 'text-primary'}`}>
+                        <span className={`text-sm font-bold ${dest.density > 0.6 ? 'text-error' : dest.density > 0.3 ? 'text-amber-700 dark:text-amber-400' : 'text-primary'}`}>
                           {Math.round(dest.density * 100)}%
                         </span>
-                        <span className="text-[10px] text-stone-500 font-medium">
+                        <span className="text-[10px] text-on-surface-variant font-medium">
                           {dest.visitors.toLocaleString('id-ID')} pax
                         </span>
                       </div>
                     </td>
-                    <td className="p-3 border-b border-stone-100 text-center">
+                    <td className="p-3 border-b border-outline-variant text-center">
                       <div className="flex items-center justify-center gap-1 opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity">
                         <button
                           type="button"
@@ -247,7 +247,7 @@ export default function DashboardDestinasi() {
           
           {filteredAndSortedDests.length === 0 && (
             <div className="py-12 text-center">
-              <Icon name="search_off" size="48px" className="text-stone-300 mx-auto mb-3" />
+              <Icon name="search_off" size="48px" className="text-on-surface-variant mx-auto mb-3" />
               <p className="text-sm font-bold text-on-surface">Tidak ada destinasi ditemukan</p>
             </div>
           )}
@@ -265,35 +265,35 @@ export default function DashboardDestinasi() {
             tabIndex={-1}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden"
+            className="bg-surface-container-lowest rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden"
           >
-            <div className="p-5 border-b border-stone-100 flex items-center justify-between bg-surface-container-lowest">
+            <div className="p-5 border-b border-outline-variant flex items-center justify-between bg-surface-container-lowest">
               <h2 id={editTitleId} className="text-lg font-bold font-headline text-on-surface">
                 {editingDest ? 'Edit Destinasi' : 'Tambah Destinasi Baru'}
               </h2>
-              <button type="button" onClick={() => setIsModalOpen(false)} aria-label="Tutup" className="p-1 rounded-full hover:bg-surface-container-high text-stone-500">
+              <button type="button" onClick={() => setIsModalOpen(false)} aria-label="Tutup" className="p-1 rounded-full hover:bg-surface-container-high text-on-surface-variant">
                 <Icon name="close" size="20px" />
               </button>
             </div>
             
-            <form onSubmit={handleSave} className="flex-1 overflow-y-auto p-6 bg-stone-50/50">
+            <form onSubmit={handleSave} className="flex-1 overflow-y-auto p-6 bg-surface-container-low/50">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div className="space-y-4">
                   <div>
                     <label className="block text-xs font-bold text-on-surface-variant mb-1">Nama Destinasi *</label>
-                    <input name="name" aria-label="Nama Destinasi" defaultValue={editingDest?.name} required className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
+                    <input name="name" aria-label="Nama Destinasi" defaultValue={editingDest?.name} required className="w-full px-3 py-2 rounded-lg border border-outline bg-surface-container-lowest text-sm" />
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-on-surface-variant mb-1">Kabupaten/Kota *</label>
-                    <input name="location" aria-label="Kabupaten/Kota" defaultValue={editingDest?.location} required placeholder="Contoh: Badung" className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
+                    <input name="location" aria-label="Kabupaten/Kota" defaultValue={editingDest?.location} required placeholder="Contoh: Badung" className="w-full px-3 py-2 rounded-lg border border-outline bg-surface-container-lowest text-sm" />
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-on-surface-variant mb-1">Region Lengkap *</label>
-                    <input name="region" aria-label="Region Lengkap" defaultValue={editingDest?.region} required placeholder="Contoh: Kuta, Badung" className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
+                    <input name="region" aria-label="Region Lengkap" defaultValue={editingDest?.region} required placeholder="Contoh: Kuta, Badung" className="w-full px-3 py-2 rounded-lg border border-outline bg-surface-container-lowest text-sm" />
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-on-surface-variant mb-1">Kategori *</label>
-                    <select name="category" aria-label="Kategori" defaultValue={editingDest?.category || 'Pantai'} required className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm">
+                    <select name="category" aria-label="Kategori" defaultValue={editingDest?.category || 'Pantai'} required className="w-full px-3 py-2 rounded-lg border border-outline bg-surface-container-lowest text-sm">
                       <option value="Pantai">Pantai</option>
                       <option value="Pura">Pura</option>
                       <option value="Alam">Alam</option>
@@ -302,7 +302,7 @@ export default function DashboardDestinasi() {
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-on-surface-variant mb-1">URL Gambar *</label>
-                    <input name="image" aria-label="URL Gambar" defaultValue={editingDest?.image} required placeholder="/highcompress_Image.jpg" className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
+                    <input name="image" aria-label="URL Gambar" defaultValue={editingDest?.image} required placeholder="/highcompress_Image.jpg" className="w-full px-3 py-2 rounded-lg border border-outline bg-surface-container-lowest text-sm" />
                   </div>
                 </div>
 
@@ -310,39 +310,39 @@ export default function DashboardDestinasi() {
                   <div className="flex gap-4">
                     <div className="flex-1">
                       <label className="block text-xs font-bold text-on-surface-variant mb-1">Pengunjung Live</label>
-                      <input name="visitors" aria-label="Pengunjung Live" type="number" defaultValue={editingDest?.visitors || 0} required className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
+                      <input name="visitors" aria-label="Pengunjung Live" type="number" defaultValue={editingDest?.visitors || 0} required className="w-full px-3 py-2 rounded-lg border border-outline bg-surface-container-lowest text-sm" />
                     </div>
                     <div className="flex-1">
                       <label className="block text-xs font-bold text-on-surface-variant mb-1">Kapasitas Maks</label>
-                      <input name="maxCapacity" aria-label="Kapasitas Maks" type="number" defaultValue={editingDest?.maxCapacity || 5000} required className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
+                      <input name="maxCapacity" aria-label="Kapasitas Maks" type="number" defaultValue={editingDest?.maxCapacity || 5000} required className="w-full px-3 py-2 rounded-lg border border-outline bg-surface-container-lowest text-sm" />
                     </div>
                   </div>
                   
                   <div className="flex gap-4">
                     <div className="flex-1">
                       <label className="block text-xs font-bold text-on-surface-variant mb-1">Rating</label>
-                      <input name="rating" aria-label="Rating" type="number" step="0.1" defaultValue={editingDest?.rating || 4.5} required className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
+                      <input name="rating" aria-label="Rating" type="number" step="0.1" defaultValue={editingDest?.rating || 4.5} required className="w-full px-3 py-2 rounded-lg border border-outline bg-surface-container-lowest text-sm" />
                     </div>
                     <div className="flex-1">
                       <label className="block text-xs font-bold text-on-surface-variant mb-1">Total Review</label>
-                      <input name="reviewCount" aria-label="Total Review" type="number" defaultValue={editingDest?.reviewCount || 1000} required className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
+                      <input name="reviewCount" aria-label="Total Review" type="number" defaultValue={editingDest?.reviewCount || 1000} required className="w-full px-3 py-2 rounded-lg border border-outline bg-surface-container-lowest text-sm" />
                     </div>
                   </div>
 
                   <div className="flex gap-4">
                     <div className="flex-1">
                       <label className="block text-xs font-bold text-on-surface-variant mb-1">Latitude</label>
-                      <input name="lat" aria-label="Latitude" type="number" step="any" defaultValue={editingDest?.lat || -8.4095} required className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
+                      <input name="lat" aria-label="Latitude" type="number" step="any" defaultValue={editingDest?.lat || -8.4095} required className="w-full px-3 py-2 rounded-lg border border-outline bg-surface-container-lowest text-sm" />
                     </div>
                     <div className="flex-1">
                       <label className="block text-xs font-bold text-on-surface-variant mb-1">Longitude</label>
-                      <input name="lng" aria-label="Longitude" type="number" step="any" defaultValue={editingDest?.lng || 115.1889} required className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
+                      <input name="lng" aria-label="Longitude" type="number" step="any" defaultValue={editingDest?.lng || 115.1889} required className="w-full px-3 py-2 rounded-lg border border-outline bg-surface-container-lowest text-sm" />
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-xs font-bold text-on-surface-variant mb-1">Deskripsi Pendek</label>
-                    <textarea name="description" aria-label="Deskripsi Pendek" defaultValue={editingDest?.description} required rows={2} className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm resize-none" />
+                    <textarea name="description" aria-label="Deskripsi Pendek" defaultValue={editingDest?.description} required rows={2} className="w-full px-3 py-2 rounded-lg border border-outline bg-surface-container-lowest text-sm resize-none" />
                   </div>
                   
                   {/* Hidden fields needed for Destination type consistency */}
@@ -353,8 +353,8 @@ export default function DashboardDestinasi() {
                 </div>
               </div>
 
-              <div className="mt-8 flex justify-end gap-3 pt-5 border-t border-stone-200">
-                <button type="button" onClick={() => setIsModalOpen(false)} className="px-5 py-2.5 rounded-xl text-sm font-bold text-stone-600 hover:bg-stone-200 transition-colors">
+              <div className="mt-8 flex justify-end gap-3 pt-5 border-t border-outline-variant">
+                <button type="button" onClick={() => setIsModalOpen(false)} className="px-5 py-2.5 rounded-xl text-sm font-bold text-on-surface-variant hover:bg-surface-container-high transition-colors">
                   Batal
                 </button>
                 <button type="submit" className="px-6 py-2.5 rounded-xl bg-primary text-on-primary text-sm font-bold shadow-md hover:bg-primary-container transition-colors">
@@ -377,7 +377,7 @@ export default function DashboardDestinasi() {
             tabIndex={-1}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-white rounded-3xl shadow-2xl p-6 max-w-sm w-full text-center"
+            className="bg-surface-container-lowest rounded-3xl shadow-2xl p-6 max-w-sm w-full text-center"
           >
             <div className="w-14 h-14 rounded-full bg-error/10 text-error flex items-center justify-center mx-auto mb-4">
               <Icon name="delete" size="28px" />
@@ -387,7 +387,7 @@ export default function DashboardDestinasi() {
               Apakah Anda yakin ingin menghapus destinasi ini? Tindakan ini tidak dapat dibatalkan.
             </p>
             <div className="flex gap-3">
-              <button type="button" onClick={() => setDeleteId(null)} className="flex-1 py-2.5 rounded-xl font-bold text-stone-600 bg-stone-100 hover:bg-stone-200 transition-colors cursor-pointer">
+              <button type="button" onClick={() => setDeleteId(null)} className="flex-1 py-2.5 rounded-xl font-bold text-on-surface-variant bg-surface-container hover:bg-surface-container-high transition-colors cursor-pointer">
                 Batal
               </button>
               <button type="button" onClick={handleDelete} className="flex-1 py-2.5 rounded-xl font-bold text-white bg-error hover:bg-error/90 shadow-md transition-colors cursor-pointer">

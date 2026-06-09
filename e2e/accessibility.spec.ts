@@ -102,6 +102,21 @@ function audit(page: Page) {
     .exclude('[data-decorative]')
 }
 
+async function expectNoBlockingViolations(page: Page, label: string) {
+  const results = await audit(page).analyze()
+  const blocking = results.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical')
+  if (blocking.length) {
+    for (const v of blocking) {
+      for (const n of v.nodes) {
+        console.log(`AXE|${label}|${v.id}|${n.target.join(' ')}|${n.html.replace(/\n/g, ' ').slice(0, 140)}`)
+      }
+    }
+  }
+  expect(blocking).toEqual([])
+}
+
+const SCHEMES = ['light', 'dark'] as const
+
 const publicRoutes = [
   { path: '/', name: 'Landing' },
   { path: '/auth', name: 'Auth' },
@@ -109,27 +124,6 @@ const publicRoutes = [
   { path: '/terms', name: 'Legal (terms)' },
 ]
 
-for (const route of publicRoutes) {
-  test(`a11y: ${route.name} (${route.path}) has no serious/critical violations`, async ({ page }) => {
-    await page.emulateMedia({ reducedMotion: 'reduce' })
-    await page.goto(route.path)
-    await page.waitForLoadState('networkidle')
-    // Let opacity/whileInView reveals settle so axe doesn't sample mid-fade.
-    await page.waitForTimeout(800)
-    const results = await audit(page).analyze()
-    const blocking = results.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical')
-    if (blocking.length) {
-      for (const v of blocking) {
-        for (const n of v.nodes) {
-          console.log(`AXE|${route.name}|${v.id}|${n.target.join(' ')}|${n.html.replace(/\n/g, ' ').slice(0, 140)}`)
-        }
-      }
-    }
-    expect(blocking).toEqual([])
-  })
-}
-
-// Member-facing routes reachable with the seeded (non-admin) session.
 const appRoutes = [
   { path: '/app', name: 'Home' },
   { path: '/app/peta', name: 'Peta' },
@@ -142,30 +136,6 @@ const appRoutes = [
   { path: '/app/ai-analysis', name: 'AI Analysis' },
 ]
 
-for (const route of appRoutes) {
-  test(`a11y: ${route.name} (${route.path}) has no serious/critical violations`, async ({ page }) => {
-    await seedAuth(page)
-    await page.emulateMedia({ reducedMotion: 'reduce' })
-    await page.goto(route.path)
-    await page.waitForLoadState('networkidle')
-    // Let opacity/whileInView reveals settle so axe doesn't sample mid-fade.
-    await page.waitForTimeout(800)
-    const results = await audit(page).analyze()
-    const blocking = results.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical')
-    if (blocking.length) {
-      for (const v of blocking) {
-        for (const n of v.nodes) {
-          console.log(`AXE|${route.name}|${v.id}|${n.target.join(' ')}|${n.html.replace(/\n/g, ' ').slice(0, 140)}`)
-        }
-      }
-    }
-    expect(blocking).toEqual([])
-  })
-}
-
-// Pengelola dashboard — gated by DashboardRoute (admin or local-manager role).
-// These pages read the static destinations dataset, so the role mock is enough
-// to render them fully.
 const dashboardRoutes = [
   { path: '/dashboard', name: 'Dashboard overview' },
   { path: '/dashboard/peta', name: 'Dashboard map' },
@@ -174,22 +144,36 @@ const dashboardRoutes = [
   { path: '/dashboard/destinasi', name: 'Dashboard destinasi' },
 ]
 
-for (const route of dashboardRoutes) {
-  test(`a11y: ${route.name} (${route.path}) has no serious/critical violations`, async ({ page }) => {
-    await seedAdmin(page)
-    await page.emulateMedia({ reducedMotion: 'reduce' })
-    await page.goto(route.path)
-    await page.waitForLoadState('networkidle')
-    await page.waitForTimeout(800)
-    const results = await audit(page).analyze()
-    const blocking = results.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical')
-    if (blocking.length) {
-      for (const v of blocking) {
-        for (const n of v.nodes) {
-          console.log(`AXE|${route.name}|${v.id}|${n.target.join(' ')}|${n.html.replace(/\n/g, ' ').slice(0, 140)}`)
-        }
-      }
-    }
-    expect(blocking).toEqual([])
-  })
+async function gotoAndSettle(page: Page, path: string, scheme: (typeof SCHEMES)[number]) {
+  // colorScheme drives the no-flash theme script (no stored theme in tests).
+  await page.emulateMedia({ reducedMotion: 'reduce', colorScheme: scheme })
+  await page.goto(path)
+  await page.waitForLoadState('networkidle')
+  // Let opacity/whileInView reveals settle so axe doesn't sample mid-fade.
+  await page.waitForTimeout(800)
+}
+
+for (const scheme of SCHEMES) {
+  for (const route of publicRoutes) {
+    test(`a11y[${scheme}]: ${route.name} (${route.path})`, async ({ page }) => {
+      await gotoAndSettle(page, route.path, scheme)
+      await expectNoBlockingViolations(page, `${route.name} [${scheme}]`)
+    })
+  }
+
+  for (const route of appRoutes) {
+    test(`a11y[${scheme}]: ${route.name} (${route.path})`, async ({ page }) => {
+      await seedAuth(page)
+      await gotoAndSettle(page, route.path, scheme)
+      await expectNoBlockingViolations(page, `${route.name} [${scheme}]`)
+    })
+  }
+
+  for (const route of dashboardRoutes) {
+    test(`a11y[${scheme}]: ${route.name} (${route.path})`, async ({ page }) => {
+      await seedAdmin(page)
+      await gotoAndSettle(page, route.path, scheme)
+      await expectNoBlockingViolations(page, `${route.name} [${scheme}]`)
+    })
+  }
 }

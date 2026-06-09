@@ -12,7 +12,7 @@ const EMOJI_ICON_MAP: Record<string, { name: string; color: string }> = {
   '🌿': { name: 'eco',               color: 'text-emerald-500' },
   '🌊': { name: 'waves',             color: 'text-cyan-500'    },
   '🏖️': { name: 'beach_access',     color: 'text-amber-500'   },
-  '⛰️': { name: 'landscape',        color: 'text-stone-500'   },
+  '⛰️': { name: 'landscape',        color: 'text-on-surface-variant'   },
   '🗺️': { name: 'map',              color: 'text-indigo-500'  },
   '📍': { name: 'location_on',       color: 'text-red-500'     },
   '🕐': { name: 'schedule',          color: 'text-slate-500'   },
@@ -39,9 +39,9 @@ const EMOJI_ICON_MAP: Record<string, { name: string; color: string }> = {
   '☀️': { name: 'wb_sunny',         color: 'text-amber-400'   },
   '🌧️': { name: 'rainy',            color: 'text-blue-400'    },
   '🤿': { name: 'scuba_diving',      color: 'text-cyan-500'    },
-  '🧗': { name: 'hiking',            color: 'text-stone-600'   },
+  '🧗': { name: 'hiking',            color: 'text-on-surface-variant'   },
   '🎪': { name: 'celebration',       color: 'text-violet-500'  },
-  '🏛️': { name: 'account_balance',  color: 'text-stone-500'   },
+  '🏛️': { name: 'account_balance',  color: 'text-on-surface-variant'   },
   '🐒': { name: 'pets',              color: 'text-amber-700'   },
 }
 
@@ -127,7 +127,7 @@ const markdownComponents: Components = {
   h1:         ({ children }) => <h1 className="text-base font-bold text-on-surface mt-3 mb-1">{children}</h1>,
   h2:         ({ children }) => <h2 className="text-sm font-bold text-on-surface mt-2.5 mb-1">{children}</h2>,
   h3:         ({ children }) => <h3 className="text-sm font-semibold text-on-surface mt-2 mb-0.5">{children}</h3>,
-  hr:         () => <hr className="my-3 border-stone-200/70" />,
+  hr:         () => <hr className="my-3 border-outline-variant/70" />,
   blockquote: ({ children }) => (
     <blockquote className="border-l-2 border-primary/40 pl-3 my-2 text-on-surface-variant italic text-xs">
       {children}

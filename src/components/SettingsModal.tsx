@@ -28,7 +28,7 @@ export default function SettingsModal({ title, isOpen, onClose, children }: Prop
       >
         <div className="flex items-center justify-between mb-5">
           <h2 id={titleId} className="text-lg font-bold text-on-surface font-headline">{title}</h2>
-          <button type="button" onClick={onClose} aria-label="Tutup" className="p-1.5 hover:bg-stone-100 rounded-full">
+          <button type="button" onClick={onClose} aria-label="Tutup" className="p-1.5 hover:bg-surface-container rounded-full">
             <Icon name="close" size="20px" />
           </button>
         </div>

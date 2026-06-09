@@ -9,6 +9,7 @@ import { useAuth, getUserInitials, getUserFullName } from '../context/AuthContex
 import { useBookings } from '../hooks/useBookings'
 import { useWatchlist } from '../hooks/useWatchlist'
 import { useNotifications } from '../hooks/useNotifications'
+import { useTheme } from '../hooks/useTheme'
 import { destinations } from '../data/destinations'
 import { formatDate, formatCurrency } from '../lib/utils'
 import { getStorageItem, setStorageItem, STORAGE_KEYS } from '../lib/storage'
@@ -32,6 +33,7 @@ export default function Profil() {
   const { bookings, cancelBooking, getUpcomingBookings } = useBookings()
   const { watchlist } = useWatchlist()
   const { prefs, updatePrefs } = useNotifications()
+  const { theme, toggleTheme } = useTheme()
   const [activeModal, setActiveModal] = useState<ModalType>(null)
   const [editName, setEditName] = useState(user?.user_metadata?.full_name || '')
   const [selectedLang, setSelectedLang] = useState<string>(() => i18n.language || 'id')
@@ -46,7 +48,9 @@ export default function Profil() {
   const upcomingBookings = getUpcomingBookings()
   const watchlistedDests = destinations.filter((d) => watchlist.includes(d.id))
 
-  const avatarColors = ['bg-primary', 'bg-tertiary', 'bg-error', 'bg-amber-500', 'bg-emerald-500', 'bg-violet-500']
+  // Literal -700 shades (not theme tokens): white initials stay legible in both
+  // light and dark, and avatar choice shouldn't flip with the theme.
+  const avatarColors = ['bg-teal-700', 'bg-amber-700', 'bg-rose-700', 'bg-indigo-700', 'bg-emerald-700', 'bg-violet-700']
 
   async function handleLogout() {
     await signOut()
@@ -119,7 +123,7 @@ export default function Profil() {
                 const next = (selectedAvatar + 1) % avatarColors.length
                 handleAvatarChange(next)
               }}
-              className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-white border-2 border-surface flex items-center justify-center shadow-md"
+              className="absolute -bottom-1 -right-1 w-7 h-7 rounded-full bg-surface-container-lowest border-2 border-surface flex items-center justify-center shadow-md"
             >
               <Icon name="edit" size="14px" className="text-on-surface" />
             </button>
@@ -262,7 +266,7 @@ export default function Profil() {
               key={item.label}
               role={item.type === 'toggle' ? undefined : 'button'}
               tabIndex={item.type === 'toggle' ? undefined : 0}
-              className="flex items-center gap-3 py-3 cursor-pointer hover:bg-stone-50/50 rounded-lg px-2 -mx-2 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+              className="flex items-center gap-3 py-3 cursor-pointer hover:bg-surface-container-low/50 rounded-lg px-2 -mx-2 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
               onClick={item.action}
               onKeyDown={
                 item.type === 'toggle'
@@ -294,7 +298,7 @@ export default function Profil() {
                   }`}
                 >
                   <span
-                    className={`absolute top-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform ${
+                    className={`absolute top-0.5 w-5 h-5 rounded-full bg-surface-container-lowest shadow transition-transform ${
                       prefs.crowdAlerts ? 'translate-x-5' : 'translate-x-0.5'
                     }`}
                   />
@@ -331,7 +335,7 @@ export default function Profil() {
         {/* Hero header */}
         <SpotlightCard
           spotlightColor="rgba(0, 100, 124, 0.15)"
-          className="bg-gradient-to-br from-surface-container-low via-white to-primary-fixed/30 rounded-[2.5rem] p-8 border border-stone-200/60"
+          className="bg-gradient-to-br from-surface-container-low via-white to-primary-fixed/30 rounded-[2.5rem] p-8 border border-outline-variant/60"
         >
           <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-primary">
             <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
@@ -480,7 +484,7 @@ export default function Profil() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.06 }}
-                  className="bg-white rounded-2xl p-5 flex items-start justify-between border border-stone-100 hover:shadow-md transition-shadow"
+                  className="bg-surface-container-lowest rounded-2xl p-5 flex items-start justify-between border border-outline-variant hover:shadow-md transition-shadow"
                 >
                   <div>
                     <p className="font-bold text-on-surface">{b.destinationName}</p>
@@ -498,7 +502,7 @@ export default function Profil() {
                         ? 'bg-emerald-100 text-emerald-700'
                         : b.status === 'cancelled'
                         ? 'bg-error/10 text-error'
-                        : 'bg-stone-100 text-stone-600'
+                        : 'bg-surface-container text-on-surface-variant'
                     }`}
                   >
                     {b.status === 'confirmed'
@@ -530,7 +534,7 @@ export default function Profil() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.04 }}
                 onClick={item.action}
-                className="flex items-center gap-4 p-4 rounded-2xl hover:bg-white transition-all hover:translate-x-1 hover:shadow-sm text-left"
+                className="flex items-center gap-4 p-4 rounded-2xl hover:bg-surface-container-lowest transition-all hover:translate-x-1 hover:shadow-sm text-left"
               >
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                   <Icon
@@ -552,7 +556,7 @@ export default function Profil() {
         </SpotlightCard>
 
         {/* Brand banner */}
-        <div className="relative bg-on-surface rounded-[2.5rem] h-48 overflow-hidden flex items-center">
+        <div className="relative bg-stone-900 rounded-[2.5rem] h-48 overflow-hidden flex items-center">
           <div className="absolute top-0 left-0 w-72 h-72 bg-primary/20 rounded-full -translate-x-1/2 -translate-y-1/2 blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 right-0 w-72 h-72 bg-primary-container/15 rounded-full translate-x-1/2 translate-y-1/2 blur-3xl pointer-events-none" />
           <div className="relative z-10 px-10 flex items-center justify-between w-full">
@@ -574,7 +578,7 @@ export default function Profil() {
             <Magnet padding={40} magnetStrength={5}>
               <a
                 href="mailto:support@wastra.id"
-                className="bg-white text-on-surface font-bold text-sm px-6 py-3 rounded-full shrink-0 hover:bg-surface-container-lowest transition-colors shadow-xl"
+                className="bg-surface-container-lowest text-on-surface font-bold text-sm px-6 py-3 rounded-full shrink-0 hover:bg-surface-container-lowest transition-colors shadow-xl"
               >
                 {lang === 'en' ? 'Contact Us' : 'Hubungi Kami'}
               </a>
@@ -601,7 +605,7 @@ export default function Profil() {
                 setActiveModal(null)
               }}
               className={`w-full flex items-center gap-3 p-3 rounded-xl text-left transition-colors ${
-                selectedLang === langOpt.code ? 'bg-primary/10 border border-primary/20' : 'hover:bg-stone-50'
+                selectedLang === langOpt.code ? 'bg-primary/10 border border-primary/20' : 'hover:bg-surface-container-low'
               }`}
             >
               <span className="text-xl">{langOpt.flag}</span>
@@ -643,7 +647,7 @@ export default function Profil() {
                 }`}
               >
                 <span
-                  className={`absolute top-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform ${
+                  className={`absolute top-0.5 w-5 h-5 rounded-full bg-surface-container-lowest shadow transition-transform ${
                     item.value ? 'translate-x-5' : 'translate-x-0.5'
                   }`}
                 />
@@ -759,7 +763,7 @@ export default function Profil() {
                 type="text"
                 value={editName}
                 onChange={(e) => setEditName(e.target.value)}
-                className="w-full bg-surface-container-low rounded-xl px-4 py-3 text-sm text-on-surface outline-none focus:ring-2 focus:ring-primary/30 focus:bg-white transition-all"
+                className="w-full bg-surface-container-low rounded-xl px-4 py-3 text-sm text-on-surface outline-none focus:ring-2 focus:ring-primary/30 focus:bg-surface-container-lowest transition-all"
               />
             </div>
             <div>
@@ -854,12 +858,25 @@ export default function Profil() {
                 {lang === 'en' ? 'Dark Mode' : 'Mode Gelap'}
               </p>
               <p className="text-xs text-on-surface-variant mt-0.5">
-                {lang === 'en' ? 'Coming soon' : 'Akan segera hadir'}
+                {lang === 'en' ? 'Switch between light and dark theme' : 'Beralih antara tema terang dan gelap'}
               </p>
             </div>
-            <div className="w-11 h-6 rounded-full bg-on-surface/10 relative opacity-50">
-              <span className="absolute top-0.5 translate-x-0.5 w-5 h-5 rounded-full bg-white shadow" />
-            </div>
+            <button
+              type="button"
+              role="switch"
+              aria-checked={theme === 'dark'}
+              aria-label={lang === 'en' ? 'Dark mode' : 'Mode gelap'}
+              onClick={toggleTheme}
+              className={`w-11 h-6 rounded-full relative transition-colors shrink-0 ${
+                theme === 'dark' ? 'bg-primary' : 'bg-on-surface/20'
+              }`}
+            >
+              <span
+                className={`absolute top-0.5 w-5 h-5 rounded-full bg-surface-container-lowest shadow transition-transform ${
+                  theme === 'dark' ? 'translate-x-5' : 'translate-x-0.5'
+                }`}
+              />
+            </button>
           </div>
           <div>
             <p className="text-sm font-semibold text-on-surface mb-3">

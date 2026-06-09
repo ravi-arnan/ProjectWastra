@@ -54,6 +54,63 @@
   --font-label: 'Manrope', sans-serif;
 }
 
+/* Class-based dark mode: `dark:` utilities respond to a `.dark` class on <html>
+   (set by useTheme), not the OS preference directly. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Dark theme — Material 3 dark scheme for the same warm-neutral + teal seed.
+   Overriding the semantic color tokens flips the whole app; components that use
+   tokens (bg-surface, text-on-surface, …) need no per-element changes. */
+.dark {
+  --color-primary: #6cd3f7;
+  --color-on-primary: #00363f;
+  --color-primary-container: #004e61;
+  --color-on-primary-container: #b7eaff;
+  --color-inverse-primary: #00647c;
+  --color-surface-tint: #6cd3f7;
+
+  --color-secondary: #cec5bf;
+  --color-on-secondary: #322f2b;
+  --color-secondary-container: #4b4641;
+  --color-on-secondary-container: #eae1da;
+
+  --color-tertiary: #ffb95f;
+  --color-on-tertiary: #452b00;
+  --color-tertiary-container: #653e00;
+  --color-on-tertiary-container: #ffddb8;
+
+  --color-error: #ffb4ab;
+  --color-on-error: #690005;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
+
+  --color-background: #16130f;
+  --color-on-background: #ece0d8;
+  --color-surface: #16130f;
+  --color-on-surface: #ece0d8;
+  --color-surface-variant: #4b4641;
+  --color-on-surface-variant: #cfc5bd;
+  --color-surface-dim: #16130f;
+  --color-surface-bright: #3d3833;
+
+  --color-surface-container-lowest: #100d0b;
+  --color-surface-container-low: #1f1a16;
+  --color-surface-container: #231e1a;
+  --color-surface-container-high: #2d2823;
+  --color-surface-container-highest: #38322e;
+
+  --color-outline: #998f88;
+  --color-outline-variant: #4b4641;
+
+  --color-inverse-surface: #ece0d8;
+  --color-inverse-on-surface: #342f2b;
+}
+
+.dark body {
+  background-color: var(--color-background);
+  color: var(--color-on-surface);
+}
+
 /* Self-hosted Material Symbols subset (~25KB, only the icons this app uses)
    generated via `node scripts/generate-icon-subset.mjs` — replaces the 1.1MB
    Google variable font. Re-run that script after adding a new icon, or it will

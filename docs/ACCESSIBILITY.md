@@ -3,6 +3,30 @@
 A snapshot of the app's accessibility posture against **WCAG 2.2 AA**, what was
 fixed in the a11y pass, and the conventions to keep new UI accessible.
 
+## Theming (light + dark)
+
+The app ships **light and dark** themes. Dark mode is class-based: `useTheme`
+toggles a `.dark` class on `<html>` (persisted to `localStorage`, defaulting to
+the OS preference), and `index.html` applies it pre-paint to avoid a flash.
+`src/index.css` defines the Material 3 dark palette by overriding the semantic
+color tokens under `.dark`.
+
+Rules that keep both themes correct:
+- **Use semantic tokens, not raw palette colors.** `bg-surface`,
+  `text-on-surface`, `bg-surface-container-*`, `border-outline-variant`, etc.
+  flip automatically. Avoid `bg-white` / `bg-stone-*` / `text-stone-*`.
+- **Pair each container with its `on-` token** so contrast holds when the
+  container flips: `bg-primary`→`text-on-primary`, `bg-error`→`text-on-error`,
+  `bg-primary-container`→`text-on-primary-container`. Density badges use the
+  paired `getDensityBgColor` + `getDensityOnColor` helpers.
+- **A literal-color surface needs literal-color text.** Heatmap cells
+  (`getDensityHex`) and "always dark" bands (`bg-stone-900 text-white`) don't
+  flip, so their text stays fixed (e.g. `text-stone-900` / `text-white`).
+- For literal accent text that must stay readable on both surfaces, add a
+  `dark:` variant (e.g. `text-amber-700 dark:text-amber-400`).
+
+The axe harness audits **every route in both `light` and `dark`** (see below).
+
 ## Conventions (apply to all new UI)
 
 - **Icons are decorative by default.** `<Icon>` renders a Material Symbols
@@ -97,7 +121,8 @@ the page language always matches the rendered content (WCAG 3.1.1).
 ## Automated audit (axe-core)
 
 `e2e/accessibility.spec.ts` runs **axe-core** (WCAG 2.0/2.1 A + AA) against 18
-routes — 4 public + 9 member-facing + 5 pengelola dashboard. The session is
+routes **in both light and dark** (36 audits) — 4 public + 9 member-facing + 5
+pengelola dashboard, each under `colorScheme: light` and `dark`. The session is
 seeded into localStorage like `booking-payment.spec.ts`; `seedAdmin` additionally
 stubs the PostgREST role-check queries so `DashboardRoute` renders. The `/app`
 admin pages (Admin, Otoritas, AiAgent, UserManagement, AuditLogs) fetch live

@@ -50,7 +50,7 @@ export default function GuestGateModal({ isOpen, onClose, action }: Props) {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.97 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="relative w-full sm:max-w-[420px] bg-white rounded-t-3xl sm:rounded-3xl shadow-2xl p-6 sm:p-8 overflow-hidden"
+            className="relative w-full sm:max-w-[420px] bg-surface-container-lowest rounded-t-3xl sm:rounded-3xl shadow-2xl p-6 sm:p-8 overflow-hidden"
           >
             {/* Decorative gradient blob */}
             <div className="absolute -top-16 -right-16 w-56 h-56 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
@@ -61,7 +61,7 @@ export default function GuestGateModal({ isOpen, onClose, action }: Props) {
               <button
                 type="button"
                 onClick={onClose}
-                className="absolute -top-1 -right-1 w-9 h-9 rounded-full hover:bg-stone-100 flex items-center justify-center text-on-surface-variant transition-colors"
+                className="absolute -top-1 -right-1 w-9 h-9 rounded-full hover:bg-surface-container flex items-center justify-center text-on-surface-variant transition-colors"
                 aria-label={lang === 'en' ? 'Close' : 'Tutup'}
               >
                 <Icon name="close" size="20px" />
@@ -119,7 +119,7 @@ export default function GuestGateModal({ isOpen, onClose, action }: Props) {
                 <Link
                   to="/auth"
                   onClick={onClose}
-                  className="bg-surface-container-low hover:bg-surface-container text-on-surface font-bold text-sm px-6 py-3 rounded-xl flex items-center justify-center gap-2 border border-stone-200 transition-colors"
+                  className="bg-surface-container-low hover:bg-surface-container text-on-surface font-bold text-sm px-6 py-3 rounded-xl flex items-center justify-center gap-2 border border-outline-variant transition-colors"
                 >
                   <Icon name="person_add" size="18px" />
                   {lang === 'en' ? 'Create account' : 'Daftar akun baru'}

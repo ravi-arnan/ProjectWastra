@@ -6,7 +6,7 @@ import type { TFunction } from 'i18next'
 import Icon from '../components/Icon'
 import {
   destinations,
-  getDensityBgColor,
+  getDensityBgColor, getDensityOnColor,
   type Destination,
 } from '../data/destinations'
 import {
@@ -209,7 +209,7 @@ export default function Bandingkan() {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1, duration: 0.4 }}
-        className="rounded-2xl border border-stone-200/60 bg-surface-container-lowest overflow-hidden divide-y divide-stone-200/50"
+        className="rounded-2xl border border-outline-variant/60 bg-surface-container-lowest overflow-hidden divide-y divide-outline-variant/50"
       >
         {/* Fixed-length, fixed-order list — index key is stable here and avoids
             remounting rows when t() labels change on language switch. */}
@@ -235,7 +235,7 @@ export default function Bandingkan() {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.15, duration: 0.4 }}
-        className="rounded-2xl border border-stone-200/60 bg-surface-container-lowest p-4 sm:p-5"
+        className="rounded-2xl border border-outline-variant/60 bg-surface-container-lowest p-4 sm:p-5"
       >
         <h2 className="text-sm font-bold text-on-surface mb-4 flex items-center gap-2">
           <Icon name="bar_chart" size="18px" className="text-primary" />
@@ -264,12 +264,12 @@ function PickerCard({
   t: TFunction
 }) {
   return (
-    <div className="rounded-2xl border border-stone-200/60 bg-surface-container-lowest overflow-hidden flex flex-col">
+    <div className="rounded-2xl border border-outline-variant/60 bg-surface-container-lowest overflow-hidden flex flex-col">
       <div className="relative h-24 sm:h-32">
         <img src={dest.image} alt={dest.name} className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/55 to-transparent" />
         <span
-          className={`absolute top-2 right-2 ${getDensityBgColor(dest.density)} text-white text-[9px] font-bold px-2 py-0.5 rounded-full`}
+          className={`absolute top-2 right-2 ${getDensityBgColor(dest.density)} ${getDensityOnColor(dest.density)} text-[9px] font-bold px-2 py-0.5 rounded-full`}
         >
           {dest.densityLabel}
         </span>

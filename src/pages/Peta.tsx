@@ -58,7 +58,7 @@ function ZoomControls() {
         type="button"
         aria-label="Perbesar peta"
         onClick={() => map.zoomIn()}
-        className="w-10 h-10 rounded-xl bg-white/95 backdrop-blur shadow-lg flex items-center justify-center text-on-surface hover:bg-white hover:scale-105 transition-all cursor-pointer"
+        className="w-10 h-10 rounded-xl bg-surface-container-lowest/95 backdrop-blur shadow-lg flex items-center justify-center text-on-surface hover:bg-surface-container-lowest hover:scale-105 transition-all cursor-pointer"
       >
         <Icon name="add" />
       </button>
@@ -66,7 +66,7 @@ function ZoomControls() {
         type="button"
         aria-label="Perkecil peta"
         onClick={() => map.zoomOut()}
-        className="w-10 h-10 rounded-xl bg-white/95 backdrop-blur shadow-lg flex items-center justify-center text-on-surface hover:bg-white hover:scale-105 transition-all cursor-pointer"
+        className="w-10 h-10 rounded-xl bg-surface-container-lowest/95 backdrop-blur shadow-lg flex items-center justify-center text-on-surface hover:bg-surface-container-lowest hover:scale-105 transition-all cursor-pointer"
       >
         <Icon name="remove" />
       </button>
@@ -165,7 +165,7 @@ export default function Peta() {
               className={`px-3 py-1.5 rounded-full text-xs font-bold shadow-md backdrop-blur-md transition-colors ${
                 activeCategory === cat
                   ? 'bg-primary text-on-primary'
-                  : 'bg-white/90 text-on-surface-variant'
+                  : 'bg-surface-container-lowest/90 text-on-surface-variant'
               }`}
             >
               {categoryLabels[cat]}
@@ -178,7 +178,7 @@ export default function Peta() {
           initial={{ opacity: 0, x: 12 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
-          className="absolute bottom-4 right-4 z-20 bg-white/95 backdrop-blur-md rounded-2xl p-3 shadow-lg border border-white/60"
+          className="absolute bottom-4 right-4 z-20 bg-surface-container-lowest/95 backdrop-blur-md rounded-2xl p-3 shadow-lg border border-white/60"
         >
           <div className="flex flex-col gap-1.5">
             {legendItems.map((item) => (
@@ -202,7 +202,7 @@ export default function Peta() {
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="absolute bottom-0 left-0 right-0 z-30 bg-white rounded-t-3xl shadow-[0_-4px_24px_rgba(0,0,0,0.12)]"
+            className="absolute bottom-0 left-0 right-0 z-30 bg-surface-container-lowest rounded-t-3xl shadow-[0_-4px_24px_rgba(0,0,0,0.12)]"
           >
             <div className="flex justify-center pt-3 pb-2">
               <div className="w-10 h-1 rounded-full bg-outline-variant" />
@@ -308,7 +308,7 @@ export default function Peta() {
           >
             <SpotlightCard
               spotlightColor="rgba(0, 100, 124, 0.15)"
-              className="bg-white/95 backdrop-blur-xl rounded-3xl p-5 shadow-xl border border-white/60"
+              className="bg-surface-container-lowest/95 backdrop-blur-xl rounded-3xl p-5 shadow-xl border border-white/60"
             >
               <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-primary">
                 <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
@@ -320,7 +320,7 @@ export default function Peta() {
               <p className="text-xs text-on-surface-variant mt-1">{t('peta.subtitle')}</p>
 
               {/* Mini stats */}
-              <div className="grid grid-cols-3 gap-3 mt-4 pt-4 border-t border-stone-200">
+              <div className="grid grid-cols-3 gap-3 mt-4 pt-4 border-t border-outline-variant">
                 <div>
                   <p className="text-xl font-extrabold text-on-surface font-headline">
                     <CountUp to={destinations.length} duration={1.4} />
@@ -351,7 +351,7 @@ export default function Peta() {
           transition={{ delay: 0.1 }}
           className="absolute top-10 right-8 z-20 w-[420px]"
         >
-          <div className="bg-white/95 backdrop-blur-md rounded-full flex items-center gap-3 px-5 py-3 shadow-xl border border-white/60 focus-within:border-primary/40 transition-colors">
+          <div className="bg-surface-container-lowest/95 backdrop-blur-md rounded-full flex items-center gap-3 px-5 py-3 shadow-xl border border-white/60 focus-within:border-primary/40 transition-colors">
             <Icon name="search" className="text-on-surface-variant" size="22px" />
             <input
               type="text"
@@ -367,7 +367,7 @@ export default function Peta() {
             )}
           </div>
           {filteredDestinations && filteredDestinations.length > 0 && (
-            <div className="mt-2 bg-white rounded-2xl shadow-lg overflow-hidden max-h-72 overflow-y-auto border border-stone-200">
+            <div className="mt-2 bg-surface-container-lowest rounded-2xl shadow-lg overflow-hidden max-h-72 overflow-y-auto border border-outline-variant">
               {filteredDestinations.map((dest) => (
                 <button
                   key={dest.id}
@@ -403,7 +403,7 @@ export default function Peta() {
               className={`px-4 py-2 rounded-full text-sm font-bold shadow-lg backdrop-blur-md border border-white/40 transition-all ${
                 activeCategory === cat
                   ? 'bg-primary text-on-primary shadow-primary/20'
-                  : 'bg-white/95 text-on-surface-variant hover:bg-white'
+                  : 'bg-surface-container-lowest/95 text-on-surface-variant hover:bg-surface-container-lowest'
               }`}
             >
               {categoryLabels[cat]}
@@ -438,7 +438,7 @@ export default function Peta() {
           >
             <SpotlightCard
               spotlightColor="rgba(0, 100, 124, 0.18)"
-              className="bg-white rounded-3xl shadow-2xl overflow-hidden border border-white/60"
+              className="bg-surface-container-lowest rounded-3xl shadow-2xl overflow-hidden border border-white/60"
             >
               <div className="relative h-44 overflow-hidden">
                 <img
@@ -550,7 +550,7 @@ export default function Peta() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25 }}
-          className="absolute bottom-8 right-8 z-20 bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-xl border border-white/60"
+          className="absolute bottom-8 right-8 z-20 bg-surface-container-lowest/95 backdrop-blur-md rounded-2xl p-4 shadow-xl border border-white/60"
         >
           <div className="flex items-center gap-2 mb-3">
             <Icon name="info" size="16px" className="text-on-surface-variant" />

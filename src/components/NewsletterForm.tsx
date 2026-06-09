@@ -46,7 +46,7 @@ export default function NewsletterForm() {
     <>
       <form
         onSubmit={handleSubmit}
-        className="flex gap-2 bg-white/5 border border-white/10 rounded-xl p-1.5 focus-within:border-primary/60 transition-colors"
+        className="flex gap-2 bg-surface-container-lowest/5 border border-white/10 rounded-xl p-1.5 focus-within:border-primary/60 transition-colors"
       >
         <input
           type="email"

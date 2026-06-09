@@ -58,7 +58,7 @@ export default function ReviewModal({ destinationName, isOpen, onClose, onSubmit
           <>
             <div className="flex items-center justify-between mb-5">
               <h2 className="text-lg font-bold text-on-surface font-headline">Tulis Ulasan</h2>
-              <button type="button" onClick={handleClose} aria-label="Tutup" className="p-1.5 hover:bg-stone-100 rounded-full">
+              <button type="button" onClick={handleClose} aria-label="Tutup" className="p-1.5 hover:bg-surface-container rounded-full">
                 <Icon name="close" size="20px" />
               </button>
             </div>
@@ -81,7 +81,7 @@ export default function ReviewModal({ destinationName, isOpen, onClose, onSubmit
                     name="star"
                     size="32px"
                     filled={star <= (hoverRating || rating)}
-                    className={star <= (hoverRating || rating) ? 'text-amber-500' : 'text-stone-300'}
+                    className={star <= (hoverRating || rating) ? 'text-amber-500' : 'text-on-surface-variant'}
                   />
                 </button>
               ))}

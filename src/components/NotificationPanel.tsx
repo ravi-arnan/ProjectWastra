@@ -32,12 +32,12 @@ export default function NotificationPanel({ isOpen, onClose }: Props) {
   return (
     <>
       <div className="fixed inset-0 z-[90]" onClick={onClose} aria-hidden="true" />
-      <div className="absolute right-0 top-full mt-2 w-[360px] bg-surface-container-lowest rounded-2xl shadow-2xl border border-stone-100 z-[91] overflow-hidden">
-        <div className="flex items-center justify-between px-5 py-4 border-b border-stone-100">
+      <div className="absolute right-0 top-full mt-2 w-[360px] bg-surface-container-lowest rounded-2xl shadow-2xl border border-outline-variant z-[91] overflow-hidden">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-outline-variant">
           <div className="flex items-center gap-2">
             <h3 className="text-sm font-bold text-on-surface">Notifikasi</h3>
             {unreadCount > 0 && (
-              <span className="bg-error text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+              <span className="bg-error text-on-error text-[10px] font-bold px-2 py-0.5 rounded-full">
                 {unreadCount}
               </span>
             )}
@@ -49,7 +49,7 @@ export default function NotificationPanel({ isOpen, onClose }: Props) {
               </button>
             )}
             {notifications.length > 0 && (
-              <button onClick={clearAll} aria-label="Hapus semua notifikasi" className="p-1 hover:bg-stone-100 rounded-full">
+              <button onClick={clearAll} aria-label="Hapus semua notifikasi" className="p-1 hover:bg-surface-container rounded-full">
                 <Icon name="delete_sweep" size="18px" className="text-on-surface-variant" />
               </button>
             )}
@@ -67,12 +67,12 @@ export default function NotificationPanel({ isOpen, onClose }: Props) {
               <button
                 key={notif.id}
                 onClick={() => markAsRead(notif.id)}
-                className={`w-full flex items-start gap-3 px-5 py-3.5 text-left transition-colors hover:bg-stone-50 group ${
+                className={`w-full flex items-start gap-3 px-5 py-3.5 text-left transition-colors hover:bg-surface-container-low group ${
                   !notif.read ? 'bg-primary/3' : ''
                 }`}
               >
                 <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${
-                  !notif.read ? 'bg-primary/10' : 'bg-stone-100'
+                  !notif.read ? 'bg-primary/10' : 'bg-surface-container'
                 }`}>
                   <Icon name={typeIcons[notif.type] || 'info'} size="18px" className={!notif.read ? 'text-primary' : 'text-on-surface-variant'} />
                 </div>
@@ -88,7 +88,7 @@ export default function NotificationPanel({ isOpen, onClose }: Props) {
                           e.stopPropagation()
                           deleteNotification(notif.id)
                         }}
-                        className="p-0.5 hover:bg-stone-200 rounded-full transition-colors opacity-0 group-hover:opacity-100"
+                        className="p-0.5 hover:bg-surface-container-high rounded-full transition-colors opacity-0 group-hover:opacity-100"
                         title="Hapus"
                         aria-label="Hapus notifikasi"
                       >

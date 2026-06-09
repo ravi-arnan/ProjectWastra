@@ -122,7 +122,7 @@ export default function DashboardPrediksi() {
             {isLocalManager ? 'Perkiraan jumlah pengunjung dan kepadatan 7 hari ke depan untuk destinasi Anda.' : 'Perkiraan jumlah pengunjung dan kepadatan 7 hari ke depan di berbagai destinasi.'}
           </p>
         </div>
-        <div className="flex items-center gap-3 bg-surface-container-lowest border border-stone-100 rounded-xl px-4 py-2 shadow-sm">
+        <div className="flex items-center gap-3 bg-surface-container-lowest border border-outline-variant rounded-xl px-4 py-2 shadow-sm">
           <div className="flex items-center gap-1.5">
             <div className="w-3 h-3 rounded-full bg-[#10b981]" />
             <span className="text-[10px] font-bold text-on-surface uppercase">Sepi</span>
@@ -158,7 +158,7 @@ export default function DashboardPrediksi() {
               className={`p-4 rounded-2xl border ${
                 isBest ? 'bg-primary/5 border-primary/30' : 
                 isWorst ? 'bg-error/5 border-error/30' : 
-                'bg-surface-container-lowest border-stone-100'
+                'bg-surface-container-lowest border-outline-variant'
               }`}
             >
               <div className="flex justify-between items-start mb-3">
@@ -167,7 +167,7 @@ export default function DashboardPrediksi() {
                   <p className="text-[11px] text-on-surface-variant">{agg.date}</p>
                 </div>
                 {isBest && <span className="bg-primary text-on-primary text-[9px] font-bold px-2 py-0.5 rounded-full uppercase">Termantap</span>}
-                {isWorst && <span className="bg-error text-white text-[9px] font-bold px-2 py-0.5 rounded-full uppercase">Tersibuk</span>}
+                {isWorst && <span className="bg-error text-on-error text-[9px] font-bold px-2 py-0.5 rounded-full uppercase">Tersibuk</span>}
               </div>
               
               <div className="flex items-end gap-2 mb-3">
@@ -181,12 +181,12 @@ export default function DashboardPrediksi() {
               
               <div className="space-y-1">
                 <div className="flex justify-between text-[11px]">
-                  <span className="text-stone-600">Terpadat:</span>
-                  <span className="font-semibold text-stone-700 truncate max-w-[100px] text-right">{agg.busiest}</span>
+                  <span className="text-on-surface-variant">Terpadat:</span>
+                  <span className="font-semibold text-on-surface truncate max-w-[100px] text-right">{agg.busiest}</span>
                 </div>
                 <div className="flex justify-between text-[11px]">
-                  <span className="text-stone-600">Tersepi:</span>
-                  <span className="font-semibold text-stone-700 truncate max-w-[100px] text-right">{agg.calmest}</span>
+                  <span className="text-on-surface-variant">Tersepi:</span>
+                  <span className="font-semibold text-on-surface truncate max-w-[100px] text-right">{agg.calmest}</span>
                 </div>
               </div>
             </motion.div>
@@ -196,16 +196,16 @@ export default function DashboardPrediksi() {
 
       <div className="flex flex-col lg:flex-row gap-6">
         {/* ── Heatmap Table ── */}
-        <div className="flex-1 bg-surface-container-lowest rounded-3xl border border-stone-100 shadow-sm overflow-hidden">
+        <div className="flex-1 bg-surface-container-lowest rounded-3xl border border-outline-variant shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr>
-                  <th className="bg-surface-container-low p-4 text-xs font-bold text-on-surface uppercase tracking-wider sticky left-0 z-10 border-b border-r border-stone-200 min-w-[180px]">
+                  <th className="bg-surface-container-low p-4 text-xs font-bold text-on-surface uppercase tracking-wider sticky left-0 z-10 border-b border-r border-outline-variant min-w-[180px]">
                     Destinasi
                   </th>
                   {days.map((d, i) => (
-                    <th key={d.date} className={`bg-surface-container-low p-3 text-center border-b border-stone-200 min-w-[80px] ${i === bestDayIdx ? 'bg-primary/10' : ''} ${i === worstDayIdx ? 'bg-error/10' : ''}`}>
+                    <th key={d.date} className={`bg-surface-container-low p-3 text-center border-b border-outline-variant min-w-[80px] ${i === bestDayIdx ? 'bg-primary/10' : ''} ${i === worstDayIdx ? 'bg-error/10' : ''}`}>
                       <p className="text-xs font-bold text-on-surface uppercase">{d.dayShort}</p>
                       <p className="text-[10px] text-on-surface-variant font-medium mt-0.5">{d.date.slice(5)}</p>
                     </th>
@@ -222,7 +222,7 @@ export default function DashboardPrediksi() {
                     onClick={() => setSelectedDestId(row.dest.id === selectedDestId ? null : row.dest.id)}
                     className={`hover:bg-surface-container-low transition-colors cursor-pointer ${selectedDestId === row.dest.id ? 'bg-primary/5' : ''}`}
                   >
-                    <td className="p-3 sticky left-0 z-10 bg-inherit border-b border-r border-stone-100">
+                    <td className="p-3 sticky left-0 z-10 bg-inherit border-b border-r border-outline-variant">
                       <p className="text-sm font-bold text-on-surface truncate">{row.dest.name}</p>
                       <p className="text-[10px] text-on-surface-variant truncate mt-0.5">{row.dest.category}</p>
                     </td>
@@ -233,7 +233,7 @@ export default function DashboardPrediksi() {
                       const isDarkText = p.density <= 0.8
                       
                       return (
-                        <td key={colIdx} className="p-1 border-b border-stone-100">
+                        <td key={colIdx} className="p-1 border-b border-outline-variant">
                           <div 
                             className="relative w-full h-12 rounded-xl flex flex-col items-center justify-center group transition-transform hover:scale-95"
                             style={{ backgroundColor: hexColor }}
@@ -245,7 +245,7 @@ export default function DashboardPrediksi() {
                             {/* Event indicator */}
                             {p.hasEvent && (
                               <div className="absolute top-1 right-1">
-                                <Icon name="star" filled size="10px" className={isDarkText ? 'text-stone-800' : 'text-white'} />
+                                <Icon name="star" filled size="10px" className={isDarkText ? 'text-stone-900' : 'text-white'} />
                               </div>
                             )}
 
@@ -275,7 +275,7 @@ export default function DashboardPrediksi() {
           <motion.div 
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="w-full lg:w-[300px] shrink-0 bg-surface-container-lowest rounded-3xl border border-stone-100 p-5 shadow-sm"
+            className="w-full lg:w-[300px] shrink-0 bg-surface-container-lowest rounded-3xl border border-outline-variant p-5 shadow-sm"
           >
             <div className="flex items-start justify-between mb-4">
               <div>
@@ -295,7 +295,7 @@ export default function DashboardPrediksi() {
             <div className="space-y-3 mb-6">
               {hourlyData.map((hour, i) => (
                 <div key={hour.hour} className="flex items-center gap-3">
-                  <span className="text-[11px] font-medium text-stone-600 w-10 shrink-0">{hour.hour}</span>
+                  <span className="text-[11px] font-medium text-on-surface-variant w-10 shrink-0">{hour.hour}</span>
                   <div className="flex-1 h-5 bg-surface-container-low rounded-md overflow-hidden relative group">
                     <motion.div
                       initial={{ width: 0 }}
@@ -304,7 +304,7 @@ export default function DashboardPrediksi() {
                       className="h-full rounded-md"
                       style={{ backgroundColor: getDensityHex(hour.density) }}
                     />
-                    <span className="absolute inset-y-0 right-2 flex items-center text-[9px] font-bold text-stone-600 mix-blend-difference text-white/80 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="absolute inset-y-0 right-2 flex items-center text-[9px] font-bold text-on-surface-variant mix-blend-difference text-white/80 opacity-0 group-hover:opacity-100 transition-opacity">
                       {hour.visitors.toLocaleString('id-ID')} pax
                     </span>
                   </div>

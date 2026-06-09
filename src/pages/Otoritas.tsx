@@ -151,7 +151,7 @@ export default function Otoritas() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.05 }}
-            className="rounded-2xl border border-stone-200/60 bg-surface-container-lowest p-4 flex flex-col gap-1"
+            className="rounded-2xl border border-outline-variant/60 bg-surface-container-lowest p-4 flex flex-col gap-1"
           >
             <Icon name={k.icon} size="20px" className={k.tint} />
             <span className="text-2xl font-extrabold text-on-surface font-headline mt-1">{k.value}</span>
@@ -349,7 +349,7 @@ function Panel({ icon, title, children }: { icon: string; title: string; childre
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.4 }}
-      className="rounded-2xl border border-stone-200/60 bg-surface-container-lowest p-4 sm:p-5"
+      className="rounded-2xl border border-outline-variant/60 bg-surface-container-lowest p-4 sm:p-5"
     >
       <h2 className="text-sm font-bold text-on-surface mb-4 flex items-center gap-2">
         <Icon name={icon} size="18px" className="text-primary" />

@@ -230,7 +230,7 @@ export default function Prediksi() {
                 <span>{dest.name}</span>
                 <span
                   className={`px-1.5 py-0.5 rounded-full text-[10px] font-bold ${
-                    isSelected ? 'bg-white/25 text-on-primary' : tag.color
+                    isSelected ? 'bg-surface-container-lowest/25 text-on-primary' : tag.color
                   }`}
                 >
                   {tag.label}
@@ -260,7 +260,7 @@ export default function Prediksi() {
               return (
                 <div key={d.date} className="flex flex-col items-center gap-1.5">
                   <span className="text-[10px] opacity-70">{d.dayShort}</span>
-                  <span className={`w-3 h-3 rounded-full ${isHigh ? 'bg-error animate-pulse' : 'bg-white/50'}`} />
+                  <span className={`w-3 h-3 rounded-full ${isHigh ? 'bg-error animate-pulse' : 'bg-surface-container-lowest/50'}`} />
                 </div>
               )
             })}
@@ -326,7 +326,7 @@ export default function Prediksi() {
                 return (
                   <div key={i} className="flex-1 flex flex-col items-center gap-1 relative">
                     {isPeak && (
-                      <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-error text-white text-[8px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap z-10">
+                      <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-error text-on-error text-[8px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap z-10">
                         {lang === 'en' ? 'PEAK' : 'PUNCAK'}
                       </div>
                     )}
@@ -390,7 +390,7 @@ export default function Prediksi() {
         {/* Hero header */}
         <SpotlightCard
           spotlightColor="rgba(0, 100, 124, 0.15)"
-          className="bg-gradient-to-br from-surface-container-low via-white to-primary-fixed/30 rounded-[2rem] p-8 border border-stone-200/60"
+          className="bg-gradient-to-br from-surface-container-low via-white to-primary-fixed/30 rounded-[2rem] p-8 border border-outline-variant/60"
         >
           <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-primary">
             <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
@@ -497,7 +497,7 @@ export default function Prediksi() {
                 {lang === 'en' ? 'Add Destination' : 'Tambah Destinasi'}
               </span>
               {showDestPicker && (
-                <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-stone-100 p-3 z-50 max-h-64 overflow-y-auto">
+                <div className="absolute top-full left-0 mt-2 w-64 bg-surface-container-lowest rounded-2xl shadow-2xl border border-outline-variant p-3 z-50 max-h-64 overflow-y-auto">
                   {destinations
                     .filter((d) => !watchlist.includes(d.id))
                     .map((dest) => (
@@ -508,7 +508,7 @@ export default function Prediksi() {
                           toggleWatchlist(dest.id)
                           setShowDestPicker(false)
                         }}
-                        className="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-stone-50 text-left"
+                        className="w-full flex items-center gap-3 p-2 rounded-xl hover:bg-surface-container-low text-left"
                       >
                         <span className={`w-2.5 h-2.5 rounded-full ${getDensityBgColor(dest.density)}`} />
                         <span className="text-sm text-on-surface">{dest.name}</span>
@@ -540,7 +540,7 @@ export default function Prediksi() {
                 <button
                   onClick={() => setChartMode('probability')}
                   className={`text-xs font-bold px-4 py-2 rounded-full transition-colors ${
-                    chartMode === 'probability' ? 'bg-white shadow-sm text-primary' : 'text-on-surface-variant'
+                    chartMode === 'probability' ? 'bg-surface-container-lowest shadow-sm text-primary' : 'text-on-surface-variant'
                   }`}
                 >
                   Probability
@@ -548,7 +548,7 @@ export default function Prediksi() {
                 <button
                   onClick={() => setChartMode('visitors')}
                   className={`text-xs font-bold px-4 py-2 rounded-full transition-colors ${
-                    chartMode === 'visitors' ? 'bg-white shadow-sm text-primary' : 'text-on-surface-variant'
+                    chartMode === 'visitors' ? 'bg-surface-container-lowest shadow-sm text-primary' : 'text-on-surface-variant'
                   }`}
                 >
                   Visitors
@@ -695,7 +695,7 @@ export default function Prediksi() {
         {/* Conclusion Banner */}
         <SpotlightCard
           spotlightColor="rgba(255, 255, 255, 0.25)"
-          className="bg-primary text-white rounded-[2rem] p-8 flex items-center justify-between overflow-hidden"
+          className="bg-primary text-on-primary rounded-[2rem] p-8 flex items-center justify-between overflow-hidden"
         >
           <div className="flex-1 max-w-2xl relative z-10">
             <div className="flex items-center gap-2 mb-2">
@@ -730,7 +730,7 @@ export default function Prediksi() {
             <Magnet padding={50} magnetStrength={5}>
               <button
                 onClick={downloadReport}
-                className="bg-white text-primary font-bold text-sm px-6 py-3 rounded-full flex items-center gap-2 shadow-lg hover:bg-surface-container-lowest transition-colors"
+                className="bg-surface-container-lowest text-primary font-bold text-sm px-6 py-3 rounded-full flex items-center gap-2 shadow-lg hover:bg-surface-container-lowest transition-colors"
               >
                 <Icon name="download" size="18px" />
                 {lang === 'en' ? 'Download Report' : 'Unduh Laporan'}
@@ -738,7 +738,7 @@ export default function Prediksi() {
             </Magnet>
             <button
               onClick={() => showToast(lang === 'en' ? 'Live cam coming soon' : 'Fitur live cam akan segera hadir', 'info')}
-              className="bg-black/25 backdrop-blur-sm text-white font-bold text-sm px-6 py-3 rounded-full flex items-center gap-2 border border-white/30 hover:bg-black/35 transition-colors"
+              className="bg-on-primary/15 backdrop-blur-sm text-on-primary font-bold text-sm px-6 py-3 rounded-full flex items-center gap-2 border border-on-primary/30 hover:bg-on-primary/25 transition-colors"
             >
               <Icon name="videocam" size="18px" />
               Live Cam

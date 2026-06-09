@@ -4,8 +4,8 @@ import Icon from '../components/Icon'
 export default function Legal({ page }: { page: 'privacy' | 'terms' }) {
   return (
     <div className="min-h-dvh bg-surface">
-      <header className="sticky top-0 z-40 bg-[#fff8f5]/80 backdrop-blur-xl border-b border-stone-100/50 px-6 py-4 flex items-center gap-3">
-        <Link to="/" aria-label="Kembali" className="p-2 hover:bg-stone-100 rounded-full transition-colors">
+      <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-xl border-b border-outline-variant/50 px-6 py-4 flex items-center gap-3">
+        <Link to="/" aria-label="Kembali" className="p-2 hover:bg-surface-container rounded-full transition-colors">
           <Icon name="arrow_back" />
         </Link>
         <h1 className="font-headline font-bold text-on-surface">

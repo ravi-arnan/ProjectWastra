@@ -211,7 +211,7 @@ export default function AiAgent() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="bg-surface-container-lowest rounded-3xl p-6 border border-stone-100 flex items-center gap-3 text-on-surface-variant text-sm">
+        <div className="bg-surface-container-lowest rounded-3xl p-6 border border-outline-variant flex items-center gap-3 text-on-surface-variant text-sm">
           <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
           {lang === 'en' ? 'Loading settings...' : 'Memuat setting...'}
         </div>
@@ -224,7 +224,7 @@ export default function AiAgent() {
       {/* Header */}
       <SpotlightCard
         spotlightColor="rgba(0, 100, 124, 0.15)"
-        className="bg-gradient-to-br from-surface-container-low via-white to-primary-fixed/30 rounded-[2rem] p-8 border border-stone-200/60"
+        className="bg-gradient-to-br from-surface-container-low via-white to-primary-fixed/30 rounded-[2rem] p-8 border border-outline-variant/60"
       >
         <Link
           to="/app/admin"
@@ -258,7 +258,7 @@ export default function AiAgent() {
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}>
         <SpotlightCard
           spotlightColor="rgba(0, 100, 124, 0.12)"
-          className="bg-surface-container-lowest rounded-3xl p-6 lg:p-7 border border-stone-100 shadow-sm flex flex-col gap-5"
+          className="bg-surface-container-lowest rounded-3xl p-6 lg:p-7 border border-outline-variant shadow-sm flex flex-col gap-5"
         >
           <div className="flex items-center gap-2">
             <Icon name="key" className="text-primary" size="20px" />
@@ -398,7 +398,7 @@ export default function AiAgent() {
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
         <SpotlightCard
           spotlightColor="rgba(0, 100, 124, 0.12)"
-          className="bg-surface-container-lowest rounded-3xl p-6 lg:p-7 border border-stone-100 shadow-sm flex flex-col gap-5"
+          className="bg-surface-container-lowest rounded-3xl p-6 lg:p-7 border border-outline-variant shadow-sm flex flex-col gap-5"
         >
           <div className="flex items-center gap-2">
             <Icon name="psychology" className="text-primary" size="20px" />
@@ -482,7 +482,7 @@ export default function AiAgent() {
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}>
         <SpotlightCard
           spotlightColor="rgba(0, 100, 124, 0.12)"
-          className="bg-surface-container-lowest rounded-3xl p-6 lg:p-7 border border-stone-100 shadow-sm flex flex-col gap-5"
+          className="bg-surface-container-lowest rounded-3xl p-6 lg:p-7 border border-outline-variant shadow-sm flex flex-col gap-5"
         >
           <div className="flex items-center gap-2">
             <Icon name="prompt_suggestion" className="text-primary" size="20px" />
@@ -585,7 +585,7 @@ export default function AiAgent() {
       <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
         <SpotlightCard
           spotlightColor="rgba(186, 26, 26, 0.1)"
-          className="bg-surface-container-lowest rounded-3xl p-6 lg:p-7 border border-stone-100 shadow-sm flex flex-col gap-5"
+          className="bg-surface-container-lowest rounded-3xl p-6 lg:p-7 border border-outline-variant shadow-sm flex flex-col gap-5"
         >
           <div className="flex items-center gap-2">
             <Icon name="shield" className="text-primary" size="20px" />
@@ -673,7 +673,7 @@ export default function AiAgent() {
       {error && <div className="bg-error-container text-on-error-container rounded-xl p-3 text-sm">{error}</div>}
 
       {/* Footer save bar */}
-      <div className="flex items-center justify-between gap-4 sticky bottom-4 bg-white/80 backdrop-blur-md border border-stone-200 rounded-2xl p-3 pl-5 shadow-lg">
+      <div className="flex items-center justify-between gap-4 sticky bottom-4 bg-surface-container-lowest/80 backdrop-blur-md border border-outline-variant rounded-2xl p-3 pl-5 shadow-lg">
         <p className="text-xs text-on-surface-variant">
           {updatedAt ? (
             <>

@@ -36,7 +36,7 @@ export default function SideNav() {
   }
 
   return (
-    <aside className="hidden lg:flex fixed left-0 top-0 w-64 h-screen bg-gradient-to-b from-white via-white to-surface-container-low/30 border-r border-stone-100 p-6 flex-col z-30">
+    <aside className="hidden lg:flex fixed left-0 top-0 w-64 h-screen bg-gradient-to-b from-white via-white to-surface-container-low/30 border-r border-outline-variant p-6 flex-col z-30">
       {/* Decorative gradient blob */}
       <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl pointer-events-none" />
       <div className="absolute bottom-32 left-0 w-32 h-32 bg-primary-container/10 rounded-full -translate-x-1/2 blur-2xl pointer-events-none" />
@@ -50,10 +50,10 @@ export default function SideNav() {
       >
         <Logo size={34} eager />
         <div>
-          <h1 className="text-xl font-black text-cyan-800 font-headline tracking-tight leading-none">
+          <h1 className="text-xl font-black text-primary font-headline tracking-tight leading-none">
             <ShinyText text="Wastra" color="#155e75" shineColor="#6cd3f7" speed={3.5} />
           </h1>
-          <p className="text-[9px] uppercase tracking-widest text-stone-400 mt-1">
+          <p className="text-[9px] uppercase tracking-widest text-on-surface-variant mt-1">
             {t('auth.subtitle')}
           </p>
         </div>
@@ -64,7 +64,7 @@ export default function SideNav() {
         initial={{ opacity: 0, x: -8 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.1, duration: 0.5 }}
-        className="relative bg-white border border-stone-100 rounded-2xl p-3 mb-6 flex items-center gap-3 shadow-sm hover:shadow-md transition-shadow"
+        className="relative bg-surface-container-lowest border border-outline-variant rounded-2xl p-3 mb-6 flex items-center gap-3 shadow-sm hover:shadow-md transition-shadow"
       >
         <div className="w-9 h-9 rounded-xl bg-primary text-on-primary flex items-center justify-center text-xs font-extrabold shrink-0">
           {initials}
@@ -95,7 +95,7 @@ export default function SideNav() {
                 `relative flex items-center gap-3 px-4 py-3 rounded-xl transition-all group ${
                   isActive
                     ? 'text-on-primary bg-primary font-bold shadow-md shadow-primary/25'
-                    : 'text-stone-500 hover:text-on-surface hover:bg-surface-container-low'
+                    : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low'
                 }`
               }
             >
@@ -106,7 +106,7 @@ export default function SideNav() {
                   {isActive && (
                     <motion.span
                       layoutId="sidenav-indicator"
-                      className="absolute right-3 w-1.5 h-1.5 rounded-full bg-white"
+                      className="absolute right-3 w-1.5 h-1.5 rounded-full bg-surface-container-lowest"
                     />
                   )}
                 </>
@@ -122,7 +122,7 @@ export default function SideNav() {
           to="/app/ai-analysis"
           className="relative w-full py-3 bg-gradient-to-r from-primary to-primary-container text-white rounded-2xl font-bold flex items-center justify-center gap-2 shadow-xl shadow-primary/30 hover:shadow-primary/40 transition-shadow overflow-hidden group"
         >
-          <span className="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors" />
+          <span className="absolute inset-0 bg-surface-container-lowest/0 group-hover:bg-surface-container-lowest/10 transition-colors" />
           <Icon name="auto_awesome" size="18px" />
           <span className="text-sm">{t('nav.aiAnalysis')}</span>
         </Link>

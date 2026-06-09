@@ -23,7 +23,7 @@ describe('density color helpers', () => {
   test('getDensityTextColor prefixes the token with "text-"', () => {
     expect(getDensityTextColor(0.9)).toBe('text-error')
     expect(getDensityTextColor(0.7)).toBe('text-tertiary')
-    expect(getDensityTextColor(0.5)).toBe('text-amber-700')
+    expect(getDensityTextColor(0.5)).toBe('text-amber-700 dark:text-amber-400')
     expect(getDensityTextColor(0.1)).toBe('text-primary')
   })
 

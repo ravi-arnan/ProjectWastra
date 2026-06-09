@@ -79,7 +79,7 @@ export default function Watchlist() {
       {/* Header */}
       <SpotlightCard
         spotlightColor="rgba(0, 100, 124, 0.15)"
-        className="bg-linear-to-br from-surface-container-low via-white to-primary-fixed/30 rounded-4xl p-8 border border-stone-200/60"
+        className="bg-linear-to-br from-surface-container-low via-white to-primary-fixed/30 rounded-4xl p-8 border border-outline-variant/60"
       >
         <div className="flex items-start gap-3">
           <div className="w-12 h-12 rounded-2xl bg-primary text-on-primary flex items-center justify-center shrink-0 shadow-lg shadow-primary/20">
@@ -141,7 +141,7 @@ export default function Watchlist() {
       {saved.length === 0 ? (
         <SpotlightCard
           spotlightColor="rgba(0, 100, 124, 0.08)"
-          className="bg-surface-container-lowest rounded-3xl p-12 border border-stone-100 flex flex-col items-center text-center gap-4"
+          className="bg-surface-container-lowest rounded-3xl p-12 border border-outline-variant flex flex-col items-center text-center gap-4"
         >
           <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center">
             <Icon name="bookmark_border" size="32px" className="text-primary" />
@@ -174,7 +174,7 @@ export default function Watchlist() {
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: Math.min(i * 0.04, 0.3) }}
-                className="bg-surface-container-lowest rounded-2xl overflow-hidden border border-stone-100 hover:shadow-md transition-shadow group"
+                className="bg-surface-container-lowest rounded-2xl overflow-hidden border border-outline-variant hover:shadow-md transition-shadow group"
               >
                 <button
                   onClick={() => navigate(`/app/destinasi/${d.id}`)}
@@ -183,7 +183,7 @@ export default function Watchlist() {
                   <div className="relative h-40 overflow-hidden">
                     <img src={d.image} alt={d.name} className="w-full h-full object-cover transition-transform group-hover:scale-105" />
                     <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent" />
-                    <span className="absolute bottom-2 left-2 inline-flex items-center gap-1 bg-white/95 text-on-surface text-[10px] font-bold px-2 py-1 rounded-full">
+                    <span className="absolute bottom-2 left-2 inline-flex items-center gap-1 bg-surface-container-lowest/95 text-on-surface text-[10px] font-bold px-2 py-1 rounded-full">
                       <span className={`w-1.5 h-1.5 rounded-full ${densityColor(d.density)}`} />
                       {d.densityLabel} · {pct}%
                     </span>
@@ -223,7 +223,7 @@ export default function Watchlist() {
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: Math.min(i * 0.03, 0.25) }}
-                className="bg-surface-container-lowest rounded-2xl border border-stone-100 flex flex-col gap-2.5 p-3 hover:shadow-sm transition-shadow"
+                className="bg-surface-container-lowest rounded-2xl border border-outline-variant flex flex-col gap-2.5 p-3 hover:shadow-sm transition-shadow"
               >
                 <div className="flex items-center gap-3">
                   <button

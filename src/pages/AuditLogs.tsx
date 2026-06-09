@@ -129,7 +129,7 @@ export default function AuditLogs() {
       {/* Header */}
       <SpotlightCard
         spotlightColor="rgba(0, 100, 124, 0.15)"
-        className="bg-gradient-to-br from-surface-container-low via-white to-primary-fixed/30 rounded-[2rem] p-8 border border-stone-200/60"
+        className="bg-gradient-to-br from-surface-container-low via-white to-primary-fixed/30 rounded-[2rem] p-8 border border-outline-variant/60"
       >
         <Link
           to="/app/admin"
@@ -192,7 +192,7 @@ export default function AuditLogs() {
       {loading ? (
         <SpotlightCard
           spotlightColor="rgba(0, 100, 124, 0.08)"
-          className="bg-surface-container-lowest rounded-3xl p-10 border border-stone-100 flex items-center justify-center gap-3"
+          className="bg-surface-container-lowest rounded-3xl p-10 border border-outline-variant flex items-center justify-center gap-3"
         >
           <div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin" />
           <span className="text-sm text-on-surface-variant">
@@ -223,7 +223,7 @@ export default function AuditLogs() {
       ) : logs.length === 0 ? (
         <SpotlightCard
           spotlightColor="rgba(0, 100, 124, 0.08)"
-          className="bg-surface-container-lowest rounded-3xl p-10 border border-stone-100 text-center"
+          className="bg-surface-container-lowest rounded-3xl p-10 border border-outline-variant text-center"
         >
           <Icon name="history_toggle_off" size="32px" className="text-on-surface-variant/50 mb-2" />
           <p className="text-sm font-semibold text-on-surface-variant">
@@ -242,7 +242,7 @@ export default function AuditLogs() {
               icon: 'history',
               labelEn: row.action,
               labelId: row.action,
-              color: 'bg-stone-100 text-stone-700',
+              color: 'bg-surface-container text-on-surface',
             }
             const isOpen = expanded.has(row.id)
             return (
@@ -251,11 +251,11 @@ export default function AuditLogs() {
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: Math.min(i * 0.015, 0.25) }}
-                className="bg-surface-container-lowest rounded-2xl border border-stone-100 overflow-hidden"
+                className="bg-surface-container-lowest rounded-2xl border border-outline-variant overflow-hidden"
               >
                 <button
                   onClick={() => toggleExpand(row.id)}
-                  className="w-full flex items-start gap-3 p-4 text-left hover:bg-stone-50/60 transition-colors"
+                  className="w-full flex items-start gap-3 p-4 text-left hover:bg-surface-container-low/60 transition-colors"
                 >
                   <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${meta.color}`}>
                     <Icon name={meta.icon} size="20px" />
@@ -288,7 +288,7 @@ export default function AuditLogs() {
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.15 }}
-                      className="border-t border-stone-100 bg-stone-50/40"
+                      className="border-t border-outline-variant bg-surface-container-low/40"
                     >
                       <pre className="text-[11px] font-mono text-on-surface p-4 overflow-x-auto whitespace-pre-wrap break-words">
                         {JSON.stringify(row.diff ?? {}, null, 2)}

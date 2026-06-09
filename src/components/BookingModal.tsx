@@ -98,7 +98,7 @@ export default function BookingModal({ destination, isOpen, onClose }: Props) {
           <>
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-lg font-bold text-on-surface font-headline">Pesan Tiket</h2>
-              <button type="button" onClick={handleClose} aria-label="Tutup" className="p-1.5 hover:bg-stone-100 rounded-full">
+              <button type="button" onClick={handleClose} aria-label="Tutup" className="p-1.5 hover:bg-surface-container rounded-full">
                 <Icon name="close" size="20px" />
               </button>
             </div>
@@ -219,7 +219,7 @@ function PaymentView({
     <div className="flex flex-col items-center text-center">
       <div className="flex items-center justify-between w-full mb-4">
         <h2 className="text-lg font-bold text-on-surface font-headline">Pembayaran AstraPay</h2>
-        <button type="button" onClick={onCancel} aria-label="Tutup" className="p-1.5 hover:bg-stone-100 rounded-full">
+        <button type="button" onClick={onCancel} aria-label="Tutup" className="p-1.5 hover:bg-surface-container rounded-full">
           <Icon name="close" size="20px" />
         </button>
       </div>
@@ -233,7 +233,7 @@ function PaymentView({
       <p className="text-sm text-on-surface-variant mb-1">{destinationName}</p>
       <p className="text-2xl font-bold text-primary mb-4">{formatCurrency(charge.amount)}</p>
 
-      <div className="bg-white rounded-2xl p-4 border border-stone-200 mb-4">
+      <div className="bg-surface-container-lowest rounded-2xl p-4 border border-outline-variant mb-4">
         <img src={charge.qrImage} alt="QRIS AstraPay" width={208} height={208} className="w-52 h-52" />
       </div>
 
@@ -304,9 +304,9 @@ function ConfirmationView({ booking, onClose }: { booking: Booking; onClose: () 
       </div>
 
       <div className="w-full bg-stone-900 rounded-2xl p-5 mb-6 text-white">
-        <p className="text-xs text-stone-400 mb-1">Kode Tiket</p>
+        <p className="text-xs text-on-surface-variant mb-1">Kode Tiket</p>
         <p className="text-2xl font-mono font-bold tracking-wider">{booking.ticketCode}</p>
-        <p className="text-[10px] text-stone-400 mt-2">Tunjukkan kode ini di pintu masuk</p>
+        <p className="text-[10px] text-on-surface-variant mt-2">Tunjukkan kode ini di pintu masuk</p>
       </div>
 
       <button

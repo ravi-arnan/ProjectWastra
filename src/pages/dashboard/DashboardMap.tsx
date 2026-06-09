@@ -21,7 +21,7 @@ function ZoomControls() {
         type="button"
         aria-label="Perbesar peta"
         onClick={() => map.zoomIn()}
-        className="w-10 h-10 rounded-xl bg-white/95 backdrop-blur shadow-lg flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-all cursor-pointer"
+        className="w-10 h-10 rounded-xl bg-surface-container-lowest/95 backdrop-blur shadow-lg flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-all cursor-pointer"
       >
         <Icon name="add" />
       </button>
@@ -29,7 +29,7 @@ function ZoomControls() {
         type="button"
         aria-label="Perkecil peta"
         onClick={() => map.zoomOut()}
-        className="w-10 h-10 rounded-xl bg-white/95 backdrop-blur shadow-lg flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-all cursor-pointer"
+        className="w-10 h-10 rounded-xl bg-surface-container-lowest/95 backdrop-blur shadow-lg flex items-center justify-center text-on-surface hover:bg-surface-container-low transition-all cursor-pointer"
       >
         <Icon name="remove" />
       </button>
@@ -73,7 +73,7 @@ export default function DashboardMap() {
     <div className="relative w-full h-full -mx-4 -mb-24 lg:-mx-8 lg:-my-6 w-[calc(100%+2rem)] lg:w-[calc(100%+4rem)] flex flex-col lg:flex-row">
       
       {/* ── Filter Sidebar (Kiri) ── */}
-      <div className="w-full lg:w-[320px] bg-surface flex-shrink-0 border-r border-stone-100 p-5 flex flex-col gap-6 z-10 lg:h-[calc(100vh-64px)] overflow-y-auto hidden lg:flex">
+      <div className="w-full lg:w-[320px] bg-surface flex-shrink-0 border-r border-outline-variant p-5 flex flex-col gap-6 z-10 lg:h-[calc(100vh-64px)] overflow-y-auto hidden lg:flex">
         <div>
           <h2 className="text-lg font-bold text-on-surface font-headline flex items-center gap-2">
             <Icon name="map" size="20px" className="text-primary" />
@@ -144,7 +144,7 @@ export default function DashboardMap() {
           </div>
         </div>
 
-        <div className="mt-auto pt-4 border-t border-stone-100">
+        <div className="mt-auto pt-4 border-t border-outline-variant">
           <button
             onClick={() => {
               setActiveCategory('Semua')
@@ -197,24 +197,24 @@ export default function DashboardMap() {
                       alt={dest.name}
                       className="w-full h-24 object-cover rounded-lg mb-2"
                     />
-                    <h3 className="font-bold text-sm text-stone-800 font-headline leading-tight">{dest.name}</h3>
-                    <p className="text-[10px] text-stone-500 mb-2">{dest.region} · {dest.category}</p>
+                    <h3 className="font-bold text-sm text-on-surface font-headline leading-tight">{dest.name}</h3>
+                    <p className="text-[10px] text-on-surface-variant mb-2">{dest.region} · {dest.category}</p>
                     
                     <div className="flex items-center justify-between mb-1">
-                      <span className="text-xs text-stone-600">Kepadatan:</span>
+                      <span className="text-xs text-on-surface-variant">Kepadatan:</span>
                       <span className="text-xs font-bold" style={{ color: hexColor }}>
                         {Math.round(dest.density * 100)}%
                       </span>
                     </div>
                     
-                    <div className="w-full h-1.5 bg-stone-100 rounded-full overflow-hidden mb-2">
+                    <div className="w-full h-1.5 bg-surface-container rounded-full overflow-hidden mb-2">
                       <div
                         className="h-full rounded-full"
                         style={{ width: `${dest.density * 100}%`, backgroundColor: hexColor }}
                       />
                     </div>
                     
-                    <div className="flex justify-between text-xs text-stone-600">
+                    <div className="flex justify-between text-xs text-on-surface-variant">
                       <span>Pengunjung:</span>
                       <span className="font-semibold">{dest.visitors.toLocaleString('id-ID')}</span>
                     </div>
@@ -231,7 +231,7 @@ export default function DashboardMap() {
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="absolute bottom-6 left-6 z-[400] bg-white/95 backdrop-blur-md rounded-2xl p-4 shadow-xl border border-white/60"
+          className="absolute bottom-6 left-6 z-[400] bg-surface-container-lowest/95 backdrop-blur-md rounded-2xl p-4 shadow-xl border border-white/60"
         >
           <div className="flex items-center gap-2 mb-3">
             <Icon name="info" size="16px" className="text-on-surface-variant" />
@@ -252,8 +252,8 @@ export default function DashboardMap() {
               </div>
             ))}
           </div>
-          <div className="mt-3 pt-3 border-t border-stone-100 flex items-center justify-between gap-4">
-            <span className="text-[10px] text-stone-400 font-bold uppercase">Total Ditampilkan</span>
+          <div className="mt-3 pt-3 border-t border-outline-variant flex items-center justify-between gap-4">
+            <span className="text-[10px] text-on-surface-variant font-bold uppercase">Total Ditampilkan</span>
             <span className="text-xs font-bold text-primary">{filteredDests.length} Destinasi</span>
           </div>
         </motion.div>

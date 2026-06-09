@@ -67,7 +67,7 @@ export default function Admin() {
       {/* Header */}
       <SpotlightCard
         spotlightColor="rgba(0, 100, 124, 0.15)"
-        className="bg-gradient-to-br from-surface-container-low via-white to-primary-fixed/30 rounded-[2rem] p-8 border border-stone-200/60"
+        className="bg-gradient-to-br from-surface-container-low via-white to-primary-fixed/30 rounded-[2rem] p-8 border border-outline-variant/60"
       >
         <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-primary">
           <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
@@ -98,7 +98,7 @@ export default function Admin() {
           >
             <SpotlightCard
               spotlightColor="rgba(0, 100, 124, 0.15)"
-              className="bg-surface-container-lowest rounded-3xl p-6 border border-stone-100 shadow-sm hover:shadow-md transition-shadow h-full"
+              className="bg-surface-container-lowest rounded-3xl p-6 border border-outline-variant shadow-sm hover:shadow-md transition-shadow h-full"
             >
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-2xl bg-primary text-on-primary flex items-center justify-center shrink-0 shadow-md shadow-primary/20">

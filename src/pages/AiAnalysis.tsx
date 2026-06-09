@@ -132,10 +132,10 @@ export default function AiAnalysis() {
       {/* ===== CHAT AREA ===== */}
       <SpotlightCard
         spotlightColor="rgba(0, 100, 124, 0.1)"
-        className="flex-1 flex flex-col bg-surface-container-lowest rounded-2xl lg:rounded-3xl border border-stone-100/50 shadow-sm"
+        className="flex-1 flex flex-col bg-surface-container-lowest rounded-2xl lg:rounded-3xl border border-outline-variant/50 shadow-sm"
       >
         {/* Header */}
-        <div className="flex items-center gap-3 px-5 py-4 border-b border-stone-100/50">
+        <div className="flex items-center gap-3 px-5 py-4 border-b border-outline-variant/50">
           <motion.div
             initial={{ scale: 0.8, rotate: -10 }}
             animate={{ scale: 1, rotate: 0 }}
@@ -226,7 +226,7 @@ export default function AiAnalysis() {
                   className={`max-w-[85%] lg:max-w-[70%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm ${
                     msg.role === 'user'
                       ? 'bg-primary text-on-primary rounded-br-md'
-                      : 'bg-surface-container-low text-on-surface rounded-bl-md border border-stone-100/60'
+                      : 'bg-surface-container-low text-on-surface rounded-bl-md border border-outline-variant/60'
                   }`}
                 >
                   {msg.role === 'assistant' ? <MarkdownMessage content={msg.content} /> : msg.content}
@@ -237,7 +237,7 @@ export default function AiAnalysis() {
 
           {isLoading && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-start">
-              <div className="bg-surface-container-low rounded-2xl rounded-bl-md px-4 py-3 flex items-center gap-1.5 border border-stone-100/60">
+              <div className="bg-surface-container-low rounded-2xl rounded-bl-md px-4 py-3 flex items-center gap-1.5 border border-outline-variant/60">
                 <span className="w-2 h-2 bg-primary/60 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
                 <span className="w-2 h-2 bg-primary/60 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
                 <span className="w-2 h-2 bg-primary/60 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
@@ -252,9 +252,9 @@ export default function AiAnalysis() {
         {/* Input Bar */}
         <form
           onSubmit={handleSubmit}
-          className="px-4 py-3 border-t border-stone-100/50 bg-surface-container-lowest"
+          className="px-4 py-3 border-t border-outline-variant/50 bg-surface-container-lowest"
         >
-          <div className="flex items-center gap-2 bg-surface-container-low rounded-2xl px-4 py-2.5 focus-within:ring-2 focus-within:ring-primary/30 focus-within:bg-white transition-all">
+          <div className="flex items-center gap-2 bg-surface-container-low rounded-2xl px-4 py-2.5 focus-within:ring-2 focus-within:ring-primary/30 focus-within:bg-surface-container-lowest transition-all">
             <input
               ref={inputRef}
               type="text"
@@ -285,7 +285,7 @@ export default function AiAnalysis() {
         {/* Destination Quick Reference */}
         <SpotlightCard
           spotlightColor="rgba(0, 100, 124, 0.15)"
-          className="bg-surface-container-lowest rounded-3xl p-6 border border-stone-100/50 shadow-sm"
+          className="bg-surface-container-lowest rounded-3xl p-6 border border-outline-variant/50 shadow-sm"
         >
           <h3 className="text-sm font-extrabold text-on-surface mb-1 font-headline">
             {lang === 'en' ? 'Destination Status' : 'Status Destinasi'}
@@ -309,8 +309,8 @@ export default function AiAnalysis() {
                   : dest.density > 0.6
                   ? 'text-tertiary'
                   : dest.density > 0.3
-                  ? 'text-amber-700'
-                  : 'text-emerald-700'
+                  ? 'text-amber-700 dark:text-amber-400'
+                  : 'text-emerald-700 dark:text-emerald-400'
 
               return (
                 <motion.div
@@ -369,7 +369,7 @@ export default function AiAnalysis() {
         {messages.length > 0 && (
           <SpotlightCard
             spotlightColor="rgba(0, 100, 124, 0.15)"
-            className="bg-surface-container-lowest rounded-3xl p-6 border border-stone-100/50"
+            className="bg-surface-container-lowest rounded-3xl p-6 border border-outline-variant/50"
           >
             <h3 className="text-sm font-bold text-on-surface mb-3 font-headline">
               {lang === 'en' ? 'More Questions' : 'Pertanyaan Lainnya'}

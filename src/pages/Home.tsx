@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
 import { useTranslation } from 'react-i18next'
 import Icon from '../components/Icon'
-import { destinations, getDensityBgColor } from '../data/destinations'
+import { destinations, getDensityBgColor, getDensityOnColor } from '../data/destinations'
 import { useAuth, getUserDisplayName } from '../context/AuthContext'
 import { filterByMood, getMoodMeta, MOODS, type Mood } from '../lib/moodMapping'
 import { getStorageItem, setStorageItem, STORAGE_KEYS } from '../lib/storage'
@@ -78,7 +78,7 @@ export default function Home() {
           to="/app/ai-analysis"
           className="bg-gradient-to-r from-primary to-primary-container rounded-2xl p-4 flex items-center gap-3 text-white no-underline active:scale-[0.98] transition-transform"
         >
-          <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center shrink-0">
+          <div className="w-10 h-10 bg-surface-container-lowest/20 rounded-xl flex items-center justify-center shrink-0">
             <Icon name="auto_awesome" size="22px" />
           </div>
           <div className="flex-1 min-w-0">
@@ -188,7 +188,7 @@ export default function Home() {
                     className="absolute inset-0 w-full h-full object-cover"
                   />
                   <span
-                    className={`absolute top-2 right-2 ${getDensityBgColor(dest.density)} text-white text-[10px] font-bold px-2 py-0.5 rounded-full`}
+                    className={`absolute top-2 right-2 ${getDensityBgColor(dest.density)} ${getDensityOnColor(dest.density)} text-[10px] font-bold px-2 py-0.5 rounded-full`}
                   >
                     {dest.densityLabel}
                   </span>
@@ -272,7 +272,7 @@ export default function Home() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between gap-2">
                       <p className="text-sm font-bold text-on-surface truncate">{dest.name}</p>
-                      <span className={`shrink-0 ${getDensityBgColor(dest.density)} text-white text-[10px] font-bold px-2 py-0.5 rounded-full`}>
+                      <span className={`shrink-0 ${getDensityBgColor(dest.density)} ${getDensityOnColor(dest.density)} text-[10px] font-bold px-2 py-0.5 rounded-full`}>
                         <CountUp to={Math.round(dest.density * 100)} duration={1.4} />%
                       </span>
                     </div>
@@ -281,7 +281,7 @@ export default function Home() {
                         <Icon name="diamond" size="10px" />Hidden Gem
                       </span>
                     )}
-                    <p className="text-[11px] text-emerald-700 font-medium mt-1">
+                    <p className="text-[11px] text-emerald-700 dark:text-emerald-400 font-medium mt-1">
                       {t('home.recommendations.calmNow', { percent: Math.round(dest.density * 100) })}
                     </p>
                     <div className="flex items-center gap-2 mt-1">
@@ -319,7 +319,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded-full w-fit mb-4"
+              className="inline-flex items-center gap-1.5 bg-surface-container-lowest/20 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded-full w-fit mb-4"
             >
               <Icon name="explore" size="16px" />
               {t('home.discoveryMode')}
@@ -354,7 +354,7 @@ export default function Home() {
                   {t('home.ctaMap')}
                 </Link>
               </Magnet>
-              <Link to="/app/profil" className="bg-white/20 backdrop-blur-sm text-white font-bold px-6 py-3 rounded-full text-sm flex items-center gap-2 hover:bg-white/30 transition-colors">
+              <Link to="/app/profil" className="bg-surface-container-lowest/20 backdrop-blur-sm text-white font-bold px-6 py-3 rounded-full text-sm flex items-center gap-2 hover:bg-surface-container-lowest/30 transition-colors">
                 <Icon name="tune" size="18px" />
                 {t('home.ctaPrefs')}
               </Link>
@@ -427,7 +427,7 @@ export default function Home() {
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <span
-                    className={`absolute top-4 right-4 z-10 ${getDensityBgColor(popularDestinations[0].density)} text-white text-xs font-bold px-3 py-1 rounded-full`}
+                    className={`absolute top-4 right-4 z-10 ${getDensityBgColor(popularDestinations[0].density)} ${getDensityOnColor(popularDestinations[0].density)} text-xs font-bold px-3 py-1 rounded-full`}
                   >
                     {popularDestinations[0].densityLabel}
                   </span>
@@ -471,7 +471,7 @@ export default function Home() {
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <span
-                    className={`absolute top-4 right-4 z-10 ${getDensityBgColor(popularDestinations[1].density)} text-white text-xs font-bold px-3 py-1 rounded-full`}
+                    className={`absolute top-4 right-4 z-10 ${getDensityBgColor(popularDestinations[1].density)} ${getDensityOnColor(popularDestinations[1].density)} text-xs font-bold px-3 py-1 rounded-full`}
                   >
                     {popularDestinations[1].densityLabel}
                   </span>
@@ -537,7 +537,7 @@ export default function Home() {
               >
                 <SpotlightCard
                   spotlightColor="rgba(0, 100, 124, 0.18)"
-                  className="bg-surface-container-low rounded-2xl flex flex-col h-full border border-stone-200/50 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+                  className="bg-surface-container-low rounded-2xl flex flex-col h-full border border-outline-variant/50 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
                 >
                   <div className="relative h-[180px] rounded-t-2xl overflow-hidden">
                     <GlareHover
@@ -560,7 +560,7 @@ export default function Home() {
                   </div>
                   <div className="p-4 flex flex-col flex-1">
                     <h3 className="text-base font-bold text-on-surface">{dest.name}</h3>
-                    <p className="text-xs text-emerald-700 font-medium mt-1">
+                    <p className="text-xs text-emerald-700 dark:text-emerald-400 font-medium mt-1">
                       {t('home.recommendations.calmNow', { percent: Math.round(dest.density * 100) })}
                     </p>
                     <div className="flex items-center gap-1 mt-2">

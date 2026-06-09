@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { destinations, getDensityTextColor, getDensityBgColor } from '../data/destinations'
+import { destinations, getDensityTextColor, getDensityBgColor, getDensityOnColor } from '../data/destinations'
 import Icon from '../components/Icon'
 import BookingModal from '../components/BookingModal'
 import ReviewModal from '../components/ReviewModal'
@@ -68,6 +68,7 @@ export default function DestinationDetail() {
   const densityPercent = Math.round(destination.density * 100)
   const densityColor = getDensityTextColor(destination.density)
   const densityBg = getDensityBgColor(destination.density)
+  const densityOn = getDensityOnColor(destination.density)
   const badgeLabel = getDensityBadgeLabel(destination.density)
   const alternatives = destinations.filter((d) => d.density < 0.4 && d.id !== destination.id)
   const circumference = 2 * Math.PI * 40
@@ -145,7 +146,7 @@ export default function DestinationDetail() {
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1">
             <span className={`${densityColor} text-2xl font-headline font-bold`}>{densityPercent}%</span>
-            <span className={`${densityBg} text-white text-xs font-semibold px-2.5 py-0.5 rounded-full`}>{badgeLabel}</span>
+            <span className={`${densityBg} ${densityOn} text-xs font-semibold px-2.5 py-0.5 rounded-full`}>{badgeLabel}</span>
           </div>
           <div className="flex items-center gap-1.5 text-on-surface-variant text-sm">
             <Icon name="group" size="16px" />
@@ -189,8 +190,8 @@ export default function DestinationDetail() {
     <div className="mx-4 mt-3 bg-surface-container-high rounded-3xl p-5">
       <div className="flex items-center justify-between mb-4">
         <h3 className="font-headline font-bold text-on-surface">Visualisasi Keramaian Real-Time</h3>
-        <span className="flex items-center gap-1.5 bg-error text-white text-xs font-bold px-2.5 py-1 rounded-full pulse-red">
-          <span className="w-1.5 h-1.5 rounded-full bg-white" />LIVE
+        <span className="flex items-center gap-1.5 bg-error text-on-error text-xs font-bold px-2.5 py-1 rounded-full pulse-red">
+          <span className="w-1.5 h-1.5 rounded-full bg-surface-container-lowest" />LIVE
         </span>
       </div>
       <div className="space-y-3">
@@ -299,7 +300,7 @@ export default function DestinationDetail() {
           <Link key={alt.id} to={`/app/destinasi/${alt.id}`} className="shrink-0 w-44 lg:w-full rounded-2xl overflow-hidden bg-surface-container-lowest shadow-sm">
             <div className="relative h-28">
               <img src={alt.image} alt={alt.name} className="w-full h-full object-cover" />
-              <span className={`absolute top-2 right-2 ${getDensityBgColor(alt.density)} text-white text-[10px] font-bold px-2 py-0.5 rounded-full`}>
+              <span className={`absolute top-2 right-2 ${getDensityBgColor(alt.density)} ${getDensityOnColor(alt.density)} text-[10px] font-bold px-2 py-0.5 rounded-full`}>
                 {getDensityBadgeLabel(alt.density)}
               </span>
             </div>
@@ -314,7 +315,7 @@ export default function DestinationDetail() {
   )
 
   const bottomActionBar = () => (
-    <div className="fixed bottom-20 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-t border-outline-variant px-4 py-3 flex items-center justify-between lg:hidden">
+    <div className="fixed bottom-20 left-0 right-0 z-50 bg-surface-container-lowest/80 backdrop-blur-lg border-t border-outline-variant px-4 py-3 flex items-center justify-between lg:hidden">
       <div className="flex gap-2">
         <Link to="/app/peta" className="flex items-center gap-1.5 px-3.5 py-2 rounded-full border border-outline text-sm font-semibold text-on-surface">
           <Icon name="sensors" size="18px" className="text-error" />Live
@@ -430,7 +431,7 @@ export default function DestinationDetail() {
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-1">
                   <span className={`${densityColor} text-3xl font-headline font-bold`}>{densityPercent}%</span>
-                  <span className={`${densityBg} text-white text-xs font-semibold px-3 py-1 rounded-full`}>{badgeLabel}</span>
+                  <span className={`${densityBg} ${densityOn} text-xs font-semibold px-3 py-1 rounded-full`}>{badgeLabel}</span>
                 </div>
                 <div className="flex items-center gap-2 text-on-surface-variant text-sm">
                   <Icon name="group" size="18px" />
@@ -459,8 +460,8 @@ export default function DestinationDetail() {
           <div className="bg-surface-container-lowest rounded-2xl shadow-sm p-5 space-y-6">
             <div className="flex items-center justify-between">
               <h3 className="font-headline font-bold text-on-surface text-lg">Analitik Keramaian</h3>
-              <span className="flex items-center gap-1.5 bg-error text-white text-xs font-bold px-2.5 py-1 rounded-full pulse-red">
-                <span className="w-1.5 h-1.5 rounded-full bg-white" />LIVE
+              <span className="flex items-center gap-1.5 bg-error text-on-error text-xs font-bold px-2.5 py-1 rounded-full pulse-red">
+                <span className="w-1.5 h-1.5 rounded-full bg-surface-container-lowest" />LIVE
               </span>
             </div>
             <div className="grid grid-cols-3 gap-4 text-center">

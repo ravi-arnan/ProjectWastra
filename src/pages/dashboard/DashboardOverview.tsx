@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
 import Icon from '../../components/Icon'
-import { destinations, getDensityBgColor, getDensityTextColor } from '../../data/destinations'
+import { destinations, getDensityBgColor, getDensityOnColor, getDensityTextColor } from '../../data/destinations'
 import CountUp from '../../components/reactbits/CountUp'
 import SpotlightCard from '../../components/reactbits/SpotlightCard'
 import { useAuth } from '../../context/AuthContext'
@@ -150,7 +150,7 @@ export default function DashboardOverview() {
               <Link to={`/app/destinasi/${dest.id}`}>
                 <SpotlightCard
                   spotlightColor={dest.density > 0.8 ? 'rgba(186,26,26,0.10)' : 'rgba(0,100,124,0.10)'}
-                  className="bg-surface-container-lowest rounded-2xl p-4 border border-stone-100 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 h-full"
+                  className="bg-surface-container-lowest rounded-2xl p-4 border border-outline-variant hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 h-full"
                 >
                   {/* Top row: image + info */}
                   <div className="flex gap-3 mb-3">
@@ -163,7 +163,7 @@ export default function DashboardOverview() {
                       <div className="flex items-start justify-between gap-1">
                         <h3 className="text-sm font-bold text-on-surface truncate">{dest.name}</h3>
                         <span
-                          className={`shrink-0 ${getDensityBgColor(dest.density)} text-white text-[10px] font-bold px-2 py-0.5 rounded-full`}
+                          className={`shrink-0 ${getDensityBgColor(dest.density)} ${getDensityOnColor(dest.density)} text-[10px] font-bold px-2 py-0.5 rounded-full`}
                         >
                           {dest.densityLabel}
                         </span>
@@ -181,7 +181,7 @@ export default function DashboardOverview() {
                         {pct}%
                       </span>
                     </div>
-                    <div className="w-full h-2 bg-stone-100 rounded-full overflow-hidden">
+                    <div className="w-full h-2 bg-surface-container rounded-full overflow-hidden">
                       <motion.div
                         className={`h-full rounded-full ${getDensityBgColor(dest.density)}`}
                         initial={{ width: 0 }}
@@ -257,7 +257,7 @@ function KpiCard({
     >
       <SpotlightCard
         spotlightColor="rgba(0,100,124,0.08)"
-        className="bg-surface-container-lowest rounded-2xl p-4 border border-stone-100"
+        className="bg-surface-container-lowest rounded-2xl p-4 border border-outline-variant"
       >
         <div className={`w-9 h-9 rounded-xl ${bg} flex items-center justify-center mb-3`}>
           <Icon name={icon} size="20px" className={text} />
