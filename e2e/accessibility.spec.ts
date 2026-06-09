@@ -56,6 +56,25 @@ async function seedAuth(page: Page) {
     },
     [STORAGE_KEY, JSON.stringify(fakeSession())] as const,
   )
+  // Stub the community reviews query so the destination-detail review list
+  // renders populated (author, stars, comment) under audit instead of just the
+  // empty state.
+  await page.route('**/rest/v1/reviews*', (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify([
+        {
+          id: '00000000-0000-4000-8000-0000000000aa',
+          destination_id: 'uluwatu',
+          author_name: 'E2E Tester',
+          rating: 5,
+          comment: 'Pemandangan sunset-nya luar biasa, datang sore hari.',
+          created_at: '2026-01-01T00:00:00.000Z',
+        },
+      ]),
+    }),
+  )
 }
 
 // Promote the seeded session to admin by stubbing the role-check queries that

@@ -30,13 +30,22 @@ export default function DestinationDetail() {
   const [reviewOpen, setReviewOpen] = useState(false)
   const [guestGateOpen, setGuestGateOpen] = useState(false)
   const { isWatchlisted, toggleWatchlist } = useWatchlist()
-  const { reviews, count: reviewCount, average: userRating, addReview } = useReviews(id ?? '')
+  const { reviews, count: reviewCount, average: userRating, loading: reviewsLoading, addReview } = useReviews(id ?? '')
 
   const handleBookClick = () => {
     if (isGuest) {
       setGuestGateOpen(true)
     } else {
       setBookingOpen(true)
+    }
+  }
+
+  // Writing a review requires a real (non-guest) account, same as booking.
+  const handleReviewClick = () => {
+    if (isGuest) {
+      setGuestGateOpen(true)
+    } else {
+      setReviewOpen(true)
     }
   }
 
@@ -228,7 +237,7 @@ export default function DestinationDetail() {
       </div>
       <span className="text-3xl font-headline font-bold text-on-surface mt-1">{destination.rating}</span>
       <span className="text-sm text-on-surface-variant">{destination.reviewCount.toLocaleString('id-ID')} ulasan</span>
-      <button onClick={() => setReviewOpen(true)} className="mt-3 px-5 py-2 border border-outline rounded-full text-sm font-semibold text-primary">
+      <button onClick={handleReviewClick} className="mt-3 px-5 py-2 border border-outline rounded-full text-sm font-semibold text-primary">
         Tulis Ulasan
       </button>
     </div>
@@ -244,11 +253,13 @@ export default function DestinationDetail() {
     <div className="bg-surface-container-lowest rounded-2xl p-5">
       <div className="flex items-center justify-between mb-3">
         <h3 className="font-headline font-bold text-on-surface">Ulasan Pengunjung</h3>
-        <button onClick={() => setReviewOpen(true)} className="text-sm font-semibold text-primary">
+        <button onClick={handleReviewClick} className="text-sm font-semibold text-primary">
           Tulis Ulasan
         </button>
       </div>
-      {reviewCount === 0 ? (
+      {reviewsLoading ? (
+        <p className="text-sm text-on-surface-variant py-6 text-center">Memuat ulasan…</p>
+      ) : reviewCount === 0 ? (
         <p className="text-sm text-on-surface-variant py-6 text-center">
           Belum ada ulasan. Jadilah yang pertama berbagi pengalaman!
         </p>
@@ -265,10 +276,13 @@ export default function DestinationDetail() {
             {reviews.map((r) => (
               <li key={r.id} className="border-t border-outline-variant/40 pt-3">
                 <div className="flex items-center justify-between mb-1">
-                  <div className="flex" aria-label={`${r.rating} dari 5 bintang`}>{reviewStars(r.rating)}</div>
-                  <span className="text-[11px] text-on-surface-variant">{timeAgo(r.createdAt)}</span>
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-on-surface truncate">{r.authorName || 'Pengunjung'}</p>
+                    <div className="flex mt-0.5" role="img" aria-label={`${r.rating} dari 5 bintang`}>{reviewStars(r.rating)}</div>
+                  </div>
+                  <span className="text-[11px] text-on-surface-variant shrink-0 ml-2">{timeAgo(r.createdAt)}</span>
                 </div>
-                {r.comment && <p className="text-sm text-on-surface-variant leading-relaxed">{r.comment}</p>}
+                {r.comment && <p className="text-sm text-on-surface-variant leading-relaxed mt-1">{r.comment}</p>}
               </li>
             ))}
           </ul>
