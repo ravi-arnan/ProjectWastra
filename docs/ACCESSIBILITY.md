@@ -96,10 +96,12 @@ the page language always matches the rendered content (WCAG 3.1.1).
 
 ## Automated audit (axe-core)
 
-`e2e/accessibility.spec.ts` runs **axe-core** (WCAG 2.0/2.1 A + AA) against 13
-routes — 4 public + 9 member-facing (a synthetic Supabase session is seeded the
-same way as `booking-payment.spec.ts`). Admin/dashboard routes need an elevated
-role and are out of scope until that fixture exists. Run it with:
+`e2e/accessibility.spec.ts` runs **axe-core** (WCAG 2.0/2.1 A + AA) against 18
+routes — 4 public + 9 member-facing + 5 pengelola dashboard. The session is
+seeded into localStorage like `booking-payment.spec.ts`; `seedAdmin` additionally
+stubs the PostgREST role-check queries so `DashboardRoute` renders. The `/app`
+admin pages (Admin, Otoritas, AiAgent, UserManagement, AuditLogs) fetch live
+data and aren't in the harness yet — their forms were labelled by hand. Run with:
 
 ```bash
 npm run test:a11y      # just the audit (needs system Chrome; boots the dev server)

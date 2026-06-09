@@ -125,6 +125,7 @@ export default function DashboardOverview() {
         {/* Sort dropdown */}
         <select
           value={sortKey}
+          aria-label="Urutkan destinasi"
           onChange={(e) => setSortKey(e.target.value as SortKey)}
           className="bg-surface-container-low border-none rounded-lg text-xs font-semibold text-on-surface-variant px-3 py-2 outline-none focus:ring-1 focus:ring-primary/30 cursor-pointer"
         >

@@ -181,11 +181,11 @@ export default function DashboardPrediksi() {
               
               <div className="space-y-1">
                 <div className="flex justify-between text-[11px]">
-                  <span className="text-stone-500">Terpadat:</span>
+                  <span className="text-stone-600">Terpadat:</span>
                   <span className="font-semibold text-stone-700 truncate max-w-[100px] text-right">{agg.busiest}</span>
                 </div>
                 <div className="flex justify-between text-[11px]">
-                  <span className="text-stone-500">Tersepi:</span>
+                  <span className="text-stone-600">Tersepi:</span>
                   <span className="font-semibold text-stone-700 truncate max-w-[100px] text-right">{agg.calmest}</span>
                 </div>
               </div>
@@ -228,7 +228,9 @@ export default function DashboardPrediksi() {
                     </td>
                     {row.preds.map((p, colIdx) => {
                       const hexColor = getDensityHex(p.density)
-                      const isDarkText = p.density > 0.3 && p.density < 0.6 // Kuning butuh teks gelap, sisanya putih
+                      // Only the dark red (>0.8) tier has enough contrast for
+                      // white text; orange/yellow/emerald all need dark text.
+                      const isDarkText = p.density <= 0.8
                       
                       return (
                         <td key={colIdx} className="p-1 border-b border-stone-100">
@@ -293,7 +295,7 @@ export default function DashboardPrediksi() {
             <div className="space-y-3 mb-6">
               {hourlyData.map((hour, i) => (
                 <div key={hour.hour} className="flex items-center gap-3">
-                  <span className="text-[11px] font-medium text-stone-500 w-10 shrink-0">{hour.hour}</span>
+                  <span className="text-[11px] font-medium text-stone-600 w-10 shrink-0">{hour.hour}</span>
                   <div className="flex-1 h-5 bg-surface-container-low rounded-md overflow-hidden relative group">
                     <motion.div
                       initial={{ width: 0 }}

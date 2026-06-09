@@ -146,7 +146,12 @@ Data ini digenerate secara otomatis oleh sistem monitoring Wastra berdasarkan da
               </button>
             </div>
 
-            <div className="bg-surface-container-low rounded-2xl p-5 font-mono text-xs text-stone-700 leading-relaxed whitespace-pre-wrap h-[280px] overflow-y-auto">
+            <div
+              role="region"
+              aria-label="Pratinjau laporan"
+              tabIndex={0}
+              className="bg-surface-container-low rounded-2xl p-5 font-mono text-xs text-stone-700 leading-relaxed whitespace-pre-wrap h-[280px] overflow-y-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+            >
               {reportSummary}
             </div>
           </motion.div>
@@ -190,6 +195,7 @@ Data ini digenerate secara otomatis oleh sistem monitoring Wastra berdasarkan da
                 
                 <select
                   value={selectedDestId}
+                  aria-label="Pilih destinasi untuk laporan"
                   onChange={(e) => setSelectedDestId(e.target.value)}
                   disabled={isLocalManager}
                   className="w-full bg-white border border-outline-variant rounded-xl text-sm font-semibold text-on-surface px-3 py-2 outline-none focus:ring-2 focus:ring-primary/30 mb-3 disabled:opacity-70 disabled:bg-stone-50"

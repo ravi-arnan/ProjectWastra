@@ -206,7 +206,7 @@ export default function DashboardDestinasi() {
                     </td>
                     <td className="p-3 border-b border-stone-100 text-right">
                       <div className="flex flex-col items-end gap-1">
-                        <span className={`text-sm font-bold ${dest.density > 0.6 ? 'text-error' : dest.density > 0.3 ? 'text-amber-600' : 'text-primary'}`}>
+                        <span className={`text-sm font-bold ${dest.density > 0.6 ? 'text-error' : dest.density > 0.3 ? 'text-amber-700' : 'text-primary'}`}>
                           {Math.round(dest.density * 100)}%
                         </span>
                         <span className="text-[10px] text-stone-500 font-medium">
@@ -281,19 +281,19 @@ export default function DashboardDestinasi() {
                 <div className="space-y-4">
                   <div>
                     <label className="block text-xs font-bold text-on-surface-variant mb-1">Nama Destinasi *</label>
-                    <input name="name" defaultValue={editingDest?.name} required className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
+                    <input name="name" aria-label="Nama Destinasi" defaultValue={editingDest?.name} required className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-on-surface-variant mb-1">Kabupaten/Kota *</label>
-                    <input name="location" defaultValue={editingDest?.location} required placeholder="Contoh: Badung" className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
+                    <input name="location" aria-label="Kabupaten/Kota" defaultValue={editingDest?.location} required placeholder="Contoh: Badung" className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-on-surface-variant mb-1">Region Lengkap *</label>
-                    <input name="region" defaultValue={editingDest?.region} required placeholder="Contoh: Kuta, Badung" className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
+                    <input name="region" aria-label="Region Lengkap" defaultValue={editingDest?.region} required placeholder="Contoh: Kuta, Badung" className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-on-surface-variant mb-1">Kategori *</label>
-                    <select name="category" defaultValue={editingDest?.category || 'Pantai'} required className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm">
+                    <select name="category" aria-label="Kategori" defaultValue={editingDest?.category || 'Pantai'} required className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm">
                       <option value="Pantai">Pantai</option>
                       <option value="Pura">Pura</option>
                       <option value="Alam">Alam</option>
@@ -302,7 +302,7 @@ export default function DashboardDestinasi() {
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-on-surface-variant mb-1">URL Gambar *</label>
-                    <input name="image" defaultValue={editingDest?.image} required placeholder="/highcompress_Image.jpg" className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
+                    <input name="image" aria-label="URL Gambar" defaultValue={editingDest?.image} required placeholder="/highcompress_Image.jpg" className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
                   </div>
                 </div>
 
@@ -310,39 +310,39 @@ export default function DashboardDestinasi() {
                   <div className="flex gap-4">
                     <div className="flex-1">
                       <label className="block text-xs font-bold text-on-surface-variant mb-1">Pengunjung Live</label>
-                      <input name="visitors" type="number" defaultValue={editingDest?.visitors || 0} required className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
+                      <input name="visitors" aria-label="Pengunjung Live" type="number" defaultValue={editingDest?.visitors || 0} required className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
                     </div>
                     <div className="flex-1">
                       <label className="block text-xs font-bold text-on-surface-variant mb-1">Kapasitas Maks</label>
-                      <input name="maxCapacity" type="number" defaultValue={editingDest?.maxCapacity || 5000} required className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
+                      <input name="maxCapacity" aria-label="Kapasitas Maks" type="number" defaultValue={editingDest?.maxCapacity || 5000} required className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
                     </div>
                   </div>
                   
                   <div className="flex gap-4">
                     <div className="flex-1">
                       <label className="block text-xs font-bold text-on-surface-variant mb-1">Rating</label>
-                      <input name="rating" type="number" step="0.1" defaultValue={editingDest?.rating || 4.5} required className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
+                      <input name="rating" aria-label="Rating" type="number" step="0.1" defaultValue={editingDest?.rating || 4.5} required className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
                     </div>
                     <div className="flex-1">
                       <label className="block text-xs font-bold text-on-surface-variant mb-1">Total Review</label>
-                      <input name="reviewCount" type="number" defaultValue={editingDest?.reviewCount || 1000} required className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
+                      <input name="reviewCount" aria-label="Total Review" type="number" defaultValue={editingDest?.reviewCount || 1000} required className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
                     </div>
                   </div>
 
                   <div className="flex gap-4">
                     <div className="flex-1">
                       <label className="block text-xs font-bold text-on-surface-variant mb-1">Latitude</label>
-                      <input name="lat" type="number" step="any" defaultValue={editingDest?.lat || -8.4095} required className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
+                      <input name="lat" aria-label="Latitude" type="number" step="any" defaultValue={editingDest?.lat || -8.4095} required className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
                     </div>
                     <div className="flex-1">
                       <label className="block text-xs font-bold text-on-surface-variant mb-1">Longitude</label>
-                      <input name="lng" type="number" step="any" defaultValue={editingDest?.lng || 115.1889} required className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
+                      <input name="lng" aria-label="Longitude" type="number" step="any" defaultValue={editingDest?.lng || 115.1889} required className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm" />
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-xs font-bold text-on-surface-variant mb-1">Deskripsi Pendek</label>
-                    <textarea name="description" defaultValue={editingDest?.description} required rows={2} className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm resize-none" />
+                    <textarea name="description" aria-label="Deskripsi Pendek" defaultValue={editingDest?.description} required rows={2} className="w-full px-3 py-2 rounded-lg border border-outline bg-white text-sm resize-none" />
                   </div>
                   
                   {/* Hidden fields needed for Destination type consistency */}

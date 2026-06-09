@@ -283,6 +283,7 @@ export default function AiAgent() {
             </span>
             <select
               value={settings.api_provider}
+              aria-label="Provider"
               onChange={(e) => {
                 const next = e.target.value
                 const nextProvider = getProvider(next)
@@ -417,6 +418,7 @@ export default function AiAgent() {
             </span>
             <select
               value={settings.default_model}
+              aria-label="Model"
               onChange={(e) => patch('default_model', e.target.value)}
               className="bg-surface-container-low rounded-xl px-4 py-3 text-sm outline-none focus:ring-2 focus:ring-primary/30"
             >
@@ -442,6 +444,7 @@ export default function AiAgent() {
             </div>
             <input
               type="range"
+              aria-label="Max tokens"
               min={64}
               max={8192}
               step={64}
@@ -458,6 +461,7 @@ export default function AiAgent() {
             </div>
             <input
               type="range"
+              aria-label="Temperature"
               min={0}
               max={2}
               step={0.1}

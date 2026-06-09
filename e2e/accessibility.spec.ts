@@ -22,12 +22,13 @@ function base64url(input: string): string {
   return Buffer.from(input).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
 }
 
+const USER_ID = '00000000-0000-4000-8000-000000000001'
+
 function fakeSession() {
-  const userId = '00000000-0000-4000-8000-000000000001'
   const farFuture = 4102444800
   const header = base64url(JSON.stringify({ alg: 'HS256', typ: 'JWT' }))
   const payload = base64url(
-    JSON.stringify({ sub: userId, aud: 'authenticated', role: 'authenticated', is_anonymous: false, exp: farFuture }),
+    JSON.stringify({ sub: USER_ID, aud: 'authenticated', role: 'authenticated', is_anonymous: false, exp: farFuture }),
   )
   return {
     access_token: `${header}.${payload}.e2e-signature`,
@@ -36,7 +37,7 @@ function fakeSession() {
     expires_at: farFuture,
     refresh_token: 'e2e-refresh-token',
     user: {
-      id: userId,
+      id: USER_ID,
       aud: 'authenticated',
       role: 'authenticated',
       email: 'e2e@wastra.id',
@@ -54,6 +55,20 @@ async function seedAuth(page: Page) {
       window.localStorage.setItem(key, value)
     },
     [STORAGE_KEY, JSON.stringify(fakeSession())] as const,
+  )
+}
+
+// Promote the seeded session to admin by stubbing the role-check queries that
+// AuthContext fires against PostgREST, so DashboardRoute renders. The dashboard
+// pages read the static destinations dataset (not Supabase), so they populate
+// fully without further mocking.
+async function seedAdmin(page: Page) {
+  await seedAuth(page)
+  await page.route('**/rest/v1/admins*', (route) =>
+    route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ user_id: USER_ID }) }),
+  )
+  await page.route('**/rest/v1/local_managers*', (route) =>
+    route.fulfill({ status: 200, contentType: 'application/json', body: 'null' }),
   )
 }
 
@@ -96,8 +111,6 @@ for (const route of publicRoutes) {
 }
 
 // Member-facing routes reachable with the seeded (non-admin) session.
-// Admin/dashboard routes need an elevated role and are audited separately
-// when that fixture exists.
 const appRoutes = [
   { path: '/app', name: 'Home' },
   { path: '/app/peta', name: 'Peta' },
@@ -117,6 +130,37 @@ for (const route of appRoutes) {
     await page.goto(route.path)
     await page.waitForLoadState('networkidle')
     // Let opacity/whileInView reveals settle so axe doesn't sample mid-fade.
+    await page.waitForTimeout(800)
+    const results = await audit(page).analyze()
+    const blocking = results.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical')
+    if (blocking.length) {
+      for (const v of blocking) {
+        for (const n of v.nodes) {
+          console.log(`AXE|${route.name}|${v.id}|${n.target.join(' ')}|${n.html.replace(/\n/g, ' ').slice(0, 140)}`)
+        }
+      }
+    }
+    expect(blocking).toEqual([])
+  })
+}
+
+// Pengelola dashboard — gated by DashboardRoute (admin or local-manager role).
+// These pages read the static destinations dataset, so the role mock is enough
+// to render them fully.
+const dashboardRoutes = [
+  { path: '/dashboard', name: 'Dashboard overview' },
+  { path: '/dashboard/peta', name: 'Dashboard map' },
+  { path: '/dashboard/prediksi', name: 'Dashboard prediksi' },
+  { path: '/dashboard/laporan', name: 'Dashboard laporan' },
+  { path: '/dashboard/destinasi', name: 'Dashboard destinasi' },
+]
+
+for (const route of dashboardRoutes) {
+  test(`a11y: ${route.name} (${route.path}) has no serious/critical violations`, async ({ page }) => {
+    await seedAdmin(page)
+    await page.emulateMedia({ reducedMotion: 'reduce' })
+    await page.goto(route.path)
+    await page.waitForLoadState('networkidle')
     await page.waitForTimeout(800)
     const results = await audit(page).analyze()
     const blocking = results.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical')

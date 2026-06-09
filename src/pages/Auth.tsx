@@ -407,6 +407,7 @@ export default function Auth() {
           {error && (
             <motion.div
               key="error"
+              id="auth-error"
               role="alert"
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -475,6 +476,8 @@ export default function Auth() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
+                    aria-invalid={!!error}
+                    aria-describedby={error ? 'auth-error' : undefined}
                     className={inputClass}
                   />
                 </div>
@@ -495,6 +498,8 @@ export default function Auth() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    aria-invalid={!!error}
+                    aria-describedby={error ? 'auth-error' : undefined}
                     className={inputClass}
                   />
                   <button
@@ -614,6 +619,8 @@ export default function Auth() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    aria-invalid={!!error}
+                    aria-describedby={error ? 'auth-error' : undefined}
                     className={inputClass}
                   />
                   <button
@@ -642,6 +649,8 @@ export default function Auth() {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
+                    aria-invalid={!!error}
+                    aria-describedby={error ? 'auth-error' : undefined}
                     className={inputClass}
                   />
                   <button

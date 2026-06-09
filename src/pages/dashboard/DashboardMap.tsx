@@ -92,6 +92,7 @@ export default function DashboardMap() {
             </label>
             <select
               value={activeRegion}
+              aria-label="Wilayah (Kabupaten)"
               onChange={(e) => setActiveRegion(e.target.value)}
               className="w-full bg-surface-container-low border-none rounded-xl text-sm font-semibold text-on-surface px-4 py-3 outline-none focus:ring-2 focus:ring-primary/30 cursor-pointer"
             >
@@ -108,6 +109,7 @@ export default function DashboardMap() {
             </label>
             <select
               value={activeCategory}
+              aria-label="Kategori"
               onChange={(e) => setActiveCategory(e.target.value)}
               className="w-full bg-surface-container-low border-none rounded-xl text-sm font-semibold text-on-surface px-4 py-3 outline-none focus:ring-2 focus:ring-primary/30 cursor-pointer"
             >
@@ -127,6 +129,7 @@ export default function DashboardMap() {
             </div>
             <input
               type="range"
+              aria-label="Kepadatan minimal"
               min="0"
               max="100"
               step="5"
