@@ -1,25 +1,16 @@
 import { useState } from 'react'
 import Icon from './Icon'
 import { useModalA11y } from '../hooks/useModalA11y'
-import { getStorageItem, setStorageItem, STORAGE_KEYS } from '../lib/storage'
-import { generateId } from '../lib/utils'
-
-interface Review {
-  id: string
-  destinationId: string
-  rating: number
-  comment: string
-  createdAt: string
-}
 
 interface Props {
-  destinationId: string
   destinationName: string
   isOpen: boolean
   onClose: () => void
+  /** Persist the review. The modal owns only the form UI. */
+  onSubmit: (rating: number, comment: string) => void
 }
 
-export default function ReviewModal({ destinationId, destinationName, isOpen, onClose }: Props) {
+export default function ReviewModal({ destinationName, isOpen, onClose, onSubmit }: Props) {
   const [rating, setRating] = useState(0)
   const [hoverRating, setHoverRating] = useState(0)
   const [comment, setComment] = useState('')
@@ -30,15 +21,7 @@ export default function ReviewModal({ destinationId, destinationName, isOpen, on
 
   function handleSubmit() {
     if (rating === 0) return
-    const reviews = getStorageItem<Review[]>(STORAGE_KEYS.REVIEWS, [])
-    reviews.unshift({
-      id: generateId(),
-      destinationId,
-      rating,
-      comment,
-      createdAt: new Date().toISOString(),
-    })
-    setStorageItem(STORAGE_KEYS.REVIEWS, reviews)
+    onSubmit(rating, comment)
     setSubmitted(true)
   }
 

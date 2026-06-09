@@ -6,9 +6,11 @@ import BookingModal from '../components/BookingModal'
 import ReviewModal from '../components/ReviewModal'
 import GuestGateModal from '../components/GuestGateModal'
 import { useWatchlist } from '../hooks/useWatchlist'
+import { useReviews } from '../hooks/useReviews'
 import { useAuth } from '../context/AuthContext'
 import { useTranslation } from 'react-i18next'
 import { generateHourlyPrediction, generateWeeklyPrediction, generateWeatherData, getBestVisitTime, estimateWaitTime } from '../lib/predictions'
+import { timeAgo } from '../lib/utils'
 import { showToast } from '../components/Toast'
 
 function getDensityBadgeLabel(density: number): string {
@@ -28,6 +30,7 @@ export default function DestinationDetail() {
   const [reviewOpen, setReviewOpen] = useState(false)
   const [guestGateOpen, setGuestGateOpen] = useState(false)
   const { isWatchlisted, toggleWatchlist } = useWatchlist()
+  const { reviews, count: reviewCount, average: userRating, addReview } = useReviews(id ?? '')
 
   const handleBookClick = () => {
     if (isGuest) {
@@ -231,6 +234,49 @@ export default function DestinationDetail() {
     </div>
   )
 
+  const reviewStars = (value: number, size = '14px') =>
+    Array.from({ length: 5 }).map((_, i) => (
+      <Icon key={i} name="star" filled={i < Math.round(value)} size={size}
+        className={i < Math.round(value) ? 'text-amber-500' : 'text-outline-variant'} />
+    ))
+
+  const reviewsSection = () => (
+    <div className="bg-surface-container-lowest rounded-2xl p-5">
+      <div className="flex items-center justify-between mb-3">
+        <h3 className="font-headline font-bold text-on-surface">Ulasan Pengunjung</h3>
+        <button onClick={() => setReviewOpen(true)} className="text-sm font-semibold text-primary">
+          Tulis Ulasan
+        </button>
+      </div>
+      {reviewCount === 0 ? (
+        <p className="text-sm text-on-surface-variant py-6 text-center">
+          Belum ada ulasan. Jadilah yang pertama berbagi pengalaman!
+        </p>
+      ) : (
+        <>
+          <div className="flex items-center gap-2 mb-4">
+            <span className="text-2xl font-headline font-bold text-on-surface">{userRating.toFixed(1)}</span>
+            <div className="flex">{reviewStars(userRating, '16px')}</div>
+            <span className="text-xs text-on-surface-variant">
+              ({reviewCount.toLocaleString('id-ID')} ulasan)
+            </span>
+          </div>
+          <ul className="space-y-3">
+            {reviews.map((r) => (
+              <li key={r.id} className="border-t border-outline-variant/40 pt-3">
+                <div className="flex items-center justify-between mb-1">
+                  <div className="flex" aria-label={`${r.rating} dari 5 bintang`}>{reviewStars(r.rating)}</div>
+                  <span className="text-[11px] text-on-surface-variant">{timeAgo(r.createdAt)}</span>
+                </div>
+                {r.comment && <p className="text-sm text-on-surface-variant leading-relaxed">{r.comment}</p>}
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+    </div>
+  )
+
   const alternativeDestinations = () => (
     <div>
       <h3 className="font-headline font-bold text-on-surface mb-3">Alternatif Lebih Sepi</h3>
@@ -355,6 +401,7 @@ export default function DestinationDetail() {
         {crowdVisualization()}
         <div className="px-4 mt-3">{infoGrid()}</div>
         <div className="px-4 mt-3">{ratingCard()}</div>
+        <div className="px-4 mt-3">{reviewsSection()}</div>
         <div className="px-4 mt-5">{alternativeDestinations()}</div>
         {bottomActionBar()}
       </div>
@@ -423,6 +470,7 @@ export default function DestinationDetail() {
             {weeklyOutlook()}
           </div>
           {ratingCard()}
+          {reviewsSection()}
         </div>
         <div className="w-[400px] shrink-0 space-y-5">
           {visitPlanningCard()}
@@ -437,7 +485,7 @@ export default function DestinationDetail() {
         onClose={() => setGuestGateOpen(false)}
         action={lang === 'en' ? 'book a ticket' : 'memesan tiket'}
       />
-      <ReviewModal destinationId={destination.id} destinationName={destination.name} isOpen={reviewOpen} onClose={() => setReviewOpen(false)} />
+      <ReviewModal destinationName={destination.name} isOpen={reviewOpen} onClose={() => setReviewOpen(false)} onSubmit={addReview} />
     </>
   )
 }
