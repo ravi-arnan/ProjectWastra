@@ -224,7 +224,7 @@ export default function AiAgent() {
       {/* Header */}
       <SpotlightCard
         spotlightColor="rgba(0, 100, 124, 0.15)"
-        className="bg-gradient-to-br from-surface-container-low via-white to-primary-fixed/30 rounded-[2rem] p-8 border border-outline-variant/60"
+        className="bg-gradient-to-br from-surface-container-low via-surface-container-lowest to-primary-fixed/30 rounded-[2rem] p-8 border border-outline-variant/60"
       >
         <Link
           to="/app/admin"
@@ -265,8 +265,8 @@ export default function AiAgent() {
             <h2 className="text-lg font-headline font-bold text-on-surface">
               <ShinyText
                 text={lang === 'en' ? 'Provider & API Key' : 'Provider & API Key'}
-                color="#1f1b17"
-                shineColor="#00647c"
+                color="var(--color-on-surface)"
+                shineColor="var(--color-primary)"
                 speed={3.5}
               />
             </h2>

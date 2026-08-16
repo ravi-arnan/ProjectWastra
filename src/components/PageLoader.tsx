@@ -6,7 +6,7 @@ import Logo from './Logo'
  */
 export default function PageLoader() {
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-gradient-to-br from-surface via-white to-primary-fixed/20">
+    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-gradient-to-br from-surface via-surface-container-lowest to-primary-fixed/20">
       {/* Decorative gradient blobs */}
       <div className="absolute top-1/3 left-1/4 w-72 h-72 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-72 h-72 rounded-full bg-primary-container/10 blur-3xl pointer-events-none" />

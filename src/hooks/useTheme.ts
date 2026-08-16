@@ -4,12 +4,6 @@ export type Theme = 'light' | 'dark'
 
 const STORAGE_KEY = 'mango_theme'
 
-function systemPrefersDark(): boolean {
-  return typeof window !== 'undefined' && !!window.matchMedia
-    ? window.matchMedia('(prefers-color-scheme: dark)').matches
-    : false
-}
-
 function readStored(): Theme | null {
   try {
     const v = localStorage.getItem(STORAGE_KEY)
@@ -19,7 +13,9 @@ function readStored(): Theme | null {
   }
 }
 
-let current: Theme = readStored() ?? (systemPrefersDark() ? 'dark' : 'light')
+// Light is the product default: dark mode is opt-in, not OS-driven. Keep this
+// in sync with the anti-flash script in index.html.
+let current: Theme = readStored() ?? 'light'
 const listeners = new Set<() => void>()
 
 function applyToDocument(theme: Theme) {

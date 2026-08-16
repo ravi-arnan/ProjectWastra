@@ -128,7 +128,7 @@ export default function Prediksi() {
         >
           <div>
             <span className="text-[10px] font-bold text-primary uppercase tracking-widest">
-              <ShinyText text="AI Forecast" color="#00647c" shineColor="#6cd3f7" speed={3} />
+              <ShinyText text="AI Forecast" color="var(--color-primary)" shineColor="var(--color-primary-fixed-dim)" speed={3} />
             </span>
             <h1 className="text-xl font-extrabold text-on-surface font-headline mt-1">{t('prediksi.title')}</h1>
             <p className="text-xs text-on-surface-variant mt-0.5">{t('prediksi.subtitle')}</p>
@@ -390,7 +390,7 @@ export default function Prediksi() {
         {/* Hero header */}
         <SpotlightCard
           spotlightColor="rgba(0, 100, 124, 0.15)"
-          className="bg-gradient-to-br from-surface-container-low via-white to-primary-fixed/30 rounded-[2rem] p-8 border border-outline-variant/60"
+          className="bg-gradient-to-br from-surface-container-low via-surface-container-lowest to-primary-fixed/30 rounded-[2rem] p-8 border border-outline-variant/60"
         >
           <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-primary">
             <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />

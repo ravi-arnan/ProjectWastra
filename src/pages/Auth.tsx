@@ -354,8 +354,8 @@ export default function Auth() {
           >
             <ShinyText
               text={t('auth.subtitle')}
-              color="#00647c"
-              shineColor="#6cd3f7"
+              color="var(--color-primary)"
+              shineColor="var(--color-primary-fixed-dim)"
               speed={3}
             />
           </GradientText>

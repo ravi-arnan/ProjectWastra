@@ -27,7 +27,7 @@ export default function DashboardLayout() {
   return (
     <div className="min-h-screen bg-surface flex">
       {/* ===== Sidebar ===== */}
-      <aside className="hidden lg:flex fixed left-0 top-0 w-[260px] h-screen bg-gradient-to-b from-white via-white to-surface-container-low/30 border-r border-outline-variant p-5 flex-col z-30">
+      <aside className="hidden lg:flex fixed left-0 top-0 w-[260px] h-screen bg-gradient-to-b from-surface-container-lowest via-surface-container-lowest to-surface-container-low/30 border-r border-outline-variant p-5 flex-col z-30">
         {/* Decorative blobs */}
         <div className="absolute top-0 right-0 w-28 h-28 bg-primary/8 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl pointer-events-none" />
         <div className="absolute bottom-24 left-0 w-24 h-24 bg-primary-container/8 rounded-full -translate-x-1/2 blur-2xl pointer-events-none" />
@@ -44,7 +44,7 @@ export default function DashboardLayout() {
           </div>
           <div>
             <h1 className="text-lg font-black text-primary font-headline tracking-tight leading-none">
-              <ShinyText text="Wastra" color="#155e75" shineColor="#6cd3f7" speed={3.5} />
+              <ShinyText text="Wastra" color="var(--color-primary)" shineColor="var(--color-primary-fixed-dim)" speed={3.5} />
             </h1>
             <p className="text-[8px] uppercase tracking-[0.2em] text-on-surface-variant mt-0.5">
               Dashboard Pengelola

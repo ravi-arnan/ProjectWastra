@@ -335,7 +335,7 @@ export default function Profil() {
         {/* Hero header */}
         <SpotlightCard
           spotlightColor="rgba(0, 100, 124, 0.15)"
-          className="bg-gradient-to-br from-surface-container-low via-white to-primary-fixed/30 rounded-[2.5rem] p-8 border border-outline-variant/60"
+          className="bg-gradient-to-br from-surface-container-low via-surface-container-lowest to-primary-fixed/30 rounded-[2.5rem] p-8 border border-outline-variant/60"
         >
           <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-primary">
             <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
@@ -376,7 +376,7 @@ export default function Profil() {
               <div>
                 <div className="flex items-center gap-2">
                   <h2 className="text-2xl font-extrabold text-on-surface font-headline">
-                    <ShinyText text={displayName} color="#1f1b17" shineColor="#00647c" speed={3.5} />
+                    <ShinyText text={displayName} color="var(--color-on-surface)" shineColor="var(--color-primary)" speed={3.5} />
                   </h2>
                   {!isGuest && (
                     <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center">

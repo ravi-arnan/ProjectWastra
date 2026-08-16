@@ -3,15 +3,15 @@ import type { VercelRequest, VercelResponse } from '@vercel/node'
 // Inlined provider → endpoint map. Kept in sync with src/data/aiProviders.ts.
 // Inlined (not imported from ../src/) so the Vercel function bundle has no
 // cross-folder dependency that could fail to resolve at build time.
+// GitHub Models dropped here — retired 2026-07-30, endpoint returns 410 Gone.
 const PROVIDER_ENDPOINTS: Record<string, { baseUrl: string; label: string }> = {
-  'github-models': { baseUrl: 'https://models.inference.ai.azure.com', label: 'GitHub Models' },
+  groq: { baseUrl: 'https://api.groq.com/openai/v1', label: 'Groq' },
   openai: { baseUrl: 'https://api.openai.com/v1', label: 'OpenAI' },
   openrouter: { baseUrl: 'https://openrouter.ai/api/v1', label: 'OpenRouter' },
-  groq: { baseUrl: 'https://api.groq.com/openai/v1', label: 'Groq' },
 }
 
 function resolveProvider(id: string): { baseUrl: string; label: string } {
-  return PROVIDER_ENDPOINTS[id] ?? PROVIDER_ENDPOINTS['github-models']
+  return PROVIDER_ENDPOINTS[id] ?? PROVIDER_ENDPOINTS.groq
 }
 
 async function isAdmin(token: string | undefined): Promise<boolean> {
@@ -78,7 +78,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(400).json({ ok: false, error: 'model required' })
     }
 
-    const providerId = typeof provider === 'string' ? provider : 'github-models'
+    const providerId = typeof provider === 'string' ? provider : 'groq'
     const { baseUrl, label } = resolveProvider(providerId)
     const endpoint = `${baseUrl}/chat/completions`
 

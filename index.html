@@ -2,12 +2,13 @@
 <html lang="id">
   <head>
     <meta charset="UTF-8" />
-    <!-- Apply the saved/system theme before the bundle loads to avoid a flash. -->
+    <!-- Apply the saved theme before the bundle loads to avoid a flash. Light is
+         the default; dark is opt-in only, so the OS preference is not consulted.
+         Keep in sync with src/hooks/useTheme.ts. -->
     <script>
       (function () {
         try {
-          var t = localStorage.getItem('mango_theme');
-          if (t === 'dark' || (!t && matchMedia('(prefers-color-scheme: dark)').matches)) {
+          if (localStorage.getItem('mango_theme') === 'dark') {
             document.documentElement.classList.add('dark');
           }
         } catch (e) {}

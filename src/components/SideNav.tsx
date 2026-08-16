@@ -36,7 +36,7 @@ export default function SideNav() {
   }
 
   return (
-    <aside className="hidden lg:flex fixed left-0 top-0 w-64 h-screen bg-gradient-to-b from-white via-white to-surface-container-low/30 border-r border-outline-variant p-6 flex-col z-30">
+    <aside className="hidden lg:flex fixed left-0 top-0 w-64 h-screen bg-gradient-to-b from-surface-container-lowest via-surface-container-lowest to-surface-container-low/30 border-r border-outline-variant p-6 flex-col z-30">
       {/* Decorative gradient blob */}
       <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl pointer-events-none" />
       <div className="absolute bottom-32 left-0 w-32 h-32 bg-primary-container/10 rounded-full -translate-x-1/2 blur-2xl pointer-events-none" />
@@ -51,7 +51,12 @@ export default function SideNav() {
         <Logo size={34} eager />
         <div>
           <h1 className="text-xl font-black text-primary font-headline tracking-tight leading-none">
-            <ShinyText text="Wastra" color="#155e75" shineColor="#6cd3f7" speed={3.5} />
+            <ShinyText
+              text="Wastra"
+              color="var(--color-primary)"
+              shineColor="var(--color-primary-fixed-dim)"
+              speed={3.5}
+            />
           </h1>
           <p className="text-[9px] uppercase tracking-widest text-on-surface-variant mt-1">
             {t('auth.subtitle')}
