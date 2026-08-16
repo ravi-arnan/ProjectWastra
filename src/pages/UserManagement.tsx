@@ -225,7 +225,7 @@ export default function UserManagement() {
       {/* Header */}
       <SpotlightCard
         spotlightColor="rgba(0, 100, 124, 0.15)"
-        className="bg-linear-to-br from-surface-container-low via-white to-primary-fixed/30 rounded-4xl p-8 border border-outline-variant/60"
+        className="bg-linear-to-br from-surface-container-low via-surface-container-lowest to-primary-fixed/30 rounded-4xl p-8 border border-outline-variant/60"
       >
         <Link
           to="/app/admin"

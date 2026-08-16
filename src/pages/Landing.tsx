@@ -461,7 +461,12 @@ export default function Landing() {
               <div>
                 <span className="text-xs font-bold text-primary uppercase tracking-widest">{t('landing.live.eyebrow')}</span>
                 <h2 className="text-3xl lg:text-5xl font-headline font-extrabold mt-3 mb-4">
-                  <ShinyText text={t('landing.live.title')} color="#1f1b17" shineColor="#00647c" speed={2.5} />
+                  <ShinyText
+                    text={t('landing.live.title')}
+                    color="var(--color-on-surface)"
+                    shineColor="var(--color-primary)"
+                    speed={2.5}
+                  />
                 </h2>
                 <p className="text-on-surface-variant text-sm leading-relaxed mb-8 max-w-md">
                   {t('landing.live.desc')}

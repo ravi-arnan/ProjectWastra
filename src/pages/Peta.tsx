@@ -315,7 +315,7 @@ export default function Peta() {
                 {t('peta.title')}
               </span>
               <h1 className="text-2xl font-extrabold font-headline text-on-surface mt-1.5">
-                <ShinyText text={t('peta.title')} color="#1f1b17" shineColor="#00647c" speed={3} />
+                <ShinyText text={t('peta.title')} color="var(--color-on-surface)" shineColor="var(--color-primary)" speed={3} />
               </h1>
               <p className="text-xs text-on-surface-variant mt-1">{t('peta.subtitle')}</p>
 

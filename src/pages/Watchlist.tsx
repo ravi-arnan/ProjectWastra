@@ -79,7 +79,7 @@ export default function Watchlist() {
       {/* Header */}
       <SpotlightCard
         spotlightColor="rgba(0, 100, 124, 0.15)"
-        className="bg-linear-to-br from-surface-container-low via-white to-primary-fixed/30 rounded-4xl p-8 border border-outline-variant/60"
+        className="bg-linear-to-br from-surface-container-low via-surface-container-lowest to-primary-fixed/30 rounded-4xl p-8 border border-outline-variant/60"
       >
         <div className="flex items-start gap-3">
           <div className="w-12 h-12 rounded-2xl bg-primary text-on-primary flex items-center justify-center shrink-0 shadow-lg shadow-primary/20">
