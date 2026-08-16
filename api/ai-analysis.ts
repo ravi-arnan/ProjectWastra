@@ -28,13 +28,15 @@ const DEFAULT_REFUSAL_MESSAGE =
   'Maaf, saya tidak bisa membantu dengan topik itu. Tanyakan seputar wisata Bali ya.'
 
 // Inlined provider → endpoint map. Kept in sync with src/data/aiProviders.ts.
+// GitHub Models was removed here: fully retired 2026-07-30, its inference API
+// answers 410 Gone for every request. Rows still storing 'github-models' fall
+// through to the default provider below.
 const PROVIDER_BASE_URLS: Record<string, string> = {
-  'github-models': 'https://models.inference.ai.azure.com',
+  groq: 'https://api.groq.com/openai/v1',
   openai: 'https://api.openai.com/v1',
   openrouter: 'https://openrouter.ai/api/v1',
-  groq: 'https://api.groq.com/openai/v1',
 }
-const DEFAULT_PROVIDER_ID = 'github-models'
+const DEFAULT_PROVIDER_ID = 'groq'
 function chatCompletionsUrl(providerId: string): string {
   const base = PROVIDER_BASE_URLS[providerId] ?? PROVIDER_BASE_URLS[DEFAULT_PROVIDER_ID]
   return `${base}/chat/completions`
@@ -166,7 +168,7 @@ interface AiSettings {
 const DEFAULT_SETTINGS: AiSettings = {
   api_key: null,
   api_provider: DEFAULT_PROVIDER_ID,
-  default_model: 'gpt-4o-mini',
+  default_model: 'llama-3.3-70b-versatile',
   system_prompt: null,
   max_tokens: 1024,
   temperature: 0.7,
@@ -182,7 +184,7 @@ async function fetchAiSettings(): Promise<AiSettings> {
   const supabaseUrl = process.env.VITE_SUPABASE_URL
   // Service role bypasses RLS so we can read api_key. Falls back to anon key
   // for local dev where the service role might not be configured (in which
-  // case api_key reads will return empty and we use GITHUB_TOKEN env fallback).
+  // case api_key reads will return empty and we use AI_API_KEY env fallback).
   const supabaseKey =
     process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.VITE_SUPABASE_ANON_KEY
   if (!supabaseUrl || !supabaseKey) return DEFAULT_SETTINGS
@@ -271,7 +273,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const settings = await fetchAiSettings()
 
   // API key resolution: DB value wins, env var as fallback for migration safety
-  const apiKey = settings.api_key?.trim() || process.env.GITHUB_TOKEN
+  const apiKey = settings.api_key?.trim() || process.env.AI_API_KEY
   if (!apiKey) {
     return res.status(503).json({ error: 'AI not configured. Set API key in /app/ai-agent.' })
   }

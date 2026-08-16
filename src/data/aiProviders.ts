@@ -17,20 +17,21 @@ export interface AiProvider {
   models: { id: string; label: string; description: string }[]
 }
 
+// NOTE: GitHub Models used to be the default provider here. It was fully
+// retired on 2026-07-30 — the inference API now returns 410 Gone for every
+// request regardless of token, so it is removed rather than left as a broken
+// option. Existing DB rows pointing at 'github-models' fall back to Groq.
 export const AI_PROVIDERS: AiProvider[] = [
   {
-    id: 'github-models',
-    label: 'GitHub Models',
-    baseUrl: 'https://models.inference.ai.azure.com',
-    keyPlaceholder: 'ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-    keyHelpUrl: 'https://github.com/settings/personal-access-tokens',
+    id: 'groq',
+    label: 'Groq',
+    baseUrl: 'https://api.groq.com/openai/v1',
+    keyPlaceholder: 'gsk_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+    keyHelpUrl: 'https://console.groq.com/keys',
     models: [
-      { id: 'gpt-4o-mini', label: 'GPT-4o Mini', description: 'Cepat & murah — default' },
-      { id: 'gpt-4o', label: 'GPT-4o', description: 'Kualitas tertinggi dari OpenAI' },
-      { id: 'o1-mini', label: 'o1-mini', description: 'Reasoning model, cocok untuk analisis' },
-      { id: 'Meta-Llama-3.1-8B-Instruct', label: 'Llama 3.1 8B Instruct', description: 'Open-source, ringan' },
-      { id: 'Mistral-Nemo', label: 'Mistral Nemo', description: 'Cepat, multibahasa' },
-      { id: 'Phi-3.5-mini-instruct', label: 'Phi 3.5 Mini', description: 'SLM dari Microsoft' },
+      { id: 'llama-3.3-70b-versatile', label: 'Llama 3.3 70B', description: 'Kualitas terbaik — default' },
+      { id: 'llama-3.1-8b-instant', label: 'Llama 3.1 8B', description: 'Sangat cepat & ringan' },
+      { id: 'gemma2-9b-it', label: 'Gemma 2 9B', description: 'Google, ringan' },
     ],
   },
   {
@@ -63,29 +64,16 @@ export const AI_PROVIDERS: AiProvider[] = [
       { id: 'meta-llama/llama-3.3-70b-instruct', label: 'Llama 3.3 70B', description: 'Open weights' },
     ],
   },
-  {
-    id: 'groq',
-    label: 'Groq',
-    baseUrl: 'https://api.groq.com/openai/v1',
-    keyPlaceholder: 'gsk_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-    keyHelpUrl: 'https://console.groq.com/keys',
-    models: [
-      { id: 'llama-3.3-70b-versatile', label: 'Llama 3.3 70B', description: 'Fast inference' },
-      { id: 'llama-3.1-8b-instant', label: 'Llama 3.1 8B', description: 'Sangat cepat' },
-      { id: 'mixtral-8x7b-32768', label: 'Mixtral 8x7B', description: 'Konteks panjang' },
-      { id: 'gemma2-9b-it', label: 'Gemma 2 9B', description: 'Google, ringan' },
-    ],
-  },
 ]
 
-export const DEFAULT_PROVIDER_ID = 'github-models'
+export const DEFAULT_PROVIDER_ID = 'groq'
 
 export function getProvider(id: string): AiProvider {
   return AI_PROVIDERS.find((p) => p.id === id) ?? AI_PROVIDERS[0]
 }
 
 export function getDefaultModel(providerId: string): string {
-  return getProvider(providerId).models[0]?.id ?? 'gpt-4o-mini'
+  return getProvider(providerId).models[0]?.id ?? 'llama-3.3-70b-versatile'
 }
 
 /** Returns `${baseUrl}/chat/completions` for a given provider id. */
