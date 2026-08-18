@@ -54,3 +54,6 @@ playwright/.cache/
 
 # Vitest coverage
 coverage/
+
+# Claude Code local overrides
+.claude/settings.local.json
