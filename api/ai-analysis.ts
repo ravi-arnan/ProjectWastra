@@ -332,7 +332,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (!response.ok) {
       const errorText = await response.text()
       console.error(`${settings.api_provider} error:`, response.status, errorText)
-      return res.status(502).json({ error: 'AI service temporarily unavailable' })
+      return res.status(502).json({ error: 'AI service temporarily unavailable', debug: `${settings.api_provider} ${response.status}: ${errorText.slice(0, 200)}`, model: settings.default_model, provider: settings.api_provider, hasKey: !!apiKey })
     }
 
     const data = await response.json()
