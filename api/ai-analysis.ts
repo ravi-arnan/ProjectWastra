@@ -277,7 +277,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (!apiKey) {
     return res.status(503).json({ error: 'AI not configured. Set API key in /app/ai-agent.' })
   }
-  const model = process.env.AI_MODEL?.trim() || settings.default_model
+  // Always use hardcoded model — DB model may be stale/deprecated
+  const model = DEFAULT_SETTINGS.default_model
 
   // 1. Guest gate
   if (!settings.allow_anonymous_chat) {
