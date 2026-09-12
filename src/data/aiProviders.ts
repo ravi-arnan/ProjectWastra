@@ -29,7 +29,8 @@ export const AI_PROVIDERS: AiProvider[] = [
     keyPlaceholder: 'gsk_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
     keyHelpUrl: 'https://console.groq.com/keys',
     models: [
-      { id: 'gemma2-9b-it', label: 'Gemma 2 9B', description: 'Google, cepat & ringan' },
+      { id: 'meta-llama/llama-4-scout-17b-16e-instruct', label: 'Llama 4 Scout 17B', description: 'Terbaru, cepat & bagus' },
+      { id: 'llama-3.3-70b-versatile', label: 'Llama 3.3 70B', description: 'Kualitas tinggi (enterprise)' },
     ],
   },
   {
@@ -71,7 +72,7 @@ export function getProvider(id: string): AiProvider {
 }
 
 export function getDefaultModel(providerId: string): string {
-  return getProvider(providerId).models[0]?.id ?? 'gemma2-9b-it'
+  return getProvider(providerId).models[0]?.id ?? 'meta-llama/llama-4-scout-17b-16e-instruct'
 }
 
 /** Returns `${baseUrl}/chat/completions` for a given provider id. */
