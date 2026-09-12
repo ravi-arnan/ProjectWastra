@@ -169,8 +169,8 @@ export default function DashboardMap() {
           style={{ background: '#e2d8d2' }}
         >
           <TileLayer
-            attribution='&copy; <a href="https://www.carto.com/">Carto</a>'
-            url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           
           {filteredDests.map((dest) => {

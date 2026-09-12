@@ -147,7 +147,7 @@ export default function Peta() {
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+            url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <MapEventHandler onMarkerClick={setSelectedDestination} filteredDests={categoryFiltered} />
           <ZoomControls />
@@ -421,7 +421,7 @@ export default function Peta() {
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
+            url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <MapEventHandler onMarkerClick={setSelectedDestination} filteredDests={categoryFiltered} />
           <ZoomControls />

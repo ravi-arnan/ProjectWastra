@@ -99,9 +99,8 @@ export default function LiveMapPreview() {
           style={{ width: '100%', height: '100%' }}
         >
           <TileLayer
-            url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
-            subdomains="abcd"
-            maxZoom={20}
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           {pins.map((pin) => (
             <Marker key={pin.name} position={[pin.lat, pin.lng]} icon={buildIcon(pin.density)}>
