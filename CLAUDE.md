@@ -10,7 +10,7 @@ Smart Tourism PWA for Indonesia: real-time crowd density tracking, AI crowd pred
 - Supabase (auth + Postgres), @supabase/supabase-js
 - Capacitor 8 (Android), vite-plugin-pwa (web installable PWA)
 - motion, ogl (visual effects), react-markdown, qrcode, Cloudflare Turnstile
-- Serverless API: Vercel functions in `api/` (AI analysis via GitHub Models, AstraPay payments)
+- Serverless API: Vercel functions in `api/` (AI analysis via Groq, AstraPay payments)
 - Tests: Vitest (unit), Playwright (e2e)
 - Package manager: npm (see package-lock.json)
 
@@ -45,7 +45,7 @@ Smart Tourism PWA for Indonesia: real-time crowd density tracking, AI crowd pred
 
 - `npm run dev` starts Vite plus `tsx watch dev-api/server.ts`; Vite proxies `/api/*` to `http://localhost:3001` (vite.config.ts). The dev API loads `api/*.ts` handlers on demand to emulate Vercel functions locally.
 - Native (Capacitor) builds set `CAP_BUILD=true`, which disables the PWA service worker (it can serve stale assets in the APK). Relative `/api` paths are rewritten to the deployed origin at runtime in `src/lib/platform.ts`.
-- Env: client vars are `VITE_`-prefixed (Supabase URL/anon key, Turnstile site key). Server secrets (`GITHUB_TOKEN`, `SUPABASE_SERVICE_ROLE_KEY`, `ASTRAPAY_*`) are never `VITE_`-prefixed. See `.env.example`.
+- Env: client vars are `VITE_`-prefixed (Supabase URL/anon key, Turnstile site key). Server secrets (`AI_API_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `ASTRAPAY_*`) are never `VITE_`-prefixed. See `.env.example`.
 - AstraPay payments run in mock mode when `ASTRAPAY_*` are unset (simulated QRIS auto-confirm); set all values to go live.
 - Vitest coverage is intentionally scoped to pure logic in `src/lib` and a few hooks (vite.config.ts); side-effect modules are covered by the Playwright e2e suite instead.
 - TypeScript is strict (`noUnusedLocals`, `noUnusedParameters`, bundler module resolution, `verbatimModuleSyntax`).
