@@ -168,7 +168,7 @@ interface AiSettings {
 const DEFAULT_SETTINGS: AiSettings = {
   api_key: null,
   api_provider: DEFAULT_PROVIDER_ID,
-  default_model: 'llama-3.3-70b-versatile',
+  default_model: 'gemma2-9b-it',
   system_prompt: null,
   max_tokens: 1024,
   temperature: 0.7,
