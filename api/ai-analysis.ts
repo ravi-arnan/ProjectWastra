@@ -272,11 +272,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const trimmedMessages = messages.slice(-20)
   const settings = await fetchAiSettings()
 
-  // API key resolution: DB value wins, env var as fallback for migration safety
-  const apiKey = settings.api_key?.trim() || process.env.AI_API_KEY
+  // API key resolution: env var wins (for quick rotation), DB as fallback
+  const apiKey = process.env.AI_API_KEY?.trim() || settings.api_key?.trim()
   if (!apiKey) {
     return res.status(503).json({ error: 'AI not configured. Set API key in /app/ai-agent.' })
   }
+  const model = process.env.AI_MODEL?.trim() || settings.default_model
 
   // 1. Guest gate
   if (!settings.allow_anonymous_chat) {
@@ -316,7 +317,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: settings.default_model,
+        model: model,
         max_tokens: settings.max_tokens,
         temperature: settings.temperature,
         messages: [
@@ -332,7 +333,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (!response.ok) {
       const errorText = await response.text()
       console.error(`${settings.api_provider} error:`, response.status, errorText)
-      return res.status(502).json({ error: 'AI service temporarily unavailable', debug: `${settings.api_provider} ${response.status}: ${errorText.slice(0, 200)}`, model: settings.default_model, provider: settings.api_provider, hasKey: !!apiKey })
+      return res.status(502).json({ error: 'AI service temporarily unavailable' })
     }
 
     const data = await response.json()
